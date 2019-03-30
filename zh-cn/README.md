@@ -1,11 +1,6 @@
-# pyecharts 文档
+# pyecharts
 
-[![Build Status](https://travis-ci.org/pyecharts/pyecharts.svg?branch=master)](https://travis-ci.org/pyecharts/pyecharts) [![Build status](https://ci.appveyor.com/api/projects/status/81cbsfjpfryv1cl8?svg=true)](https://ci.appveyor.com/project/chenjiandongx/pyecharts) [![codecov](https://codecov.io/gh/pyecharts/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/pyecharts/pyecharts) [![PyPI version](https://badge.fury.io/py/pyecharts.svg)](https://badge.fury.io/py/pyecharts) [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyecharts.svg?colorB=brightgreen)](https://pypi.org/project/pyecharts/) 
-[![PyPI - Format](https://img.shields.io/pypi/format/pyecharts.svg)](https://pypi.org/project/pyecharts)
- [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/pyecharts/pyecharts/pulls) [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
-
-
-pyecharts 是一个用于生成 Echarts 图表的类库。Echarts 是百度开源的一个数据可视化 JS 库。用 Echarts 生成的图可视化效果非常棒，pyecharts 是为了与 Python 进行对接，方便在 Python 中直接使用数据生成图。
+[Echarts](https://github.com/ecomfe/echarts) 是一个由百度开源的数据可视化，凭借着良好的交互性，精巧的图表设计，得到了众多开发者的认可。而 Python 是一门富有表达力的语言，很适合用于数据处理。当数据分析遇上数据可视化时，[pyecharts](https://github.com/pyecharts/pyecharts) 诞生了。
 
 **基本使用**
 

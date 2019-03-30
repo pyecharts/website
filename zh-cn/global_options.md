@@ -11,16 +11,26 @@ class InitOpts(
 
     # 图表 ID
     chart_id: Optional[str] = None,
+
+    # 渲染风格，可选 "canvas", "svg"
     renderer: str = RenderType.CANVAS,
+
+    # 网页标题
     page_title: str = "Awesome-pyecharts",
+
+    # 图表主题
     theme: str = "white",
+
+    # 图表背景颜色
     bg_color: Optional[str] = None,
+
+    # 远程 js host
     js_host: str = "",
 )
 ```
 
 ## ToolBoxFeatureOpts
-> *class pyecharts.options.ToolBoxFeatureOpts*
+> 工具箱各项工具配置项 *class pyecharts.options.ToolBoxFeatureOpts*
 
 ```python
 class ToolBoxFeatureOpts(
@@ -148,7 +158,7 @@ class DataZoomOpts(
 ```
 
 ## LegendOpts
-> *class pyecharts.options.LegendOpts*
+> 图例配置项 *class pyecharts.options.LegendOpts*
 
 ```python
 class LegendOpts(
@@ -182,7 +192,7 @@ class LegendOpts(
     # 图例列表的布局朝向。可选：'horizontal', 'vertical'
     orient: Optional[str] = None,
 
-    # 图例组件字体样式，参考 `global_options.TextStyleOpts`
+    # 图例组件字体样式，参考 `series_options.TextStyleOpts`
     textstyle_opts: Union[TextStyleOpts, dict, None] = None,
 )
 ```
@@ -193,9 +203,16 @@ class LegendOpts(
 ```python
 class VisualMapOpts(
     type_: str = "color",
+
+    # 指定 visualMapPiecewise 组件的最小值。
     min_: Union[int, float] = 0,
+
+    # 指定 visualMapPiecewise 组件的最大值。
     max_: Union[int, float] = 100,
+
+    # 两端的文本，如['High', 'Low']。
     range_text: Union[list, tuple] = None,
+
     range_color: Union[List[str]] = None,
     range_size: Union[List[int]] = None,
     orient: str = "vertical",
@@ -211,7 +228,7 @@ class VisualMapOpts(
 ```
 
 ## TooltipOpts
-> *class pyecharts.options.TooltipOpts*
+> 提示框组件配置项 *class pyecharts.options.TooltipOpts*
 
 ```python
 class TooltipOpts(
@@ -228,10 +245,44 @@ class TooltipOpts(
     # 'none': 不在 'mousemove' 或 'click' 时触发，
     trigger_on: str = "mousemove|click",
 
-
+    # 指示器类型。可选
+    # 'line'：直线指示器
+    # 'shadow'：阴影指示器
+    # 'none'：无指示器
+    # 'cross'：十字准星指示器。其实是种简写，表示启用两个正交的轴的 axisPointer。
     axis_pointer_type: str = "line",
 
+    # 标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 \n 换行。
+    # 字符串模板 模板变量有：
+    # {a}：系列名。
+    # {b}：数据名。
+    # {c}：数据值。
+    # {@xxx}：数据中名为 'xxx' 的维度的值，如 {@product} 表示名为 'product'` 的维度的值。
+    # {@[n]}：数据中维度 n 的值，如{@[3]}` 表示维度 3 的值，从 0 开始计数。
+    # 示例：formatter: '{b}: {@score}'
     # 
+    # 回调函数，回调函数格式：
+    # (params: Object|Array) => string
+    # 参数 params 是 formatter 需要的单个数据集。格式如下：
+    # {
+    #    componentType: 'series',
+    #    // 系列类型
+    #    seriesType: string,
+    #    // 系列在传入的 option.series 中的 index
+    #    seriesIndex: number,
+    #    // 系列名称
+    #    seriesName: string,
+    #    // 数据名，类目名
+    #    name: string,
+    #    // 数据在传入的 data 数组中的 index
+    #    dataIndex: number,
+    #    // 传入的原始数据项
+    #    data: Object,
+    #    // 传入的数据值
+    #    value: number|Array,
+    #    // 数据图形的颜色
+    #    color: string,
+    # }
     formatter: Optional[str] = None,
 
     # 提示框浮层的背景颜色。
@@ -242,6 +293,8 @@ class TooltipOpts(
 
     # 提示框浮层的边框宽。
     border_width: Numeric = 0,
+
+    # 文字样式配置项，参考 `series_options.TextStyleOpts`
     textstyle_opts: TextStyleOpts = TextStyleOpts(font_size=14),
 )
 ```
@@ -329,7 +382,7 @@ class AxisOpts(
 ```
 
 ## GridOpts
-> *class pyecharts.options.GridOpts*
+> 直角坐标系内绘图网格配置项 *class pyecharts.options.GridOpts*
 
 ```python
 class GridOpts(
@@ -393,37 +446,111 @@ class Axis3DOpts(
 ```
 
 ## CalendarOpts
-> *class pyecahrts.options.CalendarOpts*
+> 日历坐标系组件配置项 *class pyecahrts.options.CalendarOpts*
 
 ```python
 class CalendarOpts(
+    # calendar组件离容器左侧的距离。
+    # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
+    # 也可以是 'left', 'center', 'right'。
+    # 如果 left 的值为'left', 'center', 'right'，组件会根据相应的位置自动对齐。
     pos_left: Optional[str] = None,
+
+    # calendar组件离容器上侧的距离。
+    # top 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
+    # 也可以是 'top', 'middle', 'bottom'。
+    # 如果 top 的值为'top', 'middle', 'bottom'，组件会根据相应的位置自动对齐。
     pos_top: Optional[str] = None,
+
+    # calendar组件离容器右侧的距离。
+    # right 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
+    # 默认自适应。
     pos_right: Optional[str] = None,
+
+    # calendar组件离容器下侧的距离。
+    # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
+    # 默认自适应。
     pos_bottom: Optional[str] = None,
+
+    # 日历坐标的布局朝向。可选：
+    # 'horizontal', 'vertical'
     orient: Optional[str] = None,
+    # 必填，日历坐标的范围 支持多种格式，使用示例：
+    # 某一年 range: 2017
+    # 某个月 range: '2017-02'
+    # 某个区间 range: ['2017-01-02', '2017-02-23']
+    # 注意 此写法会识别为['2017-01-01', '2017-02-01']
+    # range: ['2017-01', '2017-02']
     range_: Union[str, Sequence, int] = None,
+
+    # 星期轴的样式，参考 `series_options.LabelOpts`
     daylabel_opts: Union[LabelOpts, dict, None] = None,
+
+    # 月份轴的样式，参考 `series_options.LabelOpts`
     monthlabel_opts: Union[LabelOpts, dict, None] = None,
+
+    # 年份的样式，参考 `series_options.LabelOpts`
     yearlabel_opts: Union[LabelOpts, dict, None] = None,
 )
 ```
 
 ## SingleAxisOpts
-> *class pyecharts.SingleAxisOpts*
+> 单轴配置项 *class pyecharts.SingleAxisOpts*
 
 ```python
 class SingleAxisOpts(
+    # 坐标轴名称。
     name: Optional[str] = None,
+
+    # 坐标轴刻度最大值。
+    # 可以设置成特殊值 'dataMax'，此时取数据在该轴上的最大值作为最大刻度。
+    # 不设置时会自动计算最大值保证坐标轴刻度的均匀分布。
+    # 在类目轴中，也可以设置为类目的序数（如类目轴 data: ['类A', '类B', '类C'] 中，序数 2 表示 '类C'。
+    # 也可以设置为负数，如 -3）。
     max_: Union[str, Numeric, None] = None,
+
+    # 坐标轴刻度最小值。
+    # 可以设置成特殊值 'dataMin'，此时取数据在该轴上的最小值作为最小刻度。
+    # 不设置时会自动计算最小值保证坐标轴刻度的均匀分布。
+    # 在类目轴中，也可以设置为类目的序数（如类目轴 data: ['类A', '类B', '类C'] 中，序数 2 表示 '类C'。
+    # 也可以设置为负数，如 -3）。
     min_: Union[str, Numeric, None] = None,
+
+    # single 组件离容器左侧的距离。
+    # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
+    # 也可以是 'left', 'center', 'right'。
+    # 如果 left 的值为'left', 'center', 'right'，组件会根据相应的位置自动对齐。
     pos_left: Optional[str] = None,
+
+    # single组件离容器右侧的距离。
+    # right 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
     pos_right: Optional[str] = None,
+
+    # single组件离容器上侧的距离。
+    # top 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
+    # 也可以是 'top', 'middle', 'bottom'。
+    # 如果 top 的值为'top', 'middle', 'bottom'，组件会根据相应的位置自动对齐。
     pos_top: Optional[str] = None,
+
+    # single组件离容器下侧的距离。
+    # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
     pos_bottom: Optional[str] = None,
+
+    # single 组件的宽度。默认自适应。
     width: Optional[str] = None,
+
+    # single 组件的高度。默认自适应。
     height: Optional[str] = None,
+
+    # 轴的朝向，默认水平朝向，可以设置成 'vertical' 垂直朝向。
     orient: Optional[str] = None,
+
+    # 坐标轴类型。可选：
+    # 'value': 数值轴，适用于连续数据。
+    # 'category': 类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据。
+    # 'time': 时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，
+    # 例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
+    # 'log' 对数轴。适用于对数数据。
     type_: Optional[str] = None,
 )
 ```
@@ -456,7 +583,7 @@ class RadiusAxisOpts(
     # 径向轴所在的极坐标系的索引，默认使用第一个极坐标系。
     polar_index: Optional[int] = None,
 
-
+    # 数据项，参考 `global_options.RadiusAxisItem`
     data: Optional[List[Union[RadiusAxisItem, dict, str]]] = None,
 
     # 坐标轴两边留白策略，类目轴和非类目轴的设置和表现不一样。
@@ -513,13 +640,39 @@ class RadiusAxisOpts(
 
 ```python
 class AngleAxisOpts(
+    # 径向轴所在的极坐标系的索引，默认使用第一个极坐标系。
     polar_index: Optional[int] = None,
     data: Optional[List[Union[AngleAxisItem, dict, str]]] = None,
     start_angle: Optional[Numeric] = None,
     is_clockwise: bool = False,
+
+    # 坐标轴两边留白策略，类目轴和非类目轴的设置和表现不一样。
+    # 类目轴中 boundaryGap 可以配置为 true 和 false。默认为 true，这时候刻度只是作为分隔线，
+    # 标签和数据点都会在两个刻度之间的带(band)中间。
+    # 非类目轴，包括时间，数值，对数轴，boundaryGap是一个两个值的数组，分别表示数据最小值和最大值的延伸范围
+    # 可以直接设置数值或者相对的百分比，在设置 min 和 max 后无效。 示例：boundaryGap: ['20%', '20%']
     boundary_gap: Union[bool, List] = None,
+
+    # 坐标轴类型。可选：
+    # 'value': 数值轴，适用于连续数据。
+    # 'category': 类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据。
+    # 'time': 时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同
+    # 例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
+    # 'log' 对数轴。适用于对数数据。
     type_: Optional[str] = None,
+
+    # 坐标轴刻度最小值。
+    # 可以设置成特殊值 'dataMin'，此时取数据在该轴上的最小值作为最小刻度。
+    # 不设置时会自动计算最小值保证坐标轴刻度的均匀分布。
+    # 在类目轴中，也可以设置为类目的序数（如类目轴 data: ['类A', '类B', '类C'] 中，序数 2 表示 '类C'
+    # 也可以设置为负数，如 -3）。
     min_: Union[str, Numeric, None] = None,
+
+    # 坐标轴刻度最大值。
+    # 可以设置成特殊值 'dataMax'，此时取数据在该轴上的最大值作为最大刻度。
+    # 不设置时会自动计算最大值保证坐标轴刻度的均匀分布。
+    # 在类目轴中，也可以设置为类目的序数（如类目轴 data: ['类A', '类B', '类C'] 中，序数 2 表示 '类C'
+    # 也可以设置为负数，如 -3）。
     max_: Union[str, Numeric, None] = None,
     splitline_opts: Union[SplitLineOpts, dict, None] = None,
     axisline_opts: Union[AxisLineOpts, dict, None] = None,

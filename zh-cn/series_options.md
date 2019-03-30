@@ -153,11 +153,14 @@ class SplitLineOpts(
 ```
 
 ## AxisLineOpts
-> *class pyecharts.options.AxisLineOpts*
+> 坐标轴轴线配置项 *class pyecharts.options.AxisLineOpts*
 
 ```python
 class AxisLineOpts(
+    # 是否显示坐标轴轴线。
     is_show: bool = True, 
+
+    # 线风格配置项，参考 `series_options.SplitLineOpts`
     linestyle_opts: LineStyleOpts = LineStyleOpts()
 )
 ```

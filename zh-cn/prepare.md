@@ -124,31 +124,6 @@ clothes_v2 = [10, 25, 8, 60, 20, 80]
     .render())
 ```
 
-### 多次显示图表
-
-从 v0.4.0+ 开始，pyecharts 重构了渲染的内部逻辑，改善效率。推荐使用以下方式显示多个图表。
-
-```python
-from pyecharts import Bar, Line
-from pyecharts.engine import create_default_environment
-
-bar = Bar("我的第一个图表", "这里是副标题")
-bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
-
-line = Line("我的第一个图表", "这里是副标题")
-line.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
-
-env = create_default_environment("html")
-# 为渲染创建一个默认配置环境
-# create_default_environment(filet_ype)
-# file_type: 'html', 'svg', 'png', 'jpeg', 'gif' or 'pdf'
-
-env.render_chart_to_file(bar, path='bar.html')
-env.render_chart_to_file(line, path='line.html')
-```
-
-相比第一个例子，该代码只是使用同一个引擎对象，减少了部分重复操作，速度有所提高。
-
 ### Pandas&Numpy 简单示例
 
 如果使用的是 Numpy 或者 Pandas，可以参考这个示例

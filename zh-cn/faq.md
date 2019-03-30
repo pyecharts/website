@@ -20,7 +20,6 @@ IOPub data rate exceeded.
 c.NotebookApp.iopub_data_rate_limit = 10000000
 ```
 
-
 **Q:在 Jupyter Notebook 使用 download-as 导出 ipynb/png/pdf 等文件后，图表无法显示？**
 
 A:由于使用 download-as 后，便脱离了 Jupyter Notebook 的环境，无法引用其内的相关 js 文件，因此应当使用在线模式，引用来自 [jupyter-echarts](https://github.com/pyecharts/jupyter-echarts) 或其他有效的远程 js 库。
@@ -30,7 +29,6 @@ from pyecharts import online
 
 online()
 ```
-
 
 **Q:jupyter-notebook 输出问题**
 
@@ -62,10 +60,6 @@ from pyecharts import online
 online(host="http://localhost:8000")
 ```
 
-**Q:如何设置 tooltip 的 formatter 选项为回调函数？**
-
-A: 在 v0.5.0 引入了 *选项回调函数* 支持，可查阅相关文档。
-
 
 **Q:为什么安装后还是无法 import Bar,Line 等图形**
 
@@ -87,33 +81,6 @@ A: 因为 china.js 没有加载成功。请检查 echarts-countries-pypkg 是不
 如果你已经安装过全部地图，在你开新的 notebook 的时候， jupyter 的 javascript console 会有这个显示：
 
 ![](https://user-images.githubusercontent.com/4280312/37921785-a472a2b8-3122-11e8-8ee3-cc80a3901d9d.png)
-
-
-**Q:为什么 jupyter notebook 图是空的？**
-
-请按这个顺序排查问题：
-
-1）检查能否访问 echarts.min.js？ http://localhost:8888/nbextensions/echarts/echarts.min.js
-
-如果不能，请检查 jupyter-echarts-pypkg 是否装好？在确认你已经装了 jupyter 的情况下，可以卸载 jupyter-echarts-pypkg 然后再装一遍（`pip install --no-cache-dir jupyter-echarts-pypkg`）。然后运行 jupyter notebook，再次查看 1）能否正确访问 echarts.min.js？
-
-如果能，请右键打开开发者工具，截下 <script>...</script> 区域的截图.
-
-例子：
-
-![](https://user-images.githubusercontent.com/4280312/29354092-4c4eecee-8264-11e7-98bb-06ec1b4c06b6.png)
-
-
-**Q: 为什么部分 echarts-xxx-pypkg 不能成功安装？**
-
-首先，请检查当前 python 环境有没有 jupyter。有的话，先卸载先前装的 echarts-xxx-pypkg (`pip uninstall echarts-xxx-pypkg`) ，下一步再用 `pip install --no-cache-dir echarts-xxx-pypkg` 装一遍。
-
-
-**Q: pip install pyecharts meet error: Microsoft Visual C++ 14.0 is required**
-
-使用 `pip install pyecharts` 安装时出现该问题，“error: Microsoft Visual C++ 14.0 is required. Get it with "Microsoft Visual C++ Build Tools": http://landinghub.visualstudio.com/visual-cpp-build-tools”。
-
-你需要到微软网站下载 Build Tools for Visual Studio 2017。具体信息请访问 https://www.scivision.co/python-windows-visual-c++-14-required/
 
 
 **Q:如何离线安装 pyecharts？**

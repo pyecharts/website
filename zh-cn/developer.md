@@ -9,42 +9,6 @@ $ pip install -r requirements.txt
 $ python setup.py install
 ```
 
-## 代码格式化 (python 3.6+)
-
-```bash
-$ pip install -r requirements-dev.txt
-$ ./format_code.sh  # windows: format_code.bat
-```
-
-## pyecharts 0.3.2+ 的扩展包
-
-现在 pyecharts 所有的 js 库均由 lml 管理，由 pip 组装。 Jupyter notebook 用户不用担心，javascript 库装机的时候，会被 pyecharts-jupyter-installer 一齐装上。
-
-![map-extension-architecture-diagram](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-extension-architecture.png)
-
-如果有更多需求，比如世界各国地图，请关注本项目。
-
-## pyecharts 0.4.2+ 的 Environment 扩展
-
-pyecharts-snapshot 能把 pyecharts 的 html 输出转换成图片，自然地，把它变成 pyecharts 的 Environment 扩展之后，就可以用同样的语句直接生成图片了。下面是个例子：
-
-```python
-#coding=utf-8
-from pyecharts import Map
-
-value = [1, 100]
-attr = ['Gujarat', 'Tamil Nadu']
-map = Map('India', width=800, height=600)
-map.add('', attr, value, maptype='印度', is_visualmap=True, visual_text_color="#000")
-map.render(path='map.png')  # <--- 直接生成图片
-```
-
-下面简单介绍一下架构：
-
-在 pyecharts 里，图标类和 EchartsEnvironment 之间引入了 EnvironmentManager 类。EchartsEnvironment 成了 EnvironmentManager 的下属的同时，EnvironmentManager 通过 lml 可以拥有其他的下属。这个时候，如果用户装了 pyecharts-snapshot 0.1.4，EnvironmentManager 通过 lml 可以得到 SnapshotEnvironment，换句话说 pyecharts 可以得到直接产生图片的功能扩展。
-
-![map-extension-architecture-diagram](https://github.com/chenjiandongx/pyecharts/blob/master/images/environment-extension-architecture.png)
-
 ### 局限性
 
 Page 类不能享受直接生成图片的功能。原因是 pyecharts-snapshot 还不能[抓多个图片](https://github.com/pyecharts/pyecharts-snapshot/issues/10)
