@@ -62,28 +62,6 @@ from pyecharts import online
 online(host="http://localhost:8000")
 ```
 
-
-**Q:Python2 编码问题**
-
-由于 pyecharts 包含了非 Ascii 字符 (Non Ascii Characters)，因此必须使用 UTF-8 编码处理文件和字符串等。
- 
-在 Python3 中，默认的编码类型为 UTF-8，无需作更改。
-
-但是在 Python2 中，使用下面的语句设置编码:
-
-```python
-#!/usr/bin/python
-#coding=utf-8
-from __future__ import unicode_literals
-```
-前两句告知你的编辑器你用 UTF-8 ([PEP-0263](https://www.python.org/dev/peps/pep-0263/)). 最后一句告知 Python 所有字符是 UTF-8 ([unicode literals](http://python-future.org/unicode_literals.html))
-
-
-**Q:pyecharts 是否支持  jupyterlab?**
-
-A: 暂不支持。 jupyterlab 应该是下一代 jupyter notebook 的雏形。欢迎大家提交相关 PR。
-
-
 **Q:如何设置 tooltip 的 formatter 选项为回调函数？**
 
 A: 在 v0.5.0 引入了 *选项回调函数* 支持，可查阅相关文档。

@@ -40,14 +40,6 @@ function add(x, y) {
 
 从 v0.6.0 开始，pyecharts 默认已经集成，无需额外安装。
 
-
-### 环境限制
-
-由于 Javascripthon 要求 Python 的版本至少为 3.5+ 而 pyecharts 用户是 python 2.7, 3.4, 3.5 和 3.6, pyecharts-javascripthon 采用了双轨制：python 3.5+ 用户直接用 Javascripthon；python 2.7 和 3.4 的用户调用网络翻译服务 (software as a service)。同时，希望大家支持这个网络服务的运营费用。
-
-> 注意： Python2.7-3.4 的用户使用时请确保系统可以联网。
-
-
 ## 使用 JavaScript 回调函数
 
 ### 基本使用

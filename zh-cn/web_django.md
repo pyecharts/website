@@ -11,7 +11,6 @@ $ pip install django==1.11.4
 $ pip install pyecharts
 ```
 
-
 ## Step 1: 新建一个 django 项目
 
 ```shell

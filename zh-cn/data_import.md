@@ -29,30 +29,6 @@ line.add('High', ds, hs)
 line.render()
 ```
 
-## Base.cast 函数
-
-数据格式化处理函数，能够将源数据转化为符合 pyecharts 的数据。
-
-具体转化格式如下：
-
-1. 元组列表  
-    [(A1, B1), (A2, B2), (A3, B3), (A4, B4)] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
-2. 字典列表  
-    [{A1: B1}, {A2: B2}, {A3: B3}, {A4: B4}] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
-3. 字典  
-    {A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
-
-
-```python
-o_data = [('A', '34'), ('B', '45'), ('C', '12')]
-x, y = Base.cast(o_data)
-print(x) # ['A', 'B', 'C']
-print(y) # ['34', '45', '12']
-```
-
-上述例子也可以直接使用 `zip` 函数。
-
-
 ## borax.fetch 模块
 
 > 项目地址： https://github.com/kinegratii/borax

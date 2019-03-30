@@ -31,56 +31,6 @@ pyecharts 内置了一些常用的城市地理坐标数据，这些数据保存�
 
 具体可参考 [pyecharts/geo-region-coords](https://github.com/pyecharts/geo-region-coords)
 
-
-### 检索中国地理坐标
-
-`get_coordinate(name, region="中国")` 返回城市名称的地理坐标，如果未定义将返回 None 。
-
-```python
-from pyecharts.datasets.coordinates import get_coordinate
-
-coordinate = get_coordinate('北京')
-print(coordinate) # [116.46, 39.92]
-
-coordinate1 = get_coordinate('A市')
-print(coordinate1) # None
-```
-
-### 按关键字搜索地理坐标
-
-`search_coordinates_by_keyword(*args)` 根据一个或多个关键字，返回一个匹配的字典对象。
-
-用法 1：单个关键字模糊搜索
-
-```python
-from pyecharts.datasets.coordinates import search_coordinates_by_keyword
-
-result = search_coordinates_by_keyword('北京')
-print(result) # {'北京':[116.46, 39.92], '北京市': [116.4, 39.9]}
-```
-
-用法 2：多个关键字模糊搜索
-
-```python
-from pyecharts.datasets.coordinates import search_coordinates_by_keyword
-result = search_coordinates_by_keyword('福州', '杭州')
-print(result) # {'福州市': [119.3, 26.08], '杭州市': [120.15, 30.28] ...}
-```
-
-### 按过滤函数搜索地理坐标
-
-`search_coordinates_by_filter(func, region="中国")` 根据过滤函数，返回一个匹配的字典对象。
-用法（结果同上）
-
-```python
-from pyecharts.datasets.coordinates import search_coordinates_by_filter
-
-result = search_coordinates_by_filter(
-    func=lambda name: '福州' in name or '杭州' in name
-)
-print(result)
-```
-
 ### 使用例子
 
 Geo/Geolines:
@@ -158,45 +108,6 @@ from pyecharts.datasets.coordinates import get_coordinate
 
 coordinate = get_coordinate('Oxford', region="英国")
 print(coordinate) # [-1.25596, 51.75222]
-```
-
-### 按关键字搜索地理坐标
-
-`search_coordinates_by_region_and_keyword(*args)` 根据一个或多个关键字，返回一个匹配的字典对象。
-
-用法 1：单个关键字模糊搜索
-
-```python
-from pyecharts.datasets.coordinates import search_coordinates_by_region_and_keyword
-
-result = search_coordinates_by_region_and_keyword("英国", 'London')
-print(result)
-#{
-#    "Londonderry County Borough": [-7.30917, 54.99721],
-#    "City of London": [-0.09184, 51.51279],
-#    "London": [-0.12574, 51.50853],
-#}
-```
-
-用法 2：多个关键字模糊搜索
-
-```python
-from pyecharts.datasets.coordinates import search_coordinates_by_region_and_keyword
-result = search_coordinates_by_region_and_keyword('中国香港', 'Central', 'Hong Kong')
-print(result) # { "Hong Kong": [114.15769, 22.28552], "Central": [114.15846, 22.28299]}
-```
-
-### 按过滤函数搜索地理坐标
-
-```python
-from pyecharts.datasets.coordinates import search_coordinates_by_filter
-
-result = search_coordinates_by_filter(
-    func=lambda name: "Central" in name or "Hong Kong" in name,
-    region="中国香港",
-
-)
-print(result) # { "Hong Kong": [114.15769, 22.28552], "Central": [114.15846, 22.28299]}
 ```
 
 ## 地图数据

@@ -51,42 +51,6 @@ polar.render()
 ![example-2](https://user-images.githubusercontent.com/19553554/35080790-c61a8ac8-fc4a-11e7-9a47-8e352b944358.png)
 
 
-用散点图画出一个爱心
-```python
-from pyecharts import Scatter
-
-scatter = Scatter("散点图示例", width=800, height=480)
-v1 ,v2 = scatter.draw("../images/love.png")
-scatter.add("Love", v1, v2)
-scatter.render()
-```
-![example-3](https://user-images.githubusercontent.com/19553554/35080813-eda5885e-fc4a-11e7-9f77-3856dced269e.png)
-
-
-用散点图画出一个火辣的 Bra
-```python
-from pyecharts import Scatter
-
-scatter = Scatter("散点图示例", width=1000, height=480)
-v1 ,v2 = scatter.draw("../images/cup.png")
-scatter.add("Cup", v1, v2)
-scatter.render()
-```
-![example-4](https://user-images.githubusercontent.com/19553554/35080804-e0a587e4-fc4a-11e7-9b38-f4defac97b37.png)
-
-
-用散点图画出一个性感的 Bra
-```python
-from pyecharts import Scatter
-
-scatter = Scatter("散点图示例", width=1000, height=480)
-v1 ,v2 = scatter.draw("../images/cup.png")
-scatter.add("Cup", v1, v2, label_color=["#000"])
-scatter.render()
-```
-![example-5](https://user-images.githubusercontent.com/19553554/35080805-e1eec020-fc4a-11e7-8aa2-2d9d58fce144.png)
-
-
 用极坐标系画出一个蜗牛壳
 ```python
 import math

@@ -2,35 +2,6 @@
 
 **图表详细配置请参考 [图表配置篇](zh-cn/charts_configure)**
 
-* 基本图表类
-    * Bar（柱状图/条形图）
-    * Bar3D（3D 柱状图）
-    * Boxplot（箱形图）
-    * EffectScatter（带有涟漪特效动画的散点图）
-    * Funnel（漏斗图）
-    * Gauge（仪表盘）
-    * Geo（地理坐标系）
-    * GeoLines（地理坐标系线图）
-    * Graph（关系图）
-    * HeatMap（热力图）
-    * Kline/Candlestick（K线图）
-    * Line（折线/面积图）
-    * Line3D（3D 折线图）
-    * Liquid（水球图）
-    * Map（地图）
-    * Parallel（平行坐标系）
-    * Pie（饼图）
-    * Polar（极坐标系）
-    * Radar（雷达图）
-    * Sankey（桑基图）
-    * Scatter（散点图）
-    * Scatter3D（3D 散点图）
-    * Surface3D（3D 曲面图）
-    * ThemeRiver（主题河流图）
-    * Tree（树图）
-    * TreeMap（矩形树图）
-    * WordCloud（词云图）
-
 
 ## Bar（柱状图/条形图）
 > 柱状/条形图，通过柱形的高度/条形的宽度来表现数据的大小。
