@@ -80,7 +80,7 @@ class ToolboxOpts(
     # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
     pos_bottom: Optional[str] = None,
 
-    # 各工具配置项
+    # 各工具配置项，参考 `global_options.ToolBoxFeatureOpts`
     feature: Union[ToolBoxFeatureOpts, dict] = ToolBoxFeatureOpts(),
 )
 ```
@@ -116,10 +116,10 @@ class TitleOpts(
     # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
     pos_bottom: Optional[str] = None,
 
-    # 主标题字体样式配置项
+    # 主标题字体样式配置项，参考 `series_options.TextStyleOpts`
     title_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
 
-    # 副标题字体样式配置项
+    # 副标题字体样式配置项，参考 `series_options.TextStyleOpts`
     subtitle_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
 )
 ```
@@ -202,6 +202,7 @@ class LegendOpts(
 
 ```python
 class VisualMapOpts(
+    # 映射过渡类型，可选，"color", "size"
     type_: str = "color",
 
     # 指定 visualMapPiecewise 组件的最小值。
@@ -213,16 +214,60 @@ class VisualMapOpts(
     # 两端的文本，如['High', 'Low']。
     range_text: Union[list, tuple] = None,
 
+    # visualMap 组件过渡颜色
     range_color: Union[List[str]] = None,
+
+    # visualMap 组件过渡 symbol 大小
     range_size: Union[List[int]] = None,
+
+    # 如何放置 visualMap 组件，水平（'horizontal'）或者竖直（'vertical'）。
     orient: str = "vertical",
-    pos_left: str = "left",
-    pos_top: str = "bottom",
+
+    # visualMap 组件离容器左侧的距离。
+    # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
+    # 也可以是 'left', 'center', 'right'。
+    # 如果 left 的值为'left', 'center', 'right'，组件会根据相应的位置自动对齐。
+    pos_left: Optional[str] = None,
+
+    # visualMap 组件离容器右侧的距离。
+    # right 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
+    pos_right: Optional[str] = None,
+
+    # visualMap 组件离容器上侧的距离。
+    # top 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
+    # 也可以是 'top', 'middle', 'bottom'。
+    # 如果 top 的值为'top', 'middle', 'bottom'，组件会根据相应的位置自动对齐。
+    pos_top: Optional[str] = None,
+
+    # visualMap 组件离容器下侧的距离。
+    # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
+    pos_bottom: Optional[str] = None,
+
+    # 对于连续型数据，自动平均切分成几段。默认为5段。连续数据的范围需要 max 和 min 来指定
     split_number: int = 5,
+
+    # 组件映射维度
     dimension: Optional[Numeric] = None,
+
+    # 是否显示拖拽用的手柄（手柄能拖拽调整选中范围）。
     is_calculable: bool = True,
+
+    # 是否为分段型
     is_piecewise: bool = False,
+
+    # 自定义的每一段的范围，以及每一段的文字，以及每一段的特别的样式。例如：
+    # pieces: [
+    #   {min: 1500}, // 不指定 max，表示 max 为无限大（Infinity）。
+    #   {min: 900, max: 1500},
+    #   {min: 310, max: 1000},
+    #   {min: 200, max: 300},
+    #   {min: 10, max: 200, label: '10 到 200（自定义label）'},
+    #   {value: 123, label: '123（自定义特殊颜色）', color: 'grey'}, // 表示 value 等于 123 的情况
+    #   {max: 5}     // 不指定 min，表示 min 为无限大（-Infinity）。
+    # ]
     pieces: Optional[Sequence] = None,
+
+    # 文字样式配置项，参考 `series_options.TextStyleOpts`
     textstyle_opts: Union[TextStyleOpts, dict, None] = None,
 )
 ```
@@ -299,8 +344,29 @@ class TooltipOpts(
 )
 ```
 
+## AxisTickOpts
+> 坐标轴刻度配置项 *class pyecharts.options.AxisTickOpts*
+```python
+class AxisTickOpts(
+    # 是否显示坐标轴刻度。
+    is_show: bool = True,
+
+    # 类目轴中在 boundaryGap 为 true 的时候有效，可以保证刻度线和标签对齐
+    is_align_with_label: bool = False,
+
+    # 坐标轴刻度是否朝内，默认朝外。
+    is_inside: bool = False,
+
+    # 坐标轴刻度的长度。
+    length: Optional[Numeric] = None,
+
+    # 坐标轴线风格，参考 `series_options.LineStyleOpts`
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+)
+```
+
 ## AxisOpts
-> *class pyecharts.options.AxisOpts*
+> 坐标轴配置项 *class pyecharts.options.AxisOpts*
 
 ```python
 class AxisOpts(
@@ -314,6 +380,9 @@ class AxisOpts(
     # 是否是脱离 0 值比例。设置成 true 后坐标刻度不会强制包含零刻度。在双数值轴的散点图中比较有用。
     # 在设置 min 和 max 之后该配置项无效。
     is_scale: bool = False,
+
+    # 是否强制设置坐标轴分割间隔。
+    is_inverse: bool = False,
 
     # 坐标轴名称显示位置。可选：
     # 'start', 'middle' 或者 'center','end'
@@ -343,12 +412,6 @@ class AxisOpts(
     # 可以直接设置数值或者相对的百分比，在设置 min 和 max 后无效。 示例：boundaryGap: ['20%', '20%']
     boundary_gap: Union[str, bool, None] = None,
 
-    label_alignment: Optional[str] = None,
-
-    formatter: Optional[str] = None,
-
-    inverse: Optional[str] = None,
-
     # 坐标轴刻度最小值。
     # 可以设置成特殊值 'dataMin'，此时取数据在该轴上的最小值作为最小刻度。
     # 不设置时会自动计算最小值保证坐标轴刻度的均匀分布。
@@ -371,12 +434,22 @@ class AxisOpts(
     # 'log' 对数轴。适用于对数数据。
     type_: Optional[str] = None,
 
+    # 坐标轴刻度配置项，参考 `golbal_options.AxisTickOpts`
+    axistick_opts: Union[AxisTickOpts, dict, None] = None,
+
+    # 坐标轴标签配置项，参考 `series_options.LabelOpts`
+    axislabel_opts: Union[LabelOpts, dict, None] = None,
+
+    # 坐标轴名称的文字样式，参考 `series_options.TextStyleOpts`
     name_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
 
+    # 分割区域配置项，参考 `series_options.SplitAreaOpts`
     splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
 
+    # 分割线配置项，参考 `series_options.SplitLineOpts`
     splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(),
 
+    # 坐标轴线风格配置项，参考 `series_optionsLineStyleOpts`
     linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
 )
 ```
@@ -442,55 +515,6 @@ class Axis3DOpts(
     max_: Union[str, Numeric, None] = None,
     interval: Optional[str] = None,
     margin: Numeric = 8,
-)
-```
-
-## CalendarOpts
-> 日历坐标系组件配置项 *class pyecahrts.options.CalendarOpts*
-
-```python
-class CalendarOpts(
-    # calendar组件离容器左侧的距离。
-    # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
-    # 也可以是 'left', 'center', 'right'。
-    # 如果 left 的值为'left', 'center', 'right'，组件会根据相应的位置自动对齐。
-    pos_left: Optional[str] = None,
-
-    # calendar组件离容器上侧的距离。
-    # top 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
-    # 也可以是 'top', 'middle', 'bottom'。
-    # 如果 top 的值为'top', 'middle', 'bottom'，组件会根据相应的位置自动对齐。
-    pos_top: Optional[str] = None,
-
-    # calendar组件离容器右侧的距离。
-    # right 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
-    # 默认自适应。
-    pos_right: Optional[str] = None,
-
-    # calendar组件离容器下侧的距离。
-    # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
-    # 默认自适应。
-    pos_bottom: Optional[str] = None,
-
-    # 日历坐标的布局朝向。可选：
-    # 'horizontal', 'vertical'
-    orient: Optional[str] = None,
-    # 必填，日历坐标的范围 支持多种格式，使用示例：
-    # 某一年 range: 2017
-    # 某个月 range: '2017-02'
-    # 某个区间 range: ['2017-01-02', '2017-02-23']
-    # 注意 此写法会识别为['2017-01-01', '2017-02-01']
-    # range: ['2017-01', '2017-02']
-    range_: Union[str, Sequence, int] = None,
-
-    # 星期轴的样式，参考 `series_options.LabelOpts`
-    daylabel_opts: Union[LabelOpts, dict, None] = None,
-
-    # 月份轴的样式，参考 `series_options.LabelOpts`
-    monthlabel_opts: Union[LabelOpts, dict, None] = None,
-
-    # 年份的样式，参考 `series_options.LabelOpts`
-    yearlabel_opts: Union[LabelOpts, dict, None] = None,
 )
 ```
 
@@ -629,8 +653,14 @@ class RadiusAxisOpts(
 
     # 分割线配置项，参考 `series_options.SplitLineOpts`
     splitline_opts: Union[SplitLineOpts, dict, None] = None,
+
+    # 坐标轴线风格配置项，参考 `series_options.AxisLineOpts`
     axisline_opts: Union[AxisLineOpts, dict, None] = None,
+
+    # 坐标轴线标签配置项，参考 `series_options.LabelOpts`
     axislabel_opts: Union[LabelOpts, dict, None] = None,
+
+    # 半径轴组件的所有图形的 z 值。控制图形的前后顺序。z 值 小的图形会被 z 值大的图形覆盖
     z: Optional[int] = None,
 )
 ```
@@ -674,9 +704,17 @@ class AngleAxisOpts(
     # 在类目轴中，也可以设置为类目的序数（如类目轴 data: ['类A', '类B', '类C'] 中，序数 2 表示 '类C'
     # 也可以设置为负数，如 -3）。
     max_: Union[str, Numeric, None] = None,
+
+    # 分割线风格配置项，参考 `series_options.AxisLineOpts`
     splitline_opts: Union[SplitLineOpts, dict, None] = None,
+
+    # 坐标轴线风格配置项，参考 `series_options.AxisLineOpts`
     axisline_opts: Union[AxisLineOpts, dict, None] = None,
+
+    # 坐标轴标签风格配置项，参考 `series_options.AxisLineOpts`
     axislabel_opts: Union[LabelOpts, dict, None] = None,
+
+    # 半径轴组件的所有图形的 z 值。控制图形的前后顺序。z 值 小的图形会被 z 值大的图形覆盖
     z: Optional[int] = None,
 )
 ```

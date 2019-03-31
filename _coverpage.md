@@ -10,4 +10,4 @@
 
 
 [GitHub](https://github.com/pyecharts/pyecharts/)
-[Get Started](zh-cn/prepare)
+[Get Started](zh-cn/intro)

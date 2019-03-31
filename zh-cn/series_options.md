@@ -166,17 +166,39 @@ class AxisLineOpts(
 ```
 
 ## MarkPointItem
-> *class pyecharts.options.MarkPointItem*
+> 标记点数据项 *class pyecharts.options.MarkPointItem*
 
 ```python
 class MarkPointItem(
+    # 标注名称。
     name: Optional[str] = None,
+
+    # 特殊的标注类型，用于标注最大值最小值等。可选:
+    # 'min' 最大值。
+    # 'max' 最大值。
+    # 'average' 平均值。
     type_: Optional[str] = None,
+
+    # 在使用 type 时有效，用于指定在哪个维度上指定最大值最小值，可以是 
+    # 0（xAxis, radiusAxis），
+    # 1（yAxis, angleAxis），默认使用第一个数值轴所在的维度。
     value_index: Optional[Numeric] = None,
+
+    # 在使用 type 时有效，用于指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，
+    # 例如折线图时可以是 x、angle 等、candlestick 图时可以是 open、close 等维度名称。
     value_dim: Optional[str] = None,
+
+    # 标注的坐标。坐标格式视系列的坐标系而定，可以是直角坐标系上的 x, y，
+    # 也可以是极坐标系上的 radius, angle。例如 [121, 2323]、['aa', 998]。
     coord: Optional[List] = None,
+
+    # 相对容器的屏幕 x 坐标，单位像素。
     x: Optional[Numeric] = None,
+
+    # 相对容器的屏幕 y 坐标，单位像素。
     y: Optional[Numeric] = None,
+
+    # 标注值，可以不设。
     value: Optional[Numeric] = None,
 
     # 标记的图形。
@@ -192,7 +214,7 @@ class MarkPointItem(
 ```
 
 ## MarkPointOpts
-> *class pyecahrts.options.MarkPointOpts*
+> 标记点配置项 *class pyecahrts.options.MarkPointOpts*
 
 ```python
 class MarkPointOpts(
@@ -218,55 +240,116 @@ class MarkPointOpts(
 ```
 
 ## MarkLineItem
-> *class pyecharts.options.MarkLineItem*
+> 标记线数据项 *class pyecharts.options.MarkLineItem*
 
 ```python
 class MarkLineItem(
+    # 标注名称。
     name: Optional[str] = None,
+
+    # 特殊的标注类型，用于标注最大值最小值等。可选:
+    # 'min' 最大值。
+    # 'max' 最大值。
+    # 'average' 平均值。
     type_: Optional[str] = None,
+
+    # 相对容器的屏幕 x 坐标，单位像素。
     x: Union[str, Numeric, None] = None,
+
+    # 相对容器的屏幕 y 坐标，单位像素。
     y: Union[str, Numeric, None] = None,
+
+    # 在使用 type 时有效，用于指定在哪个维度上指定最大值最小值，可以是 
+    # 0（xAxis, radiusAxis），
+    # 1（yAxis, angleAxis），默认使用第一个数值轴所在的维度。
     value_index: Optional[Numeric] = None,
+
+    # 在使用 type 时有效，用于指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，
+    # 例如折线图时可以是 x、angle 等、candlestick 图时可以是 open、close 等维度名称。
     value_dim: Optional[str] = None,
+
+    # 起点或终点的坐标。坐标格式视系列的坐标系而定，可以是直角坐标系上的 x, y，
+    # 也可以是极坐标系上的 radius, angle。
     coord: Optional[Sequence] = None,
+
+    # 终点标记的图形。
+    # ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle',
+    #  'diamond', 'pin', 'arrow', 'none'
+    # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
     symbol: Optional[str] = None,
+
+    # 标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示宽和高，
+    # 例如 [20, 10] 表示标记宽为 20，高为 10。
     symbol_size: Optional[Numeric] = None,
 )
 ```
 
 ## MarkLineOpts
-> *class pyecharts.options.MarkLineOpts*
+> 标记线配置项 *class pyecharts.options.MarkLineOpts*
 
 ```python
 class MarkLineOpts(
+    # 标记线数据，参考 `series_options.MarkPointItem`
     data: List[Union[MarkLineItem, dict]] = None,
+
+    # 标线两端的标记类型，可以是一个数组分别指定两端，也可以是单个统一指定，具体格式见 data.symbol。
     symbol: Optional[str] = None,
+
+    # 标线两端的标记大小，可以是一个数组分别指定两端，也可以是单个统一指定。
     symbol_size: Union[None, Numeric] = None,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: LabelOpts = LabelOpts(),
 )
 ```
 
-## EffectOpts
-> *class pyecharts.options.EffectOpts*
-
-```python
-class EffectOpts(
-    is_show: bool = True,
-    brush_type: str = "stroke",
-    scale: Numeric = 2.5,
-    period: Numeric = 4,
-    color: Optional[str] = None,
-    symbol: Optional[str] = None,
-    symbol_size: Optional[Numeric] = None,
-)
-```
-
 ## AreaStyleOpts
-> *class pyecharts.options.AreaStyleOpts*
+> 区域填充样式配置项 *class pyecharts.options.AreaStyleOpts*
 
 ```python
 class AreaStyleOpts(
+    # 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
     opacity: Optional[Numeric] = 0,
+    # 填充的颜色。
+    # 颜色可以使用 RGB 表示，比如 'rgb(128, 128, 128)'，如果想要加上 alpha 通道表示不透明度，
+    # 可以使用 RGBA，比如 'rgba(128, 128, 128, 0.5)'，也可以使用十六进制格式，比如 '#ccc'。
+    # 除了纯色之外颜色也支持渐变色和纹理填充
+    # 
+    # 线性渐变，前四个参数分别是 x0, y0, x2, y2, 范围从 0 - 1，相当于在图形包围盒中的百分比，
+    # 如果 globalCoord 为 `true`，则该四个值是绝对的像素位置
+    # color: {
+    #    type: 'linear',
+    #    x: 0,
+    #    y: 0,
+    #    x2: 0,
+    #    y2: 1,
+    #    colorStops: [{
+    #        offset: 0, color: 'red' // 0% 处的颜色
+    #    }, {
+    #        offset: 1, color: 'blue' // 100% 处的颜色
+    #    }],
+    #    global: false // 缺省为 false
+    # }
+    # 
+    # 径向渐变，前三个参数分别是圆心 x, y 和半径，取值同线性渐变
+    # color: {
+    #    type: 'radial',
+    #    x: 0.5,
+    #    y: 0.5,
+    #    r: 0.5,
+    #    colorStops: [{
+    #        offset: 0, color: 'red' // 0% 处的颜色
+    #    }, {
+    #        offset: 1, color: 'blue' // 100% 处的颜色
+    #    }],
+    #    global: false // 缺省为 false
+    # }
+    # 
+    # 纹理填充
+    # color: {
+    #    image: imageDom, // 支持为 HTMLImageElement, HTMLCanvasElement，不支持路径字符串
+    #    repeat: 'repeat' // 是否平铺, 可以是 'repeat-x', 'repeat-y', 'no-repeat'
+    # }
     color: Optional[str] = None
 )
 ```
@@ -276,8 +359,52 @@ class AreaStyleOpts(
 
 ```python
 class ItemStyleOpts(
+    # 图形的颜色。
+    # 颜色可以使用 RGB 表示，比如 'rgb(128, 128, 128)'，如果想要加上 alpha 通道表示不透明度，
+    # 可以使用 RGBA，比如 'rgba(128, 128, 128, 0.5)'，也可以使用十六进制格式，比如 '#ccc'。
+    # 除了纯色之外颜色也支持渐变色和纹理填充
+    # 
+    # 线性渐变，前四个参数分别是 x0, y0, x2, y2, 范围从 0 - 1，相当于在图形包围盒中的百分比，
+    # 如果 globalCoord 为 `true`，则该四个值是绝对的像素位置
+    # color: {
+    #    type: 'linear',
+    #    x: 0,
+    #    y: 0,
+    #    x2: 0,
+    #    y2: 1,
+    #    colorStops: [{
+    #        offset: 0, color: 'red' // 0% 处的颜色
+    #    }, {
+    #        offset: 1, color: 'blue' // 100% 处的颜色
+    #    }],
+    #    global: false // 缺省为 false
+    # }
+    # 
+    # 径向渐变，前三个参数分别是圆心 x, y 和半径，取值同线性渐变
+    # color: {
+    #    type: 'radial',
+    #    x: 0.5,
+    #    y: 0.5,
+    #    r: 0.5,
+    #    colorStops: [{
+    #        offset: 0, color: 'red' // 0% 处的颜色
+    #    }, {
+    #        offset: 1, color: 'blue' // 100% 处的颜色
+    #    }],
+    #    global: false // 缺省为 false
+    # }
+    # 
+    # 纹理填充
+    # color: {
+    #    image: imageDom, // 支持为 HTMLImageElement, HTMLCanvasElement，不支持路径字符串
+    #    repeat: 'repeat' // 是否平铺, 可以是 'repeat-x', 'repeat-y', 'no-repeat'
+    # }
     color: Optional[str] = None,
+
+    # 图形的描边颜色。支持的颜色格式同 color，不支持回调函数。
     border_color: Optional[str] = None,
+
+    # 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
     opacity: Optional[Numeric] = None,
 )
 ```
