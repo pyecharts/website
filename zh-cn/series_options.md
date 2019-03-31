@@ -1,5 +1,5 @@
-## LabelOpts
-> 标签配置项 *class pyecahrts.options.LabelOpts*
+## LabelOpts：标签 Options
+> *class pyecahrts.options.LabelOpts*
 
 ```python
 class LabelOpts(
@@ -77,8 +77,8 @@ class LabelOpts(
 )
 ```
 
-## LineStyleOpts
-> 线风格配置项 *class pyecahrts.options.LineStyleOpts*
+## LineStyleOpts：线风格 Options
+> *class pyecahrts.options.LineStyleOpts*
 
 ```python
 class LineStyleOpts(
@@ -139,8 +139,8 @@ class LineStyleOpts(
 )
 ```
 
-## SplitLineOpts
-> 分割线风格配置项 *class pyecharts.options.SplitLineOpts*
+## SplitLineOpts：分割线 Options
+> *class pyecharts.options.SplitLineOpts*
 
 ```python
 class SplitLineOpts(
@@ -152,8 +152,8 @@ class SplitLineOpts(
 )
 ```
 
-## AxisLineOpts
-> 坐标轴轴线配置项 *class pyecharts.options.AxisLineOpts*
+## AxisLineOpts：坐标轴轴线 Options
+> *class pyecharts.options.AxisLineOpts*
 
 ```python
 class AxisLineOpts(
@@ -165,8 +165,8 @@ class AxisLineOpts(
 )
 ```
 
-## MarkPointItem
-> 标记点数据项 *class pyecharts.options.MarkPointItem*
+## MarkPointItem：标记点数据项
+> *class pyecharts.options.MarkPointItem*
 
 ```python
 class MarkPointItem(
@@ -213,8 +213,8 @@ class MarkPointItem(
 )
 ```
 
-## MarkPointOpts
-> 标记点配置项 *class pyecahrts.options.MarkPointOpts*
+## MarkPointOpts：标记点 Options
+> *class pyecahrts.options.MarkPointOpts*
 
 ```python
 class MarkPointOpts(
@@ -239,8 +239,8 @@ class MarkPointOpts(
 )
 ```
 
-## MarkLineItem
-> 标记线数据项 *class pyecharts.options.MarkLineItem*
+## MarkLineItem：标记线数据项
+> *class pyecharts.options.MarkLineItem*
 
 ```python
 class MarkLineItem(
@@ -284,8 +284,8 @@ class MarkLineItem(
 )
 ```
 
-## MarkLineOpts
-> 标记线配置项 *class pyecharts.options.MarkLineOpts*
+## MarkLineOpts：标记线 Options
+> *class pyecharts.options.MarkLineOpts*
 
 ```python
 class MarkLineOpts(
@@ -303,8 +303,8 @@ class MarkLineOpts(
 )
 ```
 
-## AreaStyleOpts
-> 区域填充样式配置项 *class pyecharts.options.AreaStyleOpts*
+## AreaStyleOpts：区域填充样式 Options
+> *class pyecharts.options.AreaStyleOpts*
 
 ```python
 class AreaStyleOpts(
@@ -354,7 +354,7 @@ class AreaStyleOpts(
 )
 ```
 
-## ItemStyleOpts
+## ItemStyleOpts：图元样式 Options
 > *class pyecharts.options.ItemStyleOpts*
 
 ```python
@@ -409,8 +409,8 @@ class ItemStyleOpts(
 )
 ```
 
-## TextStyleOpts
-> 文字样式配置项 *class pyecharts.options.TextStyleOpts*
+## TextStyleOpts：文字样式 Options
+> *class pyecharts.options.TextStyleOpts*
 
 ```python
 class TextStyleOpts(

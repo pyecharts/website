@@ -1,5 +1,5 @@
-## InitOpts
-> 初始化配置项 *class pyecharts.options.InitOpts*
+## InitOpts：初始化 Options
+> *class pyecharts.options.InitOpts*
 
 ```python
 class InitOpts(
@@ -29,8 +29,8 @@ class InitOpts(
 )
 ```
 
-## ToolBoxFeatureOpts
-> 工具箱各项工具配置项 *class pyecharts.options.ToolBoxFeatureOpts*
+## ToolBoxFeatureOpts：工具箱工具 Options
+> *class pyecharts.options.ToolBoxFeatureOpts*
 
 ```python
 class ToolBoxFeatureOpts(
@@ -48,8 +48,8 @@ class ToolBoxFeatureOpts(
 )
 ```
 
-## ToolboxOpts
-> 工具箱配置项 *class pyecharts.options.ToolboxOpts*
+## ToolboxOpts：工具箱 Options
+> *class pyecharts.options.ToolboxOpts*
 
 ```python
 class ToolboxOpts(
@@ -85,8 +85,8 @@ class ToolboxOpts(
 )
 ```
 
-## TitleOpts
-> 标题配置项 *class pyecharts.options.TitleOpts*
+## TitleOpts：标题 Options
+> *class pyecharts.options.TitleOpts*
 
 ```python
 class TitleOpts(
@@ -124,7 +124,7 @@ class TitleOpts(
 )
 ```
 
-## DataZoomOpts
+## DataZoomOpts：区域缩放组件 Options
 > *class pyecharts.options.DataZoomOpts*
 
 ```python
@@ -157,8 +157,8 @@ class DataZoomOpts(
 )
 ```
 
-## LegendOpts
-> 图例配置项 *class pyecharts.options.LegendOpts*
+## LegendOpts：图例 Options
+> *class pyecharts.options.LegendOpts*
 
 ```python
 class LegendOpts(
@@ -197,7 +197,7 @@ class LegendOpts(
 )
 ```
 
-## VisualMapOpts
+## VisualMapOpts：视觉映射组件 Options
 > *class pyecharts.options.VisualMapOpts*
 
 ```python
@@ -272,8 +272,8 @@ class VisualMapOpts(
 )
 ```
 
-## TooltipOpts
-> 提示框组件配置项 *class pyecharts.options.TooltipOpts*
+## TooltipOpts：提示框组件 Options
+> *class pyecharts.options.TooltipOpts*
 
 ```python
 class TooltipOpts(
@@ -344,8 +344,8 @@ class TooltipOpts(
 )
 ```
 
-## AxisTickOpts
-> 坐标轴刻度配置项 *class pyecharts.options.AxisTickOpts*
+## AxisTickOpts：坐标轴刻度 Options
+> *class pyecharts.options.AxisTickOpts*
 ```python
 class AxisTickOpts(
     # 是否显示坐标轴刻度。
@@ -365,8 +365,8 @@ class AxisTickOpts(
 )
 ```
 
-## AxisOpts
-> 坐标轴配置项 *class pyecharts.options.AxisOpts*
+## AxisOpts：坐标轴 Options
+> *class pyecharts.options.AxisOpts*
 
 ```python
 class AxisOpts(
@@ -454,8 +454,8 @@ class AxisOpts(
 )
 ```
 
-## GridOpts
-> 直角坐标系内绘图网格配置项 *class pyecharts.options.GridOpts*
+## GridOpts：直角坐标系网格 Options
+> *class pyecharts.options.GridOpts*
 
 ```python
 class GridOpts(
@@ -518,8 +518,8 @@ class Axis3DOpts(
 )
 ```
 
-## SingleAxisOpts
-> 单轴配置项 *class pyecharts.SingleAxisOpts*
+## SingleAxisOpts：单轴 Options
+> *class pyecharts.SingleAxisOpts*
 
 ```python
 class SingleAxisOpts(

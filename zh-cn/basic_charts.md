@@ -1,13 +1,17 @@
 ## Bar：柱状图/条形图
-> 柱状图/条形图 *class pyecharts.charts.Bar*
 
-### API
+> *class pyecharts.charts.Bar*
+
 ```python
-def __init__(
+class Bar(
     # 初始化配置项，参考 `global_options.InitOpts`
     init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
 )
+```
 
+> *func pyecharts.charts.Bar.add_yaxis*
+
+```python
 def add_yaxis(
     # 系列名称，用于tooltip的显示，legend 的图例筛选。
     series_name: str,
@@ -94,19 +98,15 @@ class CalendarOpts(
 
 ## EffectScatter：涟漪特效散点图
 
-### API
-
 ## Funnel：漏斗图
-
-### API
 
 ## Gauge：仪表盘
 
-### API
-
 ## Geo：地理坐标系
 
-## EffectOpts
+### 专属 Options
+
+#### EffectOpts
 
 > *class pyecharts.options.EffectOpts*
 
@@ -122,11 +122,7 @@ class EffectOpts(
 )
 ```
 
-### API
-
 ## Graph：关系图
-
-### API
 
 ### 专属 Options
 
@@ -221,27 +217,15 @@ class GraphCategory(
 
 ## HeatMap：热力图
 
-### API
-
 ## Kline/Candlestick：K线图
-
-### API
 
 ## Line：折线/面积图
 
-### API
-
 ## Liquid：水球图
-
-### API
 
 ## Map：地图
 
-### API
-
 ## Parallel：平行坐标系
-
-### API
 
 ### 专属 Options
 
@@ -275,15 +259,9 @@ class ParallelAxisOpts(
 
 ## Pie：饼图
 
-### API
-
 ## Polar：极坐标系
 
-### API
-
 ## Radar：雷达图
-
-### API
 
 ### 专属 Options
 
@@ -301,19 +279,11 @@ class RadarIndicatorOpts(
 
 ## Sankey：桑基图
 
-### API
-
 ## Scatter：散点图
-
-### API
 
 ## ThemeRiver：主题河流图
 
-### API
-
 ## Tree：树图
-
-### API
 
 ### 专属 Options
 
@@ -332,8 +302,4 @@ class TreeItem(
 
 ## TreeMap：矩形树图
 
-### API
-
 ## WordCloud：词云图
-
-### API
