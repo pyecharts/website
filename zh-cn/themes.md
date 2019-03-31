@@ -1,21 +1,20 @@
-> 主题自定义篇：扩展主题插件，多样化图表配色。V0.5.2+ 新增
-
-自 0.5.2+ 起，pyecharts 支持更换主题。下面是更换为 "dark" 的例子：
 
 ```python
-import random
+from pyecharts import options as opts
+from pyecharts.charts import Bar
+from pyecharts.globals import ThemeType
 
-from pyecharts import Bar
-
-
-X_AXIS = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-bar = Bar("我的第一个图表", "这里是副标题")
-bar.use_theme("dark")
-bar.add("商家A", X_AXIS, [random.randint(10, 100) for _ in range(6)])
-bar.add("商家B", X_AXIS, [random.randint(10, 100) for _ in range(6)])
-bar.add("商家C", X_AXIS, [random.randint(10, 100) for _ in range(6)])
-bar.add("商家D", X_AXIS, [random.randint(10, 100) for _ in range(6)])
-bar.render()
+def theme_default() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .add_yaxis("商家C", Faker.values())
+        .add_yaxis("商家D", Faker.values())
+        .set_global_opts(title_opts=opts.TitleOpts("Theme-default"))
+    )
+    return c
 ```
 ![dark](https://user-images.githubusercontent.com/19553554/39868563-c136646a-548c-11e8-87c2-dbf7ae85e844.png)
 
@@ -24,103 +23,80 @@ bar.render()
 ![default](https://user-images.githubusercontent.com/19553554/39868566-c20b699e-548c-11e8-861f-5a1b063434c3.png)
 
 
-## 使用主题插件
-
-echarts 自带 `dark` 主题，pyecharts 也就自带了 `dark`。 [echarts-themes-pypkg](https://github.com/pyecharts/echarts-themes-pypkg) 主题插件提供了如下主题
-
-* [vintage](#vintage)
-* [macarons](#macarons)
-* [infographic](#infographic)
-* [shine](#shine)
-* [roma](#roma)
-* [westeros](#westeros)
-* [wonderland](#wonderland)
-* [chalk](#chalk)
-* [halloween](#halloween)
-* [essos](#essos)
-* [walden](#walden)
-* [purple-passion](#purple-passion)
-* [romantic](#romantic)
-
-
-### 安装主题插件
-
-```shell
-$ pip install echarts-themes-pypkg
-```
-
-### 使用主题
-
-更换单个图形主题
-```python
-bar.use_theme("vintage")
-```
-
-更换运行环境内所有图表主题
-```python
-from pyecharts import configure
-
-# 将这行代码置于首部
-configure(global_theme='dark')
-
-bar = Bar()
-# 其他代码
-```
 
 ## 主题风格
 
-### vintage
+### LIGHT
 
-![vintage](https://user-images.githubusercontent.com/19553554/39868887-1bed3ae0-548e-11e8-99f5-8440ea578080.png)
+```pyhon
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.LIGHT))
+```
 
-### macarons
+### DARK
 
-![macarons](https://user-images.githubusercontent.com/19553554/39868570-c3563a0e-548c-11e8-9795-e0ebea18853f.png)
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.DARK))
+```
 
-### infographic
+### CHALK
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.CHALK))
+```
 
-![infographic](https://user-images.githubusercontent.com/19553554/39868564-c1884dac-548c-11e8-9009-f61162759be3.png)
+### ESSOS
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.ESSOS))
+```
 
-### shine
+### INFOGRAPHIC
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.INFOGRAPHIC))
+```
 
-![shine](https://user-images.githubusercontent.com/19553554/39868565-c1c8951a-548c-11e8-8351-2973cce47679.png)
+### MACARONS
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.MACARONS))
+```
 
-### roma
+### PURPLE_PASSION
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.PURPLE_PASSION))
+```
 
-![roma](https://user-images.githubusercontent.com/19553554/39868568-c2c7b798-548c-11e8-9de8-3d3ae148f172.png)
+### ROMA
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.ROMA))
+```
 
-### westeros
+### ROMANTIC
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.ROMANTIC))
+```
 
-![westeros](https://user-images.githubusercontent.com/19553554/43997578-077ff444-9e12-11e8-947b-9b37b279e99f.png)
+### SHINE
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.SHINE))
+```
 
-### wonderland
+### VINTAGE
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.VINTAGE))
+```
 
-![wonderland](https://user-images.githubusercontent.com/19553554/43997583-31b32b8c-9e12-11e8-8f39-4ef027e7a223.png)
+### WALDEN
+```
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.WALDEN))
+```
 
-### chalk
+### WESTEROS
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS))
+```
 
-![chalk](https://user-images.githubusercontent.com/19553554/43997593-6835b652-9e12-11e8-98ff-1894c4475b5a.png)
-
-### halloween
-
-![halloween](https://user-images.githubusercontent.com/19553554/43997599-97fcc038-9e12-11e8-878d-0a9a538ad75e.png)
-
-### essos
-
-![essos](https://user-images.githubusercontent.com/19553554/43997602-c0ce6390-9e12-11e8-94ba-5215b9e2c85b.png)
-
-### walden
-
-![walden](https://user-images.githubusercontent.com/19553554/43997620-3868a01e-9e13-11e8-84d5-79e998051170.png)
-
-### purple-passion
-
-![purple-passion](https://user-images.githubusercontent.com/19553554/43997624-56ed56e2-9e13-11e8-95be-8815e1bdf0e5.png)
-
-### romantic
-
-![romantic](https://user-images.githubusercontent.com/19553554/44029175-eef6f170-9f2e-11e8-82cb-b60a39b28762.png)
-
+### WONDERLAND
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.WONDERLAND))
+```
 
 ## 使用自己构建的主题
 

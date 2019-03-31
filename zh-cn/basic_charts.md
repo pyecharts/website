@@ -42,12 +42,224 @@ def add_yaxis(
 )
 ```
 
+### Demo
+```python
+def bar_base() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values(), is_selected=False)
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-基本示例", subtitle="我是副标题"))
+    )
+    return c
+```
+
+```python
+def bar_reversal_axis() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .reversal_axis()
+        .set_series_opts(label_opts=opts.LabelOpts(position="right"))
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-翻转 XY 轴"))
+    )
+    return c
+```
+
+```python
+def bar_stack0() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values(), stack="stack1")
+        .add_yaxis("商家B", Faker.values(), stack="stack1")
+        .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-堆叠数据（全部）"))
+    )
+    return c
+```
+
+```python
+def bar_stack1() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values(), stack="stack1")
+        .add_yaxis("商家B", Faker.values(), stack="stack1")
+        .add_yaxis("商家C", Faker.values())
+        .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-堆叠数据（部分）"))
+    )
+    return c
+```
+
+```python
+def bar_markpoint_type() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-MarkPoint（指定类型）"))
+        .set_series_opts(
+            label_opts=opts.LabelOpts(is_show=False),
+            markpoint_opts=opts.MarkPointOpts(
+                data=[
+                    opts.MarkPointItem(type_="max", name="最大值"),
+                    opts.MarkPointItem(type_="min", name="最小值"),
+                    opts.MarkPointItem(type_="average", name="平均值"),
+                ]
+            ),
+        )
+    )
+    return c
+```
+
+```python
+def bar_markpoint_custom() -> Bar:
+    x, y = Faker.choose(), Faker.values()
+    c = (
+        Bar()
+        .add_xaxis(x)
+        .add_yaxis(
+            "商家A",
+            y,
+            markpoint_opts=opts.MarkPointOpts(
+                data=[opts.MarkPointItem(name="自定义标记点", coord=[x[2], y[2]], value=y[2])]
+            ),
+        )
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-MarkPoint（自定义）"))
+        .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
+    )
+    return c
+```
+
+```python
+def bar_markline_type() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-MarkLine（指定类型）"))
+        .set_series_opts(
+            label_opts=opts.LabelOpts(is_show=False),
+            markline_opts=opts.MarkLineOpts(
+                data=[
+                    opts.MarkLineItem(type_="min", name="最小值"),
+                    opts.MarkLineItem(type_="max", name="最大值"),
+                    opts.MarkLineItem(type_="average", name="平均值"),
+                ]
+            ),
+        )
+    )
+    return c
+```
+
+```python
+def bar_markline_custom() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-MarkLine（自定义）"))
+        .set_series_opts(
+            label_opts=opts.LabelOpts(is_show=False),
+            markline_opts=opts.MarkLineOpts(
+                data=[opts.MarkLineItem(y=50, name="yAxis=50")]
+            ),
+        )
+    )
+    return c
+```
+
+```python
+def bar_datazoom_slider() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.days_attrs)
+        .add_yaxis("商家A", Faker.days_values)
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-DataZoom（slider-水平）"),
+            datazoom_opts=[opts.DataZoomOpts()],
+        )
+    )
+    return c
+```
+
+```python
+def bar_datazoom_slider_vertical() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.days_attrs)
+        .add_yaxis("商家A", Faker.days_values, color=Faker.rand_color())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-DataZoom（slider-垂直）"),
+            datazoom_opts=[opts.DataZoomOpts(orient="vertical")],
+        )
+    )
+    return c
+```
+
+```python
+def bar_datazoom_inside() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.days_attrs)
+        .add_yaxis("商家A", Faker.days_values, color=Faker.rand_color())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-DataZoom（inside）"),
+            datazoom_opts=[opts.DataZoomOpts(type_="inside")],
+        )
+    )
+    return c
+```
+
+```python
+def bar_datazoom_both() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.days_attrs)
+        .add_yaxis("商家A", Faker.days_values, color=Faker.rand_color())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-DataZoom（slider+inside）"),
+            datazoom_opts=[opts.DataZoomOpts(), opts.DataZoomOpts(type_="inside")],
+        )
+    )
+    return c
+```
+
+```python
+def bar_histogram() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values(), category_gap=0, color=Faker.rand_color())
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-直方图"))
+    )
+    return c
+```
+
 
 ## Boxplot：箱形图
 
+> *class pyecharts.charts.Boxplot*
+```python
+```
+
 ## Calendar：日历图
 
-## CalendarOpts
+> *class pyecharts.charts.Calendar*
+```python
+```
+
+
+### CalendarOpts
 > 日历坐标系组件配置项 *class pyecahrts.options.CalendarOpts*
 
 ```python
@@ -98,13 +310,27 @@ class CalendarOpts(
 
 ## EffectScatter：涟漪特效散点图
 
+> *class pyecharts.charts.EffectScatter*
+```python
+```
+
 ## Funnel：漏斗图
+
+> *class pyecharts.charts.Funnel*
+```python
+```
 
 ## Gauge：仪表盘
 
+> *class pyecharts.charts.Gauge*
+```python
+```
+
 ## Geo：地理坐标系
 
-### 专属 Options
+> *class pyecharts.charts.Geo*
+```python
+```
 
 #### EffectOpts
 
@@ -124,7 +350,9 @@ class EffectOpts(
 
 ## Graph：关系图
 
-### 专属 Options
+> *class pyecharts.charts.Graph*
+```python
+```
 
 #### GraphNode
 > *class pyecahrts.options.GraphNode*
@@ -217,17 +445,39 @@ class GraphCategory(
 
 ## HeatMap：热力图
 
+> *class pyecharts.charts.HeatMap*
+```python
+```
+
 ## Kline/Candlestick：K线图
+
+> *class pyecharts.charts.Kline*
+```python
+```
 
 ## Line：折线/面积图
 
+> *class pyecharts.charts.Line*
+```python
+```
+
 ## Liquid：水球图
+
+> *class pyecharts.charts.Liquid*
+```python
+```
 
 ## Map：地图
 
+> *class pyecharts.charts.Map*
+```python
+```
+
 ## Parallel：平行坐标系
 
-### 专属 Options
+> *class pyecharts.charts.Parallel*
+```python
+```
 
 #### ParallelOpts
 > *class pyecharts.options.ParallelOpts*
@@ -259,11 +509,21 @@ class ParallelAxisOpts(
 
 ## Pie：饼图
 
+> *class pyecharts.charts.Pie*
+```python
+```
+
 ## Polar：极坐标系
+
+> *class pyecharts.charts.Polar*
+```python
+```
 
 ## Radar：雷达图
 
-### 专属 Options
+> *class pyecharts.charts.Radar*
+```python
+```
 
 #### RadarIndicatorOpts
 > *class pyecahrts.options.RadarIndicatorOpts*
@@ -279,13 +539,27 @@ class RadarIndicatorOpts(
 
 ## Sankey：桑基图
 
+> *class pyecharts.charts.Sankey*
+```python
+```
+
 ## Scatter：散点图
+
+> *class pyecharts.charts.Scatter*
+```python
+```
 
 ## ThemeRiver：主题河流图
 
+> *class pyecharts.charts.ThemeRiver*
+```python
+```
+
 ## Tree：树图
 
-### 专属 Options
+> *class pyecharts.charts.Tree*
+```python
+```
 
 #### TreeItem
 > *class pyecahrts.options.TreeItem*
@@ -302,4 +576,12 @@ class TreeItem(
 
 ## TreeMap：矩形树图
 
+> *class pyecharts.charts.TreeMap*
+```python
+```
+
 ## WordCloud：词云图
+
+> *class pyecharts.charts.WordCloud*
+```python
+```
