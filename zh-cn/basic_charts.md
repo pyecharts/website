@@ -134,12 +134,6 @@ def add(
 )
 ```
 
-## Geo：地理坐标系
-
-> *class pyecharts.charts.Geo*
-```python
-```
-
 #### EffectOpts
 
 > *class pyecharts.options.EffectOpts*
@@ -254,12 +248,6 @@ class GraphCategory(
 ## Liquid：水球图
 
 > *class pyecharts.charts.Liquid*
-```python
-```
-
-## Map：地图
-
-> *class pyecharts.charts.Map*
 ```python
 ```
 
