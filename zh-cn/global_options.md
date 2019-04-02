@@ -1,4 +1,4 @@
-## InitOpts：初始化 Options
+## InitOpts：初始化配置项
 > *class pyecharts.options.InitOpts*
 
 ```python
@@ -29,7 +29,7 @@ class InitOpts(
 )
 ```
 
-## ToolBoxFeatureOpts：工具箱工具 Options
+## ToolBoxFeatureOpts：工具箱工具配置项
 > *class pyecharts.options.ToolBoxFeatureOpts*
 
 ```python
@@ -48,7 +48,7 @@ class ToolBoxFeatureOpts(
 )
 ```
 
-## ToolboxOpts：工具箱 Options
+## ToolboxOpts：工具箱配置项
 > *class pyecharts.options.ToolboxOpts*
 
 ```python
@@ -85,7 +85,7 @@ class ToolboxOpts(
 )
 ```
 
-## TitleOpts：标题 Options
+## TitleOpts：标题配置项
 > *class pyecharts.options.TitleOpts*
 
 ```python
@@ -124,7 +124,7 @@ class TitleOpts(
 )
 ```
 
-## DataZoomOpts：区域缩放组件 Options
+## DataZoomOpts：区域缩放配置项
 > *class pyecharts.options.DataZoomOpts*
 
 ```python
@@ -157,7 +157,7 @@ class DataZoomOpts(
 )
 ```
 
-## LegendOpts：图例 Options
+## LegendOpts：图例配置项
 > *class pyecharts.options.LegendOpts*
 
 ```python
@@ -197,7 +197,7 @@ class LegendOpts(
 )
 ```
 
-## VisualMapOpts：视觉映射组件 Options
+## VisualMapOpts：视觉映射配置项
 > *class pyecharts.options.VisualMapOpts*
 
 ```python
@@ -262,7 +262,7 @@ class VisualMapOpts(
     #   {min: 310, max: 1000},
     #   {min: 200, max: 300},
     #   {min: 10, max: 200, label: '10 到 200（自定义label）'},
-    #   {value: 123, label: '123（自定义特殊颜色）', color: 'grey'}, // 表示 value 等于 123 的情况
+    #   {value: 123, label: '123（自定义特殊颜色）', color: 'grey'}, //表示 value 等于 123 的情况
     #   {max: 5}     // 不指定 min，表示 min 为无限大（-Infinity）。
     # ]
     pieces: Optional[Sequence] = None,
@@ -272,7 +272,7 @@ class VisualMapOpts(
 )
 ```
 
-## TooltipOpts：提示框组件 Options
+## TooltipOpts：提示框配置项
 > *class pyecharts.options.TooltipOpts*
 
 ```python
@@ -344,8 +344,9 @@ class TooltipOpts(
 )
 ```
 
-## AxisTickOpts：坐标轴刻度 Options
+## AxisTickOpts：坐标轴刻度配置项
 > *class pyecharts.options.AxisTickOpts*
+
 ```python
 class AxisTickOpts(
     # 是否显示坐标轴刻度。
@@ -365,7 +366,7 @@ class AxisTickOpts(
 )
 ```
 
-## AxisOpts：坐标轴 Options
+## AxisOpts：坐标轴配置项
 > *class pyecharts.options.AxisOpts*
 
 ```python
@@ -454,7 +455,7 @@ class AxisOpts(
 )
 ```
 
-## GridOpts：直角坐标系网格 Options
+## GridOpts：直角坐标系网格配置项
 > *class pyecharts.options.GridOpts*
 
 ```python
@@ -518,7 +519,7 @@ class Axis3DOpts(
 )
 ```
 
-## SingleAxisOpts：单轴 Options
+## SingleAxisOpts：单轴配置项
 > *class pyecharts.SingleAxisOpts*
 
 ```python

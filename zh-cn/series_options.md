@@ -1,4 +1,4 @@
-## LabelOpts：标签 Options
+## LabelOpts：标签配置项
 > *class pyecahrts.options.LabelOpts*
 
 ```python
@@ -77,7 +77,7 @@ class LabelOpts(
 )
 ```
 
-## LineStyleOpts：线风格 Options
+## LineStyleOpts：线样式配置项
 > *class pyecahrts.options.LineStyleOpts*
 
 ```python
@@ -139,7 +139,7 @@ class LineStyleOpts(
 )
 ```
 
-## SplitLineOpts：分割线 Options
+## SplitLineOpts：分割线配置项
 > *class pyecharts.options.SplitLineOpts*
 
 ```python
@@ -152,7 +152,7 @@ class SplitLineOpts(
 )
 ```
 
-## AxisLineOpts：坐标轴轴线 Options
+## AxisLineOpts：坐标轴轴线配置项
 > *class pyecharts.options.AxisLineOpts*
 
 ```python
@@ -213,7 +213,7 @@ class MarkPointItem(
 )
 ```
 
-## MarkPointOpts：标记点 Options
+## MarkPointOpts：标记点配置项
 > *class pyecahrts.options.MarkPointOpts*
 
 ```python
@@ -284,7 +284,7 @@ class MarkLineItem(
 )
 ```
 
-## MarkLineOpts：标记线 Options
+## MarkLineOpts：标记线配置项
 > *class pyecharts.options.MarkLineOpts*
 
 ```python
@@ -303,7 +303,22 @@ class MarkLineOpts(
 )
 ```
 
-## AreaStyleOpts：区域填充样式 Options
+## EffectOpts：涟漪特效配置项
+> *class pyecharts.EffectOpts.EffectOpts*
+
+```python
+class EffectOpts(
+    is_show: bool = True,
+    brush_type: str = "stroke",
+    scale: Numeric = 2.5,
+    period: Numeric = 4,
+    color: Optional[str] = None,
+    symbol: Optional[str] = None,
+    symbol_size: Optional[Numeric] = None,
+)
+```
+
+## AreaStyleOpts：区域填充样式配置项
 > *class pyecharts.options.AreaStyleOpts*
 
 ```python
@@ -354,7 +369,19 @@ class AreaStyleOpts(
 )
 ```
 
-## ItemStyleOpts：图元样式 Options
+## SplitAreaOpts：分隔区域配置项
+> *class pyecharts.options.SplitAreaOpts*
+
+```python
+class SplitAreaOpts(
+    # 是否显示分隔区域。
+    is_show=True, 
+    # 分隔区域的样式配置项，参考 `series_options.AreaStyleOpts`
+    areastyle_opts: AreaStyleOpts = AreaStyleOpts()
+)
+```
+
+## ItemStyleOpts：图元样式配置项
 > *class pyecharts.options.ItemStyleOpts*
 
 ```python
@@ -409,7 +436,7 @@ class ItemStyleOpts(
 )
 ```
 
-## TextStyleOpts：文字样式 Options
+## TextStyleOpts：文字样式配置项
 > *class pyecharts.options.TextStyleOpts*
 
 ```python
