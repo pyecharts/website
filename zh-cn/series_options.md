@@ -381,6 +381,34 @@ class SplitAreaOpts(
 )
 ```
 
+## TextStyleOpts：文字样式配置项
+> *class pyecharts.options.TextStyleOpts*
+
+```python
+class TextStyleOpts(
+    # 文字颜色。
+    color: Optional[str] = None,
+
+    # 文字字体的风格
+    # 可选：'normal'，'italic'，'oblique'
+    font_style: Optional[str] = None,
+
+    # 主标题文字字体的粗细，可选：
+    # 'normal'，'bold'，'bolder'，'lighter'
+    font_weight: Optional[str] = None,
+
+    # 文字的字体系列
+    # 还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+    font_family: Optional[str] = None,
+
+    # 文字的字体大小
+    font_size: Optional[Numeric] = None,
+
+    # 行高
+    line_height: Optional[str] = None,
+)
+```
+
 ## ItemStyleOpts：图元样式配置项
 > *class pyecharts.options.ItemStyleOpts*
 
@@ -433,33 +461,5 @@ class ItemStyleOpts(
 
     # 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
     opacity: Optional[Numeric] = None,
-)
-```
-
-## TextStyleOpts：文字样式配置项
-> *class pyecharts.options.TextStyleOpts*
-
-```python
-class TextStyleOpts(
-    # 文字颜色。
-    color: Optional[str] = None,
-
-    # 文字字体的风格
-    # 可选：'normal'，'italic'，'oblique'
-    font_style: Optional[str] = None,
-
-    # 主标题文字字体的粗细，可选：
-    # 'normal'，'bold'，'bolder'，'lighter'
-    font_weight: Optional[str] = None,
-
-    # 文字的字体系列
-    # 还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
-    font_family: Optional[str] = None,
-
-    # 文字的字体大小
-    font_size: Optional[Numeric] = None,
-
-    # 行高
-    line_height: Optional[str] = None,
 )
 ```

@@ -293,6 +293,147 @@ class ParallelAxisOpts(
 
 ## Polar：极坐标系
 
+### RadiusAxisItem：极坐标系径向轴数据项
+> *class pyecahrts.options.RadiusAxisItem*
+
+```python
+class RadiusAxisItem(
+    value: Optional[str] = None,
+    textstyle_opts: Optional[TextStyleOpts] = None,
+)
+```
+
+### RadiusAxisOpts：极坐标系径向轴配置项
+> *class pyecharts.optiones.RadiusAxisOpts*
+
+```python
+class RadiusAxisOpts(
+    # 径向轴所在的极坐标系的索引，默认使用第一个极坐标系。
+    polar_index: Optional[int] = None,
+
+    # 数据项，参考 `global_options.RadiusAxisItem`
+    data: Optional[List[Union[RadiusAxisItem, dict, str]]] = None,
+
+    # 坐标轴两边留白策略，类目轴和非类目轴的设置和表现不一样。
+    # 类目轴中 boundaryGap 可以配置为 true 和 false。默认为 true，这时候刻度只是作为分隔线，
+    # 标签和数据点都会在两个刻度之间的带(band)中间。
+    # 非类目轴，包括时间，数值，对数轴，boundaryGap是一个两个值的数组，分别表示数据最小值和最大值的延伸范围
+    # 可以直接设置数值或者相对的百分比，在设置 min 和 max 后无效。 示例：boundaryGap: ['20%', '20%']
+    boundary_gap: Union[bool, List] = None,
+
+    # 坐标轴类型。可选：
+    # 'value': 数值轴，适用于连续数据。
+    # 'category': 类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据。
+    # 'time': 时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同
+    # 例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
+    # 'log' 对数轴。适用于对数数据。
+    type_: Optional[str] = None,
+
+    # 坐标轴名称。
+    name: Optional[str] = None,
+
+    # 坐标轴名称显示位置。可选：
+    # 'start', 'middle' 或者 'center','end
+    name_location: Optional[str] = None,
+
+    # 坐标轴刻度最小值。
+    # 可以设置成特殊值 'dataMin'，此时取数据在该轴上的最小值作为最小刻度。
+    # 不设置时会自动计算最小值保证坐标轴刻度的均匀分布。
+    # 在类目轴中，也可以设置为类目的序数（如类目轴 data: ['类A', '类B', '类C'] 中，序数 2 表示 '类C'
+    # 也可以设置为负数，如 -3）。
+    min_: Union[str, Numeric, None] = None,
+
+    # 坐标轴刻度最大值。
+    # 可以设置成特殊值 'dataMax'，此时取数据在该轴上的最大值作为最大刻度。
+    # 不设置时会自动计算最大值保证坐标轴刻度的均匀分布。
+    # 在类目轴中，也可以设置为类目的序数（如类目轴 data: ['类A', '类B', '类C'] 中，序数 2 表示 '类C'
+    # 也可以设置为负数，如 -3）。
+    max_: Union[str, Numeric, None] = None,
+
+    # 只在数值轴中（type: 'value'）有效。
+    # 是否是脱离 0 值比例。设置成 true 后坐标刻度不会强制包含零刻度。在双数值轴的散点图中比较有用。
+    # 在设置 min 和 max 之后该配置项无效。
+    is_scale: bool = False,
+
+    # 分割线配置项，参考 `series_options.SplitLineOpts`
+    splitline_opts: Union[SplitLineOpts, dict, None] = None,
+
+    # 坐标轴线风格配置项，参考 `series_options.AxisLineOpts`
+    axisline_opts: Union[AxisLineOpts, dict, None] = None,
+
+    # 坐标轴线标签配置项，参考 `series_options.LabelOpts`
+    axislabel_opts: Union[LabelOpts, dict, None] = None,
+
+    # 半径轴组件的所有图形的 z 值。控制图形的前后顺序。z 值 小的图形会被 z 值大的图形覆盖
+    z: Optional[int] = None,
+)
+```
+
+### AngleAxisItem：极坐标系角度轴数据项
+> *class pyecharts.options.AngleAxisItem*
+
+```python
+class AngleAxisItem(
+    value: Optional[str] = None,
+    textstyle_opts: Optional[TextStyleOpts] = None,
+)
+```
+
+### AngleAxisOpts：极坐标系角度轴配置项
+> *class pyecharts.options.AngleAxisOpts*
+
+```python
+class AngleAxisOpts(
+    # 径向轴所在的极坐标系的索引，默认使用第一个极坐标系。
+    polar_index: Optional[int] = None,
+    data: Optional[List[Union[AngleAxisItem, dict, str]]] = None,
+    start_angle: Optional[Numeric] = None,
+    is_clockwise: bool = False,
+
+    # 坐标轴两边留白策略，类目轴和非类目轴的设置和表现不一样。
+    # 类目轴中 boundaryGap 可以配置为 true 和 false。默认为 true，这时候刻度只是作为分隔线，
+    # 标签和数据点都会在两个刻度之间的带(band)中间。
+    # 非类目轴，包括时间，数值，对数轴，boundaryGap是一个两个值的数组，分别表示数据最小值和最大值的延伸范围
+    # 可以直接设置数值或者相对的百分比，在设置 min 和 max 后无效。 示例：boundaryGap: ['20%', '20%']
+    boundary_gap: Union[bool, List] = None,
+
+    # 坐标轴类型。可选：
+    # 'value': 数值轴，适用于连续数据。
+    # 'category': 类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据。
+    # 'time': 时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同
+    # 例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
+    # 'log' 对数轴。适用于对数数据。
+    type_: Optional[str] = None,
+
+    # 坐标轴刻度最小值。
+    # 可以设置成特殊值 'dataMin'，此时取数据在该轴上的最小值作为最小刻度。
+    # 不设置时会自动计算最小值保证坐标轴刻度的均匀分布。
+    # 在类目轴中，也可以设置为类目的序数（如类目轴 data: ['类A', '类B', '类C'] 中，序数 2 表示 '类C'
+    # 也可以设置为负数，如 -3）。
+    min_: Union[str, Numeric, None] = None,
+
+    # 坐标轴刻度最大值。
+    # 可以设置成特殊值 'dataMax'，此时取数据在该轴上的最大值作为最大刻度。
+    # 不设置时会自动计算最大值保证坐标轴刻度的均匀分布。
+    # 在类目轴中，也可以设置为类目的序数（如类目轴 data: ['类A', '类B', '类C'] 中，序数 2 表示 '类C'
+    # 也可以设置为负数，如 -3）。
+    max_: Union[str, Numeric, None] = None,
+
+    # 分割线风格配置项，参考 `series_options.AxisLineOpts`
+    splitline_opts: Union[SplitLineOpts, dict, None] = None,
+
+    # 坐标轴线风格配置项，参考 `series_options.AxisLineOpts`
+    axisline_opts: Union[AxisLineOpts, dict, None] = None,
+
+    # 坐标轴标签风格配置项，参考 `series_options.AxisLineOpts`
+    axislabel_opts: Union[LabelOpts, dict, None] = None,
+
+    # 半径轴组件的所有图形的 z 值。控制图形的前后顺序。z 值 小的图形会被 z 值大的图形覆盖
+    z: Optional[int] = None,
+)
+```
+
+
 > *class pyecharts.charts.Polar*
 ```python
 ```

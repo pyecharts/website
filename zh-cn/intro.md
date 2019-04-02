@@ -2,14 +2,6 @@
 
 ### 安装 pyecharts
 
-#### 兼容性
-
-pyecharts 支持 Python2.7+ 和 Ptyhon3.5+。如果你使用的是 Python2.7，请在代码顶部声明字符编码，否则会出现中文乱码问题。
-```python
-#coding=utf-8
-from __future__ import unicode_literals
-```
-
 #### pyecharts
 
 pip 安装
@@ -25,10 +17,6 @@ $ pip install -r requirements.txt
 $ python setup.py install
 ```
 
-#### 地图插件
-
-自从 v0.3.2 开始，为了缩减项目本身的体积以及维持 pyecharts 项目的轻量化运行，pyecharts 将不再自带地图 js 文件。想使用地图的开发者**必须**自己手动安装地图插件。具体参考 [自定义地图篇](zh-cn/customize_map)。
-
 
 ### 快速开始
 
@@ -42,7 +30,6 @@ bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "�
 bar.render()    # 生成本地 HTML 文件
 ```
 ![guide-0](https://user-images.githubusercontent.com/19553554/35103909-3ee41ba2-fca2-11e7-87be-1a3585b9e0fa.png)
-
 
 * ```add()```  
     主要方法，用于添加图表的数据和设置各种配置项
@@ -81,48 +68,6 @@ bar.render()
 
 pyecharts 支持另外 5 个主体色系，[请移步到主题色系获取更多配置信息](zh-cn/themes)。
 
-
-### 使用 pyecharts-snapshot 插件
-
-如果想直接将图片保存为 png, pdf, gif 格式的文件，可以使用 [pyecharts-snapshot](https://github.com/pyecharts/pyecharts-snapshot)。使用该插件请确保你的系统上已经安装了 [Nodejs](https://nodejs.org/en/download/) 环境。
-
-1. 安装 phantomjs
-    `$ npm install -g phantomjs-prebuilt`
-2. 安装 pyecharts-snapshot
-    `$ pip install pyecharts-snapshot`
-3. 调用 `render` 方法
-    `bar.render(path='snapshot.png')`
-    文件结尾可以为 svg/jpeg/png/pdf/gif。请注意，svg 文件需要你在初始化 bar 的时候设置 renderer='svg'。
-
-更多内容请移步至 [pyecharts-snapshot](https://github.com/pyecharts/pyecharts-snapshot)
-
-
-### 图形绘制过程
-
-图表类提供了若干了构建和渲染的方法，在使用的过程中，建议按照以下的顺序分别调用：
-
-| 步骤 | 描述 | 代码示例 | 备注 |
-| ------ | ------ | ------ | ------ |
-| 1 | 实例一个具体类型图表的对象 |  `chart = FooChart()`| |
-| 2  | 为图表添加通用的配置，如主题 |  `chart.use_theme()` | |
-| 3  | 为图表添加特定的配置 | `geo.add_coordinate()` | |
-| 4  | 添加数据及配置项| `chart.add()` | 参考 [数据解析与导入篇](zh-cn/data_import) |
-| 5  | 生成本地文件（html/svg/jpeg/png/pdf/gif）| `chart.render()` | |
-
-从 v0.5.9 开始，以上涉及的方法均支持链式调用。例如：
-
-```python
-from pyecharts import Bar
-
-CLOTHES = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-clothes_v1 = [5, 20, 36, 10, 75, 90]
-clothes_v2 = [10, 25, 8, 60, 20, 80]
-
-(Bar("柱状图数据堆叠示例")
-    .add("商家A", CLOTHES, clothes_v1, is_stack=True)
-    .add("商家B", CLOTHES, clothes_v2, is_stack=True)
-    .render())
-```
 
 ### Pandas&Numpy 简单示例
 
