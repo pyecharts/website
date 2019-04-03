@@ -248,13 +248,23 @@ class GraphCategory(
 ## Liquid：水球图
 
 > *class pyecharts.charts.Liquid*
+
 ```python
+class Liquid(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+)
 ```
 
 ## Parallel：平行坐标系
 
 > *class pyecharts.charts.Parallel*
+
 ```python
+class Parallel(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+)
 ```
 
 #### ParallelOpts
@@ -292,6 +302,15 @@ class ParallelAxisOpts(
 ```
 
 ## Polar：极坐标系
+
+> *class pyecharts.charts.Polar*
+
+```python
+class Polar(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+)
+```
 
 ### RadiusAxisItem：极坐标系径向轴数据项
 > *class pyecahrts.options.RadiusAxisItem*
@@ -441,7 +460,12 @@ class AngleAxisOpts(
 ## Radar：雷达图
 
 > *class pyecharts.charts.Radar*
+
 ```python
+class Radar(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+)
 ```
 
 #### RadarIndicatorOpts
@@ -461,18 +485,32 @@ class RadarIndicatorOpts(
 > *class pyecharts.charts.Sankey*
 
 ```python
+class Saneky(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+)
 ```
 
 ## ThemeRiver：主题河流图
 
 > *class pyecharts.charts.ThemeRiver*
+
 ```python
+class ThemeRiver(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+)
 ```
 
 ## Tree：树图
 
 > *class pyecharts.charts.Tree*
+
 ```python
+class Tree(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+)
 ```
 
 #### TreeItem
@@ -491,11 +529,21 @@ class TreeItem(
 ## TreeMap：矩形树图
 
 > *class pyecharts.charts.TreeMap*
+
 ```python
+class TreeMap(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+)
 ```
 
 ## WordCloud：词云图
 
 > *class pyecharts.charts.WordCloud*
+
 ```python
+class WordCloud(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+)
 ```

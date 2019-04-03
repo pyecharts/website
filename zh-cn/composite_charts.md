@@ -1,6 +1,11 @@
 ## Grid：并行多图
 
-## GridOpts：直角坐标系网格配置项
+> *class class pyecharts.Grid*
+
+```python
+```
+
+### GridOpts：直角坐标系网格配置项
 > *class pyecharts.options.GridOpts*
 
 ```python
@@ -34,5 +39,17 @@ class GridOpts(
 ```
 
 ## Overlap：层叠多图
+
 ## Page：顺序多图
+
+> *class class pyecharts.Page*
+
+```python
+```
+
 ## Timeline：时间线轮播多图
+
+> *class class pyecharts.Timeline*
+
+```python
+```

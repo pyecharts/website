@@ -76,8 +76,28 @@ class Axis3DOpts(
 
 ## Bar3D：3D柱状图
 
+> *class pyecharts.charts.Bar3D*
+
+```python
+```
+
 ## Line3D：3D折线图
+
+> *class pyecharts.charts.Line3D*
+
+```python
+```
 
 ## Scatter3D：3D散点图
 
+> *class pyecharts.charts.Scatter3D*
+
+```python
+```
+
 ## Surface3D：3D曲面图
+
+> *class pyecharts.charts.Surface3D*
+
+```python
+```
