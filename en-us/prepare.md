@@ -32,9 +32,6 @@ Now, you are ready to make your first chart!
 from pyecharts import Bar
 from pyecharts import options as opts
 
-from pyecharts.charts import Bar
-from pyecharts import options as opts
-
 (Bar()
     .add_xaxis(["Microsoft", "Amazon", "IBM", "Oracl", "Google", "Alibaba"])
     .add_yaxis('2017-2018 Revenue in (billion $)', [21.2, 20.4, 10.3, 6.08, 4, 2.2])
@@ -54,32 +51,41 @@ from pyecharts import options as opts
 * ```render()```
     creat a file named `render.html` in the root directory defaultly, which supports path parameter and set the location the file save in, for instance render(r"e:\my_first_chart.html"), open file with your browser.
 
-**Note：** Click the image download button on the right hand side of the chart. If you need more buttons, please insert `is_more_utils=True` when calling add()
+In order to have toolbox buttons, you need to give a bit more configuration. Then you can click the image download button.
 
 ```python
 from pyecharts import Bar
+from pyecharts import options as opts
 
-bar = Bar("My first bar chart", "For our fashion shop client")
-bar.add("Clothes", ["T-shirt", "Sweater", "Georgette", "Trousers", "High-heels", "Socks"], [5, 20, 36, 10, 75, 90],
-        is_more_utils=True)
-bar.render()
+(Bar()
+    .add_xaxis(["Microsoft", "Amazon", "IBM", "Oracl", "Google", "Alibaba"])
+    .add_yaxis('2017-2018 Revenue in (billion $)', [21.2, 20.4, 10.3, 6.08, 4, 2.2])
+    .set_global_opts(title_opts=opts.TitleOpts(title="Top cloud providers 2018", subtitle="2017-2018 Revenue"),
+                     toolbox_opts=opts.ToolboxOpts())
+    .render() # generate a local HTML file
+)
 ```
-![guide-1](https://user-images.githubusercontent.com/4280312/45588058-9aa13a80-b906-11e8-9d41-dd8b9f625c6d.png)
+![guide-1](https://user-images.githubusercontent.com/4280312/55645894-b05a4c80-57d1-11e9-8eda-e41f5ef7e9d0.png)
 
 
 ### Use theme
 
-Since 0.5.2+, pyecharts has supported the replacement of the theme color. Here's an example of changing to 'dark':
+You will need pass on theme parameter:
 
 ```python
+from pyecharts.globals import ThemeType
 from pyecharts import Bar
+from pyecharts import options as opts
 
-bar = Bar("My first bar chart", "For our fashion shop client")
-bar.use_theme('dark')
-bar.add("Clothes", ["T-shirt", "Sweater", "Georgette", "Trousers", "High-heels", "Socks"], [5, 20, 36, 10, 75, 90])
-bar.render()
+(Bar(init_opts=opts.InitOpts(theme=ThemeType.DARK)))
+    .add_xaxis(["Microsoft", "Amazon", "IBM", "Oracl", "Google", "Alibaba"])
+    .add_yaxis('2017-2018 Revenue in (billion $)', [21.2, 20.4, 10.3, 6.08, 4, 2.2])
+    .set_global_opts(title_opts=opts.TitleOpts(title="Top cloud providers 2018", subtitle="2017-2018 Revenue"))
+    .render() # generate a local HTML file
+)
+
 ```
-![guide-2](https://user-images.githubusercontent.com/4280312/45588084-e9e76b00-b906-11e8-99d7-9e3d651bfcc2.png)
+![guide-2](https://user-images.githubusercontent.com/4280312/55646201-7b022e80-57d2-11e9-98bd-17f81f3a3333.png)
 
 pyecharts supports extra 5 body colors, [Please move to the theme color for more configuration information](en-us/themes).
 
