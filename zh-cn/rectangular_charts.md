@@ -1,4 +1,3 @@
-
 直角坐标系图表继承自 `AxisChart` 都拥有以下方法
 
 > *func AxisChart.extend_axis*
@@ -42,7 +41,7 @@ def overlap(
 
 ## Bar：柱状图/条形图
 
-> *class pyecharts.charts.Bar*
+> *class pyecharts.charts.Bar(AxisChart)*
 
 ```python
 class Bar(
@@ -99,6 +98,11 @@ def add_yaxis(
 > Bar-基本示例
 
 ```python
+from example.commons import Faker
+from pyecharts import options as opts
+from pyecharts.charts import Bar
+
+
 def bar_base() -> Bar:
     c = (
         Bar()
@@ -340,7 +344,7 @@ def bar_histogram() -> Bar:
 
 ## Boxplot：箱形图
 
-> *class pyecharts.charts.Boxplot*
+> *class pyecharts.charts.Boxplot(AxisChart)*
 
 ```python
 class Boxplot(
@@ -388,6 +392,10 @@ def add_yaxis(
 > BoxPlot-基本示例
 
 ```python
+from pyecharts import options as opts
+from pyecharts.charts import Boxplot
+
+
 def boxpolt_base() -> Boxplot:
     v1 = [
         [850, 740, 900, 1070, 930, 850, 950, 980, 980, 880]
@@ -412,7 +420,7 @@ def boxpolt_base() -> Boxplot:
 
 ## EffectScatter：涟漪特效散点图
 
-> *class pyecharts.charts.EffectScatter*
+> *class pyecharts.charts.EffectScatter(AxisChart)*
 
 ```python
 class EffectScatter(
@@ -466,6 +474,12 @@ class EffectScatter(
 > EffectScatter-基本示例
 
 ```python
+from example.commons import Faker
+from pyecharts import options as opts
+from pyecharts.charts import EffectScatter
+from pyecharts.globals import SymbolType
+
+
 def effectscatter_base() -> EffectScatter:
     c = (
         EffectScatter()
@@ -511,7 +525,7 @@ def effectscatter_symbol() -> EffectScatter:
 
 ## HeatMap：热力图
 
-> *class pyecharts.charts.HeatMap*
+> *class pyecharts.charts.HeatMap(AxisChart)*
 
 ```python
 class HeatMap(
@@ -559,6 +573,13 @@ def add_yaxis(
 > HeatMap-基本示例
 
 ```python
+import random
+
+from example.commons import  Faker
+from pyecharts import options as opts
+from pyecharts.charts import HeatMap
+
+
 def heatmap_base() -> HeatMap:
     value = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
     c = (
@@ -577,7 +598,7 @@ def heatmap_base() -> HeatMap:
 
 ## Kline/Candlestick：K线图
 
-> *class pyecharts.charts.Kline*
+> *class pyecharts.charts.Kline(AxisChart)*
 
 ```python
 class Kline(
@@ -621,6 +642,10 @@ def add_yaxis(
 > Kline-基本示例
 
 ```python
+from pyecharts import options as opts
+from pyecharts.charts import Kline
+
+
 data = [
     [2320.26, 2320.26, 2287.3, 2362.94],
     [2300, 2291.3, 2288.26, 2308.38],
@@ -774,7 +799,7 @@ def kline_markline() -> Kline:
 
 ## Line：折线/面积图
 
-> *class pyecharts.charts.Line*
+> *class pyecharts.charts.Line(AxisChart)*
 
 ```python
 class Line(
@@ -852,6 +877,11 @@ def add_yaxis(
 > Line-基本示例
 
 ```python
+import pyecharts.options as opts
+from example.commons import  Faker
+from pyecharts.charts import Line
+
+
 def line_base() -> Line:
     c = (
         Line()
@@ -942,7 +972,7 @@ def line_step() -> Line:
 
 ## Scatter：散点图
 
-> *class pyecharts.charts.Scatter*
+> *class pyecharts.charts.Scatter(AxisChart)*
 
 ```python
 class Scatter(
@@ -1002,6 +1032,11 @@ def add_yaxis(
 > Scatter-基本示例
 
 ```python
+from example.commons import Faker
+from pyecharts import options as opts
+from pyecharts.charts import Scatter
+
+
 def scatter_base() -> Scatter:
     c = (
         Scatter()

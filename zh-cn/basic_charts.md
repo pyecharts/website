@@ -82,6 +82,46 @@ class CalendarOpts(
 )
 ```
 
+### Demo
+
+> Calendar-2017年微信步数情况
+
+```python
+import datetime
+import random
+
+from pyecharts import options as opts
+from pyecharts.charts import Calendar
+
+
+def calendar_base() -> Calendar:
+    begin = datetime.date(2017, 1, 1)
+    end = datetime.date(2017, 12, 31)
+    data = [
+        [str(begin + datetime.timedelta(days=i)), random.randint(1000, 25000)]
+        for i in range((end - begin).days + 1)
+    ]
+
+    c = (
+        Calendar()
+        .add("", data, calendar_opts=opts.CalendarOpts(range_="2017"))
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Calendar-2017年微信步数情况"),
+            visualmap_opts=opts.VisualMapOpts(
+                max_=20000,
+                min_=500,
+                orient="horizontal",
+                is_piecewise=True,
+                pos_top="230px",
+                pos_left="100px",
+            ),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/55605195-f7324d00-57a5-11e9-8b1c-1042e60e0431.png)
+
+
 ## Funnel：漏斗图
 
 > *class pyecharts.charts.Funnel*
@@ -106,6 +146,11 @@ def add(
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
 )
+```
+
+### Demo
+
+```python
 ```
 
 ## Gauge：仪表盘
@@ -245,6 +290,11 @@ class GraphCategory(
 )
 ```
 
+### Demo
+
+```python
+```
+
 ## Liquid：水球图
 
 > *class pyecharts.charts.Liquid*
@@ -254,6 +304,11 @@ class Liquid(
     # 初始化配置项，参考 `global_options.InitOpts`
     init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
 )
+```
+
+### Demo
+
+```python
 ```
 
 ## Parallel：平行坐标系
@@ -295,9 +350,23 @@ class ParallelAxisOpts(
 )
 ```
 
+### Demo
+
+```python
+```
+
 ## Pie：饼图
 
 > *class pyecharts.charts.Pie*
+```python
+class Pie(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+)
+```
+
+### Demo
+
 ```python
 ```
 
@@ -310,6 +379,11 @@ class Polar(
     # 初始化配置项，参考 `global_options.InitOpts`
     init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
 )
+```
+
+### Demo
+
+```python
 ```
 
 ### RadiusAxisItem：极坐标系径向轴数据项

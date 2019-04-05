@@ -7,6 +7,7 @@ from pyecharts.globals import ThemeType
 def theme_default() -> Bar:
     c = (
         Bar()
+        # 等价于 Bar(init_opts=opts.InitOpts(theme=ThemeType.WHITE))
         .add_xaxis(Faker.choose())
         .add_yaxis("商家A", Faker.values())
         .add_yaxis("商家B", Faker.values())
