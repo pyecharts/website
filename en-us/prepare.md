@@ -4,11 +4,7 @@
 
 #### Compatibility
 
-pyecharts supports Python2.7+ and Ptyhon3.5+. If you are using Python 2.7, please declare the character encoding at the top of the code, otherwise there will be Chinese garbled problems.
-```python
-#coding=utf-8
-from __future__ import unicode_literals
-```
+Latest pyecharts 1.0.0 will drop python 2.7 support and will not be backward compactible.
 
 #### pyecharts
 
@@ -27,28 +23,33 @@ $ python setup.py install
 
 #### Map plugin
 
-Since v0.3.2, in order to reduce the size of the project itself and maintain the lightweight operation of the pyecharts project, pyecharts will no longer have its own map js file. Developers who want to use the map **must** manually install the map plugin. Detailed reference [Map Customization](en-us/customize_map).
-
+No more map plugin. Pyecharts 1.0.0 allow you register online resources from assets.pyecharts.org,  echarts-maps organisation or your own hosted assets.
 
 ### Quick start
 
 Now, you are ready to make your first chart!
 ```python
 from pyecharts import Bar
+from pyecharts import options as opts
 
-bar = Bar("My first bar chart", "For our fashion shop client")
-bar.add("Clothes", ["T-shirt", "Sweater", "Georgette", "Trousers", "High-heels", "Socks"], [5, 20, 36, 10, 75, 90])
-# bar.print_echarts_options() # This line is only for printing configuration items, which is convenient for debugging.
-bar.render()  # generate a local HTML file
+from pyecharts.charts import Bar
+from pyecharts import options as opts
+
+(Bar()
+    .add_xaxis(["Microsoft", "Amazon", "IBM", "Oracl", "Google", "Alibaba"])
+    .add_yaxis('2017-2018 Revenue in (billion $)', [21.2, 20.4, 10.3, 6.08, 4, 2.2])
+    .set_global_opts(title_opts=opts.TitleOpts(title="Top cloud providers 2018", subtitle="2017-2018 Revenue"))
+    .render() # generate a local HTML file
+)
 ```
 
-![guide-0](https://user-images.githubusercontent.com/4280312/45588036-41d1a200-b906-11e8-83f9-fc84e8b0eccd.png)
+![guide-0](https://user-images.githubusercontent.com/4280312/55591624-e940e580-572d-11e9-9fe0-6d85d78be46a.png)
 
-* ```add()```
-    main method，add the data and set up various options of the chart
+* ```add_xaxis()```
+    show data item on xaxis
 
-* ```print_echarts_config()```
-    print and output all options of the chart
+* ```add_yaxis()```
+    bar chart values for yaxis 
 
 * ```render()```
     creat a file named `render.html` in the root directory defaultly, which supports path parameter and set the location the file save in, for instance render(r"e:\my_first_chart.html"), open file with your browser.
