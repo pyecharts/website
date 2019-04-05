@@ -1,4 +1,3 @@
-
 直角坐标系图表继承自 `AxisChart` 都拥有以下方法
 
 > *func AxisChart.extend_axis*
@@ -42,7 +41,7 @@ def overlap(
 
 ## Bar：柱状图/条形图
 
-> *class pyecharts.charts.Bar*
+> *class pyecharts.charts.Bar(AxisChart)*
 
 ```python
 class Bar(
@@ -96,7 +95,14 @@ def add_yaxis(
 
 ### Demo
 
+> Bar-基本示例
+
 ```python
+from example.commons import Faker
+from pyecharts import options as opts
+from pyecharts.charts import Bar
+
+
 def bar_base() -> Bar:
     c = (
         Bar()
@@ -107,6 +113,9 @@ def bar_base() -> Bar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603121-addd0000-579b-11e9-82ff-0b0a9d83bc59.png)
+
+> Bar-翻转 XY 轴
 
 ```python
 def bar_reversal_axis() -> Bar:
@@ -121,6 +130,9 @@ def bar_reversal_axis() -> Bar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603127-b6353b00-579b-11e9-908e-27147c8cac6f.png)
+
+> Bar-堆叠数据（全部）
 
 ```python
 def bar_stack0() -> Bar:
@@ -134,6 +146,9 @@ def bar_stack0() -> Bar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603135-bdf4df80-579b-11e9-9040-54931e22a22a.png)
+
+> Bar-堆叠数据（部分）
 
 ```python
 def bar_stack1() -> Bar:
@@ -148,6 +163,9 @@ def bar_stack1() -> Bar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603139-c3522a00-579b-11e9-8e2d-1c725320ab74.png)
+
+> Bar-MarkPoint（指定类型）
 
 ```python
 def bar_markpoint_type() -> Bar:
@@ -170,6 +188,9 @@ def bar_markpoint_type() -> Bar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603167-f0064180-579b-11e9-87ef-b6afb775612b.png)
+
+> Bar-MarkPoint（自定义）
 
 ```python
 def bar_markpoint_custom() -> Bar:
@@ -190,6 +211,9 @@ def bar_markpoint_custom() -> Bar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603172-f5638c00-579b-11e9-9064-d4ceeac29f1c.png)
+
+> Bar-MarkLine（指定类型）
 
 ```python
 def bar_markline_type() -> Bar:
@@ -212,6 +236,9 @@ def bar_markline_type() -> Bar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603176-fac0d680-579b-11e9-8bcd-0e96777e9fd8.png)
+
+> Bar-MarkLine（自定义）
 
 ```python
 def bar_markline_custom() -> Bar:
@@ -230,6 +257,9 @@ def bar_markline_custom() -> Bar:
     )
     return c
 ```
+[](https://user-images.githubusercontent.com/19553554/55603180-ff858a80-579b-11e9-8538-138d24a70a65.png)
+
+> Bar-DataZoom（slider-水平）
 
 ```python
 def bar_datazoom_slider() -> Bar:
@@ -244,6 +274,9 @@ def bar_datazoom_slider() -> Bar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603271-630fb800-579c-11e9-8e90-3835d3bddf57.gif)
+
+> Bar-DataZoom（slider-垂直）
 
 ```python
 def bar_datazoom_slider_vertical() -> Bar:
@@ -258,6 +291,9 @@ def bar_datazoom_slider_vertical() -> Bar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603273-65721200-579c-11e9-83a1-22e640d1d599.gif)
+
+> Bar-DataZoom（inside）
 
 ```python
 def bar_datazoom_inside() -> Bar:
@@ -272,6 +308,9 @@ def bar_datazoom_inside() -> Bar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603276-67d46c00-579c-11e9-9e26-664b6692a7c4.gif)
+
+> Bar-DataZoom（slider+inside）
 
 ```python
 def bar_datazoom_both() -> Bar:
@@ -286,6 +325,9 @@ def bar_datazoom_both() -> Bar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603299-92bec000-579c-11e9-89bd-87db197d760f.gif)
+
+> Bar-直方图
 
 ```python
 def bar_histogram() -> Bar:
@@ -297,10 +339,12 @@ def bar_histogram() -> Bar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603313-a36f3600-579c-11e9-80bd-38efb033daf8.png)
+
 
 ## Boxplot：箱形图
 
-> *class pyecharts.charts.Boxplot*
+> *class pyecharts.charts.Boxplot(AxisChart)*
 
 ```python
 class Boxplot(
@@ -345,7 +389,13 @@ def add_yaxis(
 
 ### Demo
 
+> BoxPlot-基本示例
+
 ```python
+from pyecharts import options as opts
+from pyecharts.charts import Boxplot
+
+
 def boxpolt_base() -> Boxplot:
     v1 = [
         [850, 740, 900, 1070, 930, 850, 950, 980, 980, 880]
@@ -365,10 +415,12 @@ def boxpolt_base() -> Boxplot:
     ).set_global_opts(title_opts=opts.TitleOpts(title="BoxPlot-基本示例"))
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603413-27c1b900-579d-11e9-954b-a1619846262e.png)
+
 
 ## EffectScatter：涟漪特效散点图
 
-> *class pyecharts.charts.EffectScatter*
+> *class pyecharts.charts.EffectScatter(AxisChart)*
 
 ```python
 class EffectScatter(
@@ -419,7 +471,15 @@ class EffectScatter(
 
 ### Demo
 
+> EffectScatter-基本示例
+
 ```python
+from example.commons import Faker
+from pyecharts import options as opts
+from pyecharts.charts import EffectScatter
+from pyecharts.globals import SymbolType
+
+
 def effectscatter_base() -> EffectScatter:
     c = (
         EffectScatter()
@@ -429,6 +489,9 @@ def effectscatter_base() -> EffectScatter:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603439-4758e180-579d-11e9-9179-646a02519dcc.png)
+
+> EffectScatter-显示分割线
 
 ```python
 def effectscatter_splitline() -> EffectScatter:
@@ -444,6 +507,9 @@ def effectscatter_splitline() -> EffectScatter:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603444-4d4ec280-579d-11e9-9b15-09cc6cd3c2e0.png)
+
+> EffectScatter-不同Symbol
 
 ```python
 def effectscatter_symbol() -> EffectScatter:
@@ -454,10 +520,12 @@ def effectscatter_symbol() -> EffectScatter:
     ).set_global_opts(title_opts=opts.TitleOpts(title="EffectScatter-不同Symbol"))
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603452-5770c100-579d-11e9-97b6-a7ed280834a4.png)
+
 
 ## HeatMap：热力图
 
-> *class pyecharts.charts.HeatMap*
+> *class pyecharts.charts.HeatMap(AxisChart)*
 
 ```python
 class HeatMap(
@@ -502,7 +570,16 @@ def add_yaxis(
 
 ### Demo
 
+> HeatMap-基本示例
+
 ```python
+import random
+
+from example.commons import  Faker
+from pyecharts import options as opts
+from pyecharts.charts import HeatMap
+
+
 def heatmap_base() -> HeatMap:
     value = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
     c = (
@@ -516,10 +593,12 @@ def heatmap_base() -> HeatMap:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603513-9ef74d00-579d-11e9-837b-5e5288569e8c.gif)
+
 
 ## Kline/Candlestick：K线图
 
-> *class pyecharts.charts.Kline*
+> *class pyecharts.charts.Kline(AxisChart)*
 
 ```python
 class Kline(
@@ -560,7 +639,13 @@ def add_yaxis(
 
 ### Demo
 
+> Kline-基本示例
+
 ```python
+from pyecharts import options as opts
+from pyecharts.charts import Kline
+
+
 data = [
     [2320.26, 2320.26, 2287.3, 2362.94],
     [2300, 2291.3, 2288.26, 2308.38],
@@ -609,6 +694,9 @@ def kline_base() -> Kline:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603539-bb938500-579d-11e9-920c-c701f24cb9b4.png)
+
+> Kline-显示分割区域
 
 ```python
 def kline_splitarea() -> Kline:
@@ -629,6 +717,9 @@ def kline_splitarea() -> Kline:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603546-bfbfa280-579d-11e9-9bc7-fac4cd49ba59.png)
+
+> Kline-DataZoom-slider
 
 ```python
 def kline_datazoom_slider() -> Kline:
@@ -650,6 +741,9 @@ def kline_datazoom_slider() -> Kline:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603567-d960ea00-579d-11e9-9368-2fa6f9c28cad.gif)
+
+> Kline-DataZoom-inside
 
 ```python
 def kline_datazoom_inside() -> Kline:
@@ -671,6 +765,9 @@ def kline_datazoom_inside() -> Kline:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603580-f1386e00-579d-11e9-948c-0207f25ebd5b.gif)
+
+> Kline-MarkLine
 
 ```python
 def kline_markline() -> Kline:
@@ -697,10 +794,12 @@ def kline_markline() -> Kline:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603591-001f2080-579e-11e9-810b-0c5c43e1d0e8.png)
+
 
 ## Line：折线/面积图
 
-> *class pyecharts.charts.Line*
+> *class pyecharts.charts.Line(AxisChart)*
 
 ```python
 class Line(
@@ -775,7 +874,14 @@ def add_yaxis(
 
 ### Demo
 
+> Line-基本示例
+
 ```python
+import pyecharts.options as opts
+from example.commons import  Faker
+from pyecharts.charts import Line
+
+
 def line_base() -> Line:
     c = (
         Line()
@@ -786,6 +892,9 @@ def line_base() -> Line:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603644-3ceb1780-579e-11e9-818c-2841b0d66ff6.png)
+
+> Line-平滑曲线
 
 ```python
 def line_smooth() -> Line:
@@ -798,6 +907,9 @@ def line_smooth() -> Line:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603648-41afcb80-579e-11e9-946b-671f308dd4b8.png)
+
+> Line-MarkPoint
 
 ```python
 def line_markpoint() -> Line:
@@ -818,6 +930,9 @@ def line_markpoint() -> Line:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603654-47a5ac80-579e-11e9-81a7-e4c3ce611de0.png)
+
+> Line-MarkLine
 
 ```python
 def line_markline() -> Line:
@@ -838,6 +953,9 @@ def line_markline() -> Line:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603660-4d02f700-579e-11e9-9d99-c4c91618e1de.png)
+
+> Line-阶梯图
 
 ```python
 def line_step() -> Line:
@@ -848,12 +966,13 @@ def line_step() -> Line:
         .set_global_opts(title_opts=opts.TitleOpts(title="Line-阶梯图"))
     )
     return c
-
 ```
+![](https://user-images.githubusercontent.com/19553554/55603664-542a0500-579e-11e9-9d5f-85ad3a605339.png)
+
 
 ## Scatter：散点图
 
-> *class pyecharts.charts.Scatter*
+> *class pyecharts.charts.Scatter(AxisChart)*
 
 ```python
 class Scatter(
@@ -910,7 +1029,14 @@ def add_yaxis(
 
 ### Demo
 
+> Scatter-基本示例
+
 ```python
+from example.commons import Faker
+from pyecharts import options as opts
+from pyecharts.charts import Scatter
+
+
 def scatter_base() -> Scatter:
     c = (
         Scatter()
@@ -920,6 +1046,9 @@ def scatter_base() -> Scatter:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603717-a408cc00-579e-11e9-921b-b14cfa4503a4.png)
+
+> Scatter-显示分割线
 
 ```python
 def scatter_spliteline() -> Scatter:
@@ -927,14 +1056,17 @@ def scatter_spliteline() -> Scatter:
         Scatter()
         .add_xaxis(Faker.choose())
         .add_yaxis("商家A", Faker.values())
-        .set_global_opts(title_opts=opts.TitleOpts(title="Scatter-显示分割线"))
         .set_global_opts(
+            title_opts=opts.TitleOpts(title="Scatter-显示分割线"),
             xaxis_opts=opts.AxisOpts(splitline_opts=opts.SplitLineOpts(is_show=True)),
             yaxis_opts=opts.AxisOpts(splitline_opts=opts.SplitLineOpts(is_show=True)),
         )
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603757-dd413c00-579e-11e9-8086-6b61c9b7b5da.png)
+
+> Scatter-VisualMap(Color)
 
 ```python
 def scatter_visualmap_color() -> Scatter:
@@ -949,6 +1081,9 @@ def scatter_visualmap_color() -> Scatter:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603783-019d1880-579f-11e9-855f-d55151769743.gif)
+
+> Scatter-VisualMap(Size)
 
 ```python
 def scatter_visualmap_color() -> Scatter:
@@ -964,3 +1099,4 @@ def scatter_visualmap_color() -> Scatter:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55603785-03ff7280-579f-11e9-8208-c80f0e47871f.gif)

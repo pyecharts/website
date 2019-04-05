@@ -1,0 +1,132 @@
+## 如何安装
+
+### pyecharts
+
+#### pip 安装
+```shell
+$ pip install pyecharts
+```
+
+#### 源码安装
+```shell
+$ git clone https://github.com/pyecharts/pyecharts.git
+$ cd pyecharts
+$ pip install -r requirements.txt
+$ python setup.py install
+```
+
+### selenium
+
+> 使用 selenium 是为了生成图片文件，如若没有这个需求可跳过本步骤
+
+```shell
+$ pip install selenium
+```
+
+> selenium 安装后需要进行配置，这部分内容网上有很多文章介绍，就不在这里赘述了。
+
+## 5 分钟上手
+
+> 首先开始来绘制你的第一个图表
+
+```python
+from pyecharts.charts import Bar
+
+bar = Bar()
+bar.add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
+bar.add_yaxis("商家A", [5, 20, 36, 10, 75, 90])
+# render 会生成本地 HTML 文件，默认会在当前目录生成 render.html 文件
+# 也可以传入路径参数，如 bar.render("mycharts.html")
+bar.render()
+```
+![](https://user-images.githubusercontent.com/19553554/55601215-656d1480-5792-11e9-87ac-19b912619d7f.png)
+
+> pyecharts 所有方法均支持链式调用。
+
+```python
+from pyecharts.charts import Bar
+
+bar = (
+    Bar()
+    .add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
+    .add_yaxis("商家A", [5, 20, 36, 10, 75, 90])
+)
+bar.render()
+```
+
+> 使用 options 配置项
+
+在 pyecharts 中，一切皆 options
+```python
+from pyecharts.charts import Bar
+from pyecharts import options as opts
+
+bar = (
+    Bar()
+    .add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
+    .add_yaxis("商家A", [5, 20, 36, 10, 75, 90])
+    .set_global_opts(title_opts=opts.TitleOpts(title="主标题", subtitle="副标题"))
+    # 或者直接使用字典参数
+    # .set_global_opts(title_opts={"text": "主标题", "subtext": "副标题"})
+)
+```
+![](https://user-images.githubusercontent.com/19553554/55601443-85510800-5793-11e9-8479-26ff27cdec7e.png)
+
+> 渲染成图片文件
+
+```python
+from pyecharts.charts import Bar
+from pyecharts.render import make_snapshot
+
+bar = (
+    Bar()
+    .add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
+    .add_yaxis("商家A", [5, 20, 36, 10, 75, 90])
+)
+make_snapshot(bar.render(), "bar.png")
+```
+
+### 使用主题
+
+pyecharts 提供了 10+ 种内置主题，开发者也可以定制自己喜欢的主题，**进阶话题** 有相关介绍。
+
+```python
+from pyecharts.charts import Bar
+from pyecharts import options as opts
+# 内置主题类型可查看 pyecharts.globals.ThemeType
+from pyecharts.globals import ThemeType
+
+bar = (
+    Bar(init_opts=opts.InitOpts(theme=ThemeType.LIGHT))
+    .add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
+    .add_yaxis("商家A", [5, 20, 36, 10, 75, 90])
+    .add_yaxis("商家B", [15, 6, 45, 20, 35, 66])
+    .set_global_opts(title_opts=opts.TitleOpts(title="主标题", subtitle="副标题"))
+)
+```
+![](https://user-images.githubusercontent.com/19553554/55601589-26d85980-5794-11e9-828e-56ae109819f2.png)
+
+> Note: 在使用 Pandas&Numpy 时，请确保将数值类型转换为 python 原生的 int/float。比如整数类型请确保为 int，而不是 numpy.int32
+
+### Nootebook 示例
+
+> 当然你也可以采用更加酷炫的方式，使用 Notebook 来展示图表，matplotlib 有的，pyecharts 也会有的
+
+#### Jupyter Notebook
+
+Jupyter Notebook 直接调用 `render_notebook` 随时随地渲染图表
+
+![](https://user-images.githubusercontent.com/19553554/55602094-715ad580-5796-11e9-8477-d745ce9b8a20.png)
+
+#### Jupyter Lab
+
+Jupyter Lab 渲染的时候有两点需要注意
+1. 在顶部声明 Notebook 类型，必须在引入 pyecharts.charts 等模块前声明
+    ```python
+    from pyecharts.globals import CurrentConfig, NotebookType
+    CurrentConfig.NOTEBOOK_TYPE = NotebookType.JUPYTER_LAB
+    ```
+2. 在第一次渲染的时候调用 `load_javasrcript()` 会预先加载基本 JavaScript 文件到 Notebook 中。如若后面其他图形渲染不出来，则请开发者尝试再次调用，因为 `load_javascript` 只会预先加载最基本的 js 引用。而主题、地图等 js 文件需要再次按需加载。
+
+![](https://user-images.githubusercontent.com/19553554/55602584-f2b36780-5798-11e9-8ce4-b579344b3a8f.png)
+![](https://user-images.githubusercontent.com/19553554/55602583-f2b36780-5798-11e9-9fcd-ad0de498f7f1.png)
