@@ -2,12 +2,12 @@
 
 ### pyecharts
 
-**pip 安装**
+#### pip 安装
 ```shell
 $ pip install pyecharts
 ```
 
-**源码安装**
+#### 源码安装
 ```shell
 $ git clone https://github.com/pyecharts/pyecharts.git
 $ cd pyecharts
@@ -23,84 +23,110 @@ $ python setup.py install
 $ pip install selenium
 ```
 
-selenium 安装后需要进行配置，这部分内容网上有很多文章介绍，就不在这里赘述了。
-
+> selenium 安装后需要进行配置，这部分内容网上有很多文章介绍，就不在这里赘述了。
 
 ## 5 分钟上手
 
-首先开始来绘制你的第一个图表
-```python
-from pyecharts import Bar
-
-bar = Bar("我的第一个图表", "这里是副标题")
-bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
-# bar.print_echarts_options() # 该行只为了打印配置项，方便调试时使用
-bar.render()    # 生成本地 HTML 文件
-```
-![guide-0](https://user-images.githubusercontent.com/19553554/35103909-3ee41ba2-fca2-11e7-87be-1a3585b9e0fa.png)
-
-* ```add()```  
-    主要方法，用于添加图表的数据和设置各种配置项
-* ```print_echarts_options()```  
-    打印输出图表的所有配置项
-* ```render()```  
-    默认将会在根目录下生成一个 render.html 的文件，支持 path 参数，设置文件保存位置，如 render(r"e:\my_first_chart.html")，文件用浏览器打开。
-
-**Note：** 可以按右边的下载按钮将图片下载到本地，如果想要提供更多实用工具按钮，请在 `add()` 中设置 `is_more_utils` 为 True
+> 首先开始来绘制你的第一个图表
 
 ```python
-from pyecharts import Bar
+from pyecharts.charts import Bar
 
-bar = Bar("我的第一个图表", "这里是副标题")
-bar.add("服装", 
-        ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90],
-        is_more_utils=True)
+bar = Bar()
+bar.add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
+bar.add_yaxis("商家A", [5, 20, 36, 10, 75, 90])
+# render 会生成本地 HTML 文件，默认会在当前目录生成 render.html 文件
+# 也可以传入路径参数，如 bar.render("mycharts.html")
 bar.render()
 ```
-![guide-1](https://user-images.githubusercontent.com/19553554/35104150-f31e1b7c-fca2-11e7-81cf-a12bf1629e02.png)
+![](https://user-images.githubusercontent.com/19553554/55601215-656d1480-5792-11e9-87ac-19b912619d7f.png)
 
+> pyecharts 所有方法均支持链式调用。
+
+```python
+from pyecharts.charts import Bar
+
+bar = (
+    Bar()
+    .add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
+    .add_yaxis("商家A", [5, 20, 36, 10, 75, 90])
+)
+bar.render()
+```
+
+> 使用 options 配置项
+
+在 pyecharts 中，一切皆 options
+```python
+from pyecharts.charts import Bar
+from pyecharts import options as opts
+
+bar = (
+    Bar()
+    .add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
+    .add_yaxis("商家A", [5, 20, 36, 10, 75, 90])
+    .set_global_opts(title_opts=opts.TitleOpts(title="主标题", subtitle="副标题"))
+    # 或者直接使用字典参数
+    # .set_global_opts(title_opts={"text": "主标题", "subtext": "副标题"})
+)
+```
+![](https://user-images.githubusercontent.com/19553554/55601443-85510800-5793-11e9-8479-26ff27cdec7e.png)
+
+> 渲染成图片文件
+
+```python
+from pyecharts.charts import Bar
+from pyecharts.render import make_snapshot
+
+bar = (
+    Bar()
+    .add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
+    .add_yaxis("商家A", [5, 20, 36, 10, 75, 90])
+)
+make_snapshot(bar.render(), "bar.png")
+```
 
 ### 使用主题
 
-自 0.5.2+ 起，pyecharts 支持更换主体色系。下面是跟换为 'dark' 的例子：
+pyecharts 提供了 10+ 种内置主题，开发者也可以定制自己喜欢的主题，**进阶话题** 有相关介绍。
 
 ```python
-from pyecharts import Bar
+from pyecharts.charts import Bar
+from pyecharts import options as opts
+# 内置主题类型可查看 pyecharts.globals.ThemeType
+from pyecharts.globals import ThemeType
 
-bar = Bar("我的第一个图表", "这里是副标题")
-bar.use_theme('dark')
-bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
-bar.render()
+bar = (
+    Bar(init_opts=opts.InitOpts(theme=ThemeType.LIGHT))
+    .add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
+    .add_yaxis("商家A", [5, 20, 36, 10, 75, 90])
+    .add_yaxis("商家B", [15, 6, 45, 20, 35, 66])
+    .set_global_opts(title_opts=opts.TitleOpts(title="主标题", subtitle="副标题"))
+)
 ```
-![guide-2](https://user-images.githubusercontent.com/4280312/39617664-79789878-4f78-11e8-9f0e-c3a2c371b6cb.png)
+![](https://user-images.githubusercontent.com/19553554/55601589-26d85980-5794-11e9-828e-56ae109819f2.png)
 
-pyecharts 支持另外 5 个主体色系，[请移步到主题色系获取更多配置信息](zh-cn/themes)。
+> Note: 在使用 Pandas&Numpy 时，请确保将数值类型转换为 python 原生的 int/float。比如整数类型请确保为 int，而不是 numpy.int32
 
+### Nootebook 示例
 
-### Pandas&Numpy 简单示例
+> 当然你也可以采用更加酷炫的方式，使用 Notebook 来展示图表，matplotlib 有的，pyecharts 也会有的
 
-如果使用的是 Numpy 或者 Pandas，可以参考这个示例
+#### Jupyter Notebook
 
-![pandas-numpy](https://user-images.githubusercontent.com/19553554/35104252-3e36cee2-fca3-11e7-8e43-09bbe8dbbd1e.png)
+Jupyter Notebook 直接调用 `render_notebook` 随时随地渲染图表
 
-**Note：** 使用 Pandas&Numpy 时，整数类型请确保为 int，而不是 numpy.int32
+![](https://user-images.githubusercontent.com/19553554/55602094-715ad580-5796-11e9-8477-d745ce9b8a20.png)
 
-**当然你也可以采用更加酷炫的方式，使用 Jupyter Notebook 来展示图表，matplotlib 有的，pyecharts 也会有的**
+#### Jupyter Lab
 
-**Note：** 从 v0.1.9.2 版本开始，废弃 ```render_notebook()``` 方法，现已采用更加 pythonic 的做法。直接调用本身实例就可以了。
+Jupyter Lab 渲染的时候有两点需要注意
+1. 在顶部声明 Notebook 类型，必须在引入 pyecharts.charts 等模块前声明
+    ```python
+    from pyecharts.globals import CurrentConfig, NotebookType
+    CurrentConfig.NOTEBOOK_TYPE = NotebookType.JUPYTER_LAB
+    ```
+2. 在第一次渲染的时候调用 `load_javasrcript()` 会预先加载基本 JavaScript 文件到 Notebook 中。如若后面其他图形渲染不出来，则请开发者尝试再次调用，因为 `load_javascript` 只会预先加载最基本的 js 引用。而主题、地图等 js 文件需要再次按需加载。
 
-比如这样
-
-![notebook-0](https://user-images.githubusercontent.com/19553554/35104153-f6256212-fca2-11e7-854c-bacc61eabf6f.gif)
-
-还有这样
-
-![notebook-1](https://user-images.githubusercontent.com/19553554/35104157-fa39e170-fca2-11e7-9738-1547e22914a6.gif)
-
-如果使用的是自定义类，直接调用自定义类示例即可
-
-![notebook-2](https://user-images.githubusercontent.com/19553554/35104165-fe9765da-fca2-11e7-8126-920158616b99.gif)
-
-更多 Jupyter notebook 的例子请参考 [notebook-use-cases](https://github.com/pyecharts/pyecharts-users-cases)。可下载后运行看看。
-
-如需使用 Jupyter Notebook 来展示图表，只需要调用自身实例即可，同时兼容 Python2 和 Python3 的 Jupyter Notebook 环境。所有图表均可正常显示，与浏览器一致的交互体验，这下展示报告连 PPT 都省了！！
+![](https://user-images.githubusercontent.com/19553554/55602584-f2b36780-5798-11e9-8ce4-b579344b3a8f.png)
+![](https://user-images.githubusercontent.com/19553554/55602583-f2b36780-5798-11e9-9fcd-ad0de498f7f1.png)
