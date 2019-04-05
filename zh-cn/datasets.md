@@ -1,11 +1,3 @@
-> 数据集篇：本文档主要介绍 pyecharts 项目相关的原始数据和访问接口。
-
-## 概述
-
-pyecharts 项目包含了一系列的地理地图数据，这些数据或者已经内置，或者需要额外安装和加载。
-
-从 v0.5.0 开始，pyecharts 重构了内部代码，不再支持对原有数据存储对象进行修改，对外提供了这些数据的访问接口。
-
 ## 地理经纬度坐标
 
 ### 原始数据
@@ -108,28 +100,4 @@ from pyecharts.datasets.coordinates import get_coordinate
 
 coordinate = get_coordinate('Oxford', region="英国")
 print(coordinate) # [-1.25596, 51.75222]
-```
-
-## 地图数据
-
-以下是 pyecharts 开发组托管的地图扩展（map extension）:
-
-1. [World countries include China map and World map](https://echarts-maps.github.io/echarts-countries-js/): [echarts-countries-pypkg](https://github.com/pyecharts/echarts-countries-pypkg) (1.9MB)
-2. [Chinese provinces and regions](https://echarts-maps.github.io/echarts-china-provinces-js/): [echarts-china-provinces-pypkg](https://github.com/pyecharts/echarts-china-provinces-pypkg) (730KB)
-3. [Chinese cities](https://echarts-maps.github.io/echarts-china-cities-js/): [echarts-china-cities-pypkg](https://github.com/pyecharts/echarts-china-cities-pypkg) (3.8MB)
-4. [Chinese counties](https://echarts-maps.github.io/echarts-china-counties-js/): [echarts-china-counties-pypkg](https://github.com/pyecharts/echarts-china-counties-pypkg) (4.1MB)
-5. [Custom Chinese regions](https://echarts-maps.github.io/echarts-china-misc-js/): [echarts-china-misc-pypkg](https://github.com/pyecharts/echarts-china-misc-pypkg) (148KB)
-6. [United Kingdom map](https://echarts-maps.github.io/echarts-united-kingdom-js/): [echarts-united-kingdom-pypkg](https://github.com/pyecharts/echarts-united-kingdom-pypkg) (1MB)
-
-更多的地图数据可查看 https://github.com/echarts-maps 。
-
-可以使用 *pip* 安装这些地图扩展。
-
-```bash
-$ pip install echarts-countries-pypkg
-$ pip install echarts-china-provinces-pypkg
-$ pip install echarts-china-cities-pypkg
-$ pip install echarts-china-counties-pypkg
-$ pip install echarts-china-misc-pypkg
-$ pip install echarts-united-kingdom-pypkg
 ```

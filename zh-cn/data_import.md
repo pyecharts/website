@@ -1,34 +1,3 @@
-> 数据解析与导入篇：介绍了一些常用的数据处理模块和库。这些并不是 pyecharts 核心的部分。
-
-## numpy 数据类型
-
-add 数据直接支持 `numpy.array` 对象，例如：
-
-```python
-from pyecharts import Bar
-import numpy as np
-
-clothes = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-v1 = np.array([5, 20, 36, 10, 75, 90])
-bar = Bar("衣服销量")
-bar.add("商家A", clothes, v1, is_stack=True)
-bar.render()
-```
-
-## zip 函数
-
-在 `pyecharts.base.Base.add(name, x_axis, y_axis)` 函数中，数据参数通常要求数据是两个长度相等的列表。
-
-```python
-from pyecharts import Line
-
-t_data = [(21, '2017-12-01'), (19, '2017-12-02'), (20, '2017-12-03')]
-hs, ds = zip(*t_data)
-line = Line('High Temperature')
-line.add('High', ds, hs)
-line.render()
-```
-
 ## borax.fetch 模块
 
 > 项目地址： https://github.com/kinegratii/borax
