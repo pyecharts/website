@@ -79,6 +79,10 @@ class Axis3DOpts(
 > *class pyecharts.charts.Bar3D*
 
 ```python
+class Bar3D(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+)
 ```
 
 ## Line3D：3D折线图
@@ -86,6 +90,10 @@ class Axis3DOpts(
 > *class pyecharts.charts.Line3D*
 
 ```python
+class Line3D(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+)
 ```
 
 ## Scatter3D：3D散点图
@@ -93,6 +101,10 @@ class Axis3DOpts(
 > *class pyecharts.charts.Scatter3D*
 
 ```python
+class Scatter3D(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+)
 ```
 
 ## Surface3D：3D曲面图
@@ -100,4 +112,8 @@ class Axis3DOpts(
 > *class pyecharts.charts.Surface3D*
 
 ```python
+class Surface3D(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+)
 ```
