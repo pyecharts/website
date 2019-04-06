@@ -76,17 +76,40 @@ class Axis3DOpts(
 )
 ```
 
+> *func pyecharts.charts.Chart3D.add*
 
+所有 3D 图表均拥有以下方法
 ```python
 def add(
-    name: str,
+    # 系列名称，用于tooltip的显示，legend 的图例筛选。
+    series_name: str,
+
+    # 系列数据
     data: Sequence,
-    opacity: Numeric = 1,
+
+    # 三维柱状图中三维图形的着色效果。
+    # color：只显示颜色，不受光照等其它因素的影响。
+    # lambert：通过经典的 lambert 着色表现光照带来的明暗。
+    # realistic：真实感渲染，配合 light.ambientCubemap 和 postEffect 使用可以让展示的画面效果和质感有质的提升。
+    # ECharts GL 中使用了基于物理的渲染（PBR) 来表现真实感材质。
     shading: Optional[str] = None,
+
+    # 图元配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None
+
+    # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(is_show=False),
+
+    # 3D X 坐标轴配置项，参考 `Axis3DOpts`
     xaxis3d_opts: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="category"),
+
+    # 3D Y 坐标轴配置项，参考 `Axis3DOpts`
     yaxis3d_opts: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="category"),
+
+    # 3D Z 坐标轴配置项，参考 `Axis3DOpts`
     zaxis3d_opts: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="value"),
+
+    # 三维笛卡尔坐标系配置项，参考 `Grid3DOpts`
     grid3d_opts: Union[opts.Grid3DOpts, dict] = opts.Grid3DOpts(),
 )
 ```

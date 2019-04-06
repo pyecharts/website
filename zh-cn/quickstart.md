@@ -54,9 +54,8 @@ bar = (
 bar.render()
 ```
 
-> 使用 options 配置项
+> 使用 options 配置项，在 pyecharts 中，一切皆 Options。
 
-在 pyecharts 中，一切皆 options
 ```python
 from pyecharts.charts import Bar
 from pyecharts import options as opts
