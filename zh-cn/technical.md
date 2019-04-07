@@ -1,5 +1,3 @@
-> 技术文档篇：介绍 pyecharts 开发过程中所使用的工具、实践规范。
-
 ## 开发工具
 
 - [Travis CI](https://travis-ci.org) ：Linux 构建工具
