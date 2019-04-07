@@ -52,10 +52,9 @@ class Bar(
 
 > *func pyecharts.charts.Bar.add_yaxis*
 
-新增及配置 Series
 ```python
 def add_yaxis(
-    # 系列名称，用于tooltip的显示，legend 的图例筛选。
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
     # 系列数据
@@ -355,10 +354,9 @@ class Boxplot(
 
 > *func pyecharts.charts.Boxplot.add_yaxis*
 
-新增及配置 Series
 ```python
 def add_yaxis(
-    # 系列名称，用于tooltip的显示，legend 的图例筛选。
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
     # 系列数据
@@ -431,10 +429,9 @@ class EffectScatter(
 
 > *func pyecharts.charts.EffectScatter.add_yaxis*
 
-新增及配置 Series
 ```python
  def add_yaxis(
-     # 系列名称，用于tooltip的显示，legend 的图例筛选。
+     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
     # 系列数据
@@ -534,9 +531,11 @@ class HeatMap(
 )
 ```
 
+> *func pyecharts.charts.HeatMap.add_yaxis*
+
 ```python
 def add_yaxis(
-    # 系列名称，用于tooltip的显示，legend 的图例筛选。
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
     # Y 坐标轴数据
@@ -611,7 +610,7 @@ class Kline(
 
 ```python
 def add_yaxis(
-    # 系列名称，用于tooltip的显示，legend 的图例筛选。
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
     # 系列数据
@@ -812,7 +811,7 @@ class Line(
 
 ```python
 def add_yaxis(
-    # 系列名称，用于tooltip的显示，legend 的图例筛选。
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
     # 系列数据
@@ -985,7 +984,7 @@ class Scatter(
 
 ```python
 def add_yaxis(
-    # 系列名称，用于tooltip的显示，legend 的图例筛选。
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
     # 系列数据

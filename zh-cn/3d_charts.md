@@ -81,7 +81,7 @@ class Axis3DOpts(
 所有 3D 图表均拥有以下方法
 ```python
 def add(
-    # 系列名称，用于tooltip的显示，legend 的图例筛选。
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
     # 系列数据
