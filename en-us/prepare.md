@@ -117,76 +117,6 @@ make_snapshot(bar.render(), 'bar.png', browser='Safari')
 
 For more details, please refer to [selenium driver on mac]( https://www.dev2qa.com/python-how-to-launch-safari-firefox-chrome-in-selenium-webdriver/)
 
-
-### Chart drawing process
-
-A chart class provides the following apis for building and rendering. Here are the generic steps to draw your own chart:
-
-| Step | Describe | Code example | Remarks |
-| ------ | ------ | ------ | ------ |
-| 1 | Instance a concrete object of chart |  `chart = FooChart()`| |
-| 2  | Add a common configuration to the chart, such as a theme |  `chart.use_theme()` | |
-| 3  | Add a specific configuration to the chart | `geo.add_coordinate()` | |
-| 4  | Add data and configuration items| `chart.add()` | Refer to [Data Analysis and Import](en-us/data_import) |
-| 5  | Generate local file(html/svg/jpeg/png/pdf/gif)| `chart.render()` | |
-
-From v0.5.9, the methods involved above support method-chaining. For example:
-
-```python
-from pyecharts import Bar
-
-CLOTHES = ["T-shirt", "Sweater", "Georgette", "Trousers", "High-heels", "Socks"]
-clothes_v1 = [5, 20, 36, 10, 75, 90]
-clothes_v2 = [10, 25, 8, 60, 20, 80]
-
-(Bar("My second bar chart")
-    .add("H&M", CLOTHES, clothes_v1, is_stack=True)
-    .add("Zara", CLOTHES, clothes_v2, is_stack=True)
-    .render())
-```
-
-
-### Render Charts Many Times
-
-From v0.4.0+, pyecharts reconstructed the internal logic of rendering to improve efficiency. It is recommended to display multiple charts in the following ways.
-
-You can call `chart.render`  many times to show some charts in a script.
-
-```python
-from pyecharts import Bar, Line
-
-bar = Bar("我的第一个图表", "这里是副标题")
-bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
-bar.render(path='bar.html')
-
-line = Line("我的第一个图表", "这里是副标题")
-line.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
-line.render(path='line.html')
-```
-
-In v0.4.0+, pyecharts refactors the internal logic and make render faster.The following code is recommended.
-
-```python
-from pyecharts import Bar, Line
-from pyecharts.engine import create_default_environment
-
-bar = Bar("我的第一个图表", "这里是副标题")
-bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
-
-line = Line("我的第一个图表", "这里是副标题")
-line.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
-
-env = create_default_environment()
-# Create a default configuration environment for rendering
-# create_default_environment(filet_ype)
-# file_type: 'html', 'svg', 'png', 'jpeg', 'gif' or 'pdf'
-
-env.render_chart_to_file(bar, path='bar.html')
-env.render_chart_to_file(line, path='line.html')
-```
-
-This example uses the only one engine object to render multiple charts.
-
 ### Pandas & Numpy examples
 
 In the context of Numpy and/or Pandas, ```pdcast(pddata)``` and ``` npcast(npdata)``` methods, provided in 0.19.2 are no log required. Please see the advanced example in README.
@@ -197,7 +127,6 @@ In the context of Numpy and/or Pandas, ```pdcast(pddata)``` and ``` npcast(npdat
 
 **Of course you can use the cooler way, use Jupyter Notebook to show the chart. What matplotlib have，so do pyecharts**
 
-**Note:** From v0.1.9.2, the ```render_notebook()``` method has been deprecated and is now more pythonic. It is ok to call the instance itself directly.
 
 like this
 
