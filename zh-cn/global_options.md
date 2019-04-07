@@ -1,8 +1,7 @@
-## 初识组件
+> 初识全局配置组件
 
-![](https://user-images.githubusercontent.com/19553554/52394318-dff81b80-2ae4-11e9-9c5f-6a3044224c8a.png)
-![](https://user-images.githubusercontent.com/19553554/52394719-3f0a6000-2ae6-11e9-8d00-c540e9a0fe2b.png)
-![](https://user-images.githubusercontent.com/19553554/52394719-3f0a6000-2ae6-11e9-8d00-c540e9a0fe2b.png)
+![](https://user-images.githubusercontent.com/19553554/55686576-70dc5d80-5995-11e9-9448-215891e62be4.png)
+
 
 ## InitOpts：初始化配置项
 > *class pyecharts.options.InitOpts*
