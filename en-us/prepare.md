@@ -90,19 +90,32 @@ from pyecharts import options as opts
 pyecharts supports extra 5 body colors, [Please move to the theme color for more configuration information](en-us/themes).
 
 
-### Rendering as image using pyecharts-snapshot
+### Rendering as image
 
-To get png, pdf, gif files instead of `render.html`, [pyecharts-snapshot](https://github.com/pyecharts/pyecharts-snapshot) is required。What's more, node.js is also required and can be downloaded from [https://nodejs.org/en/download/](https://nodejs.org/en/download/).
+Pyecharts 1.0.0 use selenim to render image. By default, it uses Google Chrome in headless mode.
 
-1. Install phantomjs  
-    `npm install -g phantomjs-prebuilt`
-2. install pyecharts-snapshot  
-    `pip install pyecharts-snapshot`
-3. Call `render` method  
-    `bar.render(path='snapshot.png')`  
-    The file suffix can be svg/jpeg/png/pdf/gif. Note that the svg file requires you to set `renderer='svg'` in the chart's constructor.
+1. You will have to download chrome driver and make sure it is accessible on user path.
 
-For more details, please refer to [pyecharts-snapshot](https://github.com/pyecharts/pyecharts-snapshot)  
+
+```
+from pyecharts.render import make_snapshot
+bar = (Bar()
+    .add_xaxis(["Microsoft", "Amazon", "IBM", "Oracl", "Google", "Alibaba"])
+    .add_yaxis('2017-2018 Revenue in (billion $)', [21.2, 20.4, 10.3, 6.08, 4, 2.2])
+    .set_global_opts(title_opts=opts.TitleOpts(title="Top cloud providers 2018", subtitle="2017-2018 Revenue"))
+)
+make_snapshot(bar.render(), 'bar.png')
+```
+
+To use Safari on MacOS, you will need to enable develop mode of Safari and eanble remote automation. 
+
+```
+from pyecharts.render import make_snapshot
+bar = ...
+make_snapshot(bar.render(), 'bar.png', browser='Safari')
+```
+
+For more details, please refer to [selenium driver on mac]( https://www.dev2qa.com/python-how-to-launch-safari-firefox-chrome-in-selenium-webdriver/)
 
 
 ### Chart drawing process
