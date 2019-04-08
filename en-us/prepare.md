@@ -92,6 +92,10 @@ pyecharts supports extra 5 body colors, [Please move to the theme color for more
 
 ### Rendering as image
 
+```
+pip install snapshot-selenium
+```
+
 Pyecharts 1.0.0 use selenim to render image. By default, it uses Google Chrome in headless mode.
 
 1. You will have to download chrome driver and make sure it is accessible on user path.
@@ -99,23 +103,49 @@ Pyecharts 1.0.0 use selenim to render image. By default, it uses Google Chrome i
 
 ```
 from pyecharts.render import make_snapshot
+import snapshot_selenium.snapshot as driver
+
 bar = (Bar()
     .add_xaxis(["Microsoft", "Amazon", "IBM", "Oracl", "Google", "Alibaba"])
     .add_yaxis('2017-2018 Revenue in (billion $)', [21.2, 20.4, 10.3, 6.08, 4, 2.2])
     .set_global_opts(title_opts=opts.TitleOpts(title="Top cloud providers 2018", subtitle="2017-2018 Revenue"))
 )
-make_snapshot(bar.render(), 'bar.png')
+make_snapshot(driver, bar.render(), 'bar.png')
 ```
 
 To use Safari on MacOS, you will need to enable develop mode of Safari and eanble remote automation. 
 
 ```
 from pyecharts.render import make_snapshot
+import snapshot_selenium.snapshot as driver
+
 bar = ...
-make_snapshot(bar.render(), 'bar.png', browser='Safari')
+
+make_snapshot(driver, bar.render(), 'bar.png', browser='Safari')
 ```
 
 For more details, please refer to [selenium driver on mac]( https://www.dev2qa.com/python-how-to-launch-safari-firefox-chrome-in-selenium-webdriver/)
+
+
+#### Use phantomjs
+
+For old users, you can still use phantomjs. 
+
+```
+pip install snapshot-phantomjs
+```
+
+And tweak the import line slightly, you will be using phantomjs instead of selenium.
+
+```
+from pyecharts.render import make_snapshot
+import snapshot_phantomjs.snapshot as driver
+
+bar = ...
+
+make_snapshot(driver, bar.render(), 'bar.png', browser='Safari')
+```
+
 
 ### Pandas & Numpy examples
 
