@@ -92,11 +92,13 @@ pyecharts supports extra 5 body colors, [Please move to the theme color for more
 
 ### Rendering as image
 
+Pyecharts 1.0.0 use selenim to render image.
+
 ```
 pip install snapshot-selenium
 ```
 
-Pyecharts 1.0.0 use selenim to render image. By default, it uses Google Chrome in headless mode.
+ By default, it uses Google Chrome in headless mode.
 
 1. You will have to download chrome driver and make sure it is accessible on user path.
 
@@ -123,6 +125,8 @@ bar = ...
 
 make_snapshot(driver, bar.render(), 'bar.png', browser='Safari')
 ```
+
+![safari](https://user-images.githubusercontent.com/4280312/55689958-3cf83c80-5983-11e9-997a-a7d711f48875.png)
 
 For more details, please refer to [selenium driver on mac]( https://www.dev2qa.com/python-how-to-launch-safari-firefox-chrome-in-selenium-webdriver/)
 
