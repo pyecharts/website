@@ -1,3 +1,93 @@
+## ItemStyleOpts：图元样式配置项
+> *class pyecharts.options.ItemStyleOpts*
+
+```python
+class ItemStyleOpts(
+    # 图形的颜色。
+    # 颜色可以使用 RGB 表示，比如 'rgb(128, 128, 128)'，如果想要加上 alpha 通道表示不透明度，
+    # 可以使用 RGBA，比如 'rgba(128, 128, 128, 0.5)'，也可以使用十六进制格式，比如 '#ccc'。
+    # 除了纯色之外颜色也支持渐变色和纹理填充
+    # 
+    # 线性渐变，前四个参数分别是 x0, y0, x2, y2, 范围从 0 - 1，相当于在图形包围盒中的百分比，
+    # 如果 globalCoord 为 `true`，则该四个值是绝对的像素位置
+    # color: {
+    #    type: 'linear',
+    #    x: 0,
+    #    y: 0,
+    #    x2: 0,
+    #    y2: 1,
+    #    colorStops: [{
+    #        offset: 0, color: 'red' // 0% 处的颜色
+    #    }, {
+    #        offset: 1, color: 'blue' // 100% 处的颜色
+    #    }],
+    #    global: false // 缺省为 false
+    # }
+    # 
+    # 径向渐变，前三个参数分别是圆心 x, y 和半径，取值同线性渐变
+    # color: {
+    #    type: 'radial',
+    #    x: 0.5,
+    #    y: 0.5,
+    #    r: 0.5,
+    #    colorStops: [{
+    #        offset: 0, color: 'red' // 0% 处的颜色
+    #    }, {
+    #        offset: 1, color: 'blue' // 100% 处的颜色
+    #    }],
+    #    global: false // 缺省为 false
+    # }
+    # 
+    # 纹理填充
+    # color: {
+    #    image: imageDom, // 支持为 HTMLImageElement, HTMLCanvasElement，不支持路径字符串
+    #    repeat: 'repeat' // 是否平铺, 可以是 'repeat-x', 'repeat-y', 'no-repeat'
+    # }
+    color: Optional[str] = None,
+    
+    # 阴线 图形的颜色。
+    color0: Optional[str] = None,
+
+    # 图形的描边颜色。支持的颜色格式同 color，不支持回调函数。
+    border_color: Optional[str] = None,
+    
+    # 阴线 图形的描边颜色。
+    border_color0: Optional[str] = None,
+    
+    # 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+    opacity: Optional[Numeric] = None,
+)
+```
+
+## TextStyleOpts：文字样式配置项
+> *class pyecharts.options.TextStyleOpts*
+
+```python
+class TextStyleOpts(
+    # 文字颜色。
+    color: Optional[str] = None,
+
+    # 文字字体的风格
+    # 可选：'normal'，'italic'，'oblique'
+    font_style: Optional[str] = None,
+
+    # 主标题文字字体的粗细，可选：
+    # 'normal'，'bold'，'bolder'，'lighter'
+    font_weight: Optional[str] = None,
+
+    # 文字的字体系列
+    # 还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+    font_family: Optional[str] = None,
+
+    # 文字的字体大小
+    font_size: Optional[Numeric] = None,
+
+    # 行高
+    line_height: Optional[str] = None,
+)
+```
+
+
 ## LabelOpts：标签配置项
 > *class pyecahrts.options.LabelOpts*
 
@@ -152,19 +242,6 @@ class SplitLineOpts(
 )
 ```
 
-## AxisLineOpts：坐标轴轴线配置项
-> *class pyecharts.options.AxisLineOpts*
-
-```python
-class AxisLineOpts(
-    # 是否显示坐标轴轴线。
-    is_show: bool = True, 
-
-    # 线风格配置项，参考 `series_options.SplitLineOpts`
-    linestyle_opts: LineStyleOpts = LineStyleOpts()
-)
-```
-
 ## MarkPointItem：标记点数据项
 > *class pyecharts.options.MarkPointItem*
 
@@ -289,6 +366,9 @@ class MarkLineItem(
 
 ```python
 class MarkLineOpts(
+    # 图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+    is_silent: bool = False,
+
     # 标记线数据，参考 `series_options.MarkPointItem`
     data: List[Union[MarkLineItem, dict]] = None,
 
@@ -297,9 +377,64 @@ class MarkLineOpts(
 
     # 标线两端的标记大小，可以是一个数组分别指定两端，也可以是单个统一指定。
     symbol_size: Union[None, Numeric] = None,
-
+    
+    # 标线数值的精度，在显示平均值线的时候有用。
+    precision: int = 2,
+    
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: LabelOpts = LabelOpts(),
+)
+```
+
+## MarkAreaItem: 标记区域数据项
+> *class pyecharts.options.MarkAreaItem*
+
+```python
+class MarkAreaItem(
+    # 区域名称, 仅仅就是一个名称而已
+    name: Optional[str] = None,
+    
+    # 特殊的标注类型，用于标注最大值最小值等。
+    # 'min' 最大值。
+    # 'max' 最大值。
+    # 'average' 平均值。
+    type_: Tuple[Optional[str], Optional[str]] = (None, None),
+    
+    # 在使用 type 时有效，用于指定在哪个维度上指定最大值最小值，可以是 0（xAxis, radiusAxis），1（yAxis, angleAxis）。
+    # 默认使用第一个数值轴所在的维度。
+    value_index: Tuple[Optional[Numeric], Optional[Numeric]] = (None, None),
+    
+    # 在使用 type 时有效，用于指定在哪个维度上指定最大值最小值。
+    # 这可以是维度的直接名称，例如折线图时可以是x、angle等、candlestick 图时可以是open、close等维度名称。
+    value_dim: Tuple[Optional[str], Optional[str]] = (None, None),
+    
+    # 相对容器的屏幕 x 坐标，单位像素，支持百分比形式，例如 '20%'。
+    x: Tuple[Union[str, Numeric, None], Union[str, Numeric, None]] = (None, None),
+    
+    # 相对容器的屏幕 y 坐标，单位像素，支持百分比形式，例如 '20%'。
+    y: Tuple[Union[str, Numeric, None], Union[str, Numeric, None]] = (None, None),
+    
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 该数据项区域的样式，起点和终点项的itemStyle会合并到一起。参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+)
+```
+
+## MarkAreaOpts: 标记区域配置项
+> *class pyecharts.options.MarkAreaOpts*
+
+```python
+class MarkAreaOpts(
+    # 图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+    is_silent: bool = False,
+    
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: LabelOpts = LabelOpts(),
+    
+    # 标记区域数据，参考 `series_options.MarkAreaItem`
+    data: List[Union[MarkAreaItem, dict]] = None,
 )
 ```
 
@@ -378,88 +513,5 @@ class SplitAreaOpts(
     is_show=True, 
     # 分隔区域的样式配置项，参考 `series_options.AreaStyleOpts`
     areastyle_opts: AreaStyleOpts = AreaStyleOpts()
-)
-```
-
-## TextStyleOpts：文字样式配置项
-> *class pyecharts.options.TextStyleOpts*
-
-```python
-class TextStyleOpts(
-    # 文字颜色。
-    color: Optional[str] = None,
-
-    # 文字字体的风格
-    # 可选：'normal'，'italic'，'oblique'
-    font_style: Optional[str] = None,
-
-    # 主标题文字字体的粗细，可选：
-    # 'normal'，'bold'，'bolder'，'lighter'
-    font_weight: Optional[str] = None,
-
-    # 文字的字体系列
-    # 还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
-    font_family: Optional[str] = None,
-
-    # 文字的字体大小
-    font_size: Optional[Numeric] = None,
-
-    # 行高
-    line_height: Optional[str] = None,
-)
-```
-
-## ItemStyleOpts：图元样式配置项
-> *class pyecharts.options.ItemStyleOpts*
-
-```python
-class ItemStyleOpts(
-    # 图形的颜色。
-    # 颜色可以使用 RGB 表示，比如 'rgb(128, 128, 128)'，如果想要加上 alpha 通道表示不透明度，
-    # 可以使用 RGBA，比如 'rgba(128, 128, 128, 0.5)'，也可以使用十六进制格式，比如 '#ccc'。
-    # 除了纯色之外颜色也支持渐变色和纹理填充
-    # 
-    # 线性渐变，前四个参数分别是 x0, y0, x2, y2, 范围从 0 - 1，相当于在图形包围盒中的百分比，
-    # 如果 globalCoord 为 `true`，则该四个值是绝对的像素位置
-    # color: {
-    #    type: 'linear',
-    #    x: 0,
-    #    y: 0,
-    #    x2: 0,
-    #    y2: 1,
-    #    colorStops: [{
-    #        offset: 0, color: 'red' // 0% 处的颜色
-    #    }, {
-    #        offset: 1, color: 'blue' // 100% 处的颜色
-    #    }],
-    #    global: false // 缺省为 false
-    # }
-    # 
-    # 径向渐变，前三个参数分别是圆心 x, y 和半径，取值同线性渐变
-    # color: {
-    #    type: 'radial',
-    #    x: 0.5,
-    #    y: 0.5,
-    #    r: 0.5,
-    #    colorStops: [{
-    #        offset: 0, color: 'red' // 0% 处的颜色
-    #    }, {
-    #        offset: 1, color: 'blue' // 100% 处的颜色
-    #    }],
-    #    global: false // 缺省为 false
-    # }
-    # 
-    # 纹理填充
-    # color: {
-    #    image: imageDom, // 支持为 HTMLImageElement, HTMLCanvasElement，不支持路径字符串
-    #    repeat: 'repeat' // 是否平铺, 可以是 'repeat-x', 'repeat-y', 'no-repeat'
-    # }
-    color: Optional[str] = None,
-
-    # 图形的描边颜色。支持的颜色格式同 color，不支持回调函数。
-    border_color: Optional[str] = None,
-
-    # 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-    opacity: Optional[Numeric] = None,
 )
 ```
