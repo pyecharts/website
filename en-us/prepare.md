@@ -126,9 +126,9 @@ bar = ...
 make_snapshot(driver, bar.render(), 'bar.png', browser='Safari')
 ```
 
-![safari](https://user-images.githubusercontent.com/4280312/55689958-3cf83c80-5983-11e9-997a-a7d711f48875.png)
-
 For more details, please refer to [selenium driver on mac]( https://www.dev2qa.com/python-how-to-launch-safari-firefox-chrome-in-selenium-webdriver/)
+
+![safari-1](https://user-images.githubusercontent.com/4280312/55689958-3cf83c80-5983-11e9-997a-a7d711f48875.png)
 
 
 #### Use phantomjs
