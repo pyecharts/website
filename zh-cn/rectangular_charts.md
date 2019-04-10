@@ -5,9 +5,13 @@
 扩展 X/Y 轴
 ```python
 def extend_axis(
-    # X 坐标轴配置项，参考 `global_options.AxisOpts`
+    # 扩展 X 坐标轴数据项
+    xaxis_data: Sequence = None,
+    
+    # 扩展 X 坐标轴配置项，参考 `global_options.AxisOpts`
     xaxis: Union[opts.AxisOpts, dict, None] = None,
-    # Y 坐标轴配置项，参考 `global_options.AxisOpts`
+    
+    # 新增 Y 坐标轴配置项，参考 `global_options.AxisOpts`
     yaxis: Union[opts.AxisOpts, dict, None] = None,
 )
 ```

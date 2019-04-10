@@ -97,9 +97,27 @@ class ToolboxOpts(
 class TitleOpts(
     # 主标题文本，支持使用 \n 换行。
     title: Optional[str] = None,
+    
+    # 主标题跳转 URL 链接
+    title_link: Optional[str] = None,
+    
+    # 主标题跳转链接方式
+    # 默认值是: blank
+    # 可选参数: 'self', 'blank'
+    # 'self' 当前窗口打开; 'blank' 新窗口打开
+    title_target: Optional[str] = None,
 
     # 副标题文本，支持使用 \n 换行。
     subtitle: Optional[str] = None,
+    
+    # 副标题跳转 URL 链接
+    subtitle_link: Optional[str] = None,
+    
+    # 副标题跳转链接方式
+    # 默认值是: blank
+    # 可选参数: 'self', 'blank'
+    # 'self' 当前窗口打开; 'blank' 新窗口打开
+    subtitle_target: Optional[str] = None,
 
     # title 组件离容器左侧的距离。
     # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
@@ -139,12 +157,21 @@ class DataZoomOpts(
 
     # 组件类型，可选 "slider", "inside"
     type_: str = "slider",
+    
+    # 拖动时，是否实时更新系列的视图。如果设置为 false，则只在拖拽结束的时候更新。
+    is_realtime: bool = True,
 
     # 数据窗口范围的起始百分比。范围是：0 ~ 100。表示 0% ~ 100%。
     range_start: Numeric = 20,
 
     # 数据窗口范围的结束百分比。范围是：0 ~ 100
     range_end: Numeric = 80,
+    
+    # 数据窗口范围的起始数值。如果设置了 start 则 startValue 失效。
+    start_value: Union[int, str, None] = None,
+    
+    # 数据窗口范围的结束数值。如果设置了 end 则 endValue 失效。
+    end_value: Union[int, str, None] = None,
 
     # 布局方式是横还是竖。不仅是布局方式，对于直角坐标系而言，也决定了，缺省情况控制横向数轴还是纵向数轴
     # 可选值为：'horizontal', 'vertical'
@@ -159,6 +186,10 @@ class DataZoomOpts(
     # 不指定时，当 dataZoom-inside.orient 为 'horizontal'时，默认控制和 dataZoom 平行的第一个 yAxis
     # 如果是 number 表示控制一个轴，如果是 Array 表示控制多个轴。
     yaxis_index: int = 0,
+    
+    # 是否锁定选择区域（或叫做数据窗口）的大小。
+    # 如果设置为 true 则锁定选择区域的大小，也就是说，只能平移，不能缩放。
+    is_zoom_lock: bool = False,
 )
 ```
 
@@ -167,6 +198,11 @@ class DataZoomOpts(
 
 ```python
 class LegendOpts(
+    # 图例的类型。可选值：
+    # 'plain'：普通图例。缺省就是普通图例。
+    # 'scroll'：可滚动翻页的图例。当图例数量较多时可以使用。
+    type_: Optional[str] = None,
+    
     # 图例选择的模式，控制是否可以通过点击图例改变系列的显示状态。默认开启图例选择，可以设成 false 关闭
     # 除此之外也可以设成 'single' 或者 'multiple' 使用单选或者多选模式。
     selected_mode: Union[str, bool, None] = None,
@@ -271,7 +307,19 @@ class VisualMapOpts(
     #   {max: 5}     // 不指定 min，表示 min 为无限大（-Infinity）。
     # ]
     pieces: Optional[Sequence] = None,
-
+    
+    # 定义 在选中范围外 的视觉元素。（用户可以和 visualMap 组件交互，用鼠标或触摸选择范围）
+    #  可选的视觉元素有：
+    #  symbol: 图元的图形类别。
+    #  symbolSize: 图元的大小。
+    #  color: 图元的颜色。
+    #  colorAlpha: 图元的颜色的透明度。
+    #  opacity: 图元以及其附属物（如文字标签）的透明度。
+    #  colorLightness: 颜色的明暗度，参见 HSL。
+    #  colorSaturation: 颜色的饱和度，参见 HSL。
+    #  colorHue: 颜色的色调，参见 HSL。
+    out_of_range: Optional[Sequence] = None,
+    
     # 文字样式配置项，参考 `series_options.TextStyleOpts`
     textstyle_opts: Union[TextStyleOpts, dict, None] = None,
 )
@@ -282,6 +330,9 @@ class VisualMapOpts(
 
 ```python
 class TooltipOpts(
+    # 是否显示提示框组件，包括提示框浮层和 axisPointer。
+    is_show: bool = True,
+
     # 触发类型。可选：
     # 'item': 数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
     # 'axis': 坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用。
@@ -346,6 +397,76 @@ class TooltipOpts(
 
     # 文字样式配置项，参考 `series_options.TextStyleOpts`
     textstyle_opts: TextStyleOpts = TextStyleOpts(font_size=14),
+)
+```
+
+## AxisLineOpts: 坐标轴轴线配置项
+> *class pyecharts.option.AxisLineOpts*
+
+```python
+class AxisLineOpts(
+    # 是否显示坐标轴轴线。
+    is_show: bool = True,
+    
+    # X 轴或者 Y 轴的轴线是否在另一个轴的 0 刻度上，只有在另一个轴为数值轴且包含 0 刻度时有效。
+    is_on_zero: bool = True,
+    
+    # 当有双轴时，可以用这个属性手动指定，在哪个轴的 0 刻度上。
+    on_zero_axis_index: int = 0,
+    
+    # 轴线两边的箭头。可以是字符串，表示两端使用同样的箭头；或者长度为 2 的字符串数组，分别表示两端的箭头。
+    # 默认不显示箭头，即 'none'。
+    # 两端都显示箭头可以设置为 'arrow'。
+    # 只在末端显示箭头可以设置为 ['none', 'arrow']。
+    symbol: Optional[str] = None,
+    
+    # 坐标轴线风格配置项，参考 `series_optionsLineStyleOpts`
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+)
+```
+
+## AxisTickOpts: 坐标轴刻度配置项
+> *class pyecharts.option.AxisTickOpts*
+
+```python
+class AxisTickOpts(
+    # 是否显示坐标轴刻度。
+    is_show: bool = True,
+    
+    # 类目轴中在 boundaryGap 为 true 的时候有效，可以保证刻度线和标签对齐。
+    is_align_with_label: bool = False,
+    
+    # 坐标轴刻度是否朝内，默认朝外。
+    is_inside: bool = False,
+    
+    # 坐标轴刻度的长度。
+    length: Optional[Numeric] = None,
+    
+    # 坐标轴线风格配置项，参考 `series_optionsLineStyleOpts`
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+)
+```
+
+## AxisPointerOpts: 坐标轴指示器配置项
+> *class pyecharts.option.AxisPointerOpts*
+
+```python
+class AxisPointerOpts(
+    # 默认显示坐标轴指示器
+    is_show: bool = True,
+    
+    # 指示器类型。
+    # 可选参数如下，默认为 'line'
+    # 'line' 直线指示器
+    # 'shadow' 阴影指示器
+    # 'none' 无指示器
+    type_: str = "line",
+    
+    # 坐标轴指示器的文本标签，坐标轴标签配置项，参考 `series_options.LabelOpts`
+    label: Union[LabelOpts, dict, None] = None,
+    
+    # 坐标轴线风格配置项，参考 `series_optionsLineStyleOpts`
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None,
 )
 ```
 
@@ -417,12 +538,18 @@ class AxisOpts(
     # 例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
     # 'log' 对数轴。适用于对数数据。
     type_: Optional[str] = None,
-
-    # 坐标轴刻度配置项，参考 `golbal_options.AxisTickOpts`
+    
+    # 坐标轴刻度线配置项，参考 `global_options.AxisLineOpts`
+    axisline_opts: Union[AxisLineOpts, dict, None] = None,
+    
+    # 坐标轴刻度配置项，参考 `global_options.AxisTickOpts`
     axistick_opts: Union[AxisTickOpts, dict, None] = None,
 
     # 坐标轴标签配置项，参考 `series_options.LabelOpts`
     axislabel_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 坐标轴指示器配置项，参考 `global_options.AxisPointerOpts`
+    axispointer_opts: Union[AxisPointerOpts, dict, None] = None,
 
     # 坐标轴名称的文字样式，参考 `series_options.TextStyleOpts`
     name_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
@@ -432,31 +559,6 @@ class AxisOpts(
 
     # 分割线配置项，参考 `series_options.SplitLineOpts`
     splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(),
-
-    # 坐标轴线风格配置项，参考 `series_optionsLineStyleOpts`
-    linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
-)
-```
-
-## AxisTickOpts：坐标轴刻度配置项
-> *class pyecharts.options.AxisTickOpts*
-
-```python
-class AxisTickOpts(
-    # 是否显示坐标轴刻度。
-    is_show: bool = True,
-
-    # 类目轴中在 boundaryGap 为 true 的时候有效，可以保证刻度线和标签对齐
-    is_align_with_label: bool = False,
-
-    # 坐标轴刻度是否朝内，默认朝外。
-    is_inside: bool = False,
-
-    # 坐标轴刻度的长度。
-    length: Optional[Numeric] = None,
-
-    # 坐标轴线风格，参考 `series_options.LineStyleOpts`
-    linestyle_opts: Union[LineStyleOpts, dict, None] = None,
 )
 ```
 
