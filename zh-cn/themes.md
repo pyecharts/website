@@ -35,12 +35,6 @@ c = Bar(init_opts=opts.InitOpts(theme=ThemeType.LIGHT))
 c = Bar(init_opts=opts.InitOpts(theme=ThemeType.DARK))
 ```
 
-### WHITE
-
-```python
-c = Bar(init_opts=opts.InitOpts(theme=ThemeType.WHITE))
-```
-
 ### CHALK
 ```python
 c = Bar(init_opts=opts.InitOpts(theme=ThemeType.CHALK))
