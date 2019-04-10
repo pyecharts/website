@@ -1,5 +1,7 @@
 > 初识全局配置组件
 
+全局配置项可通过 `set_global_options` 方法设置
+
 ![](https://user-images.githubusercontent.com/19553554/55686576-70dc5d80-5995-11e9-9448-215891e62be4.png)
 
 

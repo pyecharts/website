@@ -9,6 +9,31 @@ class Geo(
 )
 ```
 
+> *func pyecharts.charts.Geo.add_schema*
+
+```python
+```
+
+> *func pyecharts.charts.Geo.add*
+
+```python
+```
+
+> *func pyecharts.charts.Geo.add_coordinate*
+
+```python
+```
+
+> *func pyecharts.charts.Geo.add_coordinate_json*
+
+```python
+```
+
+> *func pyecharts.charts.Geo.get_coordinate*
+
+```python
+```
+
 ### Demo
 
 > Geo-基本示例
@@ -188,6 +213,11 @@ class Map(
     # 初始化配置项，参考 `global_options.InitOpts`
     init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
 )
+```
+
+> *func pyecharts.charts.Map.get_coordinate*
+
+```python
 ```
 
 ### Demo
