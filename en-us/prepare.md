@@ -160,9 +160,9 @@ make_snapshot(driver, bar.render(), 'bar.png')
 
 ### Pandas & Numpy examples
 
-In the context of Numpy and/or Pandas, ```pdcast(pddata)``` and ``` npcast(npdata)``` methods, provided in 0.19.2 are no log required. Please see the advanced example in README.
+Here is the example to work with Pandas and Numpy.
 
-![pandas-numpy](https://user-images.githubusercontent.com/19553554/35104252-3e36cee2-fca3-11e7-8e43-09bbe8dbbd1e.png)
+![pandas-numpy](https://user-images.githubusercontent.com/19553554/35104252-3e36cee2-fca3-11e7-8e43-09bbe8dbbd1e.pnghttps://user-images.githubusercontent.com/4280312/55858071-a1bfbc80-5b66-11e9-9189-1e309b667cb1.png)
 
 **Note:** When using Pandas&Numpy, ensure that the integer type is int instead of numpy.int32
 
@@ -180,7 +180,3 @@ and this
 more Jupyter notebook examples, please refer to [notebook-use-cases](https://github.com/chenjiandongx/pyecharts/blob/master/document/notebook-use-cases.ipynb). You could download and run it on your notebook.
 
 Use Jupyter Notebook to display charts, just call your own instance and be compatible with Python2 and Python3's Jupyter Notebook environment. All charts can be displayed normally, and the interactive experience is consistent with the browser. It is even no need PPT with this method to display report! !
-
-### Offline installation instructions for pyecharts
-
-Please visit faq section for more details
