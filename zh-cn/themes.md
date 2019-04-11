@@ -38,12 +38,6 @@ c = Bar(init_opts=opts.InitOpts(theme=ThemeType.DARK))
 ```
 ![](https://user-images.githubusercontent.com/19553554/55897130-80a4ad80-5bf2-11e9-836d-748b15b260ce.png)
 
-### WHITE
-
-```python
-c = Bar(init_opts=opts.InitOpts(theme=ThemeType.WHITE))
-```
-
 ### CHALK
 
 ```python
