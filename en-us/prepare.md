@@ -92,36 +92,77 @@ pyecharts supports extra 5 body colors, [Please move to the theme color for more
 
 ### Rendering as image
 
-Pyecharts 1.0.0 use selenim to render image. By default, it uses Google Chrome in headless mode.
+Pyecharts 1.0.0 can use selenim to render image. By default, 'png', 'jpeg' and 'svg' are supported.
+
+```
+pip install snapshot-selenium
+```
+
+By default, it uses Google Chrome in headless mode.
 
 1. You will have to download chrome driver and make sure it is accessible on user path.
 
-
 ```
 from pyecharts.render import make_snapshot
+import snapshot_selenium.snapshot as driver
+
 bar = (Bar()
     .add_xaxis(["Microsoft", "Amazon", "IBM", "Oracl", "Google", "Alibaba"])
     .add_yaxis('2017-2018 Revenue in (billion $)', [21.2, 20.4, 10.3, 6.08, 4, 2.2])
     .set_global_opts(title_opts=opts.TitleOpts(title="Top cloud providers 2018", subtitle="2017-2018 Revenue"))
 )
-make_snapshot(bar.render(), 'bar.png')
+make_snapshot(driver, bar.render(), 'bar.png')
 ```
 
 To use Safari on MacOS, you will need to enable develop mode of Safari and eanble remote automation. 
 
 ```
 from pyecharts.render import make_snapshot
+import snapshot_selenium.snapshot as driver
+
 bar = ...
-make_snapshot(bar.render(), 'bar.png', browser='Safari')
+
+make_snapshot(driver, bar.render(), 'bar.png', browser='Safari')
 ```
 
-For more details, please refer to [selenium driver on mac]( https://www.dev2qa.com/python-how-to-launch-safari-firefox-chrome-in-selenium-webdriver/)
+![safari-1](https://user-images.githubusercontent.com/4280312/55689958-3cf83c80-5983-11e9-997a-a7d711f48875.png)
+
+
+For more details, please refer to [selenium driver on mac](https://www.dev2qa.com/python-how-to-launch-safari-firefox-chrome-in-selenium-webdriver/)
+
+#### more image formats
+
+For more image formats, you have install PIL to get pdf, gif, raw etc.
+
+```
+pip install PIL
+```
+
+#### Use phantomjs
+
+For old users, you can still use phantomjs. 
+
+```
+pip install snapshot-phantomjs
+```
+
+And tweak the import line slightly, you will be using phantomjs instead of selenium.
+
+```
+from pyecharts.render import make_snapshot
+import snapshot_phantomjs.snapshot as driver
+
+bar = ...
+
+make_snapshot(driver, bar.render(), 'bar.png')
+```
+
 
 ### Pandas & Numpy examples
 
-In the context of Numpy and/or Pandas, ```pdcast(pddata)``` and ``` npcast(npdata)``` methods, provided in 0.19.2 are no log required. Please see the advanced example in README.
+Here is the example to work with Pandas and Numpy.
 
-![pandas-numpy](https://user-images.githubusercontent.com/19553554/35104252-3e36cee2-fca3-11e7-8e43-09bbe8dbbd1e.png)
+![pandas-numpy](https://user-images.githubusercontent.com/19553554/35104252-3e36cee2-fca3-11e7-8e43-09bbe8dbbd1e.pnghttps://user-images.githubusercontent.com/4280312/55858071-a1bfbc80-5b66-11e9-9189-1e309b667cb1.png)
 
 **Note:** When using Pandas&Numpy, ensure that the integer type is int instead of numpy.int32
 
@@ -139,7 +180,3 @@ and this
 more Jupyter notebook examples, please refer to [notebook-use-cases](https://github.com/chenjiandongx/pyecharts/blob/master/document/notebook-use-cases.ipynb). You could download and run it on your notebook.
 
 Use Jupyter Notebook to display charts, just call your own instance and be compatible with Python2 and Python3's Jupyter Notebook environment. All charts can be displayed normally, and the interactive experience is consistent with the browser. It is even no need PPT with this method to display report! !
-
-### Offline installation instructions for pyecharts
-
-Please visit faq section for more details

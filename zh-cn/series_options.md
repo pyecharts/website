@@ -405,7 +405,7 @@ class MarkAreaItem(
     value_index: Tuple[Optional[Numeric], Optional[Numeric]] = (None, None),
     
     # 在使用 type 时有效，用于指定在哪个维度上指定最大值最小值。
-    # 这可以是维度的直接名称，例如折线图时可以是x、angle等、candlestick 图时可以是open、close等维度名称。
+    # 这可以是维度的直接名称，例如折线图时可以是 x、angle 等、candlestick 图时可以是 open、close 等维度名称。
     value_dim: Tuple[Optional[str], Optional[str]] = (None, None),
     
     # 相对容器的屏幕 x 坐标，单位像素，支持百分比形式，例如 '20%'。
@@ -417,7 +417,7 @@ class MarkAreaItem(
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[LabelOpts, dict, None] = None,
     
-    # 该数据项区域的样式，起点和终点项的itemStyle会合并到一起。参考 `series_options.ItemStyleOpts`
+    # 该数据项区域的样式，起点和终点项的 itemStyle 会合并到一起。参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
 )
 ```
