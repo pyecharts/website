@@ -165,6 +165,8 @@ def add(
 
 ### Demo
 
+> Funnel-基本示例
+
 ```python
 from example.commons import Faker
 from pyecharts import options as opts
@@ -179,6 +181,9 @@ def funnel_base() -> Funnel:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55929585-fb4fe600-5c4f-11e9-8c31-60edd9c8b2b9.png)
+
+> Funnel-Label（inside)
 
 ```python
 def funnel_label_inside() -> Funnel:
@@ -193,6 +198,9 @@ def funnel_label_inside() -> Funnel:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55929620-191d4b00-5c50-11e9-97eb-b6ea184d1140.png)
+
+> Funnel-Sort（ascending）
 
 ```python
 def funnel_sort_ascending() -> Funnel:
@@ -204,10 +212,12 @@ def funnel_sort_ascending() -> Funnel:
             sort_="ascending",
             label_opts=opts.LabelOpts(position="inside"),
         )
-        .set_global_opts(title_opts=opts.TitleOpts(title="Funnel-Label（inside)"))
+        .set_global_opts(title_opts=opts.TitleOpts(title="Funnel-Sort（ascending）"))
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55929629-233f4980-5c50-11e9-8dbe-9562b3fdfdd5.png)
+
 
 ## Gauge：仪表盘
 
@@ -252,6 +262,8 @@ def add(
 
 ### Demo
 
+> Gauge-基本示例
+
 ```python
 from pyecharts import options as opts
 from pyecharts.charts import Gauge, Page
@@ -265,17 +277,51 @@ def gauge_base() -> Gauge:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55929665-3ce09100-5c50-11e9-8bba-9156fdbde06b.png)
+
 
 ## Graph：关系图
 
 > *class pyecharts.charts.Graph*
 
 ```python
+class Graph(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+)
 ```
 
 > *class pyecharts.charts.Graph.add*
 
 ```python
+def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
+    series_name: str,
+
+
+    nodes: List[Union[opts.GraphNode, dict]],
+    links: List[Union[opts.GraphLink, dict]],
+    categories: Union[List[Union[opts.GraphCategory, dict]], None] = None,
+    is_selected: bool = True,
+    is_focusnode: bool = True,
+    is_roam: bool = True,
+    is_rotate_label: bool = False,
+    layout: str = "force",
+    symbol: Optional[str] = None,
+    edge_length: Numeric = 50,
+    gravity: Numeric = 0.2,
+    repulsion: Numeric = 50,
+    edge_symbol: Optional[str] = None,
+    
+    edge_symbol_size: Numeric = 10,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+    linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+)
 ```
 
 ### GraphNode
@@ -369,6 +415,8 @@ class GraphCategory(
 
 ### Demo
 
+> Graph-基本示例
+
 ```python
 import json
 import os
@@ -399,6 +447,9 @@ def graph_base() -> Graph:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55931719-37d40f80-5c59-11e9-9f1f-86326f4250f2.png)
+
+> Graph-GraphNode-GraphLink
 
 ```python
 def graph_with_opts() -> Graph:
@@ -423,6 +474,9 @@ def graph_with_opts() -> Graph:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55931745-47535880-5c59-11e9-8728-9216afd2975b.png)
+
+> Graph-微博转发关系图
 
 ```python
 def graph_weibo() -> Graph:
@@ -447,6 +501,8 @@ def graph_weibo() -> Graph:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55931763-5b975580-5c59-11e9-966c-b54705924b88.png)
+
 
 ## Liquid：水球图
 
@@ -462,9 +518,20 @@ class Liquid(
 > *func pyecharts.charts.Liquid.add*
 
 ```python
+def add(
+    series_name: str,
+    data: Sequence,
+    shape: str = "circle",
+    color: Optional[List[str]] = None,
+    is_animation: bool = True,
+    is_outline_show: bool = True,
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+)
 ```
 
 ### Demo
+
+> Liquid-基本示例
 
 ```python
 from pyecharts import options as opts
@@ -480,6 +547,9 @@ def liquid_base() -> Liquid:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55931845-aadd8600-5c59-11e9-9446-7700ddb3e875.gif)
+
+> Liquid-无边框
 
 ```python
 def liquid_without_outline() -> Liquid:
@@ -490,6 +560,9 @@ def liquid_without_outline() -> Liquid:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55931903-e710e680-5c59-11e9-9d34-1eab6fdc22b5.png)
+
+> Liquid-Shape-diamond
 
 ```python
 def liquid_shape_diamond() -> Liquid:
@@ -500,6 +573,9 @@ def liquid_shape_diamond() -> Liquid:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55931921-f1cb7b80-5c59-11e9-916c-75db9bad367d.png)
+
+> Liquid-Shape-arrow
 
 ```python
 def liquid_shape_diamond() -> Liquid:
@@ -510,6 +586,9 @@ def liquid_shape_diamond() -> Liquid:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55931932-027bf180-5c5a-11e9-8ed5-f55c43ce58fc.png)
+
+> Liquid-Shape-rect
 
 ```python
 def liquid_shape_diamond() -> Liquid:
@@ -519,8 +598,9 @@ def liquid_shape_diamond() -> Liquid:
         .set_global_opts(title_opts=opts.TitleOpts(title="Liquid-Shape-rect"))
     )
     return c
-
 ```
+![](https://user-images.githubusercontent.com/19553554/55931939-0e67b380-5c5a-11e9-9986-bc7bfe3adc43.png)
+
 
 ## Parallel：平行坐标系
 
@@ -536,11 +616,21 @@ class Parallel(
 > *func pyecharts.charts.Parallel.add_schema*
 
 ```python
+def add_schema(
+    schema: List[Union[opts.ParallelAxisOpts, dict]]
+)
 ```
 
 > *func pyecharts.charts.Parallel.add*
 
 ```python
+def add(
+    series_name: str,
+    data: Sequence,
+    is_selected: bool = True,
+    linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+)
 ```
 
 ### ParallelOpts
@@ -572,6 +662,8 @@ class ParallelAxisOpts(
 ```
 
 ### Demo
+
+> Parallel-基本示例
 
 ```python
 from pyecharts import options as opts
@@ -609,6 +701,9 @@ def parallel_base() -> Parallel:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55932922-24777300-5c5e-11e9-80f5-6af49727ef11.png)
+
+> Parallel-Category
 
 ```python
 def parallel_category() -> Parallel:
@@ -652,6 +747,8 @@ def parallel_category() -> Parallel:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55932940-2fca9e80-5c5e-11e9-9a36-78882da3ff78.png)
+
 
 ## Pie：饼图
 
@@ -667,9 +764,21 @@ class Pie(
 > *func pyecharts.charts.Pie.add*
 
 ```python
+def add(
+    series_name: str,
+    data_pair: Sequence,
+    color: Optional[str] = None,
+    radius: Optional[Sequence] = None,
+    center: Optional[Sequence] = None,
+    rosetype: Optional[str] = None,
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+)
 ```
 
 ### Demo
+
+> Pie-基本示例
 
 ```python
 from example.commons import Faker
@@ -686,6 +795,9 @@ def pie_base() -> Pie:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55933061-9354cc00-5c5e-11e9-8f80-5e2f434a1ec4.png)
+
+> Pie-Radius
 
 ```python
 def pie_radius() -> Pie:
@@ -706,6 +818,9 @@ def pie_radius() -> Pie:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55933080-a9fb2300-5c5e-11e9-9be2-61e806577b69.png)
+
+> Pie-玫瑰图示例
 
 ```python
 def pie_rosetype() -> Pie:
@@ -731,6 +846,8 @@ def pie_rosetype() -> Pie:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55933111-b4b5b800-5c5e-11e9-9dad-3aaa7870d858.png)
+
 
 ## Polar：极坐标系
 
@@ -746,11 +863,28 @@ class Polar(
 > *func pyecharts.charts.Polar.add_schema*
 
 ```python
+ def add_schema(
+    radiusaxis_opts: Union[opts.RadiusAxisOpts, dict] = opts.RadiusAxisOpts(),
+    angleaxis_opts: Union[opts.AngleAxisOpts, dict] = opts.AngleAxisOpts(),
+)
 ```
 
 > *func pyecharts.charts.Polar.add*
 
 ```python
+def add(
+    series_name: str,
+    data: Sequence,
+    is_selected: bool = True,
+    type_: str = "line",
+    symbol: Optional[str] = None,
+    symbol_size: Numeric = 4,
+    stack: Optional[str] = None,
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+    areastyle_opts: Union[opts.AreaStyleOpts, dict] = opts.AreaStyleOpts(),
+    effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+)
 ```
 
 ### RadiusAxisItem：极坐标系径向轴数据项
@@ -895,6 +1029,8 @@ class AngleAxisOpts(
 
 ### Demo
 
+> Polar-Scatter0
+
 ```python
 import math
 import random
@@ -913,6 +1049,9 @@ def polar_scatter0() -> Polar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55933279-5dfcae00-5c5f-11e9-8ee8-21721e663c1a.png)
+
+> Polar-Scatter1
 
 ```python
 def polar_scatter1() -> Polar:
@@ -926,6 +1065,9 @@ def polar_scatter1() -> Polar:
 
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55933321-88e70200-5c5f-11e9-93a8-5ca5a5143176.png)
+
+> Polar-EffectScatter
 
 ```python
 def polar_effectscatter() -> Polar:
@@ -943,6 +1085,9 @@ def polar_effectscatter() -> Polar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55933356-9f8d5900-5c5f-11e9-83bb-0abc240279b0.png)
+
+> Polar-RadiusAxis
 
 ```python
 def polar_radiusaxis() -> Polar:
@@ -958,6 +1103,9 @@ def polar_radiusaxis() -> Polar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55933386-b633b000-5c5f-11e9-9abb-331ba6eae0c7.png)
+
+> Polar-AngleAxis
 
 ```python
 def polar_angleaxis() -> Polar:
@@ -973,6 +1121,9 @@ def polar_angleaxis() -> Polar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55933405-c186db80-5c5f-11e9-8cab-81f323669d83.png)
+
+> Polar-Love
 
 ```python
 def polar_flower() -> Polar:
@@ -994,6 +1145,9 @@ def polar_flower() -> Polar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55933447-e3805e00-5c5f-11e9-83ed-2c97f7f43dea.png)
+
+> Polar-Flower
 
 ```python
 def polar_flower() -> Polar:
@@ -1006,9 +1160,12 @@ def polar_flower() -> Polar:
         Polar()
         .add_schema(angleaxis_opts=opts.AngleAxisOpts(start_angle=0, min_=0))
         .add("flower", data, label_opts=opts.LabelOpts(is_show=False))
+        .set_global_opts(title_opts=opts.TitleOpts(title="Polar-Flower"))
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55933460-eed38980-5c5f-11e9-87c4-6dfa265febda.png)
+
 
 ## Radar：雷达图
 
@@ -1024,11 +1181,30 @@ class Radar(
 > *func pyecharts.charts.Radar.add_schema*
 
 ```python
+def add_schema(
+    schema: List[Union[opts.RadarIndicatorOpts, dict]],
+    shape: Optional[str] = None,
+    textstyle_opts: Union[opts.TextStyleOpts, dict] = opts.TextStyleOpts(),
+    splitline_opt: Union[opts.SplitLineOpts, dict] = opts.SplitLineOpts(is_show=True),
+    splitarea_opt: Union[opts.SplitAreaOpts, dict] = opts.SplitAreaOpts(),
+    axisline_opt: Union[opts.AxisLineOpts, dict] = opts.AxisLineOpts(),
+)
 ```
 
 > *func pyecharts.charts.Radar.add*
 
 ```python
+def add(
+    series_name: str,
+    data: Sequence,
+    is_selected: bool = True,
+    symbol: Optional[str] = None,
+    color: Optional[str] = None,
+    label_opts: opts.LabelOpts = opts.LabelOpts(),
+    linestyle_opts: opts.LineStyleOpts = opts.LineStyleOpts(),
+    areastyle_opts: opts.AreaStyleOpts = opts.AreaStyleOpts(),
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+)
 ```
 
 ### RadarIndicatorOpts
@@ -1044,6 +1220,8 @@ class RadarIndicatorOpts(
 ```
 
 ### Demo
+
+> Radar-基本示例
 
 ```python
 from pyecharts import options as opts
@@ -1074,6 +1252,9 @@ def radar_base() -> Radar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55933590-6bfefe80-5c60-11e9-8b15-0858f1b95e28.png)
+
+> Radar-单例模式
 
 ```python
 def radar_selected_mode() -> Radar:
@@ -1099,6 +1280,9 @@ def radar_selected_mode() -> Radar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55933615-8507af80-5c60-11e9-9e27-8ea17f6a0c0f.png)
+
+> Radar-空气质量
 
 ```python
 def radar_air_quality() -> Radar:
@@ -1148,6 +1332,8 @@ def radar_air_quality() -> Radar:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55933630-8fc24480-5c60-11e9-9fd6-740b11fd33b5.png)
+
 
 ## Sankey：桑基图
 
@@ -1163,9 +1349,22 @@ class Saneky(
 > *func pyecharts.charts.Sankey.add*
 
 ```python
+def add(
+    series_name: str,
+    nodes: Sequence,
+    links: Sequence,
+    is_selected: bool = True,
+    node_width: Numeric = 20,
+    node_gap: Numeric = 8,
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+    linestyle_opt: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+)
 ```
 
 ### Demo
+
+> Sankey-基本示例
 
 ```python
 import json
@@ -1205,6 +1404,9 @@ def sankey_base() -> Sankey:
 
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55933773-137c3100-5c61-11e9-9af5-4096121d6848.png)
+
+> Sankey-官方示例
 
 ```python
 def sankey_offical() -> Sankey:
@@ -1223,6 +1425,8 @@ def sankey_offical() -> Sankey:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55933787-1ecf5c80-5c61-11e9-8217-cf34864a6ee9.png)
+
 
 ## ThemeRiver：主题河流图
 
@@ -1238,9 +1442,19 @@ class ThemeRiver(
 > *func pyecharts.charts.ThemeRiver.add*
 
 ```python
+def add(
+    series_name: Sequence,
+    data: Sequence,
+    is_selected: bool = True,
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+    singleaxis_opts: Union[opts.SingleAxisOpts, dict] = opts.SingleAxisOpts(),
+):
 ```
 
 ### Demo
+
+> ThemeRiver-基本示例
 
 ```python
 from pyecharts import options as opts
@@ -1340,6 +1554,8 @@ def themeriver_example() -> ThemeRiver:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55933910-7b327c00-5c61-11e9-9812-95073eaaa9bd.png)
+
 
 ## Tree：树图
 
@@ -1355,6 +1571,22 @@ class Tree(
 > *func pyecharts.charts.Tree.add*
 
 ```python
+def add(
+    series_name: str,
+    data: Sequence,
+    layout: str = "orthogonal",
+    symbol: str = "emptyCircle",
+    symbol_size: Numeric = 7,
+    orient: str = "LR",
+    pos_top: Optional[str] = None,
+    pos_left: Optional[str] = None,
+    pos_bottom: Optional[str] = None,
+    pos_right: Optional[str] = None,
+    collapse_interval: Numeric = 0,
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+    leaves_label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+)
 ```
 
 ### TreeItem
@@ -1370,6 +1602,8 @@ class TreeItem(
 ```
 
 ### Demo
+
+> Tree-基本示例
 
 ```python
 import json
@@ -1409,6 +1643,9 @@ def tree_base() -> Tree:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55934121-365b1500-5c62-11e9-8a42-6bf302f50e8a.png)
+
+> Tree-左右方向
 
 ```python
 def tree_lr() -> Tree:
@@ -1421,6 +1658,9 @@ def tree_lr() -> Tree:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55934142-4672f480-5c62-11e9-81b7-9bff73fec63e.png)
+
+> Tree-右左方向
 
 ```python
 def tree_rl() -> Tree:
@@ -1433,6 +1673,9 @@ def tree_rl() -> Tree:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55934158-525eb680-5c62-11e9-83a2-b97ec2443675.png)
+
+> Tree-上下方向
 
 ```python
 def tree_tb() -> Tree:
@@ -1456,6 +1699,9 @@ def tree_tb() -> Tree:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55934179-60143c00-5c62-11e9-9e6e-d5394b6d0a8f.png)
+
+> Tree-下上方向
 
 ```python
 def tree_bt() -> Tree:
@@ -1479,6 +1725,9 @@ def tree_bt() -> Tree:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55934194-6f938500-5c62-11e9-93bb-f70f6e8608d5.png)
+
+> Tree-Layout
 
 ```python
 def tree_layout() -> Tree:
@@ -1491,6 +1740,8 @@ def tree_layout() -> Tree:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55934220-7e7a3780-5c62-11e9-9fe7-d072d17056ee.png)
+
 
 ## TreeMap：矩形树图
 
@@ -1503,12 +1754,29 @@ class TreeMap(
 )
 ```
 
-> *func pyecharts.charts.TreeMap*
+> *func pyecharts.charts.TreeMap.add*
 
 ```python
+def add(
+    series_name: str,
+    data: Sequence,
+    is_selected: bool = True,
+    left_depth: Optional[Numeric] = None,
+    pos_left: Optional[str] = None,
+    pos_right: Optional[str] = None,
+    pos_top: Optional[str] = None,
+    pos_bottom: Optional[str] = None,
+    drilldown_icon: str = "▶",
+    visible_min: Numeric = 10,
+    visible_max: Optional[Numeric] = None,
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+)
 ```
 
 ### Demo
+
+> TreeMap-基本示例
 
 ```python
 import json
@@ -1546,6 +1814,9 @@ def treemap_base() -> TreeMap:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55934288-ae293f80-5c62-11e9-8010-fd8a313d60ca.png)
+
+> TreeMap-官方示例
 
 ```python
 def treemap_official():
@@ -1557,8 +1828,9 @@ def treemap_official():
         .set_global_opts(title_opts=opts.TitleOpts(title="TreeMap-官方示例"))
     )
     return c
-
 ```
+![](https://user-images.githubusercontent.com/19553554/55934306-c13c0f80-5c62-11e9-98f1-c9c0296736be.png)
+
 
 ## WordCloud：词云图
 
@@ -1574,9 +1846,20 @@ class WordCloud(
 > *func pyecharts.charts.WordCloud.add*
 
 ```python
+def add(
+    series_name: str,
+    data_pair: Sequence,
+    shape: str = "circle",
+    word_gap: Numeric = 20,
+    word_size_range=None,
+    rotate_step: Numeric = 45,
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+)
 ```
 
 ### Demo
+
+> WordCloud-基本示例
 
 ```python
 from pyecharts import options as opts
@@ -1616,6 +1899,9 @@ def wordcloud_base() -> WordCloud:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55934373-ecbefa00-5c62-11e9-950f-0d93aeb10a74.png)
+
+> WordCloud-shape-diamond
 
 ```python
 def wordcloud_diamond() -> WordCloud:
@@ -1626,3 +1912,4 @@ def wordcloud_diamond() -> WordCloud:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/55934388-fb0d1600-5c62-11e9-8906-958aadc5c1a2.png)
