@@ -300,13 +300,13 @@ class VisualMapOpts(
 
     # 自定义的每一段的范围，以及每一段的文字，以及每一段的特别的样式。例如：
     # pieces: [
-    #   {min: 1500}, // 不指定 max，表示 max 为无限大（Infinity）。
-    #   {min: 900, max: 1500},
-    #   {min: 310, max: 1000},
-    #   {min: 200, max: 300},
-    #   {min: 10, max: 200, label: '10 到 200（自定义label）'},
-    #   {value: 123, label: '123（自定义特殊颜色）', color: 'grey'}, //表示 value 等于 123 的情况
-    #   {max: 5}     // 不指定 min，表示 min 为无限大（-Infinity）。
+    #   {"min": 1500}, // 不指定 max，表示 max 为无限大（Infinity）。
+    #   {"min": 900, "max": 1500},
+    #   {"min": 310, "max": 1000},
+    #   {"min": 200, "max": 300},
+    #   {"min": 10, "max": 200, "label": '10 到 200（自定义label）'},
+    #   {"value": 123, "label": '123（自定义特殊颜色）', "color": 'grey'}, //表示 value 等于 123 的情况
+    #   {"max": 5}     // 不指定 min，表示 min 为无限大（-Infinity）。
     # ]
     pieces: Optional[Sequence] = None,
     
