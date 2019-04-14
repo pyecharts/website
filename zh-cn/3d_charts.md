@@ -207,7 +207,7 @@ def line3d_base() -> Line3D:
 > Line3D-旋转的弹簧
 
 ```python
-def line3d_base() -> Line3D:
+def line3d_auto_rotate() -> Line3D:
     data = []
     for t in range(0, 25000):
         _t = t / 1000
@@ -336,7 +336,7 @@ def surface3d_base() -> Surface3D:
 > Surface3D-曲面波图
 
 ```python
-def surface3D_flower() -> Surface3D:
+def surface3d_flower() -> Surface3D:
     def surface3d_data():
         for t0 in range(-30, 30, 1):
             y = t0 / 10
