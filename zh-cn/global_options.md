@@ -182,12 +182,12 @@ class DataZoomOpts(
     # 设置 dataZoom-inside 组件控制的 x 轴（即 xAxis，是直角坐标系中的概念，参见 grid）。
     # 不指定时，当 dataZoom-inside.orient 为 'horizontal'时，默认控制和 dataZoom 平行的第一个 xAxis
     # 如果是 number 表示控制一个轴，如果是 Array 表示控制多个轴。
-    xaxis_index: int = 0,
+    xaxis_index: Union[int, List[int], None] = None,
 
     # 设置 dataZoom-inside 组件控制的 y 轴（即 yAxis，是直角坐标系中的概念，参见 grid）。
     # 不指定时，当 dataZoom-inside.orient 为 'horizontal'时，默认控制和 dataZoom 平行的第一个 yAxis
     # 如果是 number 表示控制一个轴，如果是 Array 表示控制多个轴。
-    yaxis_index: int = 0,
+    yaxis_index: Union[int, List[int], None] = None,
     
     # 是否锁定选择区域（或叫做数据窗口）的大小。
     # 如果设置为 true 则锁定选择区域的大小，也就是说，只能平移，不能缩放。
