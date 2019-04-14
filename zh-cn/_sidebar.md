@@ -20,6 +20,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。Echarts 是百度开�
   - [定制地图](zh-cn/maps)
   - [渲染图片](zh-cn/render_images)
   - [原生 Javascropt](zh-cn/javasrcipt)
+  - [资源引用](zh-cn/assets_host)
 - 平台支持
   - [Notebook](zh-cn/notebook)
   - [Flask](zh-cn/flask)
