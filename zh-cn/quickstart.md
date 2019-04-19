@@ -80,7 +80,7 @@ make_snapshot(snapshot, bar.render(), "bar.png")
 
 ### 使用主题
 
-pyecharts 提供了 10+ 种内置主题，开发者也可以定制自己喜欢的主题，**进阶话题** 有相关介绍。
+pyecharts 提供了 10+ 种内置主题，开发者也可以定制自己喜欢的主题，**进阶话题-定制主题** 有相关介绍。
 
 ```python
 from pyecharts.charts import Bar

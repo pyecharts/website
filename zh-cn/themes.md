@@ -125,4 +125,17 @@ c = Bar(init_opts=opts.InitOpts(theme=ThemeType.WONDERLAND))
 
 ## 使用自己构建的主题
 
-Echarts 提供了[主题构建工具](http://echarts.baidu.com/theme-builder/)，你可以从中构建喜欢的主题，如 `myTheme.js`。然后 hack *echarts-themes-pypkg* 包。具体操作如下
+Echarts 提供了[主题构建工具](http://echarts.baidu.com/theme-builder/)，你可以从中构建喜欢的主题，假设你构建的主题文件为 `myTheme.js`。
+
+使用自己构建的主题必须由开发者自己启动资源文件服务器，这部分内容请参考 **进阶话题-资源引用**，然后你需要进行以下步骤的操作
+
+1. 将 `myTheme.js` 放入至 `pyecharts-assets/assets/themes` 文件夹。
+2. 注册主题到 pyecharts
+    ```python
+    from pyecharts.datasets import register_files
+    register_files({"myTheme": ["themes/myTheme", "js"]})
+    ```
+3. 使用主题
+    ```python
+    c = Bar(init_opts=opts.InitOpts(theme="myTheme"))
+    ```
