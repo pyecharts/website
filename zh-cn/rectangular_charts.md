@@ -1,6 +1,6 @@
-直角坐标系图表继承自 `AxisChart` 都拥有以下方法
+直角坐标系图表继承自 `RectChart` 都拥有以下方法
 
-> *func AxisChart.extend_axis*
+> *func RectChart.extend_axis*
 
 扩展 X/Y 轴
 ```python
@@ -16,7 +16,7 @@ def extend_axis(
 )
 ```
 
-> *func AxisChart.add_xaxis*
+> *func RectChart.add_xaxis*
 
 新增 X 轴数据
 ```python
@@ -26,14 +26,14 @@ def add_xaxis(
 )
 ```
 
-> *func AxisChart.reversal_axis*
+> *func RectChart.reversal_axis*
 
 翻转 XY 轴数据
 ```python
 def reversal_axis():
 ```
 
-> *func AxisChart.overlap*
+> *func RectChart.overlap*
 
 层叠多图
 ```python
@@ -45,7 +45,7 @@ def overlap(
 
 ## Bar：柱状图/条形图
 
-> *class pyecharts.charts.Bar(AxisChart)*
+> *class pyecharts.charts.Bar(RectChart)*
 
 ```python
 class Bar(
@@ -347,7 +347,7 @@ def bar_histogram() -> Bar:
 
 ## Boxplot：箱形图
 
-> *class pyecharts.charts.Boxplot(AxisChart)*
+> *class pyecharts.charts.Boxplot(RectChart)*
 
 ```python
 class Boxplot(
@@ -422,7 +422,7 @@ def boxpolt_base() -> Boxplot:
 
 ## EffectScatter：涟漪特效散点图
 
-> *class pyecharts.charts.EffectScatter(AxisChart)*
+> *class pyecharts.charts.EffectScatter(RectChart)*
 
 ```python
 class EffectScatter(
@@ -526,7 +526,7 @@ def effectscatter_symbol() -> EffectScatter:
 
 ## HeatMap：热力图
 
-> *class pyecharts.charts.HeatMap(AxisChart)*
+> *class pyecharts.charts.HeatMap(RectChart)*
 
 ```python
 class HeatMap(
@@ -601,7 +601,7 @@ def heatmap_base() -> HeatMap:
 
 ## Kline/Candlestick：K线图
 
-> *class pyecharts.charts.Kline(AxisChart)*
+> *class pyecharts.charts.Kline(RectChart)*
 
 ```python
 class Kline(
@@ -802,7 +802,7 @@ def kline_markline() -> Kline:
 
 ## Line：折线/面积图
 
-> *class pyecharts.charts.Line(AxisChart)*
+> *class pyecharts.charts.Line(RectChart)*
 
 ```python
 class Line(
@@ -975,7 +975,7 @@ def line_step() -> Line:
 
 ## Scatter：散点图
 
-> *class pyecharts.charts.Scatter(AxisChart)*
+> *class pyecharts.charts.Scatter(RectChart)*
 
 ```python
 class Scatter(
