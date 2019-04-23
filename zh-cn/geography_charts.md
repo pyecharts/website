@@ -12,26 +12,108 @@ class Geo(
 > *func pyecharts.charts.Geo.add_schema*
 
 ```python
+def add_schema(
+    # 地图类型，具体参考 pyecharts.datasets.map_filenames.json 文件
+    maptype: str = "china",
+
+    # 是否开启鼠标缩放和平移漫游。
+    is_roam: bool = True,
+
+    # # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[opts.LabelOpts, dict, None] = None,
+
+    # 地图区域的多边形 图形样式。
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] =None,
+
+    # 高亮状态下的多边形样式
+    emphasis_itemstyle_opts: Union[opts.ItemStyleOpts, dict,None] = None,
+
+    # 高亮状态下的标签样式。
+    emphasis_label_opts: Union[opts.LabelOpts, dict, None] =None,
+):
 ```
 
 > *func pyecharts.charts.Geo.add*
 
 ```python
+def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
+    series_name: str,
+
+    # 数据项 (坐标点名称，坐标点值)
+    data_pair: Sequence,
+
+    # Geo 图类型，有 scatter, effectScatter, heatmap, lines 4 种，建议使用
+    # from pyecharts.globals import ChartType
+    # ChartType.SCATTER，ChartType.EFFECT_SCATTER，ChartType.HEATMAP，ChartType.LINES
+    type_: str = "scatter",
+
+    # 是否选中图例
+    is_selected: bool = True,
+
+    # 标记图形形状
+    symbol: Optional[str] = None,
+
+    # 标记的大小
+    symbol_size: Numeric = 12,
+
+    # 系列 label 颜色
+    color: Optional[str] = None,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+
+    # 涟漪特效配置项，参考 `series_options.EffectOpts`
+    effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
+
+    # 线样式配置项，参考 `series_options.LineStyleOpts`
+    linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+)
 ```
 
 > *func pyecharts.charts.Geo.add_coordinate*
 
+新增一个坐标点
 ```python
+def add_coordinate(
+    # 坐标地点名称
+    name: str,
+
+    # 经度
+    longitude: Numeric,
+
+    # 纬度
+    latitude: Numeric,
+)
 ```
 
 > *func pyecharts.charts.Geo.add_coordinate_json*
 
+以 JOSN 文件格式新增多个坐标点
 ```python
+def add_coordinate_json(
+    # json 文件格式的坐标数据
+    # 格式如下
+    # {
+    #   "阿城": [126.58, 45.32],
+    #   "阿克苏": [80.19, 41.09]
+    # }
+  ],
+    json_file: str
+)
 ```
 
 > *func pyecharts.charts.Geo.get_coordinate*
 
+查询指定地点的坐标
 ```python
+def get_coordinate(
+    # 地点名称
+    name: str
+) -> List
 ```
 
 ### Demo
@@ -215,9 +297,37 @@ class Map(
 )
 ```
 
-> *func pyecharts.charts.Map.get_coordinate*
+> *func pyecharts.charts.Map.add*
 
 ```python
+def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
+    series_name: str,
+
+    # 数据项 (坐标点名称，坐标点值)
+    data_pair: Sequence,
+
+    # 地图类型，具体参考 pyecharts.datasets.map_filenames.json 文件
+    maptype: str = "china",
+
+    # 是否选中图例
+    is_selected: bool = True,
+
+    # 是否开启鼠标缩放和平移漫游。
+    is_roam: bool = True,
+
+    # 标记图形形状
+    symbol: Optional[str] = None,
+
+    # 是否显示标记图形
+    is_map_symbol_show: bool = True,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+)
 ```
 
 ### Demo

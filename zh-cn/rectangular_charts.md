@@ -1105,7 +1105,7 @@ def scatter_visualmap_color() -> Scatter:
 ![](https://user-images.githubusercontent.com/19553554/55603785-03ff7280-579f-11e9-8208-c80f0e47871f.gif)
 
 
-## 层叠多图
+## Overlap：层叠多图
 
 ### Demo
 
