@@ -1103,3 +1103,31 @@ def scatter_visualmap_color() -> Scatter:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/55603785-03ff7280-579f-11e9-8208-c80f0e47871f.gif)
+
+
+## 层叠多图
+
+### Demo
+
+```python
+def overlap_line_scatter() -> Bar:
+    x = Faker.choose()
+    bar = (
+        Bar()
+        .add_xaxis(x)
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(title_opts=opts.TitleOpts(title="Overlap-line+scatter"))
+    )
+    line = (
+        Line()
+        .add_xaxis(x)
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+    )
+    bar.overlap(line)
+    return bar
+
+overlap_line_scatter().render()
+```
+![](https://user-images.githubusercontent.com/19553554/56574713-8341d280-65f6-11e9-9a13-178472520dc8.png)
