@@ -44,8 +44,8 @@ def add(
     data_pair: Sequence,
 
     # Geo 图类型，有 scatter, effectScatter, heatmap, lines 4 种，建议使用
-    # from pyecharts.globals import ChartType
-    # ChartType.SCATTER，ChartType.EFFECT_SCATTER，ChartType.HEATMAP，ChartType.LINES
+    # from pyecharts.globals import GeoType
+    # GeoType.GeoType.EFFECT_SCATTER，GeoType.HEATMAP，GeoType.LINES
     type_: str = "scatter",
 
     # 是否选中图例
