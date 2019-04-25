@@ -24,8 +24,8 @@ pyecharts 是一个用于生成 Echarts 图表的类库。Echarts 是百度开�
   - [资源引用](zh-cn/assets_host)
 - 平台支持
   - [Notebook](zh-cn/notebook)
-  - [Flask](zh-cn/flask)
-  - [Django](zh-cn/django)
+  - [Flask](zh-cn/web_flask)
+  - [Django](zh-cn/web_django)
 - 其他资源
   - [地理地图数据](zh-cn/datasets)
 - 项目发布
