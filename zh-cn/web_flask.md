@@ -78,3 +78,7 @@ if __name__ == "__main__":
 ```shell
 $ python server.py
 ```
+
+使用浏览器打开 http://127.0.0.1:5000 即可访问服务
+
+![](https://user-images.githubusercontent.com/19553554/56732149-0138e180-678f-11e9-8641-cb659188e716.png)
