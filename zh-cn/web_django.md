@@ -75,7 +75,7 @@ chenjiandongx@DESKTOP-E83NUHA:/mnt/d/Python/pyecharts-django-demo/pyecharts_djan
 └── table.html
 ```
 
-## Step 2: 编辑视图
+## Step 2: 渲染图表
 
 将下列代码保存到 `demo/views.py` 中。
 
@@ -101,7 +101,7 @@ def index(request):
     return HttpResponse(c.render_embed())
 ```
 
-## Step 4: 运行项目
+## Step 3: 运行项目
 
 ```shell
 $ python manage.py runserver
