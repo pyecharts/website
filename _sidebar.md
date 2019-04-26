@@ -1,18 +1,30 @@
 pyecharts 是一个用于生成 Echarts 图表的类库。Echarts 是百度开源的一个数据可视化 JS 库。用 Echarts 生成的图可视化效果非常棒，pyecharts 是为了与 Python 进行对接，方便在 Python 中直接使用数据生成图。
 
+- 概览
+  - [简介](zh-cn/intro)
+  - [快速开始](zh-cn/quickstart)
+- 配置项
+  - [全局配置项](zh-cn/global_options)
+  - [系列配置项](zh-cn/series_options)
 - 基本使用
-  - [渲染图表](zh-cn/prepare)
-  - [图表配置](zh-cn/charts)
-- 高级话题
-  - [图表 API](zh-cn/api)
-  - [自定义地图](zh-cn/customize_map)
-  - [回调函数和事件处理](zh-cn/advanced)
-  - [语言翻译扩展](zh-cn/translator)
-- 平台支持
-  - [Jupyter Notebook](zh-cn/jupyter_notebook)
-  - [Flask](zh-cn/flask)
-  - [Django](zh-cn/django)
-  - [web 框架整合](zh-cn/web_integration)
+  - [图表 API](zh-cn/chart_api)
+  - [示例数据](zh-cn/demo_data)
+  - [全局变量](zh-cn/global_vars)
+- 图表类型
+  - [基本图表](zh-cn/basic_charts)
+  - [直角坐标系图表](zh-cn/rectangular_charts)
+  - [地理图表](zh-cn/geography_charts)
+  - [3D 图表](zh-cn/3d_charts)
+  - [组合图表](zh-cn/composite_charts)
+- 进阶话题
+  - [定制主题](zh-cn/themes)
+  - [定制地图](zh-cn/maps)
+  - [渲染图片](zh-cn/render_images)
+  - [原生 Javascropt](zh-cn/javasrcipt)
+  - [资源引用](zh-cn/assets_host)
+- Web 框架整合
+  - [Flask](zh-cn/web_flask)
+  - [Django](zh-cn/web_django)
 - 其他资源
   - [地理地图数据](zh-cn/datasets)
 - 项目发布
@@ -20,6 +32,5 @@ pyecharts 是一个用于生成 Echarts 图表的类库。Echarts 是百度开�
   - [发布日志](zh-cn/release-note/)
 - 项目开发
   - [技术文档](zh-cn/technical)
-  - [开发团队](zh-cn/team)
   - [赞助者名单](zh-cn/donors)
   - [FAQ](zh-cn/faq)
