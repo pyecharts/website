@@ -1109,6 +1109,8 @@ def scatter_visualmap_color() -> Scatter:
 
 ### Demo
 
+> Overlap-line+scatter
+
 ```python
 def overlap_line_scatter() -> Bar:
     x = Faker.choose()
@@ -1131,3 +1133,31 @@ def overlap_line_scatter() -> Bar:
 overlap_line_scatter().render()
 ```
 ![](https://user-images.githubusercontent.com/19553554/56574713-8341d280-65f6-11e9-9a13-178472520dc8.png)
+
+> Overlap-bar+line（双 Y 轴）
+
+```python
+def overlap_bar_line() -> Bar:
+    bar = (
+        Bar()
+        .add_xaxis(Faker.months)
+        .add_yaxis("蒸发量", v1)
+        .add_yaxis("降水量", v2)
+        .extend_axis(
+            yaxis=opts.AxisOpts(
+                axislabel_opts=opts.LabelOpts(formatter="{value} °C"), interval=5
+            )
+        )
+        .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Overlap-bar+line（双 Y 轴）"),
+            yaxis_opts=opts.AxisOpts(
+                axislabel_opts=opts.LabelOpts(formatter="{value} ml")
+            ),
+        )
+    )
+
+    line = Line().add_xaxis(Faker.months).add_yaxis("平均温度", v3, yaxis_index=1)
+    bar.overlap(line)
+```
+![](https://user-images.githubusercontent.com/19553554/56789638-f0db4200-6834-11e9-90e2-54015b379fe9.png)
