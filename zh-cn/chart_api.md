@@ -1,12 +1,5 @@
 `Base` 类是所有图表的基类，包括组合图表，`Base` 类 API 如下
 
-> *func pyecharts.Base.produce_js_func*
-
-产生并包装一段 js 代码
-```python
-def produce_js_func(fn: str) -> str
-```
-
 > *func pyecharts.Base.add_js_funcs*
 
 新增 js 代码，js 代码会被渲染进 HTML 中执行
