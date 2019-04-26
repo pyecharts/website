@@ -30,10 +30,14 @@ def add(
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 )
 ```
 
 ### CalendarOpts
+
 > 日历坐标系组件配置项 *class pyecahrts.options.CalendarOpts*
 
 ```python
@@ -160,6 +164,9 @@ def add(
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 )
 ```
 
@@ -257,6 +264,9 @@ def add(
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 )
 ```
 
@@ -298,33 +308,73 @@ def add(
     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
-
+    # 关系图节点数据项列表，参考 `opts.GraphNode`
     nodes: List[Union[opts.GraphNode, dict]],
+
+    # 关系图节点间关系数据项列表，参考 `opts.GraphLink`
     links: List[Union[opts.GraphLink, dict]],
+
+    # 关系图节点分类的类目列表，参考 `opts.GraphCategory`
     categories: Union[List[Union[opts.GraphCategory, dict]], None] = None,
+
+    # 是否选中图例。
     is_selected: bool = True,
+
+    # 是否在鼠标移到节点上的时候突出显示节点以及节点的边和邻接节点。
     is_focusnode: bool = True,
+
+    # 是否开启鼠标缩放和平移漫游。
     is_roam: bool = True,
+
+    # 是否旋转标签，默认不旋转。
     is_rotate_label: bool = False,
+
+    # 图的布局。可选：
+    # 'none' 不采用任何布局，使用节点中提供的 x， y 作为节点的位置。
+    # 'circular' 采用环形布局。
+    # 'force' 采用力引导布局。
     layout: str = "force",
+
+    # 关系图节点标记的图形。
+    # ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 
+    # 'diamond', 'pin', 'arrow', 'none'
+    # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
     symbol: Optional[str] = None,
+
+    # 边的两个节点之间的距离，这个距离也会受 repulsion。
+    # 支持设置成数组表达边长的范围，此时不同大小的值会线性映射到不同的长度。值越小则长度越长。
     edge_length: Numeric = 50,
+
+    # 节点受到的向中心的引力因子。该值越大节点越往中心点靠拢。
     gravity: Numeric = 0.2,
+
+    # 节点之间的斥力因子。
+    # 支持设置成数组表达斥力的范围，此时不同大小的值会线性映射到不同的斥力。值越大则斥力越大
     repulsion: Numeric = 50,
+
+    # 边两端的标记类型，可以是一个数组分别指定两端，也可以是单个统一指定。
+    # 默认不显示标记，常见的可以设置为箭头，如下：edgeSymbol: ['circle', 'arrow']
     edge_symbol: Optional[str] = None,
     
+    # 边两端的标记大小，可以是一个数组分别指定两端，也可以是单个统一指定。
     edge_symbol_size: Numeric = 10,
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+
+    # 关系边的公用线条样式。
     linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 )
 ```
 
-### GraphNode
+### GraphNode：关系图的节点数据项
+
 > *class pyecahrts.options.GraphNode*
 
 ```python
@@ -362,7 +412,8 @@ class GraphNode(
 )
 ```
 
-### GraphLink
+### GraphLink：节点间的关系数据
+
 > *class pyecahrts.options.GraphLink*
 
 ```python
@@ -390,7 +441,8 @@ class GraphLink(
 )
 ```
 
-### GraphCategory
+### GraphCategory：节点分类的类目
+
 > *class pyecharts.options.GraphCategory*
 
 ```python
@@ -519,12 +571,26 @@ class Liquid(
 
 ```python
 def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
+
+    # 系列数据
     data: Sequence,
+
+    # 水球外形，有' circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow' 可选。
+    # 默认 'circle'。也可以为自定义的 SVG 路径。
     shape: str = "circle",
+
+    # 波浪颜色。
     color: Optional[List[str]] = None,
+
+    # 是否显示波浪动画。
     is_animation: bool = True,
+
+    # 是否显示边框。
     is_outline_show: bool = True,
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
 )
 ```
@@ -625,15 +691,28 @@ def add_schema(
 
 ```python
 def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
+
+    # 系列数据
     data: Sequence,
+
+    # 是否选中图例。
     is_selected: bool = True,
+
+    # 线条样式，参考 `series_options.LineStyleOpts`
     linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 )
 ```
 
-### ParallelOpts
+### ParallelOpts：平行坐标系配置项
+
 > *class pyecharts.options.ParallelOpts*
 
 ```python
@@ -646,7 +725,8 @@ class ParallelOpts(
 )
 ```
 
-### ParallelAxisOpts
+### ParallelAxisOpts：平行坐标系轴配置项
+
 > *class pyecharts.options.ParallelAxisOpts*
 
 ```python
@@ -765,14 +845,23 @@ class Pie(
 
 ```python
 def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
+
     data_pair: Sequence,
     color: Optional[str] = None,
     radius: Optional[Sequence] = None,
     center: Optional[Sequence] = None,
     rosetype: Optional[str] = None,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 )
 ```
 
@@ -873,6 +962,7 @@ class Polar(
 
 ```python
 def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
     data: Sequence,
     is_selected: bool = True,
@@ -883,11 +973,14 @@ def add(
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
     areastyle_opts: Union[opts.AreaStyleOpts, dict] = opts.AreaStyleOpts(),
     effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
 )
 ```
 
 ### RadiusAxisItem：极坐标系径向轴数据项
+
 > *class pyecahrts.options.RadiusAxisItem*
 
 ```python
@@ -898,6 +991,7 @@ class RadiusAxisItem(
 ```
 
 ### RadiusAxisOpts：极坐标系径向轴配置项
+
 > *class pyecharts.optiones.RadiusAxisOpts*
 
 ```python
@@ -964,6 +1058,7 @@ class RadiusAxisOpts(
 ```
 
 ### AngleAxisItem：极坐标系角度轴数据项
+
 > *class pyecharts.options.AngleAxisItem*
 
 ```python
@@ -974,6 +1069,7 @@ class AngleAxisItem(
 ```
 
 ### AngleAxisOpts：极坐标系角度轴配置项
+
 > *class pyecharts.options.AngleAxisOpts*
 
 ```python
@@ -1195,19 +1291,27 @@ def add_schema(
 
 ```python
 def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
+
+
     data: Sequence,
     is_selected: bool = True,
     symbol: Optional[str] = None,
     color: Optional[str] = None,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: opts.LabelOpts = opts.LabelOpts(),
     linestyle_opts: opts.LineStyleOpts = opts.LineStyleOpts(),
     areastyle_opts: opts.AreaStyleOpts = opts.AreaStyleOpts(),
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
 )
 ```
 
 ### RadarIndicatorOpts
+
 > *class pyecahrts.options.RadarIndicatorOpts*
 
 ```python
@@ -1350,14 +1454,19 @@ class Saneky(
 
 ```python
 def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
     nodes: Sequence,
     links: Sequence,
     is_selected: bool = True,
     node_width: Numeric = 20,
     node_gap: Numeric = 8,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
     linestyle_opt: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
 )
 ```
@@ -1447,7 +1556,11 @@ def add(
     data: Sequence,
     is_selected: bool = True,
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+
     singleaxis_opts: Union[opts.SingleAxisOpts, dict] = opts.SingleAxisOpts(),
 ):
 ```
@@ -1572,15 +1685,34 @@ class Tree(
 
 ```python
 def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
+
+    # 系列数据项
     data: Sequence,
     layout: str = "orthogonal",
     symbol: str = "emptyCircle",
     symbol_size: Numeric = 7,
     orient: str = "LR",
+
+    # tree组件离容器上侧的距离。
+    # top 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
+    # 也可以是 'top', 'middle', 'bottom'。
+    # 如果 top 的值为'top', 'middle', 'bottom'，组件会根据相应的位置自动对齐。
     pos_top: Optional[str] = None,
+
+    # tree 组件离容器左侧的距离。
+    # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
+    # 也可以是 'left', 'center', 'right'。
+    # 如果 left 的值为'left', 'center', 'right'，组件会根据相应的位置自动对齐。
     pos_left: Optional[str] = None,
+
+    # tree 组件离容器下侧的距离。
+    # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
     pos_bottom: Optional[str] = None,
+
+    # tree 组件离容器右侧的距离。
+    # right 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
     pos_right: Optional[str] = None,
     collapse_interval: Numeric = 0,
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
@@ -1590,6 +1722,7 @@ def add(
 ```
 
 ### TreeItem
+
 > *class pyecahrts.options.TreeItem*
 
 ```python
@@ -1758,18 +1891,53 @@ class TreeMap(
 
 ```python
 def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
+
+    # 系列数据项
     data: Sequence,
+
+    # 是否选中图例。
     is_selected: bool = True,
-    left_depth: Optional[Numeric] = None,
+
+    # leaf_depth 表示『展示几层』，层次更深的节点则被隐藏起来。
+    # 设置了 leafDepth 后，下钻（drill down）功能开启。drill down 功能即点击后才展示子层级。
+    # 例如，leafDepth 设置为 1，表示展示一层节点。
+    leaf_depth: Optional[Numeric] = None,
+
+    # treemap 组件离容器左侧的距离。
+    # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
+    # 也可以是 'left', 'center', 'right'。
+    # 如果 left 的值为'left', 'center', 'right'，组件会根据相应的位置自动对齐。
     pos_left: Optional[str] = None,
+
+    # treemap 组件离容器右侧的距离。
+    # right 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
     pos_right: Optional[str] = None,
+
+    # treemap 组件离容器上侧的距离。
+    # top 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
+    # 也可以是 'top', 'middle', 'bottom'。
+    # 如果 top 的值为'top', 'middle', 'bottom'，组件会根据相应的位置自动对齐。
     pos_top: Optional[str] = None,
+
+    # treemap 组件离容器下侧的距离。
+    # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
     pos_bottom: Optional[str] = None,
+
+    # 当节点可以下钻时的提示符。只能是字符。
     drilldown_icon: str = "▶",
-    visible_min: Numeric = 10,
-    visible_max: Optional[Numeric] = None,
+
+    # 当前层级的最小 value 值。如果不设置则自动统计。
+    visual_min: Optional[Numeric] = None,
+
+    # 当前层级的最大 value 值。如果不设置则自动统计。
+    visual_max: Optional[Numeric] = None,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
 )
 ```
@@ -1847,12 +2015,25 @@ class WordCloud(
 
 ```python
 def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
+
+    # 系列数据项。
     data_pair: Sequence,
+
+    # 词云图轮廓，有 'circle', 'cardioid', 'diamond', 'triangle-forward', 'triangle', 'pentagon', 'star' 可选
     shape: str = "circle",
+
+    # 单词间隔
     word_gap: Numeric = 20,
+
+    # 单词字体大小范围
     word_size_range=None,
+
+    # 旋转单词角度
     rotate_step: Numeric = 45,
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
 )
 ```
