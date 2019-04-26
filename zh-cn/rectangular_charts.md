@@ -872,6 +872,9 @@ def add_yaxis(
 
     # 填充区域配置项，参考 `series_options.AreaStyleOpts`
     areastyle_opts: Union[opts.AreaStyleOpts, dict] = opts.AreaStyleOpts(),
+
+    # 折线线条样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict] = opts.ItemStyleOpts(),
 )
 ```
 
