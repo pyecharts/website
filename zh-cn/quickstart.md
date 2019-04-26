@@ -15,16 +15,6 @@ $ pip install -r requirements.txt
 $ python setup.py install
 ```
 
-### selenium
-
-> 使用 selenium 是为了生成图片文件，如若没有这个需求可跳过本步骤
-
-```shell
-$ pip install selenium
-```
-
-> selenium 安装后需要进行配置，这部分内容网上有很多文章介绍，就不在这里赘述了。
-
 ## 5 分钟上手
 
 > 首先开始来绘制你的第一个图表
@@ -71,23 +61,26 @@ bar = (
 ```
 ![](https://user-images.githubusercontent.com/19553554/55601443-85510800-5793-11e9-8479-26ff27cdec7e.png)
 
-> 渲染成图片文件
+> 渲染成图片文件，这部分内容请参考 **进阶话题-渲染图片**
 
 ```python
 from pyecharts.charts import Bar
 from pyecharts.render import make_snapshot
+
+# 使用 snapshot-selenium 渲染图片
+from snapshot_selenium import snapshot
 
 bar = (
     Bar()
     .add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
     .add_yaxis("商家A", [5, 20, 36, 10, 75, 90])
 )
-make_snapshot(bar.render(), "bar.png")
+make_snapshot(snapshot, bar.render(), "bar.png")
 ```
 
 ### 使用主题
 
-pyecharts 提供了 10+ 种内置主题，开发者也可以定制自己喜欢的主题，**进阶话题** 有相关介绍。
+pyecharts 提供了 10+ 种内置主题，开发者也可以定制自己喜欢的主题，**进阶话题-定制主题** 有相关介绍。
 
 ```python
 from pyecharts.charts import Bar
