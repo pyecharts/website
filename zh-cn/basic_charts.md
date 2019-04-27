@@ -36,9 +36,9 @@ def add(
 )
 ```
 
-### CalendarOpts
+### CalendarOpts：日历坐标系组件配置项
 
-> 日历坐标系组件配置项 *class pyecahrts.options.CalendarOpts*
+> *class pyecahrts.options.CalendarOpts*
 
 ```python
 class CalendarOpts(
@@ -144,7 +144,7 @@ def add(
     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
-    # 系列数据项。
+    # 系列数据项，[(key1, value1), (key2, value2)]
     data_pair: Sequence,
 
     # 是否选中图例
@@ -244,7 +244,7 @@ def add(
     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
-    # 系列数据项。
+    # 系列数据项，[(key1, value1), (key2, value2)]
     data_pair: Sequence,
 
     # 是否选中图例
@@ -717,10 +717,29 @@ def add(
 
 ```python
 class ParallelOpts(
+    # parallel 组件离容器左侧的距离。
+    # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
+    # 也可以是 'left', 'center', 'right'。
+    # 如果 left 的值为'left', 'center', 'right'，组件会根据相应的位置自动对齐。
     pos_left: str = "5%",
+
+    # parallel 组件离容器右侧的距离。
+    # right 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
     pos_right: str = "13%",
+
+    # parallel 组件离容器下侧的距离。
+    # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
     pos_bottom: str = "10%",
+
+    # parallel 组件离容器上侧的距离。
+    # top 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
+    # 也可以是 'top', 'middle', 'bottom'。
+    # 如果 top 的值为'top', 'middle', 'bottom'，组件会根据相应的位置自动对齐。
     pos_top: str = "20%",
+
+    # 布局方式，可选值为：
+    # 'horizontal'：水平排布各个坐标轴。
+    # 'vertical'：竖直排布各个坐标轴。
     layout: Optional[str] = None,
 )
 ```
@@ -731,12 +750,40 @@ class ParallelOpts(
 
 ```python
 class ParallelAxisOpts(
+    # 坐标轴的维度序号。
     dim: Numeric,
+
+    # 坐标轴名称。
     name: str,
+
+    # 坐标轴数据项
     data: Sequence = None,
+
+    # 坐标轴类型。可选：
+    # 'value': 数值轴，适用于连续数据。
+    # 'category': 类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据。
+    # 'time': 时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同
+    # 例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
+    # 'log' 对数轴。适用于对数数据。
     type_: Optional[str] = None,
+
+    # 坐标轴刻度最小值。
+    # 可以设置成特殊值 'dataMin'，此时取数据在该轴上的最小值作为最小刻度。
+    # 不设置时会自动计算最小值保证坐标轴刻度的均匀分布。
+    # 在类目轴中，也可以设置为类目的序数（如类目轴 data: ['类A', '类B', '类C'] 中，序数 2 表示 '类C'
+    # 也可以设置为负数，如 -3）。
     min_: Union[str, Numeric, None] = None,
+
+    # 坐标轴刻度最大值。
+    # 可以设置成特殊值 'dataMax'，此时取数据在该轴上的最大值作为最大刻度。
+    # 不设置时会自动计算最大值保证坐标轴刻度的均匀分布。
+    # 在类目轴中，也可以设置为类目的序数（如类目轴 data: ['类A', '类B', '类C'] 中，序数 2 表示 '类C'
+    # 也可以设置为负数，如 -3）。
     max_: Union[str, Numeric, None] = None,
+
+    # 只在数值轴中（type: 'value'）有效。
+    # 是否是脱离 0 值比例。设置成 true 后坐标刻度不会强制包含零刻度。在双数值轴的散点图中比较有用。
+    # 在设置 min 和 max 之后该配置项无效。
     is_scale: bool = False,
 )
 ```
@@ -848,10 +895,23 @@ def add(
     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
+    # 系列数据项，[(key1, value1), (key2, value2)]
     data_pair: Sequence,
+
+    # 系列 label 颜色
     color: Optional[str] = None,
+
+    # 饼图的半径，数组的第一项是内半径，第二项是外半径
+    # 默认设置成百分比，相对于容器高宽中较小的一项的一半
     radius: Optional[Sequence] = None,
+
+    # 饼图的中心（圆心）坐标，数组的第一项是横坐标，第二项是纵坐标
+    # 默认设置成百分比，设置成百分比时第一项是相对于容器宽度，第二项是相对于容器高度
     center: Optional[Sequence] = None,
+
+    # 是否展示成南丁格尔图，通过半径区分数据大小，有'radius'和'area'两种模式。
+    # radius：扇区圆心角展现数据的百分比，半径展现数据的大小
+    # area：所有扇区圆心角相同，仅通过半径展现数据大小
     rosetype: Optional[str] = None,
 
     # 标签配置项，参考 `series_options.LabelOpts`
@@ -1464,6 +1524,8 @@ def add(
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+
+    # 线条样式配置项，参考 `series_options.LineStyleOpts`
     linestyle_opt: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
@@ -1670,336 +1732,6 @@ def themeriver_example() -> ThemeRiver:
 ![](https://user-images.githubusercontent.com/19553554/55933910-7b327c00-5c61-11e9-9812-95073eaaa9bd.png)
 
 
-## Tree：树图
-
-> *class pyecharts.charts.Tree*
-
-```python
-class Tree(
-    # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
-)
-```
-
-> *func pyecharts.charts.Tree.add*
-
-```python
-def add(
-    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
-    series_name: str,
-
-    # 系列数据项
-    data: Sequence,
-    layout: str = "orthogonal",
-    symbol: str = "emptyCircle",
-    symbol_size: Numeric = 7,
-    orient: str = "LR",
-
-    # tree组件离容器上侧的距离。
-    # top 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
-    # 也可以是 'top', 'middle', 'bottom'。
-    # 如果 top 的值为'top', 'middle', 'bottom'，组件会根据相应的位置自动对齐。
-    pos_top: Optional[str] = None,
-
-    # tree 组件离容器左侧的距离。
-    # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
-    # 也可以是 'left', 'center', 'right'。
-    # 如果 left 的值为'left', 'center', 'right'，组件会根据相应的位置自动对齐。
-    pos_left: Optional[str] = None,
-
-    # tree 组件离容器下侧的距离。
-    # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
-    pos_bottom: Optional[str] = None,
-
-    # tree 组件离容器右侧的距离。
-    # right 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
-    pos_right: Optional[str] = None,
-    collapse_interval: Numeric = 0,
-    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-    leaves_label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-)
-```
-
-### TreeItem
-
-> *class pyecahrts.options.TreeItem*
-
-```python
-class TreeItem(
-    name: Optional[str] = None,
-    value: Optional[Numeric] = None,
-    label_opts: Optional[LabelOpts] = None,
-    children: Optional[Sequence] = None,
-)
-```
-
-### Demo
-
-> Tree-基本示例
-
-```python
-import json
-import os
-
-from pyecharts import options as opts
-from pyecharts.charts import Page, Tree
-
-
-def tree_base() -> Tree:
-    data = [
-        {
-            "children": [
-                {"name": "B"},
-                {
-                    "children": [
-                        {"children": [{"name": "I"}], "name": "E"},
-                        {"name": "F"},
-                    ],
-                    "name": "C",
-                },
-                {
-                    "children": [
-                        {"children": [{"name": "J"}, {"name": "K"}], "name": "G"},
-                        {"name": "H"},
-                    ],
-                    "name": "D",
-                },
-            ],
-            "name": "A",
-        }
-    ]
-    c = (
-        Tree()
-        .add("", data)
-        .set_global_opts(title_opts=opts.TitleOpts(title="Tree-基本示例"))
-    )
-    return c
-```
-![](https://user-images.githubusercontent.com/19553554/55934121-365b1500-5c62-11e9-8a42-6bf302f50e8a.png)
-
-> Tree-左右方向
-
-```python
-def tree_lr() -> Tree:
-    with open(os.path.join("fixtures", "flare.json"), "r", encoding="utf-8") as f:
-        j = json.load(f)
-    c = (
-        Tree()
-        .add("", [j], collapse_interval=2)
-        .set_global_opts(title_opts=opts.TitleOpts(title="Tree-左右方向"))
-    )
-    return c
-```
-![](https://user-images.githubusercontent.com/19553554/55934142-4672f480-5c62-11e9-81b7-9bff73fec63e.png)
-
-> Tree-右左方向
-
-```python
-def tree_rl() -> Tree:
-    with open(os.path.join("fixtures", "flare.json"), "r", encoding="utf-8") as f:
-        j = json.load(f)
-    c = (
-        Tree()
-        .add("", [j], collapse_interval=2, orient="RL")
-        .set_global_opts(title_opts=opts.TitleOpts(title="Tree-右左方向"))
-    )
-    return c
-```
-![](https://user-images.githubusercontent.com/19553554/55934158-525eb680-5c62-11e9-83a2-b97ec2443675.png)
-
-> Tree-上下方向
-
-```python
-def tree_tb() -> Tree:
-    with open(os.path.join("fixtures", "flare.json"), "r", encoding="utf-8") as f:
-        j = json.load(f)
-    c = (
-        Tree()
-        .add(
-            "",
-            [j],
-            collapse_interval=2,
-            orient="TB",
-            label_opts=opts.LabelOpts(
-                position="top",
-                horizontal_align="right",
-                vertical_align="middle",
-                rotate=-90,
-            ),
-        )
-        .set_global_opts(title_opts=opts.TitleOpts(title="Tree-上下方向"))
-    )
-    return c
-```
-![](https://user-images.githubusercontent.com/19553554/55934179-60143c00-5c62-11e9-9e6e-d5394b6d0a8f.png)
-
-> Tree-下上方向
-
-```python
-def tree_bt() -> Tree:
-    with open(os.path.join("fixtures", "flare.json"), "r", encoding="utf-8") as f:
-        j = json.load(f)
-    c = (
-        Tree()
-        .add(
-            "",
-            [j],
-            collapse_interval=2,
-            orient="BT",
-            label_opts=opts.LabelOpts(
-                position="top",
-                horizontal_align="right",
-                vertical_align="middle",
-                rotate=-90,
-            ),
-        )
-        .set_global_opts(title_opts=opts.TitleOpts(title="Tree-下上方向"))
-    )
-    return c
-```
-![](https://user-images.githubusercontent.com/19553554/55934194-6f938500-5c62-11e9-93bb-f70f6e8608d5.png)
-
-> Tree-Layout
-
-```python
-def tree_layout() -> Tree:
-    with open(os.path.join("fixtures", "flare.json"), "r", encoding="utf-8") as f:
-        j = json.load(f)
-    c = (
-        Tree()
-        .add("", [j], collapse_interval=2, layout="radial")
-        .set_global_opts(title_opts=opts.TitleOpts(title="Tree-Layout"))
-    )
-    return c
-```
-![](https://user-images.githubusercontent.com/19553554/55934220-7e7a3780-5c62-11e9-9fe7-d072d17056ee.png)
-
-
-## TreeMap：矩形树图
-
-> *class pyecharts.charts.TreeMap*
-
-```python
-class TreeMap(
-    # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
-)
-```
-
-> *func pyecharts.charts.TreeMap.add*
-
-```python
-def add(
-    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
-    series_name: str,
-
-    # 系列数据项
-    data: Sequence,
-
-    # 是否选中图例。
-    is_selected: bool = True,
-
-    # leaf_depth 表示『展示几层』，层次更深的节点则被隐藏起来。
-    # 设置了 leafDepth 后，下钻（drill down）功能开启。drill down 功能即点击后才展示子层级。
-    # 例如，leafDepth 设置为 1，表示展示一层节点。
-    leaf_depth: Optional[Numeric] = None,
-
-    # treemap 组件离容器左侧的距离。
-    # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
-    # 也可以是 'left', 'center', 'right'。
-    # 如果 left 的值为'left', 'center', 'right'，组件会根据相应的位置自动对齐。
-    pos_left: Optional[str] = None,
-
-    # treemap 组件离容器右侧的距离。
-    # right 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
-    pos_right: Optional[str] = None,
-
-    # treemap 组件离容器上侧的距离。
-    # top 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
-    # 也可以是 'top', 'middle', 'bottom'。
-    # 如果 top 的值为'top', 'middle', 'bottom'，组件会根据相应的位置自动对齐。
-    pos_top: Optional[str] = None,
-
-    # treemap 组件离容器下侧的距离。
-    # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
-    pos_bottom: Optional[str] = None,
-
-    # 当节点可以下钻时的提示符。只能是字符。
-    drilldown_icon: str = "▶",
-
-    # 当前层级的最小 value 值。如果不设置则自动统计。
-    visual_min: Optional[Numeric] = None,
-
-    # 当前层级的最大 value 值。如果不设置则自动统计。
-    visual_max: Optional[Numeric] = None,
-
-    # 标签配置项，参考 `series_options.LabelOpts`
-    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-
-    # 提示框组件配置项，参考 `series_options.TooltipOpts`
-    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-)
-```
-
-### Demo
-
-> TreeMap-基本示例
-
-```python
-import json
-import os
-
-from pyecharts import options as opts
-from pyecharts.charts import Page, TreeMap
-
-
-def treemap_base() -> TreeMap:
-    data = [
-        {"value": 40, "name": "我是A"},
-        {
-            "value": 180,
-            "name": "我是B",
-            "children": [
-                {
-                    "value": 76,
-                    "name": "我是B.children",
-                    "children": [
-                        {"value": 12, "name": "我是B.children.a"},
-                        {"value": 28, "name": "我是B.children.b"},
-                        {"value": 20, "name": "我是B.children.c"},
-                        {"value": 16, "name": "我是B.children.d"},
-                    ],
-                }
-            ],
-        },
-    ]
-
-    c = (
-        TreeMap()
-        .add("演示数据", data)
-        .set_global_opts(title_opts=opts.TitleOpts(title="TreeMap-基本示例"))
-    )
-    return c
-```
-![](https://user-images.githubusercontent.com/19553554/55934288-ae293f80-5c62-11e9-8010-fd8a313d60ca.png)
-
-> TreeMap-官方示例
-
-```python
-def treemap_official():
-    with open(os.path.join("fixtures", "treemap.json"), "r", encoding="utf-8") as f:
-        data = json.load(f)
-    c = (
-        TreeMap()
-        .add("演示数据", data)
-        .set_global_opts(title_opts=opts.TitleOpts(title="TreeMap-官方示例"))
-    )
-    return c
-```
-![](https://user-images.githubusercontent.com/19553554/55934306-c13c0f80-5c62-11e9-98f1-c9c0296736be.png)
-
-
 ## WordCloud：词云图
 
 > *class pyecharts.charts.WordCloud*
@@ -2018,7 +1750,7 @@ def add(
     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
-    # 系列数据项。
+    # 系列数据项，[(word1, count1), (word2, count2)]
     data_pair: Sequence,
 
     # 词云图轮廓，有 'circle', 'cardioid', 'diamond', 'triangle-forward', 'triangle', 'pentagon', 'star' 可选
