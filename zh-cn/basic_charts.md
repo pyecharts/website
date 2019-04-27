@@ -1024,14 +1024,27 @@ class Polar(
 def add(
     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
+
+    # 系列数据项
     data: Sequence,
+
+    # 是否选中图例
     is_selected: bool = True,
+
     type_: str = "line",
     symbol: Optional[str] = None,
     symbol_size: Numeric = 4,
+
+    # 数据堆叠，同个类目轴上系列配置相同的　stack　值可以堆叠放置。
     stack: Optional[str] = None,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+
+    # 区域填充样式配置项，参考 `series_options.AreaStyleOpts`
     areastyle_opts: Union[opts.AreaStyleOpts, dict] = opts.AreaStyleOpts(),
+
+    # 涟漪特效配置项，参考 `series_options.EffectOpts`
     effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
@@ -1338,11 +1351,22 @@ class Radar(
 
 ```python
 def add_schema(
-    schema: List[Union[opts.RadarIndicatorOpts, dict]],
+    # 雷达指示器配置项列表，参考 `RadarIndicatorItem`
+    schema: List[Union[opts.RadarIndicatorItem, dict]],
+
+    # 雷达图绘制类型，可选 'polygon' 和 'circle'
     shape: Optional[str] = None,
+
+    # 文字样式配置项，参考 `series_options.TextStyleOpts`
     textstyle_opts: Union[opts.TextStyleOpts, dict] = opts.TextStyleOpts(),
+
+    # 分割线配置项，参考 `series_options.SplitLineOpts`
     splitline_opt: Union[opts.SplitLineOpts, dict] = opts.SplitLineOpts(is_show=True),
+
+    # 分隔区域配置项，参考 `series_options.SplitAreaOpts`
     splitarea_opt: Union[opts.SplitAreaOpts, dict] = opts.SplitAreaOpts(),
+
+    # 坐标轴轴线配置项，参考 `global_options.AxisLineOpts`
     axisline_opt: Union[opts.AxisLineOpts, dict] = opts.AxisLineOpts(),
 )
 ```
@@ -1354,15 +1378,27 @@ def add(
     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
-
+    # 系列数据项
     data: Sequence,
+
+    # 是否选中图例
     is_selected: bool = True,
+
+    # ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 
+    # 'diamond', 'pin', 'arrow', 'none'
+    # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
     symbol: Optional[str] = None,
+
+    # 系列 label 颜色
     color: Optional[str] = None,
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: opts.LabelOpts = opts.LabelOpts(),
+
+    # 线样式配置项，参考 `series_options.LineStyleOpts`
     linestyle_opts: opts.LineStyleOpts = opts.LineStyleOpts(),
+
+    # 区域填充样式配置项，参考 `series_options.AreaStyleOpts`
     areastyle_opts: opts.AreaStyleOpts = opts.AreaStyleOpts(),
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
@@ -1370,15 +1406,22 @@ def add(
 )
 ```
 
-### RadarIndicatorOpts
+### RadarIndicatorItem
 
-> *class pyecahrts.options.RadarIndicatorOpts*
+> *class pyecahrts.options.RadarIndicatorItem*
 
 ```python
-class RadarIndicatorOpts(
+class RadarIndicatorItem(
+    # 指示器名称。
     name: Optional[str] = None,
+
+    # 指示器的最大值，可选，建议设置
     min_: Optional[Numeric] = None,
+
+    # 指示器的最小值，可选，默认为 0。
     max_: Optional[Numeric] = None,
+
+    # 标签特定的颜色。
     color: Optional[str] = None,
 )
 ```
@@ -1401,12 +1444,12 @@ def radar_base() -> Radar:
         Radar()
         .add_schema(
             schema=[
-                opts.RadarIndicatorOpts(name="销售", max_=6500),
-                opts.RadarIndicatorOpts(name="管理", max_=16000),
-                opts.RadarIndicatorOpts(name="信息技术", max_=30000),
-                opts.RadarIndicatorOpts(name="客服", max_=38000),
-                opts.RadarIndicatorOpts(name="研发", max_=52000),
-                opts.RadarIndicatorOpts(name="市场", max_=25000),
+                opts.RadarIndicatorItem(name="销售", max_=6500),
+                opts.RadarIndicatorItem(name="管理", max_=16000),
+                opts.RadarIndicatorItem(name="信息技术", max_=30000),
+                opts.RadarIndicatorItem(name="客服", max_=38000),
+                opts.RadarIndicatorItem(name="研发", max_=52000),
+                opts.RadarIndicatorItem(name="市场", max_=25000),
             ]
         )
         .add("预算分配", v1)
@@ -1426,12 +1469,12 @@ def radar_selected_mode() -> Radar:
         Radar()
         .add_schema(
             schema=[
-                opts.RadarIndicatorOpts(name="销售", max_=6500),
-                opts.RadarIndicatorOpts(name="管理", max_=16000),
-                opts.RadarIndicatorOpts(name="信息技术", max_=30000),
-                opts.RadarIndicatorOpts(name="客服", max_=38000),
-                opts.RadarIndicatorOpts(name="研发", max_=52000),
-                opts.RadarIndicatorOpts(name="市场", max_=25000),
+                opts.RadarIndicatorItem(name="销售", max_=6500),
+                opts.RadarIndicatorItem(name="管理", max_=16000),
+                opts.RadarIndicatorItem(name="信息技术", max_=30000),
+                opts.RadarIndicatorItem(name="客服", max_=38000),
+                opts.RadarIndicatorItem(name="研发", max_=52000),
+                opts.RadarIndicatorItem(name="市场", max_=25000),
             ]
         )
         .add("预算分配", v1)
@@ -1518,8 +1561,14 @@ def add(
     series_name: str,
     nodes: Sequence,
     links: Sequence,
+
+    # 是否选中图例
     is_selected: bool = True,
+
+
     node_width: Numeric = 20,
+
+
     node_gap: Numeric = 8,
 
     # 标签配置项，参考 `series_options.LabelOpts`
@@ -1614,15 +1663,22 @@ class ThemeRiver(
 
 ```python
 def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: Sequence,
+
+    # 系列数据项
     data: Sequence,
+
+    # 是否选中图例
     is_selected: bool = True,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
 
-
+    # 单轴组件配置项，参考 `global_options.SingleAxisOpts`
     singleaxis_opts: Union[opts.SingleAxisOpts, dict] = opts.SingleAxisOpts(),
 ):
 ```
