@@ -683,7 +683,8 @@ class Parallel(
 
 ```python
 def add_schema(
-    schema: List[Union[opts.ParallelAxisOpts, dict]]
+    schema: List[Union[opts.ParallelAxisOpts, dict]],
+    parallel_opts: Union[opts.ParallelOpts, dict, None] = None,
 )
 ```
 
