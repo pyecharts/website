@@ -114,12 +114,46 @@ def bar_base() -> Bar:
         Bar()
         .add_xaxis(Faker.choose())
         .add_yaxis("商家A", Faker.values())
-        .add_yaxis("商家B", Faker.values(), is_selected=False)
+        .add_yaxis("商家B", Faker.values())
         .set_global_opts(title_opts=opts.TitleOpts(title="Bar-基本示例", subtitle="我是副标题"))
     )
     return c
 ```
-![](https://user-images.githubusercontent.com/19553554/55603121-addd0000-579b-11e9-82ff-0b0a9d83bc59.png)
+![](https://user-images.githubusercontent.com/19553554/56866199-32bce180-6a09-11e9-9e1c-35273a2770e5.png)
+
+> Bar-默认取消显示某 Series
+
+```python
+def bar_is_selected() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values(), is_selected=False)
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-默认取消显示某 Series"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/56866219-5bdd7200-6a09-11e9-8768-d09599546822.png)
+
+> Bar-显示 ToolBox
+
+```python
+def bar_toolbox() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-显示 ToolBox"),
+            toolbox_opts=opts.ToolboxOpts(),
+            legend_opts=opts.LegendOpts(is_show=False)
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/56866240-816a7b80-6a09-11e9-9fce-1443541b36dd.png)
 
 > Bar-翻转 XY 轴
 
