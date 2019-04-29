@@ -93,6 +93,9 @@ def add_yaxis(
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 )
 ```
 
@@ -111,12 +114,46 @@ def bar_base() -> Bar:
         Bar()
         .add_xaxis(Faker.choose())
         .add_yaxis("商家A", Faker.values())
-        .add_yaxis("商家B", Faker.values(), is_selected=False)
+        .add_yaxis("商家B", Faker.values())
         .set_global_opts(title_opts=opts.TitleOpts(title="Bar-基本示例", subtitle="我是副标题"))
     )
     return c
 ```
-![](https://user-images.githubusercontent.com/19553554/55603121-addd0000-579b-11e9-82ff-0b0a9d83bc59.png)
+![](https://user-images.githubusercontent.com/19553554/56866199-32bce180-6a09-11e9-9e1c-35273a2770e5.png)
+
+> Bar-默认取消显示某 Series
+
+```python
+def bar_is_selected() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values(), is_selected=False)
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-默认取消显示某 Series"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/56866219-5bdd7200-6a09-11e9-8768-d09599546822.png)
+
+> Bar-显示 ToolBox
+
+```python
+def bar_toolbox() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-显示 ToolBox"),
+            toolbox_opts=opts.ToolboxOpts(),
+            legend_opts=opts.LegendOpts(is_show=False)
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/56866240-816a7b80-6a09-11e9-9fce-1443541b36dd.png)
 
 > Bar-翻转 XY 轴
 
@@ -386,6 +423,9 @@ def add_yaxis(
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 )
 ```
 
@@ -467,6 +507,9 @@ class EffectScatter(
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 )
 ```
 
@@ -568,6 +611,9 @@ def add_yaxis(
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 )
 ```
 
@@ -637,6 +683,9 @@ def add_yaxis(
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 )
 ```
 
@@ -745,6 +794,39 @@ def kline_datazoom_slider() -> Kline:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/55603567-d960ea00-579d-11e9-9368-2fa6f9c28cad.gif)
+
+> Kline-ItemStyle
+
+```python
+def kline_itemstyle() -> Kline:
+    c = (
+        Kline()
+        .add_xaxis(["2017/7/{}".format(i + 1) for i in range(31)])
+        .add_yaxis(
+            "kline",
+            data,
+            itemstyle_opts=opts.ItemStyleOpts(
+                color="#ec0000",
+                color0="#00da3c",
+                border_color="#8A0000",
+                border_color0="#008F28",
+            ),
+        )
+        .set_global_opts(
+            xaxis_opts=opts.AxisOpts(is_scale=True),
+            yaxis_opts=opts.AxisOpts(
+                is_scale=True,
+                splitarea_opts=opts.SplitAreaOpts(
+                    is_show=True, areastyle_opts=opts.AreaStyleOpts(opacity=1)
+                ),
+            ),
+            datazoom_opts=[opts.DataZoomOpts(type_="inside")],
+            title_opts=opts.TitleOpts(title="Kline-ItemStyle"),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/56814513-f2772b00-6871-11e9-826d-1d590d1b3f58.png)
 
 > Kline-DataZoom-inside
 
@@ -873,8 +955,8 @@ def add_yaxis(
     # 填充区域配置项，参考 `series_options.AreaStyleOpts`
     areastyle_opts: Union[opts.AreaStyleOpts, dict] = opts.AreaStyleOpts(),
 
-    # 折线线条样式配置项，参考 `series_options.ItemStyleOpts`
-    itemstyle_opts: Union[opts.ItemStyleOpts, dict] = opts.ItemStyleOpts(),
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 )
 ```
 
@@ -1030,6 +1112,9 @@ def add_yaxis(
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 )
 ```
 
@@ -1112,6 +1197,8 @@ def scatter_visualmap_color() -> Scatter:
 
 ### Demo
 
+> Overlap-line+scatter
+
 ```python
 def overlap_line_scatter() -> Bar:
     x = Faker.choose()
@@ -1134,3 +1221,31 @@ def overlap_line_scatter() -> Bar:
 overlap_line_scatter().render()
 ```
 ![](https://user-images.githubusercontent.com/19553554/56574713-8341d280-65f6-11e9-9a13-178472520dc8.png)
+
+> Overlap-bar+line（双 Y 轴）
+
+```python
+def overlap_bar_line() -> Bar:
+    bar = (
+        Bar()
+        .add_xaxis(Faker.months)
+        .add_yaxis("蒸发量", v1)
+        .add_yaxis("降水量", v2)
+        .extend_axis(
+            yaxis=opts.AxisOpts(
+                axislabel_opts=opts.LabelOpts(formatter="{value} °C"), interval=5
+            )
+        )
+        .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Overlap-bar+line（双 Y 轴）"),
+            yaxis_opts=opts.AxisOpts(
+                axislabel_opts=opts.LabelOpts(formatter="{value} ml")
+            ),
+        )
+    )
+
+    line = Line().add_xaxis(Faker.months).add_yaxis("平均温度", v3, yaxis_index=1)
+    bar.overlap(line)
+```
+![](https://user-images.githubusercontent.com/19553554/56789638-f0db4200-6834-11e9-90e2-54015b379fe9.png)
