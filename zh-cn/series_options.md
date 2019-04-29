@@ -81,9 +81,49 @@ class TextStyleOpts(
 
     # 文字的字体大小
     font_size: Optional[Numeric] = None,
-
+    
+    # 文字水平对齐方式，默认自动
+    align: Optional[str] = None,
+    
+    # 文字垂直对齐方式，默认自动
+    vertical_align: Optional[str] = None,
+    
     # 行高
     line_height: Optional[str] = None,
+    
+    # 文字块背景色。可以是直接的颜色值，例如：'#123234', 'red', 'rgba(0,23,11,0.3)'
+    background_color: Optional[str] = None,
+    
+    # 文字块边框颜色
+    border_color: Optional[str] = None,
+    
+    # 文字块边框宽度
+    border_width: Optional[Numeric] = None,
+    
+    # 文字块的圆角
+    border_radius: Union[Numeric, List, None] = None,
+    
+    # 文字块的内边距 
+    # 例如 padding: [3, 4, 5, 6]：表示 [上, 右, 下, 左] 的边距
+    # 例如 padding: 4：表示 padding: [4, 4, 4, 4]
+    # 例如 padding: [3, 4]：表示 padding: [3, 4, 3, 4]
+    padding: Union[Numeric, List, None] = None,
+    
+    # 文字块的背景阴影颜色
+    shadow_color: Optional[str] = None,
+    
+    # 文字块的背景阴影长度
+    shadow_blur: Optional[Numeric] = None,
+    
+    # 文字块的宽度
+    width: Optional[str] = None,
+    
+    # 文字块的高度
+    height: Optional[str] = None,
+    
+    # 在 rich 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果
+    # 具体配置可以参考一下 https://www.echartsjs.com/tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE
+    rich: Optional[dict] = None,
 )
 ```
 
@@ -123,6 +163,9 @@ class LabelOpts(
 
     # 标签旋转。从 -90 度到 90 度。正值是逆时针。
     rotate: Optional[Numeric] = None,
+    
+    # 刻度标签与轴线之间的距离。
+    margin: Optional[Numeric] = 8,
 
     # 文字水平对齐方式，默认自动。可选：
     # 'left'，'center'，'right'
@@ -166,6 +209,10 @@ class LabelOpts(
     #    color: string,
     # }
     formatter: Optional[str] = None,
+    
+    # 在 rich 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果
+    # 具体配置可以参考一下 https://www.echartsjs.com/tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE
+    rich: Optional[dict] = None,
 )
 ```
 
@@ -227,7 +274,7 @@ class LineStyleOpts(
     #    image: imageDom, // 支持为 HTMLImageElement, HTMLCanvasElement，不支持路径字符串
     #    repeat: 'repeat' // 是否平铺, 可以是 'repeat-x', 'repeat-y', 'no-repeat'
     # }
-    color: Optional[str] = None,
+    color: Union[str, List, None] = None,
 )
 ```
 
