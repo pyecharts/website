@@ -6,13 +6,13 @@ GEO = """function (params) {
     }"""
 ```
 
-然后在 `set_global_opts` 中配置，所有的 JS 函数均要使用 `utils.produce_js_func` 封装
+然后在 `set_global_opts` 中配置，所有的 JS 函数均要使用 `utils.JsCode` 类封装
 
 ```python
 from pyecharts.commons import utils
 
 geo.set_global_opts(
-    opts.TooltipOpts(formatter=utils.produce_js_func(TooltipFormatterType.GEO)),
+    opts.TooltipOpts(formatter=utils.JsCode(TooltipFormatterType.GEO)),
 )
 ```
 
