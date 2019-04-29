@@ -6,6 +6,8 @@ GEO = """function (params) {
     }"""
 ```
 
+> Note: 想使用 `\n`, `\t` 字符串的话，需要转换为 `\\n`, `\\t`
+
 然后在 `set_global_opts` 中配置，所有的 JS 函数均要使用 `utils.JsCode` 类封装
 
 ```python
