@@ -17,7 +17,7 @@ def add(
     series_name: str,
 
     # 系列数据项
-    data: List[Union[opts.TreeItem, dict]],
+    data: Sequence[Union[opts.TreeItem, dict]],
 
     # 树图的布局，有 正交 和 径向 两种。这里的 正交布局 就是我们通常所说的水平 和 垂直 方向，
     # 对应的参数取值为 'orthogonal' 。而 径向布局 是指以根节点为圆心，每一层节点为环，
@@ -253,7 +253,7 @@ def add(
     series_name: str,
 
     # 系列数据项
-    data: List[Union[opts.TreeItem, dict]],
+    data: Sequence[Union[opts.TreeItem, dict]],
 
     # 是否选中图例。
     is_selected: bool = True,

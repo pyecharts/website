@@ -81,9 +81,49 @@ class TextStyleOpts(
 
     # 文字的字体大小
     font_size: Optional[Numeric] = None,
-
+    
+    # 文字水平对齐方式，默认自动
+    align: Optional[str] = None,
+    
+    # 文字垂直对齐方式，默认自动
+    vertical_align: Optional[str] = None,
+    
     # 行高
     line_height: Optional[str] = None,
+    
+    # 文字块背景色。可以是直接的颜色值，例如：'#123234', 'red', 'rgba(0,23,11,0.3)'
+    background_color: Optional[str] = None,
+    
+    # 文字块边框颜色
+    border_color: Optional[str] = None,
+    
+    # 文字块边框宽度
+    border_width: Optional[Numeric] = None,
+    
+    # 文字块的圆角
+    border_radius: Union[Numeric, Sequence, None] = None,
+    
+    # 文字块的内边距 
+    # 例如 padding: [3, 4, 5, 6]：表示 [上, 右, 下, 左] 的边距
+    # 例如 padding: 4：表示 padding: [4, 4, 4, 4]
+    # 例如 padding: [3, 4]：表示 padding: [3, 4, 3, 4]
+    padding: Union[Numeric, Sequence, None] = None,
+    
+    # 文字块的背景阴影颜色
+    shadow_color: Optional[str] = None,
+    
+    # 文字块的背景阴影长度
+    shadow_blur: Optional[Numeric] = None,
+    
+    # 文字块的宽度
+    width: Optional[str] = None,
+    
+    # 文字块的高度
+    height: Optional[str] = None,
+    
+    # 在 rich 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果
+    # 具体配置可以参考一下 https://www.echartsjs.com/tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE
+    rich: Optional[dict] = None,
 )
 ```
 
@@ -123,6 +163,9 @@ class LabelOpts(
 
     # 标签旋转。从 -90 度到 90 度。正值是逆时针。
     rotate: Optional[Numeric] = None,
+    
+    # 刻度标签与轴线之间的距离。
+    margin: Optional[Numeric] = 8,
 
     # 文字水平对齐方式，默认自动。可选：
     # 'left'，'center'，'right'
@@ -166,6 +209,10 @@ class LabelOpts(
     #    color: string,
     # }
     formatter: Optional[str] = None,
+    
+    # 在 rich 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果
+    # 具体配置可以参考一下 https://www.echartsjs.com/tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE
+    rich: Optional[dict] = None,
 )
 ```
 
@@ -227,7 +274,7 @@ class LineStyleOpts(
     #    image: imageDom, // 支持为 HTMLImageElement, HTMLCanvasElement，不支持路径字符串
     #    repeat: 'repeat' // 是否平铺, 可以是 'repeat-x', 'repeat-y', 'no-repeat'
     # }
-    color: Optional[str] = None,
+    color: Union[str, Sequence, None] = None,
 )
 ```
 
@@ -269,7 +316,7 @@ class MarkPointItem(
 
     # 标注的坐标。坐标格式视系列的坐标系而定，可以是直角坐标系上的 x, y，
     # 也可以是极坐标系上的 radius, angle。例如 [121, 2323]、['aa', 998]。
-    coord: Optional[List] = None,
+    coord: Optional[Sequence] = None,
 
     # 相对容器的屏幕 x 坐标，单位像素。
     x: Optional[Numeric] = None,
@@ -288,7 +335,7 @@ class MarkPointItem(
 
     # 标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示宽和高，
     # 例如 [20, 10] 表示标记宽为 20，高为 10。
-    symbol_size: Union[Numeric, List] = None,
+    symbol_size: Union[Numeric, Sequence] = None,
 )
 ```
 
@@ -298,7 +345,7 @@ class MarkPointItem(
 ```python
 class MarkPointOpts(
     # 标记点数据，参考 `series_options.MarkPointItem`
-    data: List[Union[MarkPointItem, dict]] = None,
+    data: Sequence[Union[MarkPointItem, dict]] = None,
 
     # 标记的图形。
     # ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 
@@ -372,7 +419,7 @@ class MarkLineOpts(
     is_silent: bool = False,
 
     # 标记线数据，参考 `series_options.MarkPointItem`
-    data: List[Union[MarkLineItem, dict]] = None,
+    data: Sequence[Union[MarkLineItem, dict]] = None,
 
     # 标线两端的标记类型，可以是一个数组分别指定两端，也可以是单个统一指定，具体格式见 data.symbol。
     symbol: Optional[str] = None,
@@ -400,21 +447,21 @@ class MarkAreaItem(
     # 'min' 最大值。
     # 'max' 最大值。
     # 'average' 平均值。
-    type_: Tuple[Optional[str], Optional[str]] = (None, None),
+    type_: Sequence[Optional[str], Optional[str]] = (None, None),
     
     # 在使用 type 时有效，用于指定在哪个维度上指定最大值最小值，可以是 0（xAxis, radiusAxis），1（yAxis, angleAxis）。
     # 默认使用第一个数值轴所在的维度。
-    value_index: Tuple[Optional[Numeric], Optional[Numeric]] = (None, None),
+    value_index: Sequence[Optional[Numeric], Optional[Numeric]] = (None, None),
     
     # 在使用 type 时有效，用于指定在哪个维度上指定最大值最小值。
     # 这可以是维度的直接名称，例如折线图时可以是 x、angle 等、candlestick 图时可以是 open、close 等维度名称。
-    value_dim: Tuple[Optional[str], Optional[str]] = (None, None),
+    value_dim: Sequence[Optional[str], Optional[str]] = (None, None),
     
     # 相对容器的屏幕 x 坐标，单位像素，支持百分比形式，例如 '20%'。
-    x: Tuple[Union[str, Numeric, None], Union[str, Numeric, None]] = (None, None),
+    x: Sequence[Union[str, Numeric, None], Union[str, Numeric, None]] = (None, None),
     
     # 相对容器的屏幕 y 坐标，单位像素，支持百分比形式，例如 '20%'。
-    y: Tuple[Union[str, Numeric, None], Union[str, Numeric, None]] = (None, None),
+    y: Sequence[Union[str, Numeric, None], Union[str, Numeric, None]] = (None, None),
     
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[LabelOpts, dict, None] = None,
@@ -436,7 +483,7 @@ class MarkAreaOpts(
     label_opts: LabelOpts = LabelOpts(),
     
     # 标记区域数据，参考 `series_options.MarkAreaItem`
-    data: List[Union[MarkAreaItem, dict]] = None,
+    data: Sequence[Union[MarkAreaItem, dict]] = None,
 )
 ```
 

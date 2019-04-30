@@ -182,12 +182,12 @@ class DataZoomOpts(
     # 设置 dataZoom-inside 组件控制的 x 轴（即 xAxis，是直角坐标系中的概念，参见 grid）。
     # 不指定时，当 dataZoom-inside.orient 为 'horizontal'时，默认控制和 dataZoom 平行的第一个 xAxis
     # 如果是 number 表示控制一个轴，如果是 Array 表示控制多个轴。
-    xaxis_index: Union[int, List[int], None] = None,
+    xaxis_index: Union[int, Sequence[int], None] = None,
 
     # 设置 dataZoom-inside 组件控制的 y 轴（即 yAxis，是直角坐标系中的概念，参见 grid）。
     # 不指定时，当 dataZoom-inside.orient 为 'horizontal'时，默认控制和 dataZoom 平行的第一个 yAxis
     # 如果是 number 表示控制一个轴，如果是 Array 表示控制多个轴。
-    yaxis_index: Union[int, List[int], None] = None,
+    yaxis_index: Union[int, Sequence[int], None] = None,
     
     # 是否锁定选择区域（或叫做数据窗口）的大小。
     # 如果设置为 true 则锁定选择区域的大小，也就是说，只能平移，不能缩放。
@@ -258,10 +258,10 @@ class VisualMapOpts(
     range_text: Union[list, tuple] = None,
 
     # visualMap 组件过渡颜色
-    range_color: Union[List[str]] = None,
+    range_color: Union[Sequence[str]] = None,
 
     # visualMap 组件过渡 symbol 大小
-    range_size: Union[List[int]] = None,
+    range_size: Union[Sequence[int]] = None,
 
     # 如何放置 visualMap 组件，水平（'horizontal'）或者竖直（'vertical'）。
     orient: str = "vertical",
@@ -477,6 +477,14 @@ class AxisPointerOpts(
 
 ```python
 class AxisOpts(
+    # 坐标轴类型。可选：
+    # 'value': 数值轴，适用于连续数据。
+    # 'category': 类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据。
+    # 'time': 时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，
+    # 例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
+    # 'log' 对数轴。适用于对数数据。
+    type_: Optional[str] = None,
+    
     # 坐标轴名称。
     name: Optional[str] = None,
 
@@ -497,6 +505,9 @@ class AxisOpts(
 
     # 坐标轴名称与轴线之间的距离。
     name_gap: Numeric = 15,
+    
+    # 坐标轴名字旋转，角度值。
+    name_rotate: Optional[Numeric] = None,
 
     # 强制设置坐标轴分割间隔。
     # 因为 splitNumber 是预估的值，实际根据策略计算出来的刻度可能无法达到想要的效果，
@@ -511,6 +522,13 @@ class AxisOpts(
     # 'top', 'bottom'
     # 默认 grid 中的第一个 x 轴在 grid 的下方（'bottom'），第二个 x 轴视第一个 x 轴的位置放在另一侧。
     position: Optional[str] = None,
+    
+    # Y 轴相对于默认位置的偏移，在相同的 position 上有多个 Y 轴的时候有用。
+    offset: Numeric = 0,
+    
+    # 坐标轴的分割段数，需要注意的是这个分割段数只是个预估值，最后实际显示的段数会在这个基础上根据分割后坐标轴刻度显示的易读程度作调整。 
+    # 默认值是 5
+    split_number: Numeric = 5,
 
     # 坐标轴两边留白策略，类目轴和非类目轴的设置和表现不一样。
     # 类目轴中 boundaryGap 可以配置为 true 和 false。默认为 true，这时候刻度只是作为分隔线，
@@ -532,15 +550,16 @@ class AxisOpts(
     # 在类目轴中，也可以设置为类目的序数（如类目轴 data: ['类A', '类B', '类C'] 中，序数 2 表示 '类C'。
     # 也可以设置为负数，如 -3）。
     max_: Union[Numeric, str, None] = None,
-
-    # 坐标轴类型。可选：
-    # 'value': 数值轴，适用于连续数据。
-    # 'category': 类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据。
-    # 'time': 时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，
-    # 例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
-    # 'log' 对数轴。适用于对数数据。
-    type_: Optional[str] = None,
     
+    # 自动计算的坐标轴最小间隔大小。
+    # 例如可以设置成1保证坐标轴分割刻度显示成整数。
+    # 默认值是 0
+    min_interval: Numeric = 0,
+    
+    # 自动计算的坐标轴最大间隔大小。
+    # 例如，在时间轴（（type: 'time'））可以设置成 3600 * 24 * 1000 保证坐标轴分割刻度最大为一天。
+    max_interval: Optional[Numeric] = None,
+
     # 坐标轴刻度线配置项，参考 `global_options.AxisLineOpts`
     axisline_opts: Union[AxisLineOpts, dict, None] = None,
     
