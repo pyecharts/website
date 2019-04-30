@@ -116,7 +116,7 @@ def add_coordinate_json(
 def get_coordinate(
     # 地点名称
     name: str
-) -> List
+) -> Sequence
 ```
 
 ### Demo
@@ -320,7 +320,7 @@ def add(
     is_roam: bool = True,
     
     # 当前视角的中心点，用经纬度表示
-    center: Optional[List] = None,
+    center: Optional[Sequence] = None,
     
     # 当前视角的缩放比例。
     zoom: Optional[Numeric] = 1,

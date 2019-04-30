@@ -309,13 +309,13 @@ def add(
     series_name: str,
 
     # 关系图节点数据项列表，参考 `opts.GraphNode`
-    nodes: List[Union[opts.GraphNode, dict]],
+    nodes: Sequence[Union[opts.GraphNode, dict]],
 
     # 关系图节点间关系数据项列表，参考 `opts.GraphLink`
-    links: List[Union[opts.GraphLink, dict]],
+    links: Sequence[Union[opts.GraphLink, dict]],
 
     # 关系图节点分类的类目列表，参考 `opts.GraphCategory`
-    categories: Union[List[Union[opts.GraphCategory, dict]], None] = None,
+    categories: Union[Sequence[Union[opts.GraphCategory, dict]], None] = None,
 
     # 是否选中图例。
     is_selected: bool = True,
@@ -582,7 +582,7 @@ def add(
     shape: str = "circle",
 
     # 波浪颜色。
-    color: Optional[List[str]] = None,
+    color: Optional[Sequence[str]] = None,
 
     # 是否显示波浪动画。
     is_animation: bool = True,
@@ -683,7 +683,7 @@ class Parallel(
 
 ```python
 def add_schema(
-    schema: List[Union[opts.ParallelAxisOpts, dict]],
+    schema: Sequence[Union[opts.ParallelAxisOpts, dict]],
     parallel_opts: Union[opts.ParallelOpts, dict, None] = None,
 )
 ```
@@ -1077,14 +1077,14 @@ class RadiusAxisOpts(
     polar_index: Optional[int] = None,
 
     # 数据项，参考 `global_options.RadiusAxisItem`
-    data: Optional[List[Union[RadiusAxisItem, dict, str]]] = None,
+    data: Optional[Sequence[Union[RadiusAxisItem, dict, str]]] = None,
 
     # 坐标轴两边留白策略，类目轴和非类目轴的设置和表现不一样。
     # 类目轴中 boundaryGap 可以配置为 true 和 false。默认为 true，这时候刻度只是作为分隔线，
     # 标签和数据点都会在两个刻度之间的带(band)中间。
     # 非类目轴，包括时间，数值，对数轴，boundaryGap是一个两个值的数组，分别表示数据最小值和最大值的延伸范围
     # 可以直接设置数值或者相对的百分比，在设置 min 和 max 后无效。 示例：boundaryGap: ['20%', '20%']
-    boundary_gap: Union[bool, List] = None,
+    boundary_gap: Union[bool, Sequence] = None,
 
     # 坐标轴类型。可选：
     # 'value': 数值轴，适用于连续数据。
@@ -1153,7 +1153,7 @@ class AngleAxisItem(
 class AngleAxisOpts(
     # 径向轴所在的极坐标系的索引，默认使用第一个极坐标系。
     polar_index: Optional[int] = None,
-    data: Optional[List[Union[AngleAxisItem, dict, str]]] = None,
+    data: Optional[Sequence[Union[AngleAxisItem, dict, str]]] = None,
     start_angle: Optional[Numeric] = None,
     is_clockwise: bool = False,
 
@@ -1162,7 +1162,7 @@ class AngleAxisOpts(
     # 标签和数据点都会在两个刻度之间的带(band)中间。
     # 非类目轴，包括时间，数值，对数轴，boundaryGap是一个两个值的数组，分别表示数据最小值和最大值的延伸范围
     # 可以直接设置数值或者相对的百分比，在设置 min 和 max 后无效。 示例：boundaryGap: ['20%', '20%']
-    boundary_gap: Union[bool, List] = None,
+    boundary_gap: Union[bool, Sequence] = None,
 
     # 坐标轴类型。可选：
     # 'value': 数值轴，适用于连续数据。
@@ -1356,7 +1356,7 @@ class Radar(
 ```python
 def add_schema(
     # 雷达指示器配置项列表，参考 `RadarIndicatorItem`
-    schema: List[Union[opts.RadarIndicatorItem, dict]],
+    schema: Sequence[Union[opts.RadarIndicatorItem, dict]],
 
     # 雷达图绘制类型，可选 'polygon' 和 'circle'
     shape: Optional[str] = None,

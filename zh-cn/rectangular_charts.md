@@ -926,7 +926,7 @@ def add_yaxis(
 
     # 标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示宽和高，
     # 例如 [20, 10] 表示标记宽为 20，高为 10。
-    symbol_size: Union[Numeric, List] = 4,
+    symbol_size: Union[Numeric, Sequence] = 4,
 
     # 数据堆叠，同个类目轴上系列配置相同的　stack　值可以堆叠放置。
     stack: Optional[str] = None,
