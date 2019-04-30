@@ -381,6 +381,33 @@ def bar_histogram() -> Bar:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55603313-a36f3600-579c-11e9-80bd-38efb033daf8.png)
 
+> Bar-旋转 X 轴标签
+
+```python
+def bar_rorate_xaxis_label() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(
+            [
+                "名字很长的X轴标签1",
+                "名字很长的X轴标签2",
+                "名字很长的X轴标签3",
+                "名字很长的X轴标签4",
+                "名字很长的X轴标签5",
+                "名字很长的X轴标签6",
+            ]
+        )
+        .add_yaxis("商家A", [10, 20, 30, 40, 50, 40])
+        .add_yaxis("商家B", [20, 10, 40, 30, 40, 50])
+        .set_global_opts(
+            xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(rotate=-15)),
+            title_opts=opts.TitleOpts(title="Bar-旋转X轴标签", subtitle="解决标签名字过长的问题"),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/56972171-16ea4480-6b9d-11e9-834c-b8eb4357808c.png)
+
 
 ## Boxplot：箱形图
 
@@ -1056,6 +1083,39 @@ def line_step() -> Line:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/55603664-542a0500-579e-11e9-9d5f-85ad3a605339.png)
+
+> Line-ItemStyle
+
+```python
+def line_itemstyle() -> Line:
+    c = (
+        Line()
+        .add_xaxis(xaxis_data=Faker.choose())
+        .add_yaxis(
+            "商家A",
+            Faker.values(),
+            symbol="triangle",
+            symbol_size=20,
+            linestyle_opts=opts.LineStyleOpts(color="green", width=4, type_="dashed"),
+            label_opts=opts.LabelOpts(is_show=False),
+            itemstyle_opts=opts.ItemStyleOpts(
+                border_width=3, border_color="yellow", color="blue"
+            ),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Line-ItemStyle"),
+            xaxis_opts=opts.AxisOpts(type_="category"),
+            yaxis_opts=opts.AxisOpts(
+                type_="value",
+                axistick_opts=opts.AxisTickOpts(is_show=True),
+                splitline_opts=opts.SplitLineOpts(is_show=True),
+            ),
+            tooltip_opts=opts.TooltipOpts(is_show=False),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/56972743-1b632d00-6b9e-11e9-8110-c52070cc2783.png)
 
 
 ## Scatter：散点图
