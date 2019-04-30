@@ -1,17 +1,21 @@
 # 版本日志
 
-### version 0.6.0（dev）
+### version 1.1.0（dev）
 
 ***Updated***
-* 将 pyecharts-javascripthon 合并入主仓库，并对该部分代码进行了重构。导入路径由 `from pyecharts_javascripthon import *` 转变为 `from pyecharts.javascripthon import *`
-* Grid / Overlap / Timeline 等更名为复合图表，并移入 `pyecharts.charts.composite` 包。
-    
-***Removed***
-* 类 `Style` 废弃，推荐使用原生 `dict` 写法。
-* [issue#762](https://github.com/pyecharts/pyecharts/issues/762) 移除 `is_fill` 配置项，使用 `area_opacity` 指定区域透明度。
+* [pr#1038](https://github.com/pyecharts/pyecharts/pull/731) 新增多个配置项参数
+
+***Fixed***
+* [pr#1038](https://github.com/pyecharts/pyecharts/pull/731) 修复换行符全局替换的 bug
 
 
-### version 0.5.11 - 2018.9.9（current）
+### version 1.0.0 - 2019.4.28（current）
+
+***Updated***
+全新版本的 pyecharts，详见 [v1.0.0 发布日志](zh-cn/release-note/v100)
+
+
+### version 0.5.11 - 2018.9.9
     
 ***Added***
 * [issue#731](https://github.com/pyecharts/pyecharts/issues/731) 新增 `mark_point_raw`, `mark_line_raw` 配置项用于个性化展示标记。
