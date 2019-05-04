@@ -2,11 +2,15 @@
 
 ### version 1.1.0（dev）
 
+***Add***
+* [issue#1052](https://github.com/pyecharts/pyecharts/issues/1052) 新增 BMap 图形种类
+
 ***Updated***
 * [pr#1038](https://github.com/pyecharts/pyecharts/pull/731) 新增多个配置项参数
 
 ***Fixed***
 * [pr#1038](https://github.com/pyecharts/pyecharts/pull/731) 修复换行符全局替换的 bug
+* [issue#1047](https://github.com/pyecharts/pyecharts/issues/1047) 修复 worldcloud_example 文件名错别字
 
 
 ### version 1.0.0 - 2019.4.28（current）

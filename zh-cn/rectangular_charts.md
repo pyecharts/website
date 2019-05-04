@@ -155,6 +155,26 @@ def bar_toolbox() -> Bar:
 ```
 ![](https://user-images.githubusercontent.com/19553554/56866240-816a7b80-6a09-11e9-9fce-1443541b36dd.png)
 
+> Bar-Y 轴 formatter
+
+```python
+def bar_yaxis_formatter() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-Y 轴 formatter"),
+            yaxis_opts=opts.AxisOpts(
+                axislabel_opts=opts.LabelOpts(formatter="{value} /月")
+            ),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57181491-1ae0d400-6ec7-11e9-9db5-6e07b0c9f431.png)
+
 > Bar-翻转 XY 轴
 
 ```python
