@@ -356,13 +356,13 @@ def add_schema(
     # 时间轴区域的高度
     height: Optional[str] = None,
     
-    # 时间轴的坐标轴线配置
+    # 时间轴的坐标轴线配置，参考 `series_options.LineStyleOpts`
     linestyle_opts: Union[opts.LineStyleOpts, dict, None] = None,
     
-    # 时间轴的轴标签配置
+    # 时间轴的轴标签配置，参考 `series_options.LabelOpts`
     label_opts: Optional[opts.LabelOpts] = None,
     
-    # 时间轴的图形样式
+    # 时间轴的图形样式，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 )
 ```
