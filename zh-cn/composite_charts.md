@@ -296,6 +296,11 @@ def add_schema(
     # 例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
     # 'log' 对数轴。适用于对数数据。
     axis_type: str = "category",
+    
+    # 时间轴的类型。可选:
+    # 'horizontal': 水平
+    # 'vertical': 垂直
+    orient: str = "horizontal",
 
     # timeline 标记的图形。
     # ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 
@@ -321,6 +326,9 @@ def add_schema(
 
     # 是否显示 timeline 组件。如果设置为 false，不会显示，但是功能还存在。
     is_timeline_show: bool = True,
+    
+    # 是否反向放置 timeline，反向则首位颠倒过来
+    is_inverse: bool = False,
 
     # Timeline 组件离容器左侧的距离。
     # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
@@ -341,6 +349,21 @@ def add_schema(
     # timeline 组件离容器下侧的距离。
     # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
     pos_bottom: Optional[str] = "-5px",
+    
+    # 时间轴区域的宽度, 影响垂直的时候时间轴的轴标签和轴之间的距离
+    width: Optional[str] = None,
+    
+    # 时间轴区域的高度
+    height: Optional[str] = None,
+    
+    # 时间轴的坐标轴线配置，参考 `series_options.LineStyleOpts`
+    linestyle_opts: Union[opts.LineStyleOpts, dict, None] = None,
+    
+    # 时间轴的轴标签配置，参考 `series_options.LabelOpts`
+    label_opts: Optional[opts.LabelOpts] = None,
+    
+    # 时间轴的图形样式，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 )
 ```
 
