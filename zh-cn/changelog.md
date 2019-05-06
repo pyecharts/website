@@ -6,11 +6,18 @@
 * [issue#1052](https://github.com/pyecharts/pyecharts/issues/1052) 新增 BMap 图形种类
 
 ***Updated***
+* [pr#1036](https://github.com/pyecharts/pyecharts/pull/1036) LabelOpts 支持富文本标签及其他参数的更新
 * [pr#1038](https://github.com/pyecharts/pyecharts/pull/731) 新增多个配置项参数
+* [issue#1043](https://github.com/pyecharts/pyecharts/issues/1043) LabelOpts 新增文本参数
+* [issue#1051](https://github.com/pyecharts/pyecharts/issues/1051) Timeline 新增多个参数
+* [issue#1065](https://github.com/pyecharts/pyecharts/issues/1065) BMap 新增控件面板的配置
 
 ***Fixed***
+* [pr#1036](https://github.com/pyecharts/pyecharts/pull/1036) 解决了 Gauge 颜色设置问题 [#1034](https://github.com/pyecharts/pyecharts/issues/1034), [#873](https://github.com/pyecharts/pyecharts/issues/873), [#870](https://github.com/pyecharts/pyecharts/issues/870)
 * [pr#1038](https://github.com/pyecharts/pyecharts/pull/731) 修复换行符全局替换的 bug
+* [issue#1043](https://github.com/pyecharts/pyecharts/issues/1043) 修复了 add_schema 方法没有 return self 导致无法 render 的情况
 * [issue#1047](https://github.com/pyecharts/pyecharts/issues/1047) 修复 worldcloud_example 文件名错别字
+* [issue#1051](https://github.com/pyecharts/pyecharts/issues/1051) 修复 Timeline 图无法添加多个 visualMap
 
 
 ### version 1.0.0 - 2019.4.28（current）
