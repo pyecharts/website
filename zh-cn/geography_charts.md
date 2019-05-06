@@ -565,7 +565,7 @@ def add_control_panel(
     # 每一个版权信息需要包含如下内容：版权的唯一标识、版权内容和其适用的区域范围。
     copyright_control_opts: Union[opts.BMapCopyrightType, None] = None,
     
-    # 地图定位的控件，使用html5浏览器定位功能
+    # 地图定位的控件，使用 HTML5 浏览器定位功能
     geo_location_control_opts: Union[opts.BMapGeoLocationControlOpts, None] = None,
 )
 ```
@@ -577,10 +577,10 @@ def add_control_panel(
 ```python
 class BMapNavigationControlOpts(
     # 控件的停靠位置
-    # BMAP_ANCHOR_TOP_LEFT  控件将定位到地图的左上角 值为 0
-    # BMAP_ANCHOR_TOP_RIGHT   控件将定位到地图的右上角 值为 1
-    # BMAP_ANCHOR_BOTTOM_LEFT 控件将定位到地图的左下角 值为 2
-    # BMAP_ANCHOR_BOTTOM_RIGHT    控件将定位到地图的右下角 值为 3
+    # BMAP_ANCHOR_TOP_LEFT，控件将定位到地图的左上角，值为 0
+    # BMAP_ANCHOR_TOP_RIGHT，控件将定位到地图的右上角，值为 1
+    # BMAP_ANCHOR_BOTTOM_LEFT，控件将定位到地图的左下角，值为 2
+    # BMAP_ANCHOR_BOTTOM_RIGHT，控件将定位到地图的右下角，值为 3
     position: Numeric = BMapType.BMAP_ANCHOR_TOP_LEFT,
     
     # 控件的水平偏移值
@@ -590,16 +590,16 @@ class BMapNavigationControlOpts(
     offset_height: Numeric = 10,
     
     # 平移缩放控件的类型
-    # BMAP_NAVIGATION_CONTROL_LARGE	标准的平移缩放控件（包括平移、缩放按钮和滑块）值为 0
-    # BMAP_NAVIGATION_CONTROL_SMALL	仅包含平移和缩放按钮 值为 1
-    # BMAP_NAVIGATION_CONTROL_PAN	仅包含平移按钮 值为 2
-    # BMAP_NAVIGATION_CONTROL_ZOOM	仅包含缩放按钮 值为 3
+    # BMAP_NAVIGATION_CONTROL_LARGE，标准的平移缩放控件（包括平移、缩放按钮和滑块，值为 0
+    # BMAP_NAVIGATION_CONTROL_SMALL，仅包含平移和缩放按钮，值为 1
+    # BMAP_NAVIGATION_CONTROL_PAN，仅包含平移按钮，值为 2
+    # BMAP_NAVIGATION_CONTROL_ZOOM，仅包含缩放按钮，值为 3
     type_: Union[BMapType, Numeric] = BMapType.BMAP_NAVIGATION_CONTROL_LARGE,
 
-    # 是否显示级别提示信息 默认为 False
+    # 是否显示级别提示信息
     is_show_zoom_info: bool = False,
 
-    # 控件是否集成定位功能，默认为 False
+    # 控件是否集成定位功能
     is_enable_geo_location: bool = False,
 )
 ```
@@ -611,10 +611,10 @@ class BMapNavigationControlOpts(
 ```python
 class BMapOverviewMapControlOpts(
     # 控件的停靠位置
-    # BMAP_ANCHOR_TOP_LEFT  控件将定位到地图的左上角 值为 0
-    # BMAP_ANCHOR_TOP_RIGHT   控件将定位到地图的右上角 值为 1
-    # BMAP_ANCHOR_BOTTOM_LEFT 控件将定位到地图的左下角 值为 2
-    # BMAP_ANCHOR_BOTTOM_RIGHT    控件将定位到地图的右下角 值为 3
+    # BMAP_ANCHOR_TOP_LEFT，控件将定位到地图的左上角，值为 0
+    # BMAP_ANCHOR_TOP_RIGHT，控件将定位到地图的右上角，值为 1
+    # BMAP_ANCHOR_BOTTOM_LEFT，控件将定位到地图的左下角，值为 2
+    # BMAP_ANCHOR_BOTTOM_RIGHT，控件将定位到地图的右下角，值为 3
     position: Numeric = BMapType.BMAP_ANCHOR_BOTTOM_RIGHT,
 
     # 控件的水平偏移值
@@ -635,10 +635,10 @@ class BMapOverviewMapControlOpts(
 ```python
 class BMapScaleControlOpts(
     # 控件的停靠位置
-    # BMAP_ANCHOR_TOP_LEFT  控件将定位到地图的左上角 值为 0
-    # BMAP_ANCHOR_TOP_RIGHT   控件将定位到地图的右上角 值为 1
-    # BMAP_ANCHOR_BOTTOM_LEFT 控件将定位到地图的左下角 值为 2
-    # BMAP_ANCHOR_BOTTOM_RIGHT    控件将定位到地图的右下角 值为 3
+    # BMAP_ANCHOR_TOP_LEFT，控件将定位到地图的左上角，值为 0
+    # BMAP_ANCHOR_TOP_RIGHT，控件将定位到地图的右上角，值为 1
+    # BMAP_ANCHOR_BOTTOM_LEFT，控件将定位到地图的左下角，值为 2
+    # BMAP_ANCHOR_BOTTOM_RIGHT，控件将定位到地图的右下角，值为 3
     position: Numeric = BMapType.BMAP_ANCHOR_BOTTOM_RIGHT,
 
     # 控件的水平偏移值
@@ -656,16 +656,16 @@ class BMapScaleControlOpts(
 ```python
 class BMapTypeControl(
     # 控件的停靠位置
-    # BMAP_ANCHOR_TOP_LEFT  控件将定位到地图的左上角 值为 0
-    # BMAP_ANCHOR_TOP_RIGHT   控件将定位到地图的右上角 值为 1
-    # BMAP_ANCHOR_BOTTOM_LEFT 控件将定位到地图的左下角 值为 2
-    # BMAP_ANCHOR_BOTTOM_RIGHT    控件将定位到地图的右下角 值为 3
+    # BMAP_ANCHOR_TOP_LEFT，控件将定位到地图的左上角，值为 0
+    # BMAP_ANCHOR_TOP_RIGHT，控件将定位到地图的右上角，值为 1
+    # BMAP_ANCHOR_BOTTOM_LEFT，控件将定位到地图的左下角，值为 2
+    # BMAP_ANCHOR_BOTTOM_RIGHT，控件将定位到地图的右下角，值为 3
     position: Numeric = BMapType.BMAP_ANCHOR_TOP_RIGHT,
 
     # 地图类型属性
-    BMAP_MAPTYPE_CONTROL_HORIZONTAL 按钮水平方式展示，默认采用此类型展示 值为 0
-    BMAP_MAPTYPE_CONTROL_DROPDOWN   按钮呈下拉列表方式展示 值为 1
-    BMAP_MAPTYPE_CONTROL_MAP    以图片方式展示类型控件，设置该类型后无法指定 maptypes 属性 值为 2
+    # BMAP_MAPTYPE_CONTROL_HORIZONTAL，按钮水平方式展示，默认采用此类型展示。值为 0
+    # BMAP_MAPTYPE_CONTROL_DROPDOWN，按钮呈下拉列表方式展示，值为 1
+    # BMAP_MAPTYPE_CONTROL_MAP，以图片方式展示类型控件，设置该类型后无法指定 maptypes 属性，值为 2
     type_: Numeric = BMapType.BMAP_MAPTYPE_CONTROL_HORIZONTAL,
 )
 ```
@@ -677,10 +677,10 @@ class BMapTypeControl(
 ```python
 class BMapCopyrightType(
     # 控件的停靠位置
-    # BMAP_ANCHOR_TOP_LEFT  控件将定位到地图的左上角 值为 0
-    # BMAP_ANCHOR_TOP_RIGHT   控件将定位到地图的右上角 值为 1
-    # BMAP_ANCHOR_BOTTOM_LEFT 控件将定位到地图的左下角 值为 2
-    # BMAP_ANCHOR_BOTTOM_RIGHT    控件将定位到地图的右下角 值为 3
+    # BMAP_ANCHOR_TOP_LEFT，控件将定位到地图的左上角，值为 0
+    # BMAP_ANCHOR_TOP_RIGHT，控件将定位到地图的右上角，值为 1
+    # BMAP_ANCHOR_BOTTOM_LEFT，控件将定位到地图的左下角，值为 2
+    # BMAP_ANCHOR_BOTTOM_RIGHT，控件将定位到地图的右下角，值为 3
     position: Numeric = BMapType.BMAP_ANCHOR_BOTTOM_RIGHT,
 
     # 控件的水平偏移值
@@ -689,8 +689,8 @@ class BMapCopyrightType(
     # 控件的竖直偏移值
     offset_height: Numeric = 50,
 
-    # Copyright 的文本内容, 可以放入 html 标签
-    copy_right: str = "",
+    # Copyright 的文本内容, 可以放入 HTML 标签
+    copyright: str = "",
 )
 ```
 
@@ -700,11 +700,11 @@ class BMapCopyrightType(
 
 ```python
 class BMapGeoLocationControlOpts(
-# 控件的停靠位置
-    # BMAP_ANCHOR_TOP_LEFT  控件将定位到地图的左上角 值为 0
-    # BMAP_ANCHOR_TOP_RIGHT   控件将定位到地图的右上角 值为 1
-    # BMAP_ANCHOR_BOTTOM_LEFT 控件将定位到地图的左下角 值为 2
-    # BMAP_ANCHOR_BOTTOM_RIGHT    控件将定位到地图的右下角 值为 3
+    # 控件的停靠位置
+    # BMAP_ANCHOR_TOP_LEFT，控件将定位到地图的左上角，值为 0
+    # BMAP_ANCHOR_TOP_RIGHT，控件将定位到地图的右上角，值为 1
+    # BMAP_ANCHOR_BOTTOM_LEFT，控件将定位到地图的左下角，值为 2
+    # BMAP_ANCHOR_BOTTOM_RIGHT，控件将定位到地图的右下角，值为 3
     position: Numeric = BMapType.BMAP_ANCHOR_BOTTOM_RIGHT,
 
     # 控件的水平偏移值
@@ -713,14 +713,13 @@ class BMapGeoLocationControlOpts(
     # 控件的竖直偏移值
     offset_height: Numeric = 50,
 
-    # 是否显示定位信息面板。默认显示定位信息面板，默认值为 True
+    # 是否显示定位信息面板。默认显示定位信息面板
     is_show_address_bar: bool = True,
 
-    # 添加控件时是否进行定位。默认添加控件时不进行定位，默认值为 False
+    # 添加控件时是否进行定位。默认添加控件时不进行定位
     is_enable_auto_location: bool = False,
 )
 ```
-
 
 ### Demo
 
