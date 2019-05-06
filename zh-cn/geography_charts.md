@@ -489,6 +489,62 @@ def add_schema(
 )
 ```
 
+> *func pyecharts.charts.BMap.add*
+
+```python
+def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
+    series_name: str,
+
+    # 数据项 (坐标点名称，坐标点值)
+    data_pair: Sequence,
+
+    # Geo 图类型，有 scatter, effectScatter, heatmap, lines 4 种，建议使用
+    # from pyecharts.globals import GeoType
+    # GeoType.GeoType.EFFECT_SCATTER，GeoType.HEATMAP，GeoType.LINES
+    type_: str = "scatter",
+
+    # 是否选中图例
+    is_selected: bool = True,
+
+    # 标记图形形状
+    symbol: Optional[str] = None,
+
+    # 标记的大小
+    symbol_size: Numeric = 12,
+
+    # 系列 label 颜色
+    color: Optional[str] = None,
+    
+    # 是否是多段线，在画 lines 图情况下
+    is_polyline: bool = False,
+    
+    # 是否启用大规模线图的优化，在数据图形特别多的时候（>=5k）可以开启
+    is_large: bool = False,
+    
+    # 特效尾迹的长度。取从 0 到 1 的值，数值越大尾迹越长。默认值 0.2
+    trail_length: Numeric = 0.2,
+    
+    # 开启绘制优化的阈值。
+    large_threshold: Numeric = 2000,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+
+    # 涟漪特效配置项，参考 `series_options.EffectOpts`
+    effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
+
+    # 线样式配置项，参考 `series_options.LineStyleOpts`
+    linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+)
+```
+
 > *func pyecharts.charts.BMap.add_control_panel*
 
 ```python
