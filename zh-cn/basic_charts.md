@@ -974,6 +974,27 @@ def pie_base() -> Pie:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55933061-9354cc00-5c5e-11e9-8f80-5e2f434a1ec4.png)
 
+> Pie-调整位置
+
+```python
+def pie_position() -> Pie:
+    c = (
+        Pie()
+        .add(
+            "",
+            [list(z) for z in zip(Faker.choose(), Faker.values())],
+            center=["35%", "50%"],
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Pie-调整位置"),
+            legend_opts=opts.LegendOpts(pos_left="15%"),
+        )
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57317851-a5297200-712b-11e9-9f06-b46698ed42cc.png)
+
 > Pie-Radius
 
 ```python
