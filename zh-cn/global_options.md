@@ -192,6 +192,28 @@ class DataZoomOpts(
     # 是否锁定选择区域（或叫做数据窗口）的大小。
     # 如果设置为 true 则锁定选择区域的大小，也就是说，只能平移，不能缩放。
     is_zoom_lock: bool = False,
+
+    # dataZoom-slider 组件离容器左侧的距离。
+    # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
+    # 也可以是 'left', 'center', 'right'。
+    # 如果 left 的值为 'left', 'center', 'right'，组件会根据相应的位置自动对齐。
+    pos_left: Optional[str] = None,
+
+    # dataZoom-slider 组件离容器上侧的距离。
+    # top 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
+    # 也可以是 'top', 'middle', 'bottom'。
+    # 如果 top 的值为 'top', 'middle', 'bottom'，组件会根据相应的位置自动对齐。
+    pos_top: Optional[str] = None,
+
+    # dataZoom-slider 组件离容器右侧的距离。
+    # right 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
+    # 默认自适应。
+    pos_right: Optional[str] = None,
+
+    # dataZoom-slider组件离容器下侧的距离。
+    # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
+    # 默认自适应。
+    pos_bottom: Optional[str] = None,
 )
 ```
 

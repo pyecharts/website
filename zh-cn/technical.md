@@ -5,6 +5,7 @@
 - [Codecov](https://codecov.io)：代码覆盖率
 - [nose](http://nose.readthedocs.io/en/latest/index.html) ：单元测试工具
 - [flake8](http://flake8.pycqa.org/en/latest/index.html) ：静态代码检查
+- [isort(4.3.16)](https://github.com/timothycrosley/isort)：import 格式化
 - [black(19.3b0)](https://github.com/ambv/black) ：代码格式化
 
 ## 开发约定

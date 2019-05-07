@@ -13,6 +13,7 @@ $ git clone https://github.com/pyecharts/pyecharts.git
 $ cd pyecharts
 $ pip install -r requirements.txt
 $ python setup.py install
+# 或者执行 python install.py
 ```
 
 ## 5 分钟上手
