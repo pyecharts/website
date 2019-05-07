@@ -175,6 +175,25 @@ def bar_yaxis_formatter() -> Bar:
 ```
 ![](https://user-images.githubusercontent.com/19553554/57181491-1ae0d400-6ec7-11e9-9db5-6e07b0c9f431.png)
 
+> Bar-XY 轴名称
+
+```python
+def bar_xyaxis_name() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-XY 轴名称"),
+            yaxis_opts=opts.AxisOpts(name="我是 Y 轴"),
+            xaxis_opts=opts.AxisOpts(name="我是 X 轴"),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57306732-edd63080-7115-11e9-8bde-b207c4e6f785.png)
+
 > Bar-翻转 XY 轴
 
 ```python

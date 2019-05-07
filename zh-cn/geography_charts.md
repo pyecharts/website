@@ -472,7 +472,8 @@ class BMap(
 
 ```python
 def add_schema(
-    # 百度地图开发应用 appkey
+    # 百度地图开发应用 appkey，请使用到百度地图的开发者自行到百度地图开发者中心
+    # 注册百度 ak。
     baidu_ak: str,
     
     # 当前视角的中心点，用经纬度表示

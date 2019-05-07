@@ -85,3 +85,12 @@ class Faker:
             ]
         )
 ```
+
+如何运行 example 文件夹中的示例
+
+```shell
+$ git clone https://github.com/pyecharts/pyecharts.git
+$ cd pyecharts/example
+$ python bar_example.py
+# 使用浏览器打开 example/render.html 文件
+```
