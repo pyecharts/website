@@ -79,8 +79,12 @@ def add_yaxis(
     # 数据堆叠，同个类目轴上系列配置相同的　stack　值可以堆叠放置。
     stack: Optional[str] = None,
 
-    # 同一系列的柱间距离，默认为类目间距的20%，可设固定值
+    # 同一系列的柱间距离，默认为类目间距的 20%，可设固定值
     category_gap: Union[Numeric, str] = "20%",
+
+    # 不同系列的柱间距离，为百分比（如 '30%'，表示柱子宽度的 30%）。
+    # 如果想要两个系列的柱子重叠，可以设置 gap 为 '-100%'。这在用柱子做背景的时候有用。
+    gap: Optional[str] = None,
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
