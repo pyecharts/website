@@ -155,6 +155,23 @@ def bar_toolbox() -> Bar:
 ```
 ![](https://user-images.githubusercontent.com/19553554/56866240-816a7b80-6a09-11e9-9fce-1443541b36dd.png)
 
+> Bar-不同系列柱间距离
+
+```python
+def bar_gap() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values(), gap="0%")
+        .add_yaxis("商家B", Faker.values(), gap="0%")
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-不同系列柱间距离"),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57316521-955c5e80-7128-11e9-9f95-adf413015472.png)
+
 > Bar-Y 轴 formatter
 
 ```python
