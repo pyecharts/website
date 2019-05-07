@@ -861,6 +861,30 @@ def kline_datazoom_slider() -> Kline:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55603567-d960ea00-579d-11e9-9368-2fa6f9c28cad.gif)
 
+> Kline-DataZoom-slider-Position（缩小 sliderbar）
+
+```python
+def kline_datazoom_slider_position() -> Kline:
+    c = (
+        Kline()
+        .add_xaxis(["2017/7/{}".format(i + 1) for i in range(31)])
+        .add_yaxis("kline", data)
+        .set_global_opts(
+            xaxis_opts=opts.AxisOpts(is_scale=True),
+            yaxis_opts=opts.AxisOpts(
+                is_scale=True,
+                splitarea_opts=opts.SplitAreaOpts(
+                    is_show=True, areastyle_opts=opts.AreaStyleOpts(opacity=1)
+                ),
+            ),
+            datazoom_opts=[opts.DataZoomOpts(pos_bottom="-2%")],
+            title_opts=opts.TitleOpts(title="Kline-DataZoom-slider-Position"),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57308413-e5cbc000-7118-11e9-932d-c0dd5356b1be.png)
+
 > Kline-ItemStyle
 
 ```python
