@@ -14,7 +14,7 @@ $ python manage.py startapp demo
 在 `pyecharts_django_demo/settings.py` 中注册应用程序
 
 ```python
-# myechartsite/settings.py
+# pyecharts_django_demo/settings.py
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -29,7 +29,7 @@ INSTALLED_APPS = [
 编辑 `demo/urls.py` 文件
 
 ```python
-# myfirstvis/urls.py
+# demo/urls.py
 from django.conf.urls import url
 
 from . import views
@@ -42,7 +42,7 @@ urlpatterns = [
 在 `pyecharts_django_demo/urls.py` 中新增 'demo.urls'
 
 ```python
-myechartsite/urls.py
+pyecharts_django_demo/urls.py
 from django.conf.urls import include, url
 from django.contrib import admin
 
@@ -52,7 +52,7 @@ urlpatterns = [
 ]
 ```
 
-## step 1: 拷贝 pyecharts 模板
+## Step 1: 拷贝 pyecharts 模板
 
 先在 `demo` 文件夹下新建 templates 文件夹
 
