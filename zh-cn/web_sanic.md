@@ -1,5 +1,9 @@
 > 本指南介绍了如何在 Sanic 中使用 pyecharts。
 
+## Sanic 前后端分离
+
+> 前后端分离可以使用动态更新数据，增量更新数据等功能。
+
 ## Step 0: 安装 Sanic 的依赖
 
 ```shell
@@ -28,7 +32,7 @@ html 代码如下
 
         $(
             function () {
-                getData(chart);
+                getData();
             }
         );
 
@@ -38,8 +42,7 @@ html 代码如下
                 url: "http://127.0.0.1:8000/barChart",
                 dataType: 'json',
                 success: function (result) {
-                    console.log(result);
-                    chart.setOption(result);
+                    chart.setOption(JSON.parse(result));
                 }
             });
         }
@@ -72,7 +75,7 @@ def bar_base() -> Bar:
         .add_yaxis("商家A", [randrange(0, 100) for _ in range(6)])
         .add_yaxis("商家B", [randrange(0, 100) for _ in range(6)])
         .set_global_opts(title_opts=opts.TitleOpts(title="Bar-基本示例", subtitle="我是副标题"))
-        .get_options()
+        .dump_options()
     )
     return c
 
@@ -124,28 +127,19 @@ $ python3 app.py
 
         $(
             function () {
-                getData(chart);
-                startInterval()
+                getData();
+                setInterval(fetchData, 2000);
             }
         );
 
-        function startInterval() {
-            if (interval !== null) {
-                clearInterval(interval);
-                interval = null;
-            }
-            interval = setInterval(getData, 2000);
-            alert("计时器启动成功!")
-        }
-
-        function getData() {
+        function fetchData() {
             $.ajax({
                 type: "GET",
                 url: "http://127.0.0.1:8000/barChart",
                 dataType: 'json',
                 success: function (result) {
                     console.log(result);
-                    chart.setOption(result);
+                    chart.setOption(JSON.parse(result));
                 }
             });
         }
@@ -176,19 +170,10 @@ $ python3 app.py
         var old_data = [];
         $(
             function () {
-                getData(chart);
-                startInterval()
+                getData();
+                setInterval(getDynamicData, 2000);
             }
         );
-
-        function startInterval() {
-            if (interval !== null) {
-                clearInterval(interval);
-                interval = null;
-            }
-            interval = setInterval(getDynamicData, 2000);
-            alert("计时器启动成功!")
-        }
 
         function getData() {
             $.ajax({
@@ -196,7 +181,7 @@ $ python3 app.py
                 url: "http://127.0.0.1:8000/lineChart",
                 dataType: 'json',
                 success: function (result) {
-                    chart.setOption(result);
+                    chart.setOption(JSON.parse(result));
                     old_data = chart.getOption().series[0].data;
                 }
             });
@@ -250,7 +235,7 @@ def line_base() -> Line:
             xaxis_opts=opts.AxisOpts(type_="value"),
             yaxis_opts=opts.AxisOpts(type_="value")
         )
-        .get_options()
+        .dump_options()
     )
     return line
 
