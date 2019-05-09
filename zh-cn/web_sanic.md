@@ -1,18 +1,15 @@
-> 本指南会以一个小的 Flask 前后端分离项目为例，说明如何在 Flask 中使用 pyecharts。
+> 本指南介绍了如何在 Sanic 中使用 pyecharts。
 
-## Step 0:
+## Step 0: 安装 Sanic 的依赖
 
 ```shell
-$ mkdir pyecharts-flask-demo
-$ cd pyecharts-flask-demo
-$ mkdir templates
+pip install Sanic
 ```
 
-## Step 1: 新建一个 html 文件
+## Step 1: 新建项目和 html 文件
 
-新建 html 文件保存位于项目根目录的 templates 文件夹
-这里以如下 html 为例. 主要用到了 `jquery` 和 `pyecharts` 管理的 `echarts.min.js` 依赖
-
+新建一个项目文件夹(空的即可)，新建 app.py、templates 文件夹以及在 templates 文件夹中新建 index.html
+html 代码如下
 
 ```html
 <!DOCTYPE html>
@@ -27,49 +24,45 @@ $ mkdir templates
 <body>
     <div id="bar" style="width:1600px; height:800px;"></div>
     <script>
+        var chart = echarts.init(document.getElementById('bar'), 'white', {renderer: 'canvas'});
+
         $(
             function () {
-                var chart = echarts.init(document.getElementById('bar'), 'white', {renderer: 'canvas'});
-                $.ajax({
-                    type: "GET",
-                    url: "http://127.0.0.1:5000/barChart",
-                    dataType: 'json',
-                    success: function (result) {
-                        console.log(result);
-                        chart.setOption(result);
-                    }
-                });
+                getData(chart);
             }
-        )
+        );
+
+        function getData() {
+            $.ajax({
+                type: "GET",
+                url: "http://127.0.0.1:8000/barChart",
+                dataType: 'json',
+                success: function (result) {
+                    console.log(result);
+                    chart.setOption(result);
+                }
+            });
+        }
     </script>
 </body>
 </html>
 ```
 
-## Step 2: 编写 flask 和 pyecharts 代码渲染图表
 
-请将下面的代码保存为 app.py 文件并移至项目的根目录下。
-
-目录结构如下
-```shell
-sunhailindeMacBook-Pro:pyecharts_flask sunhailin$ tree -L 1
-.
-├── app.py
-└── templates
-```
+## Step 2: 编写 Sanic 和 pyecharts 的代码
 
 示例代码
 ```python
 from random import randrange
 
-from flask.json import jsonify
-from flask import Flask, render_template
+from sanic import Sanic
+from sanic.response import json, html
 
 from pyecharts import options as opts
 from pyecharts.charts import Bar
 
-
-app = Flask(__name__, static_folder="templates")
+# 初始化 Sanic
+app = Sanic(__name__)
 
 
 def bar_base() -> Bar:
@@ -84,20 +77,18 @@ def bar_base() -> Bar:
     return c
 
 
-@app.route("/")
-def index():
-    return render_template("index.html")
+@app.route("/barChart", methods=["GET"])
+async def draw_bar_chart(request):
+    return json(bar_base())
 
 
-@app.route("/barChart")
-def get_bar_chart():
-    c = bar_base()
-    return jsonify(c)
+@app.route("/", methods=["GET"])
+async def index(request):
+    return html(open("./templates/index.html").read())
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run()
-
 ```
 
 ## Step 3: 运行项目
@@ -106,9 +97,9 @@ if __name__ == "__main__":
 $ python3 app.py
 ```
 
-使用浏览器打开 http://127.0.0.1:5000 即可访问服务
+使用浏览器打开 http://127.0.0.1:8000 即可访问服务
 
-![](https://user-images.githubusercontent.com/17564655/57358164-633e1180-71a7-11e9-8937-062f27c0147c.png)
+![](https://user-images.githubusercontent.com/17564655/57364426-c171f100-71b5-11e9-8a7a-f0636363bba1.png)
 
 
 ## Extension Function 1: 定时全量更新图表 (前端主动向后端进行数据刷新)
@@ -150,7 +141,7 @@ $ python3 app.py
         function getData() {
             $.ajax({
                 type: "GET",
-                url: "http://127.0.0.1:5000/barChart",
+                url: "http://127.0.0.1:8000/barChart",
                 dataType: 'json',
                 success: function (result) {
                     console.log(result);
@@ -202,7 +193,7 @@ $ python3 app.py
         function getData() {
             $.ajax({
                 type: "GET",
-                url: "http://127.0.0.1:5000/lineChart",
+                url: "http://127.0.0.1:8000/lineChart",
                 dataType: 'json',
                 success: function (result) {
                     chart.setOption(result);
@@ -214,7 +205,7 @@ $ python3 app.py
         function getDynamicData() {
             $.ajax({
                 type: "GET",
-                url: "http://127.0.0.1:5000/lineDynamicData",
+                url: "http://127.0.0.1:8000/lineDynamicData",
                 dataType: 'json',
                 success: function (result) {
                     old_data.push([result.name, result.value]);
@@ -237,14 +228,14 @@ $ python3 app.py
 ```python
 from random import randrange
 
-from flask.json import jsonify
-from flask import Flask, render_template
+from sanic import Sanic
+from sanic.response import json, html
 
 from pyecharts import options as opts
 from pyecharts.charts import Line
 
-
-app = Flask(__name__, static_folder="templates")
+# 初始化 Sanic
+app = Sanic(__name__)
 
 i = 9
 
@@ -264,25 +255,23 @@ def line_base() -> Line:
     return line
 
 
-@app.route("/")
-def index():
-    return render_template("index.html")
+@app.route("/lineChart", methods=["GET"])
+async def draw_line_chart(request):
+    return json(line_base())
 
 
-@app.route("/lineChart")
-def get_line_chart():
-    c = line_base()
-    return jsonify(c)
-
-
-@app.route("/lineDynamicData")
-def update_line_data():
+@app.route("/lineDynamicData", methods=["GET"])
+async def update_line_data(request):
     global i
     i = i + 1
-    return jsonify({"name": i, "value": randrange(0, 100)})
+    return json({"name": i, "value": randrange(0, 100)})
 
 
-if __name__ == "__main__":
+@app.route("/", methods=["GET"])
+async def index(request):
+    return html(open("./templates/index.html").read())
+
+
+if __name__ == '__main__':
     app.run()
-
 ```

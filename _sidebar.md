@@ -13,6 +13,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。Echarts 是百度开�
 - 图表类型
   - [基本图表](zh-cn/basic_charts)
   - [直角坐标系图表](zh-cn/rectangular_charts)
+  - [树型图表](zh-cn/tree_charts)
   - [地理图表](zh-cn/geography_charts)
   - [3D 图表](zh-cn/3d_charts)
   - [组合图表](zh-cn/composite_charts)
@@ -23,11 +24,9 @@ pyecharts 是一个用于生成 Echarts 图表的类库。Echarts 是百度开�
   - [原生 Javascropt](zh-cn/javasrcipt)
   - [资源引用](zh-cn/assets_host)
 - Web 框架整合
-  - [Flask 模版渲染](zh-cn/web_flask_render)
-  - [Flask 前后端分离](zh-cn/web_flask_api)
-  - [Sanic 前后端分离](zh-cn/web_sanic_api)
-  - [Django 模版渲染](zh-cn/web_django_render)
-  - [Django 前后端分离](zh-cn/web_django_api)
+  - [Flask](zh-cn/web_flask)
+  - [Sanic](zh-cn/web_sanic)
+  - [Django](zh-cn/web_django)
 - 其他资源
   - [地理地图数据](zh-cn/datasets)
 - 项目发布
