@@ -476,7 +476,7 @@ class MarkAreaItem(
 
 ```python
 class MarkAreaOpts(
-    # 图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+    # 图形是否不响应和触发鼠标事件，默认为 False，即响应和触发鼠标事件。
     is_silent: bool = False,
     
     # 标签配置项，参考 `series_options.LabelOpts`
@@ -492,13 +492,33 @@ class MarkAreaOpts(
 
 ```python
 class EffectOpts(
+    # 是否显示特效。
     is_show: bool = True,
+
+    # 波纹的绘制方式，可选 'stroke' 和 'fill'，Scatter 类型有效。
     brush_type: str = "stroke",
+
+    # 动画中波纹的最大缩放比例，Scatter 类型有效。
     scale: Numeric = 2.5,
+
+    # 动画的周期，秒数，Scatter 类型有效。
     period: Numeric = 4,
+
+    # 特效标记的颜色
     color: Optional[str] = None,
+
+    # 特效图形的标记。
+    # ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 
+    # 'diamond', 'pin', 'arrow', 'none'
+    # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
     symbol: Optional[str] = None,
+
+    # 特效标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示高和宽，
+    # 例如 [20, 10] 表示标记宽为 20，高为 10。
     symbol_size: Optional[Numeric] = None,
+
+    # 特效尾迹的长度。取从 0 到 1 的值，数值越大尾迹越长。Geo 图设置 Lines 类型时有效。
+    trail_length: Optional[Numeric] = None,
 )
 ```
 

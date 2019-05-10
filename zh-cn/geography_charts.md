@@ -459,6 +459,8 @@ def map_guangdong() -> Map:
 
 ## BMap：百度地图
 
+百度地图需要申请开发者 AK，[官网申请](https://lbsyun.baidu.com/)。
+
 > *class pyecharts.charts.BMap*
 
 ```python
@@ -523,9 +525,6 @@ def add(
     # 是否启用大规模线图的优化，在数据图形特别多的时候（>=5k）可以开启
     is_large: bool = False,
     
-    # 特效尾迹的长度。取从 0 到 1 的值，数值越大尾迹越长。默认值 0.2
-    trail_length: Numeric = 0.2,
-    
     # 开启绘制优化的阈值。
     large_threshold: Numeric = 2000,
 
@@ -551,38 +550,38 @@ def add(
 ```python
 def add_control_panel(
     # 地图的平移缩放控件
-    navigation_control_opts: Union[opts.BMapNavigationControlOpts, None] = None,
+    navigation_control_opts: Union[opts.BMapNavigationControlOpts, dict, None] = None,
     
     # 缩略地图控件
-    overview_map_opts: Union[opts.BMapOverviewMapControlOpts, None] = None,
+    overview_map_opts: Union[opts.BMapOverviewMapControlOpts, dict, None] = None,
     
     # 比例尺控件
-    scale_control_opts: Union[opts.BMapScaleControlOpts, None] = None,
+    scale_control_opts: Union[opts.BMapScaleControlOpts, dict, None] = None,
     
     # 切换地图类型的控件
-    maptype_control_opts: Union[opts.BMapTypeControl, None] = None,
+    maptype_control_opts: Union[opts.BMapTypeControl, dict, None] = None,
     
     # 版权控件，您可以在地图上添加自己的版权信息。
     # 每一个版权信息需要包含如下内容：版权的唯一标识、版权内容和其适用的区域范围。
-    copyright_control_opts: Union[opts.BMapCopyrightType, None] = None,
+    copyright_control_opts: Union[opts.BMapCopyrightType, dict, None] = None,
     
     # 地图定位的控件，使用 HTML5 浏览器定位功能
-    geo_location_control_opts: Union[opts.BMapGeoLocationControlOpts, None] = None,
+    geo_location_control_opts: Union[opts.BMapGeoLocationControlOpts, dict, None] = None,
 )
 ```
 
-### BMapNavigationControlOpts
+### BMapNavigationControlOpts：地图的平移缩放控件
 
 > *class pyecahrts.options.BMapNavigationControlOpts*
 
 ```python
 class BMapNavigationControlOpts(
     # 控件的停靠位置
-    # BMAP_ANCHOR_TOP_LEFT，控件将定位到地图的左上角，值为 0
-    # BMAP_ANCHOR_TOP_RIGHT，控件将定位到地图的右上角，值为 1
-    # BMAP_ANCHOR_BOTTOM_LEFT，控件将定位到地图的左下角，值为 2
-    # BMAP_ANCHOR_BOTTOM_RIGHT，控件将定位到地图的右下角，值为 3
-    position: Numeric = BMapType.BMAP_ANCHOR_TOP_LEFT,
+    # ANCHOR_TOP_LEFT，控件将定位到地图的左上角，值为 0
+    # ANCHOR_TOP_RIGHT，控件将定位到地图的右上角，值为 1
+    # ANCHOR_BOTTOM_LEFT，控件将定位到地图的左下角，值为 2
+    # ANCHOR_BOTTOM_RIGHT，控件将定位到地图的右下角，值为 3
+    position: Numeric = BMapType.ANCHOR_TOP_LEFT,
     
     # 控件的水平偏移值
     offset_width: Numeric = 10,
@@ -591,11 +590,11 @@ class BMapNavigationControlOpts(
     offset_height: Numeric = 10,
     
     # 平移缩放控件的类型
-    # BMAP_NAVIGATION_CONTROL_LARGE，标准的平移缩放控件（包括平移、缩放按钮和滑块，值为 0
-    # BMAP_NAVIGATION_CONTROL_SMALL，仅包含平移和缩放按钮，值为 1
-    # BMAP_NAVIGATION_CONTROL_PAN，仅包含平移按钮，值为 2
-    # BMAP_NAVIGATION_CONTROL_ZOOM，仅包含缩放按钮，值为 3
-    type_: Union[BMapType, Numeric] = BMapType.BMAP_NAVIGATION_CONTROL_LARGE,
+    # NAVIGATION_CONTROL_LARGE，标准的平移缩放控件（包括平移、缩放按钮和滑块，值为 0
+    # NAVIGATION_CONTROL_SMALL，仅包含平移和缩放按钮，值为 1
+    # NAVIGATION_CONTROL_PAN，仅包含平移按钮，值为 2
+    # NAVIGATION_CONTROL_ZOOM，仅包含缩放按钮，值为 3
+    type_: Numeric = BMapType.NAVIGATION_CONTROL_LARGE,
 
     # 是否显示级别提示信息
     is_show_zoom_info: bool = False,
@@ -605,18 +604,18 @@ class BMapNavigationControlOpts(
 )
 ```
 
-### BMapOverviewMapControlOpts
+### BMapOverviewMapControlOpts：缩略地图控件
 
 > *class pyecahrts.options.BMapOverviewMapControlOpts*
 
 ```python
 class BMapOverviewMapControlOpts(
     # 控件的停靠位置
-    # BMAP_ANCHOR_TOP_LEFT，控件将定位到地图的左上角，值为 0
-    # BMAP_ANCHOR_TOP_RIGHT，控件将定位到地图的右上角，值为 1
-    # BMAP_ANCHOR_BOTTOM_LEFT，控件将定位到地图的左下角，值为 2
-    # BMAP_ANCHOR_BOTTOM_RIGHT，控件将定位到地图的右下角，值为 3
-    position: Numeric = BMapType.BMAP_ANCHOR_BOTTOM_RIGHT,
+    # ANCHOR_TOP_LEFT，控件将定位到地图的左上角，值为 0
+    # ANCHOR_TOP_RIGHT，控件将定位到地图的右上角，值为 1
+    # ANCHOR_BOTTOM_LEFT，控件将定位到地图的左下角，值为 2
+    # ANCHOR_BOTTOM_RIGHT，控件将定位到地图的右下角，值为 3
+    position: Numeric = BMapType.ANCHOR_BOTTOM_RIGHT,
 
     # 控件的水平偏移值
     offset_width: Numeric = 10,
@@ -629,18 +628,18 @@ class BMapOverviewMapControlOpts(
 )
 ```
 
-### BMapScaleControlOpts
+### BMapScaleControlOpts：比例尺控件
 
 > *class pyecahrts.options.BMapScaleControlOpts*
 
 ```python
 class BMapScaleControlOpts(
     # 控件的停靠位置
-    # BMAP_ANCHOR_TOP_LEFT，控件将定位到地图的左上角，值为 0
-    # BMAP_ANCHOR_TOP_RIGHT，控件将定位到地图的右上角，值为 1
-    # BMAP_ANCHOR_BOTTOM_LEFT，控件将定位到地图的左下角，值为 2
-    # BMAP_ANCHOR_BOTTOM_RIGHT，控件将定位到地图的右下角，值为 3
-    position: Numeric = BMapType.BMAP_ANCHOR_BOTTOM_RIGHT,
+    # ANCHOR_TOP_LEFT，控件将定位到地图的左上角，值为 0
+    # ANCHOR_TOP_RIGHT，控件将定位到地图的右上角，值为 1
+    # ANCHOR_BOTTOM_LEFT，控件将定位到地图的左下角，值为 2
+    # ANCHOR_BOTTOM_RIGHT，控件将定位到地图的右下角，值为 3
+    position: Numeric = BMapType.ANCHOR_BOTTOM_RIGHT,
 
     # 控件的水平偏移值
     offset_width: Numeric = 10,
@@ -650,39 +649,39 @@ class BMapScaleControlOpts(
 )
 ```
 
-### BMapTypeControl
+### BMapTypeControl：切换地图类型的控件
 
 > *class pyecahrts.options.BMapTypeControl*
 
 ```python
 class BMapTypeControl(
     # 控件的停靠位置
-    # BMAP_ANCHOR_TOP_LEFT，控件将定位到地图的左上角，值为 0
-    # BMAP_ANCHOR_TOP_RIGHT，控件将定位到地图的右上角，值为 1
-    # BMAP_ANCHOR_BOTTOM_LEFT，控件将定位到地图的左下角，值为 2
-    # BMAP_ANCHOR_BOTTOM_RIGHT，控件将定位到地图的右下角，值为 3
-    position: Numeric = BMapType.BMAP_ANCHOR_TOP_RIGHT,
+    # ANCHOR_TOP_LEFT，控件将定位到地图的左上角，值为 0
+    # ANCHOR_TOP_RIGHT，控件将定位到地图的右上角，值为 1
+    # ANCHOR_BOTTOM_LEFT，控件将定位到地图的左下角，值为 2
+    # ANCHOR_BOTTOM_RIGHT，控件将定位到地图的右下角，值为 3
+    position: Numeric = BMapType.ANCHOR_TOP_RIGHT,
 
     # 地图类型属性
-    # BMAP_MAPTYPE_CONTROL_HORIZONTAL，按钮水平方式展示，默认采用此类型展示。值为 0
-    # BMAP_MAPTYPE_CONTROL_DROPDOWN，按钮呈下拉列表方式展示，值为 1
-    # BMAP_MAPTYPE_CONTROL_MAP，以图片方式展示类型控件，设置该类型后无法指定 maptypes 属性，值为 2
-    type_: Numeric = BMapType.BMAP_MAPTYPE_CONTROL_HORIZONTAL,
+    # MAPTYPE_CONTROL_HORIZONTAL，按钮水平方式展示，默认采用此类型展示。值为 0
+    # MAPTYPE_CONTROL_DROPDOWN，按钮呈下拉列表方式展示，值为 1
+    # MAPTYPE_CONTROL_MAP，以图片方式展示类型控件，设置该类型后无法指定 maptypes 属性，值为 2
+    type_: Numeric = BMapType.MAPTYPE_CONTROL_HORIZONTAL,
 )
 ```
 
-### BMapCopyrightType
+### BMapCopyrightType：版权控件
 
 > *class pyecahrts.options.BMapCopyrightType*
 
 ```python
 class BMapCopyrightType(
     # 控件的停靠位置
-    # BMAP_ANCHOR_TOP_LEFT，控件将定位到地图的左上角，值为 0
-    # BMAP_ANCHOR_TOP_RIGHT，控件将定位到地图的右上角，值为 1
-    # BMAP_ANCHOR_BOTTOM_LEFT，控件将定位到地图的左下角，值为 2
-    # BMAP_ANCHOR_BOTTOM_RIGHT，控件将定位到地图的右下角，值为 3
-    position: Numeric = BMapType.BMAP_ANCHOR_BOTTOM_RIGHT,
+    # ANCHOR_TOP_LEFT，控件将定位到地图的左上角，值为 0
+    # ANCHOR_TOP_RIGHT，控件将定位到地图的右上角，值为 1
+    # ANCHOR_BOTTOM_LEFT，控件将定位到地图的左下角，值为 2
+    # ANCHOR_BOTTOM_RIGHT，控件将定位到地图的右下角，值为 3
+    position: Numeric = BMapType.ANCHOR_BOTTOM_RIGHT,
 
     # 控件的水平偏移值
     offset_width: Numeric = 10,
@@ -691,22 +690,22 @@ class BMapCopyrightType(
     offset_height: Numeric = 50,
 
     # Copyright 的文本内容, 可以放入 HTML 标签
-    copyright: str = "",
+    copyright_: str = "",
 )
 ```
 
-### BMapGeoLocationControlOpts
+### BMapGeoLocationControlOpts：地图定位的控件
 
 > *class pyecahrts.options.BMapGeoLocationControlOpts*
 
 ```python
 class BMapGeoLocationControlOpts(
     # 控件的停靠位置
-    # BMAP_ANCHOR_TOP_LEFT，控件将定位到地图的左上角，值为 0
-    # BMAP_ANCHOR_TOP_RIGHT，控件将定位到地图的右上角，值为 1
-    # BMAP_ANCHOR_BOTTOM_LEFT，控件将定位到地图的左下角，值为 2
-    # BMAP_ANCHOR_BOTTOM_RIGHT，控件将定位到地图的右下角，值为 3
-    position: Numeric = BMapType.BMAP_ANCHOR_BOTTOM_RIGHT,
+    # ANCHOR_TOP_LEFT，控件将定位到地图的左上角，值为 0
+    # ANCHOR_TOP_RIGHT，控件将定位到地图的右上角，值为 1
+    # ANCHOR_BOTTOM_LEFT，控件将定位到地图的左下角，值为 2
+    # ANCHOR_BOTTOM_RIGHT，控件将定位到地图的右下角，值为 3
+    position: Numeric = BMapType.ANCHOR_BOTTOM_RIGHT,
 
     # 控件的水平偏移值
     offset_width: Numeric = 10,
@@ -727,11 +726,13 @@ class BMapGeoLocationControlOpts(
 > BMap 基本示例
 
 ```python
+BAIDU_AK = "your_baidu_map_ak"
+
 def bmap_base() -> BMap:
     c = (
         BMap()
         .add_schema(
-            baidu_ak="Uf1rIjuIVVXxDwEy0iEU0tApwdoqGeGn",
+            baidu_ak=BAIDU_AK,
             center=[120.13066322374, 30.240018034923],
         )
         .add(
@@ -743,3 +744,124 @@ def bmap_base() -> BMap:
     )
     return c
 ```
+
+> BMap-杭州热门步行路线
+
+```python
+def bmap_lines() -> BMap:
+    with open(
+        os.path.join("fixtures", "hangzhou-tracks.json"), "r", encoding="utf-8"
+    ) as f:
+        j = json.load(f)
+    c = (
+        BMap()
+        .add_schema(
+            baidu_ak=BAIDU_MAP_AK,
+            center=[120.13066322374, 30.240018034923],
+            zoom=14,
+            is_roam=True,
+            map_style={
+                "styleJson": [
+                    {
+                        "featureType": "water",
+                        "elementType": "all",
+                        "stylers": {"color": "#d1d1d1"},
+                    },
+                    {
+                        "featureType": "land",
+                        "elementType": "all",
+                        "stylers": {"color": "#f3f3f3"},
+                    },
+                    {
+                        "featureType": "railway",
+                        "elementType": "all",
+                        "stylers": {"visibility": "off"},
+                    },
+                    {
+                        "featureType": "highway",
+                        "elementType": "all",
+                        "stylers": {"color": "#fdfdfd"},
+                    },
+                    {
+                        "featureType": "highway",
+                        "elementType": "labels",
+                        "stylers": {"visibility": "off"},
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "geometry",
+                        "stylers": {"color": "#fefefe"},
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "geometry.fill",
+                        "stylers": {"color": "#fefefe"},
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "all",
+                        "stylers": {"visibility": "off"},
+                    },
+                    {
+                        "featureType": "green",
+                        "elementType": "all",
+                        "stylers": {"visibility": "off"},
+                    },
+                    {
+                        "featureType": "subway",
+                        "elementType": "all",
+                        "stylers": {"visibility": "off"},
+                    },
+                    {
+                        "featureType": "manmade",
+                        "elementType": "all",
+                        "stylers": {"color": "#d1d1d1"},
+                    },
+                    {
+                        "featureType": "local",
+                        "elementType": "all",
+                        "stylers": {"color": "#d1d1d1"},
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "labels",
+                        "stylers": {"visibility": "off"},
+                    },
+                    {
+                        "featureType": "boundary",
+                        "elementType": "all",
+                        "stylers": {"color": "#fefefe"},
+                    },
+                    {
+                        "featureType": "building",
+                        "elementType": "all",
+                        "stylers": {"color": "#d1d1d1"},
+                    },
+                    {
+                        "featureType": "label",
+                        "elementType": "labels.text.fill",
+                        "stylers": {"color": "#999999"},
+                    },
+                ]
+            },
+        )
+        .add(
+            "",
+            type_="lines",
+            data_pair=j,
+            is_polyline=True,
+            is_large=True,
+            linestyle_opts=opts.LineStyleOpts(color="purple", opacity=0.6, width=1),
+        )
+        .add_control_panel(
+            maptype_control_opts=opts.BMapTypeControl(
+                type_=BMapType.MAPTYPE_CONTROL_DROPDOWN
+            ),
+            scale_control_opts=opts.BMapScaleControlOpts(),
+            overview_map_opts=opts.BMapOverviewMapControlOpts(is_open=True),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="BMap-杭州热门步行路线"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57545910-431c7700-738e-11e9-896b-e071b55115c7.png)
