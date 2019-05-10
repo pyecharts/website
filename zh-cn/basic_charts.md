@@ -579,6 +579,44 @@ def graph_weibo() -> Graph:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55931763-5b975580-5c59-11e9-966c-b54705924b88.png)
 
+> Graph-NPM Dependencies
+
+```python
+def graph_npm_dependencies() -> Graph:
+    with open(os.path.join("fixtures", "npmdepgraph.json"), "r", encoding="utf-8") as f:
+        j = json.load(f)
+    nodes = [
+        {
+            "x": node["x"],
+            "y": node["y"],
+            "id": node["id"],
+            "name": node["label"],
+            "symbolSize": node["size"],
+            "itemStyle": {"normal": {"color": node["color"]}},
+        }
+        for node in j["nodes"]
+    ]
+
+    edges = [
+        {"source": edge["sourceID"], "target": edge["targetID"]} for edge in j["edges"]
+    ]
+
+    c = (
+        Graph(init_opts=opts.InitOpts(width="1000px", height="600px"))
+        .add(
+            "",
+            nodes=nodes,
+            links=edges,
+            layout="none",
+            label_opts=opts.LabelOpts(is_show=False),
+            linestyle_opts=opts.LineStyleOpts(width=0.5, curve=0.3, opacity=0.7),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Graph-NPM Dependencies"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57499076-e29b2480-7310-11e9-85db-29712819308d.png)
+
 
 ## Liquid：水球图
 
@@ -614,6 +652,9 @@ def add(
     # 是否显示边框。
     is_outline_show: bool = True,
 
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(font_size=50, position="inside"),
+
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
 )
@@ -638,6 +679,31 @@ def liquid_base() -> Liquid:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/55931845-aadd8600-5c59-11e9-9446-7700ddb3e875.gif)
+
+> Liquid-数据精度
+
+```python
+def liquid_data_precision() -> Liquid:
+    c = (
+        Liquid()
+        .add(
+            "lq",
+            [0.3254],
+            label_opts=opts.LabelOpts(
+                font_size=50,
+                formatter=JsCode(
+                    """function (param) {
+                        return (Math.floor(param.value * 10000) / 100) + '%';
+                    }"""
+                ),
+                position="inside",
+            ),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Liquid-数据精度"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57499126-0a8a8800-7311-11e9-8d05-0040c5a70de4.png)
 
 > Liquid-无边框
 
