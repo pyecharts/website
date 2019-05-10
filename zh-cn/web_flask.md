@@ -159,7 +159,6 @@ def bar_base() -> Bar:
         .add_yaxis("商家A", [randrange(0, 100) for _ in range(6)])
         .add_yaxis("商家B", [randrange(0, 100) for _ in range(6)])
         .set_global_opts(title_opts=opts.TitleOpts(title="Bar-基本示例", subtitle="我是副标题"))
-        .get_options()
     )
     return c
 

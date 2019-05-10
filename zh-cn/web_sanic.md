@@ -75,14 +75,14 @@ def bar_base() -> Bar:
         .add_yaxis("商家A", [randrange(0, 100) for _ in range(6)])
         .add_yaxis("商家B", [randrange(0, 100) for _ in range(6)])
         .set_global_opts(title_opts=opts.TitleOpts(title="Bar-基本示例", subtitle="我是副标题"))
-        .dump_options()
     )
     return c
 
 
 @app.route("/barChart", methods=["GET"])
 async def draw_bar_chart(request):
-    return json(bar_base())
+    c = bar_base()
+    return json(c.dump_options())
 
 
 @app.route("/", methods=["GET"])
@@ -235,14 +235,14 @@ def line_base() -> Line:
             xaxis_opts=opts.AxisOpts(type_="value"),
             yaxis_opts=opts.AxisOpts(type_="value")
         )
-        .dump_options()
     )
     return line
 
 
 @app.route("/lineChart", methods=["GET"])
 async def draw_line_chart(request):
-    return json(line_base())
+    c = line_base()
+    return json(c.dump_options())
 
 
 @app.route("/lineDynamicData", methods=["GET"])
