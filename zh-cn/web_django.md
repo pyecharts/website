@@ -298,8 +298,9 @@ $ python manage.py runserver
 
 ## Extension Function 1: 定时全量更新图表 (前端主动向后端进行数据刷新)
 
-定时刷新的核心在于 html 的 `setInterval` 方法，这里附上定时刷新的 demo html 代码。
+定时刷新的核心在于 html 的 `setInterval` 方法。
 
+index.html
 ```html
 <!DOCTYPE html>
 <html>
@@ -313,32 +314,21 @@ $ python manage.py runserver
 <body>
     <div id="bar" style="width:1600px; height:800px;"></div>
     <script>
-        var interval = null; //计时器
         var chart = echarts.init(document.getElementById('bar'), 'white', {renderer: 'canvas'});
 
         $(
             function () {
                 getData(chart);
-                startInterval()
+                setInterval(fetchData, 2000);
             }
         );
 
-        function startInterval() {
-            if (interval !== null) {
-                clearInterval(interval);
-                interval = null;
-            }
-            interval = setInterval(getData, 2000);
-            alert("计时器启动成功!")
-        }
-
-        function getData() {
+        function fetchData() {
             $.ajax({
                 type: "GET",
                 url: "http://127.0.0.1:8000/demo/bar",
                 dataType: 'json',
                 success: function (result) {
-                    console.log(result);
                     chart.setOption(result.data);
                 }
             });
@@ -350,8 +340,7 @@ $ python manage.py runserver
 
 ## Extension Function 2: 定时增量更新图表
 
-定时刷新的核心在于 html 的 `setInterval` 方法，这里附上定时刷新的 demo html 代码。
-
+index.html
 ```html
 <!DOCTYPE html>
 <html>
@@ -365,30 +354,20 @@ $ python manage.py runserver
 <body>
     <div id="bar" style="width:1600px; height:800px;"></div>
     <script>
-        var interval = null; //计时器
         var chart = echarts.init(document.getElementById('bar'), 'white', {renderer: 'canvas'});
         var old_data = [];
         $(
             function () {
                 getData(chart);
-                startInterval()
+                setInterval(fetchData, 2000);
             }
         );
 
-        function startInterval() {
-            if (interval !== null) {
-                clearInterval(interval);
-                interval = null;
-            }
-            interval = setInterval(getDynamicData, 2000);
-            alert("计时器启动成功!")
-        }
-
-        function getData() {
+        function fetchData() {
             $.ajax({
                 type: "GET",
                 url: "http://127.0.0.1:8000/demo/line",
-                dataType: 'json',
+                dataType: "json",
                 success: function (result) {
                     var options = result.data;
                     chart.setOption(options);
@@ -478,8 +457,6 @@ def json_error(error_string="error", code=500, **kwargs):
 JsonResponse = json_response
 JsonError = json_error
 
-i = 9
-
 
 def line_base() -> Line:
     line = (
@@ -501,11 +478,14 @@ class ChartView(APIView):
         return JsonResponse(json.loads(line_base()))
 
 
+cnt = 9
+
+
 class ChartUpdateView(APIView):
     def get(self, request, *args, **kwargs):
-        global i
-        i = i + 1
-        return JsonResponse({"name": i, "value": randrange(0, 100)})
+        global cnt
+        cnt = cnt + 1
+        return JsonResponse({"name": cnt, "value": randrange(0, 100)})
 
 class IndexView(APIView):
     def get(self, request, *args, **kwargs):

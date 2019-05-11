@@ -4,17 +4,17 @@
 
 > 前后端分离可以使用动态更新数据，增量更新数据等功能。
 
-## Step 0: 安装 Sanic 的依赖
+### Step 0: 安装 Sanic 的依赖
 
 ```shell
-pip install Sanic
+$ pip install Sanic
 ```
 
-## Step 1: 新建项目和 html 文件
+### Step 1: 新建项目和 HTML 文件
 
-新建一个项目文件夹(空的即可)，新建 app.py、templates 文件夹以及在 templates 文件夹中新建 index.html
-html 代码如下
+新建一个项目文件夹(空的即可)，新建 app.py、templates 文件夹以及在 templates 文件夹中新建 index.html。
 
+index.html
 ```html
 <!DOCTYPE html>
 <html>
@@ -26,7 +26,7 @@ html 代码如下
 
 </head>
 <body>
-    <div id="bar" style="width:1600px; height:800px;"></div>
+    <div id="bar" style="width:1000px; height:600px;"></div>
     <script>
         var chart = echarts.init(document.getElementById('bar'), 'white', {renderer: 'canvas'});
 
@@ -51,8 +51,7 @@ html 代码如下
 </html>
 ```
 
-
-## Step 2: 编写 Sanic 和 pyecharts 的代码
+### Step 2: 编写 Sanic 和 pyecharts 的代码
 
 示例代码
 ```python
@@ -94,10 +93,10 @@ if __name__ == '__main__':
     app.run()
 ```
 
-## Step 3: 运行项目
+### Step 3: 运行项目
 
 ```shell
-$ python3 app.py
+$ python app.py
 ```
 
 使用浏览器打开 http://127.0.0.1:8000 即可访问服务
@@ -107,8 +106,9 @@ $ python3 app.py
 
 ## Extension Function 1: 定时全量更新图表 (前端主动向后端进行数据刷新)
 
-定时刷新的核心在于 html 的 `setInterval` 方法，这里附上定时刷新的 demo html 代码。
+定时刷新的核心在于 html 的 `setInterval` 方法。
 
+index.html
 ```html
 <!DOCTYPE html>
 <html>
@@ -120,14 +120,13 @@ $ python3 app.py
 
 </head>
 <body>
-    <div id="bar" style="width:1600px; height:800px;"></div>
+    <div id="bar" style="width:1000px; height:600px;"></div>
     <script>
-        var interval = null; //计时器
         var chart = echarts.init(document.getElementById('bar'), 'white', {renderer: 'canvas'});
 
         $(
             function () {
-                getData();
+                fetchData();
                 setInterval(fetchData, 2000);
             }
         );
@@ -136,9 +135,8 @@ $ python3 app.py
             $.ajax({
                 type: "GET",
                 url: "http://127.0.0.1:8000/barChart",
-                dataType: 'json',
+                dataType: "json",
                 success: function (result) {
-                    console.log(result);
                     chart.setOption(JSON.parse(result));
                 }
             });
@@ -150,8 +148,7 @@ $ python3 app.py
 
 ## Extension Function 2: 定时增量更新图表
 
-定时刷新的核心在于 html 的 `setInterval` 方法，这里附上定时刷新的 demo html 代码。
-
+index.html
 ```html
 <!DOCTYPE html>
 <html>
@@ -163,23 +160,22 @@ $ python3 app.py
 
 </head>
 <body>
-    <div id="bar" style="width:1600px; height:800px;"></div>
+    <div id="bar" style="width:1000px; height:600px;"></div>
     <script>
-        var interval = null; //计时器
         var chart = echarts.init(document.getElementById('bar'), 'white', {renderer: 'canvas'});
         var old_data = [];
         $(
             function () {
-                getData();
+                fetchData();
                 setInterval(getDynamicData, 2000);
             }
         );
 
-        function getData() {
+        function fetchData() {
             $.ajax({
                 type: "GET",
                 url: "http://127.0.0.1:8000/lineChart",
-                dataType: 'json',
+                dataType: "json",
                 success: function (result) {
                     chart.setOption(JSON.parse(result));
                     old_data = chart.getOption().series[0].data;
@@ -191,7 +187,7 @@ $ python3 app.py
             $.ajax({
                 type: "GET",
                 url: "http://127.0.0.1:8000/lineDynamicData",
-                dataType: 'json',
+                dataType: "json",
                 success: function (result) {
                     old_data.push([result.name, result.value]);
                     chart.setOption({
@@ -222,8 +218,6 @@ from pyecharts.charts import Line
 # 初始化 Sanic
 app = Sanic(__name__)
 
-i = 9
-
 
 def line_base() -> Line:
     line = (
@@ -244,12 +238,13 @@ async def draw_line_chart(request):
     c = line_base()
     return json(c.dump_options())
 
+cnt = 9
 
 @app.route("/lineDynamicData", methods=["GET"])
 async def update_line_data(request):
-    global i
-    i = i + 1
-    return json({"name": i, "value": randrange(0, 100)})
+    global cnt
+    cnt = cnt + 1
+    return json({"name": cnt, "value": randrange(0, 100)})
 
 
 @app.route("/", methods=["GET"])
