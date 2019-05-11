@@ -219,10 +219,10 @@ index.html
 将下列代码保存到 `demo/views.py` 中
 
 ```python
+import json
 from random import randrange
 
 from django.http import HttpResponse
-from dss.Serializer import serializer
 from rest_framework.views import APIView
 
 from pyecharts.charts import Bar
@@ -230,8 +230,8 @@ from pyecharts import options as opts
 
 
 # Create your views here.
-def response_as_json(data, foreign_penetrate=False):
-    json_str = serializer(data=data, output_type="json", foreign=foreign_penetrate)
+def response_as_json(data):
+    json_str = json.dumps(data)
     response = HttpResponse(
         json_str,
         content_type="application/json",
@@ -240,13 +240,13 @@ def response_as_json(data, foreign_penetrate=False):
     return response
 
 
-def json_response(data, code=200, foreign_penetrate=False, **kwargs):
+def json_response(data, code=200):
     data = {
         "code": code,
         "msg": "success",
         "data": data,
     }
-    return response_as_json(data, foreign_penetrate=foreign_penetrate)
+    return response_as_json(data)
 
 
 def json_error(error_string="error", code=500, **kwargs):
@@ -270,14 +270,14 @@ def bar_base() -> Bar:
         .add_yaxis("商家A", [randrange(0, 100) for _ in range(6)])
         .add_yaxis("商家B", [randrange(0, 100) for _ in range(6)])
         .set_global_opts(title_opts=opts.TitleOpts(title="Bar-基本示例", subtitle="我是副标题"))
-        .get_options()
+        .dump_options()
     )
     return c
 
 
 class ChartView(APIView):
     def get(self, request, *args, **kwargs):
-        return JsonResponse(bar_base())
+        return JsonResponse(json.loads(bar_base()))
 
 
 class IndexView(APIView):
@@ -436,18 +436,18 @@ urlpatterns = [
 
 
 ```python
+import json
 from random import randrange
 
 from django.http import HttpResponse
-from dss.Serializer import serializer
 from rest_framework.views import APIView
 
 from pyecharts.charts import Line
 from pyecharts import options as opts
 
 # Create your views here.
-def response_as_json(data, foreign_penetrate=False):
-    json_str = serializer(data=data, output_type="json", foreign=foreign_penetrate)
+def response_as_json(data):
+    json_str = json.dumps(data)
     response = HttpResponse(
         json_str,
         content_type="application/json",
@@ -456,13 +456,13 @@ def response_as_json(data, foreign_penetrate=False):
     return response
 
 
-def json_response(data, code=200, foreign_penetrate=False, **kwargs):
+def json_response(data, code=200):
     data = {
         "code": code,
         "msg": "success",
         "data": data,
     }
-    return response_as_json(data, foreign_penetrate=foreign_penetrate)
+    return response_as_json(data)
 
 
 def json_error(error_string="error", code=500, **kwargs):
@@ -491,14 +491,14 @@ def line_base() -> Line:
             xaxis_opts=opts.AxisOpts(type_="value"),
             yaxis_opts=opts.AxisOpts(type_="value")
         )
-        .get_options()
+        .dump_options()
     )
     return line
 
 
 class ChartView(APIView):
     def get(self, request, *args, **kwargs):
-        return JsonResponse(line_base())
+        return JsonResponse(json.loads(line_base()))
 
 
 class ChartUpdateView(APIView):
