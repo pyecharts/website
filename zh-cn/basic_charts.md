@@ -1811,6 +1811,10 @@ def add(
     # 或者用 javascript 回调函数进行排列：
     sort_: Optional[JSFunc] = "desc",
     
+    # 旭日图多层级配置
+    # 目前配置方式可以参考: https://www.echartsjs.com/option.html#series-sunburst.levels
+    levels: Optional[Sequence] = None,
+    
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
     
@@ -1917,22 +1921,42 @@ def sunburst_base() -> Sunburst:
 > Sunburst-官方示例
 
 ```python
-def sunburst_base_json() -> Sunburst:
-    with open(os.path.join("fixtures", "family.json"), "r", encoding="utf-8") as f:
+def sunburst_official() -> Sunburst:
+    with open(os.path.join("fixtures", "drink.json"), "r", encoding="utf-8") as f:
         j = json.load(f)
 
     c = (
         Sunburst(init_opts=opts.InitOpts(width="1000px", height="600px"))
         .add(
             "",
-            data_pair=j
+            data_pair=j,
+            highlight_policy="ancestor",
+            radius=[0, "95%"],
+            sort_="null",
+            levels=[
+                {},
+                {
+                    "r0": "15%",
+                    "r": "35%",
+                    "itemStyle": {"borderWidth": 2},
+                    "label": {"rotate": "tangential"},
+                },
+                {"r0": "35%", "r": "70%", "label": {"align": "right"}},
+                {
+                    "r0": "70%",
+                    "r": "72%",
+                    "label": {"position": "outside", "padding": 3, "silent": False},
+                    "itemStyle": {"borderWidth": 3},
+                },
+            ],
         )
-        .set_global_opts(title_opts=opts.TitleOpts(title="Sunburst-官方示例(使用 JSON 传入数据)"))
+        .set_global_opts(title_opts=opts.TitleOpts(title="Sunburst-官方示例"))
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}"))
     )
     return c
+
 ```
-![](https://user-images.githubusercontent.com/17564655/57566356-1ef87e80-73fe-11e9-8ce0-b9f94e4b2231.png)
+![](https://user-images.githubusercontent.com/17564655/57567164-bdd5a880-7407-11e9-8d19-9be2776c57fa.png)
 
 
 ## ThemeRiver：主题河流图
