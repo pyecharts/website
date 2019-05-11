@@ -1763,6 +1763,213 @@ def sankey_offical() -> Sankey:
 ![](https://user-images.githubusercontent.com/19553554/55933787-1ecf5c80-5c61-11e9-8217-cf34864a6ee9.png)
 
 
+## Sunburst：旭日图
+
+> *class pyecharts.charts.Sunburst*
+
+```python
+class Sunburst(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+)
+```
+
+> *func pyecharts.charts.Sunburst.add*
+
+```python
+def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
+    series_name: str,
+    
+    # 数据
+    data_pair: Sequence,
+    
+    # 旭日图的中心（圆心）坐标，数组的第一项是横坐标，第二项是纵坐标。
+    # 支持设置成百分比，设置成百分比时第一项是相对于容器宽度，第二项是相对于容器高度。
+    center: Optional[Sequence] = None,
+    
+    # 旭日图的半径。可以为如下类型：
+    # Sequence.<int|str>：数组的第一项是内半径，第二项是外半径。
+    radius: Optional[Sequence] = None,
+    
+    # 当鼠标移动到一个扇形块时，可以高亮相关的扇形块。
+    # 如果其值为 'descendant'，则会高亮该扇形块和后代元素，其他元素将被淡化；
+    # 如果其值为 'ancestor'，则会高亮该扇形块和祖先元素；
+    # 如果其值为 'self' 则只高亮自身；
+    # 如果其值为 'none' 则不会淡化其他元素。
+    highlight_policy: str = "descendant",
+    
+    # 点击节点后的行为。可取值为：false：节点点击无反应。
+    # 'rootToNode'：点击节点后以该节点为根结点。
+    # 'link'：如果节点数据中有 link 点击节点后会进行超链接跳转。
+    node_click: str = "rootToNode",
+    
+    # 扇形块根据数据 value 的排序方式，如果未指定 value，则其值为子元素 value 之和。
+    # 默认值 'desc' 表示降序排序；
+    # 还可以设置为 'asc' 表示升序排序；
+    # null 表示不排序，使用原始数据的顺序；
+    # 或者用 javascript 回调函数进行排列：
+    sort_: Optional[JSFunc] = "desc",
+    
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+    
+    # 数据项的配置，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+)
+```
+
+### SunburstItem: 旭日图的数据项
+
+> *class pyecharts.options.SunburstItem*
+
+```python
+class SunburstItem(
+    # 数据值，如果包含 children，则可以不写 value 值。
+    # 这时，将使用子元素的 value 之和作为父元素的 value。
+    # 如果 value 大于子元素之和，可以用来表示还有其他子元素未显示。
+    value: Optional[Numeric] = None,
+    
+    # 显示在扇形块中的描述文字。
+    name: Optional[str] = None,
+    
+    # 点击此节点可跳转的超链接。须 Sunburst.add.node_click 值为 'link' 时才生效
+    link: Optional[str] = None,
+    
+    # 意义同 HTML <a> 标签中的 target，跳转方式的不同
+    # blank 是在新窗口或者新的标签页中打开
+    # self 则在当前页面或者当前标签页打开
+    target: Optional[str] = "blank",
+    
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 数据项配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # 子节点数据项配置配置(和 SunburstItem 一致, 递归下去)
+    children: Optional[Sequence] = None,
+)
+```
+
+### Demo
+
+> Sunburst-基本示例
+
+```python
+from pyecharts import options as opts
+from pyecharts.charts import Sunburst
+
+
+def sunburst_base() -> Sunburst:
+    data = [
+        opts.SunburstItem(
+            name="Grandpa",
+            children=[
+                opts.SunburstItem(
+                    name="Uncle Leo",
+                    value=15,
+                    children=[
+                        opts.SunburstItem(name="Cousin Jack", value=2),
+                        opts.SunburstItem(
+                            name="Cousin Mary",
+                            value=5,
+                            children=[opts.SunburstItem(name="Jackson", value=2)],
+                        ),
+                        opts.SunburstItem(name="Cousin Ben", value=4),
+                    ],
+                ),
+                opts.SunburstItem(
+                    name="Father",
+                    value=10,
+                    children=[
+                        opts.SunburstItem(name="Me", value=5),
+                        opts.SunburstItem(name="Brother Peter", value=1),
+                    ],
+                ),
+            ],
+        ),
+        opts.SunburstItem(
+            name="Nancy",
+            children=[
+                opts.SunburstItem(
+                    name="Uncle Nike",
+                    children=[
+                        opts.SunburstItem(name="Cousin Betty", value=1),
+                        opts.SunburstItem(name="Cousin Jenny", value=2),
+                    ],
+                )
+            ],
+        ),
+    ]
+
+    c = (
+        Sunburst()
+        .add(series_name="", data_pair=data, radius=[0, "90%"])
+        .set_global_opts(title_opts=opts.TitleOpts(title="Sunburst-基本示例"))
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}"))
+    )
+    return c
+
+```
+![](https://user-images.githubusercontent.com/17564655/57566356-1ef87e80-73fe-11e9-8ce0-b9f94e4b2231.png)
+
+> Sunburst-官方示例
+
+```python
+def sunburst_offical() -> Sunburst:
+    data = [
+        opts.SunburstItem(
+            name="Grandpa",
+            children=[
+                opts.SunburstItem(
+                    name="Uncle Leo",
+                    value=15,
+                    children=[
+                        opts.SunburstItem(name="Cousin Jack", value=2),
+                        opts.SunburstItem(
+                            name="Cousin Mary",
+                            value=5,
+                            children=[opts.SunburstItem(name="Jackson", value=2)],
+                        ),
+                        opts.SunburstItem(name="Cousin Ben", value=4),
+                    ],
+                ),
+                opts.SunburstItem(
+                    name="Father",
+                    value=10,
+                    children=[
+                        opts.SunburstItem(name="Me", value=5),
+                        opts.SunburstItem(name="Brother Peter", value=1),
+                    ],
+                ),
+            ],
+        ),
+        opts.SunburstItem(
+            name="Nancy",
+            children=[
+                opts.SunburstItem(
+                    name="Uncle Nike",
+                    children=[
+                        opts.SunburstItem(name="Cousin Betty", value=1),
+                        opts.SunburstItem(name="Cousin Jenny", value=2),
+                    ],
+                )
+            ],
+        ),
+    ]
+
+    c = (
+        Sunburst()
+        .add(series_name="", data_pair=data, radius=[0, "90%"])
+        .set_global_opts(title_opts=opts.TitleOpts(title="Sunburst-基本示例"))
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/57566356-1ef87e80-73fe-11e9-8ce0-b9f94e4b2231.png)
+
+
 ## ThemeRiver：主题河流图
 
 > *class pyecharts.charts.ThemeRiver*
