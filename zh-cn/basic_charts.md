@@ -1781,7 +1781,7 @@ def add(
     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
     
-    # 数据
+    # 数据项。
     data_pair: Sequence,
     
     # 旭日图的中心（圆心）坐标，数组的第一项是横坐标，第二项是纵坐标。
@@ -1793,10 +1793,10 @@ def add(
     radius: Optional[Sequence] = None,
     
     # 当鼠标移动到一个扇形块时，可以高亮相关的扇形块。
-    # 如果其值为 'descendant'，则会高亮该扇形块和后代元素，其他元素将被淡化；
-    # 如果其值为 'ancestor'，则会高亮该扇形块和祖先元素；
-    # 如果其值为 'self' 则只高亮自身；
-    # 如果其值为 'none' 则不会淡化其他元素。
+    # 'descendant'：高亮该扇形块和后代元素，其他元素将被淡化；
+    # 'ancestor'：高亮该扇形块和祖先元素；
+    # 'self'：只高亮自身；
+    # 'none'：不会淡化其他元素。
     highlight_policy: str = "descendant",
     
     # 点击节点后的行为。可取值为：false：节点点击无反应。
@@ -1805,10 +1805,10 @@ def add(
     node_click: str = "rootToNode",
     
     # 扇形块根据数据 value 的排序方式，如果未指定 value，则其值为子元素 value 之和。
-    # 默认值 'desc' 表示降序排序；
-    # 还可以设置为 'asc' 表示升序排序；
-    # null 表示不排序，使用原始数据的顺序；
-    # 或者用 javascript 回调函数进行排列：
+    # 'desc'：降序排序；
+    # 'asc'：升序排序；
+    # 'null'：表示不排序，使用原始数据的顺序；
+    # 使用 javascript 回调函数进行排列：
     sort_: Optional[JSFunc] = "desc",
     
     # 旭日图多层级配置
@@ -1914,7 +1914,6 @@ def sunburst_base() -> Sunburst:
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}"))
     )
     return c
-
 ```
 ![](https://user-images.githubusercontent.com/17564655/57566356-1ef87e80-73fe-11e9-8ce0-b9f94e4b2231.png)
 
@@ -1954,7 +1953,6 @@ def sunburst_official() -> Sunburst:
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}"))
     )
     return c
-
 ```
 ![](https://user-images.githubusercontent.com/17564655/57567164-bdd5a880-7407-11e9-8d19-9be2776c57fa.png)
 
