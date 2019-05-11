@@ -505,3 +505,59 @@ def timeline_pie() -> Timeline:
     return tl
 ```
 ![](https://user-images.githubusercontent.com/19553554/56574394-b768c380-65f5-11e9-85a2-ecb6e4697028.gif)
+
+> Map 图 Timeline 效果
+
+```python
+def timeline_map() -> Timeline:
+    map0 = (
+        Map()
+        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Map-2015年某些数据"),
+            visualmap_opts=opts.VisualMapOpts(max_=200),
+        )
+    )
+    map1 = (
+        Map()
+        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Map-2016年某些数据"),
+            visualmap_opts=opts.VisualMapOpts(max_=200),
+        )
+    )
+    map2 = (
+        Map()
+        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Map-2017年某些数据"),
+            visualmap_opts=opts.VisualMapOpts(max_=200),
+        )
+    )
+    map3 = (
+        Map()
+        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Map-2018年某些数据"),
+            visualmap_opts=opts.VisualMapOpts(max_=200),
+        )
+    )
+    map4 = (
+        Map()
+        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Map-2019年某些数据"),
+            visualmap_opts=opts.VisualMapOpts(max_=200),
+        )
+    )
+    tl = (
+        Timeline()
+        .add(map0, "2015年")
+        .add(map1, "2016年")
+        .add(map2, "2017年")
+        .add(map3, "2018年")
+        .add(map4, "2019年")
+    )
+    return tl
+```
+![](https://user-images.githubusercontent.com/19553554/57547640-7d3b4800-7391-11e9-8187-a1483e0a617c.gif)
