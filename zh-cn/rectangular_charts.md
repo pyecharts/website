@@ -62,7 +62,7 @@ def add_yaxis(
     series_name: str,
 
     # 系列数据
-    yaxis_data: Sequence,
+    yaxis_data: Sequence[Numeric, opts.BarItem, dict],
 
     # 是否选中图例
     is_selected: bool = True,
@@ -100,6 +100,27 @@ def add_yaxis(
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+)
+```
+
+### BarItem：柱状图数据项
+
+```python
+class BarItem(
+    # 数据项名称。
+    name: Optional[str] = None,
+
+    # 单个数据项的数值。
+    value: Optional[Numeric] = None,
+
+    # 单个柱条文本的样式设置，参考 `series_options.LabelOpts`。
+    label_opts: Union[LabelOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[TooltipOpts, dict, None] = None,
 )
 ```
 
@@ -159,10 +180,24 @@ def bar_toolbox() -> Bar:
 ```
 ![](https://user-images.githubusercontent.com/19553554/56866240-816a7b80-6a09-11e9-9fce-1443541b36dd.png)
 
+> Bar-单系列柱间距离
+
+```python
+def bar_same_series_gap() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values(), category_gap="80%")
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-单系列柱间距离"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57543834-11a0ad00-7388-11e9-8416-918ad00ca2a2.png)
+
 > Bar-不同系列柱间距离
 
 ```python
-def bar_gap() -> Bar:
+def bar_different_series_gap() -> Bar:
     c = (
         Bar()
         .add_xaxis(Faker.choose())
@@ -440,6 +475,41 @@ def bar_histogram() -> Bar:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/55603313-a36f3600-579c-11e9-80bd-38efb033daf8.png)
+
+> Bar-直方图（颜色区分）
+
+```python
+def bar_histogram_color() -> Bar:
+    x = Faker.dogs + Faker.animal
+    xlen = len(x)
+    y = []
+    for idx, item in enumerate(x):
+        if idx <= xlen / 2:
+            y.append(
+                opts.BarItem(
+                    name=item,
+                    value=(idx + 1) * 10,
+                    itemstyle_opts=opts.ItemStyleOpts(color="#749f83"),
+                )
+            )
+        else:
+            y.append(
+                opts.BarItem(
+                    name=item,
+                    value=(xlen + 1 - idx) * 10,
+                    itemstyle_opts=opts.ItemStyleOpts(color="#d48265"),
+                )
+            )
+
+    c = (
+        Bar()
+        .add_xaxis(x)
+        .add_yaxis("series0", y, category_gap=0, color=Faker.rand_color())
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-直方图（颜色区分）"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57544117-f7b39a00-7388-11e9-9315-529511c924f6.png)
 
 > Bar-旋转 X 轴标签
 
@@ -1107,6 +1177,38 @@ def line_smooth() -> Line:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/55603648-41afcb80-579e-11e9-946b-671f308dd4b8.png)
+
+> Line-对数轴示例
+
+```python
+def line_yaxis_log() -> Line:
+    c = (
+        Line()
+        .add_xaxis(xaxis_data=["一", "二", "三", "四", "五", "六", "七", "八", "九"])
+        .add_yaxis(
+            "2 的指数",
+            y_axis=[1, 2, 4, 8, 16, 32, 64, 128, 256],
+            linestyle_opts=opts.LineStyleOpts(width=2),
+        )
+        .add_yaxis(
+            "3 的指数",
+            y_axis=[1, 3, 9, 27, 81, 247, 741, 2223, 6669],
+            linestyle_opts=opts.LineStyleOpts(width=2),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Line-对数轴示例"),
+            xaxis_opts=opts.AxisOpts(name="x"),
+            yaxis_opts=opts.AxisOpts(
+                type_="log",
+                name="y",
+                splitline_opts=opts.SplitLineOpts(is_show=True),
+                is_scale=True,
+            ),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57543749-d0a89880-7387-11e9-8b7b-18d46e73616c.png)
 
 > Line-MarkPoint
 
