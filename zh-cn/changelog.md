@@ -20,7 +20,7 @@ TODO
 ***Fixed***
 * [issue#1034](https://github.com/pyecharts/pyecharts/issues/1034) 解决了 Gauge 颜色设置问题 
 * [issue#873](https://github.com/pyecharts/pyecharts/issues/873), [issue#870](https://github.com/pyecharts/pyecharts/issues/870) 解决了多条 Y 轴会出现重复的问题(增加了 Y 轴 offset 参数)
-* [pr#1038](https://github.com/pyecharts/pyecharts/pull/731) 修复换行符全局替换的 bug
+* [pr#1038](https://github.com/pyecharts/pyecharts/pull/731)，[issue#1067](https://github.com/pyecharts/pyecharts/issues/1067)，[issue#1048](https://github.com/pyecharts/pyecharts/issues/1048) 修复换行符全局替换的 bug
 * [issue#1043](https://github.com/pyecharts/pyecharts/issues/1043) 修复 add_schema 方法没有 return self 导致无法 render 的情况
 * [issue#1044](https://github.com/pyecharts/pyecharts/issues/1044) 修复 Table.render 方法无法正常运行的问题
 * [issue#1047](https://github.com/pyecharts/pyecharts/issues/1047) 修复 worldcloud_example 文件名错别字

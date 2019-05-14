@@ -104,7 +104,8 @@ $ python app.py
 ![](https://user-images.githubusercontent.com/17564655/57364426-c171f100-71b5-11e9-8a7a-f0636363bba1.png)
 
 
-## Extension Function 1: 定时全量更新图表 (前端主动向后端进行数据刷新)
+## 定时全量更新图表
+> 前端主动向后端进行数据刷新
 
 定时刷新的核心在于 html 的 `setInterval` 方法。
 
@@ -146,7 +147,7 @@ index.html
 </html>
 ```
 
-## Extension Function 2: 定时增量更新图表
+## 定时增量更新图表
 
 index.html
 ```html

@@ -186,7 +186,8 @@ $ python app.py
 使用浏览器打开 http://127.0.0.1:5000 即可访问服务
 
 
-## Extension Function 1: 定时全量更新图表 (前端主动向后端进行数据刷新)
+## 定时全量更新图表
+> 前端主动向后端进行数据刷新
 
 定时刷新的核心在于 HTML 的 `setInterval` 方法。
 
@@ -228,7 +229,7 @@ index.html
 </html>
 ```
 
-## Extension Function 2: 定时增量更新图表
+## 定时增量更新图表
 
 index.html
 ```html

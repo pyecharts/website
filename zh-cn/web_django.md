@@ -296,7 +296,8 @@ $ python manage.py runserver
 ![](https://user-images.githubusercontent.com/17564655/57363412-a30af600-71b3-11e9-934b-0caa11c979b7.png)
 
 
-## Extension Function 1: 定时全量更新图表 (前端主动向后端进行数据刷新)
+## 定时全量更新图表
+> 前端主动向后端进行数据刷新
 
 定时刷新的核心在于 html 的 `setInterval` 方法。
 
@@ -338,7 +339,7 @@ index.html
 </html>
 ```
 
-## Extension Function 2: 定时增量更新图表
+## 定时增量更新图表
 
 index.html
 ```html
