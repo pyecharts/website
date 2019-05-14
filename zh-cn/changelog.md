@@ -1,10 +1,15 @@
 # 版本日志
 
-### version 1.1.0（dev）
+### version 1.y.z（dev）
+
+TODO
+
+### version 1.1.0 - 2019.5.14（current）
 
 ***Add***
 * [issue#1052](https://github.com/pyecharts/pyecharts/issues/1052)，[issue#1065](https://github.com/pyecharts/pyecharts/issues/1065) 新增 BMap 图形种类
 * [issue#1078](https://github.com/pyecharts/pyecharts/issues/1078)，[issue#396](https://github.com/pyecharts/pyecharts/issues/396) 新增 Sunburst 图形种类
+* [issue#1112](https://github.com/pyecharts/pyecharts/issues/1112) Page 类新增 render_embed 方法
 
 ***Updated***
 * [pr#1036](https://github.com/pyecharts/pyecharts/pull/1036) LabelOpts 支持富文本标签及其他参数的更新
@@ -16,12 +21,13 @@
 * [issue#1034](https://github.com/pyecharts/pyecharts/issues/1034) 解决了 Gauge 颜色设置问题 
 * [issue#873](https://github.com/pyecharts/pyecharts/issues/873), [issue#870](https://github.com/pyecharts/pyecharts/issues/870) 解决了多条 Y 轴会出现重复的问题(增加了 Y 轴 offset 参数)
 * [pr#1038](https://github.com/pyecharts/pyecharts/pull/731) 修复换行符全局替换的 bug
-* [issue#1043](https://github.com/pyecharts/pyecharts/issues/1043) 修复了 add_schema 方法没有 return self 导致无法 render 的情况
+* [issue#1043](https://github.com/pyecharts/pyecharts/issues/1043) 修复 add_schema 方法没有 return self 导致无法 render 的情况
+* [issue#1044](https://github.com/pyecharts/pyecharts/issues/1044) 修复 Table.render 方法无法正常运行的问题
 * [issue#1047](https://github.com/pyecharts/pyecharts/issues/1047) 修复 worldcloud_example 文件名错别字
 * [issue#1051](https://github.com/pyecharts/pyecharts/issues/1051) 修复 Timeline 图无法添加多个 visualMap
 
 
-### version 1.0.0 - 2019.4.28（current）
+### version 1.0.0
 
 ***Updated***
 * 全新版本的 pyecharts，详见 [v1.0.0 发布日志](zh-cn/release-note/v100)
