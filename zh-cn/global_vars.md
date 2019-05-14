@@ -22,6 +22,9 @@ ThemeType = _ThemeType()
 # Geo 图形类型
 GeoType = _GeoType()
 
+# BMap 图形全局参数
+BMapType = _BMapType
+
 # Notebook 环境类型
 NotebookType = _NotebookType()
 

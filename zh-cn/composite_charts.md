@@ -130,6 +130,89 @@ def grid_horizontal() -> Grid:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55605309-7d4e9380-57a6-11e9-87be-e7b6d3193261.png)
 
+> Grid-多 Y 轴示例
+
+```python
+def grid_mutil_yaxis() -> Grid:
+    x_data = ["{}月".format(i) for i in range(1, 13)]
+    bar = (
+        Bar()
+        .add_xaxis(x_data)
+        .add_yaxis(
+            "蒸发量",
+            [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+            yaxis_index=0,
+            color="#d14a61",
+        )
+        .add_yaxis(
+            "降水量",
+            [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+            yaxis_index=1,
+            color="#5793f3",
+        )
+        .extend_axis(
+            yaxis=opts.AxisOpts(
+                name="蒸发量",
+                type_="value",
+                min_=0,
+                max_=250,
+                position="right",
+                axisline_opts=opts.AxisLineOpts(
+                    linestyle_opts=opts.LineStyleOpts(color="#d14a61")
+                ),
+                axislabel_opts=opts.LabelOpts(formatter="{value} ml"),
+            )
+        )
+        .extend_axis(
+            yaxis=opts.AxisOpts(
+                type_="value",
+                name="温度",
+                min_=0,
+                max_=25,
+                position="left",
+                axisline_opts=opts.AxisLineOpts(
+                    linestyle_opts=opts.LineStyleOpts(color="#675bba")
+                ),
+                axislabel_opts=opts.LabelOpts(formatter="{value} °C"),
+                splitline_opts=opts.SplitLineOpts(
+                    is_show=True, linestyle_opts=opts.LineStyleOpts(opacity=1)
+                ),
+            )
+        )
+        .set_global_opts(
+            yaxis_opts=opts.AxisOpts(
+                name="降水量",
+                min_=0,
+                max_=250,
+                position="right",
+                offset=80,
+                axisline_opts=opts.AxisLineOpts(
+                    linestyle_opts=opts.LineStyleOpts(color="#5793f3")
+                ),
+                axislabel_opts=opts.LabelOpts(formatter="{value} ml"),
+            ),
+            title_opts=opts.TitleOpts(title="Grid-多 Y 轴示例"),
+            tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross"),
+        )
+    )
+
+    line = (
+        Line()
+        .add_xaxis(x_data)
+        .add_yaxis(
+            "平均温度",
+            [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2],
+            yaxis_index=2,
+            color="#675bba",
+            label_opts=opts.LabelOpts(is_show=False),
+        )
+    )
+
+    bar.overlap(line)
+    return Grid().add(bar, opts.GridOpts(pos_left="5%", pos_right="20%"))
+```
+![](https://user-images.githubusercontent.com/19553554/56976071-b9f28c80-6ba4-11e9-8efd-603203c77619.png)
+
 
 ## Page：顺序多图
 
@@ -213,6 +296,11 @@ def add_schema(
     # 例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
     # 'log' 对数轴。适用于对数数据。
     axis_type: str = "category",
+    
+    # 时间轴的类型。可选:
+    # 'horizontal': 水平
+    # 'vertical': 垂直
+    orient: str = "horizontal",
 
     # timeline 标记的图形。
     # ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 
@@ -238,6 +326,9 @@ def add_schema(
 
     # 是否显示 timeline 组件。如果设置为 false，不会显示，但是功能还存在。
     is_timeline_show: bool = True,
+    
+    # 是否反向放置 timeline，反向则首位颠倒过来
+    is_inverse: bool = False,
 
     # Timeline 组件离容器左侧的距离。
     # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
@@ -258,6 +349,21 @@ def add_schema(
     # timeline 组件离容器下侧的距离。
     # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
     pos_bottom: Optional[str] = "-5px",
+    
+    # 时间轴区域的宽度, 影响垂直的时候时间轴的轴标签和轴之间的距离
+    width: Optional[str] = None,
+    
+    # 时间轴区域的高度
+    height: Optional[str] = None,
+    
+    # 时间轴的坐标轴线配置，参考 `series_options.LineStyleOpts`
+    linestyle_opts: Union[opts.LineStyleOpts, dict, None] = None,
+    
+    # 时间轴的轴标签配置，参考 `series_options.LabelOpts`
+    label_opts: Optional[opts.LabelOpts] = None,
+    
+    # 时间轴的图形样式，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 )
 ```
 
@@ -399,3 +505,59 @@ def timeline_pie() -> Timeline:
     return tl
 ```
 ![](https://user-images.githubusercontent.com/19553554/56574394-b768c380-65f5-11e9-85a2-ecb6e4697028.gif)
+
+> Map 图 Timeline 效果
+
+```python
+def timeline_map() -> Timeline:
+    map0 = (
+        Map()
+        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Map-2015年某些数据"),
+            visualmap_opts=opts.VisualMapOpts(max_=200),
+        )
+    )
+    map1 = (
+        Map()
+        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Map-2016年某些数据"),
+            visualmap_opts=opts.VisualMapOpts(max_=200),
+        )
+    )
+    map2 = (
+        Map()
+        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Map-2017年某些数据"),
+            visualmap_opts=opts.VisualMapOpts(max_=200),
+        )
+    )
+    map3 = (
+        Map()
+        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Map-2018年某些数据"),
+            visualmap_opts=opts.VisualMapOpts(max_=200),
+        )
+    )
+    map4 = (
+        Map()
+        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Map-2019年某些数据"),
+            visualmap_opts=opts.VisualMapOpts(max_=200),
+        )
+    )
+    tl = (
+        Timeline()
+        .add(map0, "2015年")
+        .add(map1, "2016年")
+        .add(map2, "2017年")
+        .add(map3, "2018年")
+        .add(map4, "2019年")
+    )
+    return tl
+```
+![](https://user-images.githubusercontent.com/19553554/57547640-7d3b4800-7391-11e9-8187-a1483e0a617c.gif)

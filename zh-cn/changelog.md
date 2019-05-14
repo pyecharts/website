@@ -1,17 +1,33 @@
 # 版本日志
 
-### version 0.6.0（dev）
+### version 1.1.0（dev）
+
+***Add***
+* [issue#1052](https://github.com/pyecharts/pyecharts/issues/1052)，[issue#1065](https://github.com/pyecharts/pyecharts/issues/1065) 新增 BMap 图形种类
+* [issue#1078](https://github.com/pyecharts/pyecharts/issues/1078)，[issue#396](https://github.com/pyecharts/pyecharts/issues/396) 新增 Sunburst 图形种类
 
 ***Updated***
-* 将 pyecharts-javascripthon 合并入主仓库，并对该部分代码进行了重构。导入路径由 `from pyecharts_javascripthon import *` 转变为 `from pyecharts.javascripthon import *`
-* Grid / Overlap / Timeline 等更名为复合图表，并移入 `pyecharts.charts.composite` 包。
-    
-***Removed***
-* 类 `Style` 废弃，推荐使用原生 `dict` 写法。
-* [issue#762](https://github.com/pyecharts/pyecharts/issues/762) 移除 `is_fill` 配置项，使用 `area_opacity` 指定区域透明度。
+* [pr#1036](https://github.com/pyecharts/pyecharts/pull/1036) LabelOpts 支持富文本标签及其他参数的更新
+* [pr#1038](https://github.com/pyecharts/pyecharts/pull/731) 新增多个配置项参数
+* [issue#1043](https://github.com/pyecharts/pyecharts/issues/1043) LabelOpts 新增文本参数
+* [issue#1051](https://github.com/pyecharts/pyecharts/issues/1051) Timeline 新增多个参数
+
+***Fixed***
+* [issue#1034](https://github.com/pyecharts/pyecharts/issues/1034) 解决了 Gauge 颜色设置问题 
+* [issue#873](https://github.com/pyecharts/pyecharts/issues/873), [issue#870](https://github.com/pyecharts/pyecharts/issues/870) 解决了多条 Y 轴会出现重复的问题(增加了 Y 轴 offset 参数)
+* [pr#1038](https://github.com/pyecharts/pyecharts/pull/731) 修复换行符全局替换的 bug
+* [issue#1043](https://github.com/pyecharts/pyecharts/issues/1043) 修复了 add_schema 方法没有 return self 导致无法 render 的情况
+* [issue#1047](https://github.com/pyecharts/pyecharts/issues/1047) 修复 worldcloud_example 文件名错别字
+* [issue#1051](https://github.com/pyecharts/pyecharts/issues/1051) 修复 Timeline 图无法添加多个 visualMap
 
 
-### version 0.5.11 - 2018.9.9（current）
+### version 1.0.0 - 2019.4.28（current）
+
+***Updated***
+* 全新版本的 pyecharts，详见 [v1.0.0 发布日志](zh-cn/release-note/v100)
+
+
+### version 0.5.11 - 2018.9.9
     
 ***Added***
 * [issue#731](https://github.com/pyecharts/pyecharts/issues/731) 新增 `mark_point_raw`, `mark_line_raw` 配置项用于个性化展示标记。

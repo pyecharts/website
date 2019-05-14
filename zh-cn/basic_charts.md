@@ -289,6 +289,30 @@ def gauge_base() -> Gauge:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55929665-3ce09100-5c50-11e9-8bba-9156fdbde06b.png)
 
+> Gauge-不同颜色
+
+```python
+def gauge_color() -> Gauge:
+    c = (
+        Gauge()
+        .add(
+            "业务指标",
+            [("完成率", 55.5)],
+            axisline_opts=opts.AxisLineOpts(
+                linestyle_opts=opts.LineStyleOpts(
+                    color=[(0.3, "#67e0e3"), (0.7, "#37a2da"), (1, "#fd666d")], width=30
+                )
+            ),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Gauge-不同颜色"),
+            legend_opts=opts.LegendOpts(is_show=False),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/56973361-48640f80-6b9f-11e9-9196-5e1147e3ac91.png)
+
 
 ## Graph：关系图
 
@@ -309,13 +333,13 @@ def add(
     series_name: str,
 
     # 关系图节点数据项列表，参考 `opts.GraphNode`
-    nodes: List[Union[opts.GraphNode, dict]],
+    nodes: Sequence[Union[opts.GraphNode, dict]],
 
     # 关系图节点间关系数据项列表，参考 `opts.GraphLink`
-    links: List[Union[opts.GraphLink, dict]],
+    links: Sequence[Union[opts.GraphLink, dict]],
 
     # 关系图节点分类的类目列表，参考 `opts.GraphCategory`
-    categories: Union[List[Union[opts.GraphCategory, dict]], None] = None,
+    categories: Union[Sequence[Union[opts.GraphCategory, dict]], None] = None,
 
     # 是否选中图例。
     is_selected: bool = True,
@@ -555,6 +579,44 @@ def graph_weibo() -> Graph:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55931763-5b975580-5c59-11e9-966c-b54705924b88.png)
 
+> Graph-NPM Dependencies
+
+```python
+def graph_npm_dependencies() -> Graph:
+    with open(os.path.join("fixtures", "npmdepgraph.json"), "r", encoding="utf-8") as f:
+        j = json.load(f)
+    nodes = [
+        {
+            "x": node["x"],
+            "y": node["y"],
+            "id": node["id"],
+            "name": node["label"],
+            "symbolSize": node["size"],
+            "itemStyle": {"normal": {"color": node["color"]}},
+        }
+        for node in j["nodes"]
+    ]
+
+    edges = [
+        {"source": edge["sourceID"], "target": edge["targetID"]} for edge in j["edges"]
+    ]
+
+    c = (
+        Graph(init_opts=opts.InitOpts(width="1000px", height="600px"))
+        .add(
+            "",
+            nodes=nodes,
+            links=edges,
+            layout="none",
+            label_opts=opts.LabelOpts(is_show=False),
+            linestyle_opts=opts.LineStyleOpts(width=0.5, curve=0.3, opacity=0.7),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Graph-NPM Dependencies"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57499076-e29b2480-7310-11e9-85db-29712819308d.png)
+
 
 ## Liquid：水球图
 
@@ -582,13 +644,16 @@ def add(
     shape: str = "circle",
 
     # 波浪颜色。
-    color: Optional[List[str]] = None,
+    color: Optional[Sequence[str]] = None,
 
     # 是否显示波浪动画。
     is_animation: bool = True,
 
     # 是否显示边框。
     is_outline_show: bool = True,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(font_size=50, position="inside"),
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
@@ -614,6 +679,31 @@ def liquid_base() -> Liquid:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/55931845-aadd8600-5c59-11e9-9446-7700ddb3e875.gif)
+
+> Liquid-数据精度
+
+```python
+def liquid_data_precision() -> Liquid:
+    c = (
+        Liquid()
+        .add(
+            "lq",
+            [0.3254],
+            label_opts=opts.LabelOpts(
+                font_size=50,
+                formatter=JsCode(
+                    """function (param) {
+                        return (Math.floor(param.value * 10000) / 100) + '%';
+                    }"""
+                ),
+                position="inside",
+            ),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Liquid-数据精度"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57499126-0a8a8800-7311-11e9-8d05-0040c5a70de4.png)
 
 > Liquid-无边框
 
@@ -683,7 +773,7 @@ class Parallel(
 
 ```python
 def add_schema(
-    schema: List[Union[opts.ParallelAxisOpts, dict]],
+    schema: Sequence[Union[opts.ParallelAxisOpts, dict]],
     parallel_opts: Union[opts.ParallelOpts, dict, None] = None,
 )
 ```
@@ -914,6 +1004,9 @@ def add(
     # radius：扇区圆心角展现数据的百分比，半径展现数据的大小
     # area：所有扇区圆心角相同，仅通过半径展现数据大小
     rosetype: Optional[str] = None,
+    
+    # 饼图的扇区是否是顺时针排布。
+    is_clockwise: bool = True,
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
@@ -946,6 +1039,27 @@ def pie_base() -> Pie:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/55933061-9354cc00-5c5e-11e9-8f80-5e2f434a1ec4.png)
+
+> Pie-调整位置
+
+```python
+def pie_position() -> Pie:
+    c = (
+        Pie()
+        .add(
+            "",
+            [list(z) for z in zip(Faker.choose(), Faker.values())],
+            center=["35%", "50%"],
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Pie-调整位置"),
+            legend_opts=opts.LegendOpts(pos_left="15%"),
+        )
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57317851-a5297200-712b-11e9-9f06-b46698ed42cc.png)
 
 > Pie-Radius
 
@@ -1074,14 +1188,14 @@ class RadiusAxisOpts(
     polar_index: Optional[int] = None,
 
     # 数据项，参考 `global_options.RadiusAxisItem`
-    data: Optional[List[Union[RadiusAxisItem, dict, str]]] = None,
+    data: Optional[Sequence[Union[RadiusAxisItem, dict, str]]] = None,
 
     # 坐标轴两边留白策略，类目轴和非类目轴的设置和表现不一样。
     # 类目轴中 boundaryGap 可以配置为 true 和 false。默认为 true，这时候刻度只是作为分隔线，
     # 标签和数据点都会在两个刻度之间的带(band)中间。
     # 非类目轴，包括时间，数值，对数轴，boundaryGap是一个两个值的数组，分别表示数据最小值和最大值的延伸范围
     # 可以直接设置数值或者相对的百分比，在设置 min 和 max 后无效。 示例：boundaryGap: ['20%', '20%']
-    boundary_gap: Union[bool, List] = None,
+    boundary_gap: Union[bool, Sequence] = None,
 
     # 坐标轴类型。可选：
     # 'value': 数值轴，适用于连续数据。
@@ -1150,7 +1264,7 @@ class AngleAxisItem(
 class AngleAxisOpts(
     # 径向轴所在的极坐标系的索引，默认使用第一个极坐标系。
     polar_index: Optional[int] = None,
-    data: Optional[List[Union[AngleAxisItem, dict, str]]] = None,
+    data: Optional[Sequence[Union[AngleAxisItem, dict, str]]] = None,
     start_angle: Optional[Numeric] = None,
     is_clockwise: bool = False,
 
@@ -1159,7 +1273,7 @@ class AngleAxisOpts(
     # 标签和数据点都会在两个刻度之间的带(band)中间。
     # 非类目轴，包括时间，数值，对数轴，boundaryGap是一个两个值的数组，分别表示数据最小值和最大值的延伸范围
     # 可以直接设置数值或者相对的百分比，在设置 min 和 max 后无效。 示例：boundaryGap: ['20%', '20%']
-    boundary_gap: Union[bool, List] = None,
+    boundary_gap: Union[bool, Sequence] = None,
 
     # 坐标轴类型。可选：
     # 'value': 数值轴，适用于连续数据。
@@ -1353,7 +1467,7 @@ class Radar(
 ```python
 def add_schema(
     # 雷达指示器配置项列表，参考 `RadarIndicatorItem`
-    schema: List[Union[opts.RadarIndicatorItem, dict]],
+    schema: Sequence[Union[opts.RadarIndicatorItem, dict]],
 
     # 雷达图绘制类型，可选 'polygon' 和 'circle'
     shape: Optional[str] = None,
@@ -1647,6 +1761,200 @@ def sankey_offical() -> Sankey:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/55933787-1ecf5c80-5c61-11e9-8217-cf34864a6ee9.png)
+
+
+## Sunburst：旭日图
+
+> *class pyecharts.charts.Sunburst*
+
+```python
+class Sunburst(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+)
+```
+
+> *func pyecharts.charts.Sunburst.add*
+
+```python
+def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
+    series_name: str,
+    
+    # 数据项。
+    data_pair: Sequence,
+    
+    # 旭日图的中心（圆心）坐标，数组的第一项是横坐标，第二项是纵坐标。
+    # 支持设置成百分比，设置成百分比时第一项是相对于容器宽度，第二项是相对于容器高度。
+    center: Optional[Sequence] = None,
+    
+    # 旭日图的半径。可以为如下类型：
+    # Sequence.<int|str>：数组的第一项是内半径，第二项是外半径。
+    radius: Optional[Sequence] = None,
+    
+    # 当鼠标移动到一个扇形块时，可以高亮相关的扇形块。
+    # 'descendant'：高亮该扇形块和后代元素，其他元素将被淡化；
+    # 'ancestor'：高亮该扇形块和祖先元素；
+    # 'self'：只高亮自身；
+    # 'none'：不会淡化其他元素。
+    highlight_policy: str = "descendant",
+    
+    # 点击节点后的行为。可取值为：false：节点点击无反应。
+    # 'rootToNode'：点击节点后以该节点为根结点。
+    # 'link'：如果节点数据中有 link 点击节点后会进行超链接跳转。
+    node_click: str = "rootToNode",
+    
+    # 扇形块根据数据 value 的排序方式，如果未指定 value，则其值为子元素 value 之和。
+    # 'desc'：降序排序；
+    # 'asc'：升序排序；
+    # 'null'：表示不排序，使用原始数据的顺序；
+    # 使用 javascript 回调函数进行排列：
+    sort_: Optional[JSFunc] = "desc",
+    
+    # 旭日图多层级配置
+    # 目前配置方式可以参考: https://www.echartsjs.com/option.html#series-sunburst.levels
+    levels: Optional[Sequence] = None,
+    
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+    
+    # 数据项的配置，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+)
+```
+
+### SunburstItem: 旭日图的数据项
+
+> *class pyecharts.options.SunburstItem*
+
+```python
+class SunburstItem(
+    # 数据值，如果包含 children，则可以不写 value 值。
+    # 这时，将使用子元素的 value 之和作为父元素的 value。
+    # 如果 value 大于子元素之和，可以用来表示还有其他子元素未显示。
+    value: Optional[Numeric] = None,
+    
+    # 显示在扇形块中的描述文字。
+    name: Optional[str] = None,
+    
+    # 点击此节点可跳转的超链接。须 Sunburst.add.node_click 值为 'link' 时才生效
+    link: Optional[str] = None,
+    
+    # 意义同 HTML <a> 标签中的 target，跳转方式的不同
+    # blank 是在新窗口或者新的标签页中打开
+    # self 则在当前页面或者当前标签页打开
+    target: Optional[str] = "blank",
+    
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 数据项配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # 子节点数据项配置配置(和 SunburstItem 一致, 递归下去)
+    children: Optional[Sequence] = None,
+)
+```
+
+### Demo
+
+> Sunburst-基本示例
+
+```python
+from pyecharts import options as opts
+from pyecharts.charts import Sunburst
+
+
+def sunburst_base() -> Sunburst:
+    data = [
+        opts.SunburstItem(
+            name="Grandpa",
+            children=[
+                opts.SunburstItem(
+                    name="Uncle Leo",
+                    value=15,
+                    children=[
+                        opts.SunburstItem(name="Cousin Jack", value=2),
+                        opts.SunburstItem(
+                            name="Cousin Mary",
+                            value=5,
+                            children=[opts.SunburstItem(name="Jackson", value=2)],
+                        ),
+                        opts.SunburstItem(name="Cousin Ben", value=4),
+                    ],
+                ),
+                opts.SunburstItem(
+                    name="Father",
+                    value=10,
+                    children=[
+                        opts.SunburstItem(name="Me", value=5),
+                        opts.SunburstItem(name="Brother Peter", value=1),
+                    ],
+                ),
+            ],
+        ),
+        opts.SunburstItem(
+            name="Nancy",
+            children=[
+                opts.SunburstItem(
+                    name="Uncle Nike",
+                    children=[
+                        opts.SunburstItem(name="Cousin Betty", value=1),
+                        opts.SunburstItem(name="Cousin Jenny", value=2),
+                    ],
+                )
+            ],
+        ),
+    ]
+
+    c = (
+        Sunburst()
+        .add(series_name="", data_pair=data, radius=[0, "90%"])
+        .set_global_opts(title_opts=opts.TitleOpts(title="Sunburst-基本示例"))
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/57566356-1ef87e80-73fe-11e9-8ce0-b9f94e4b2231.png)
+
+> Sunburst-官方示例
+
+```python
+def sunburst_official() -> Sunburst:
+    with open(os.path.join("fixtures", "drink.json"), "r", encoding="utf-8") as f:
+        j = json.load(f)
+
+    c = (
+        Sunburst(init_opts=opts.InitOpts(width="1000px", height="600px"))
+        .add(
+            "",
+            data_pair=j,
+            highlight_policy="ancestor",
+            radius=[0, "95%"],
+            sort_="null",
+            levels=[
+                {},
+                {
+                    "r0": "15%",
+                    "r": "35%",
+                    "itemStyle": {"borderWidth": 2},
+                    "label": {"rotate": "tangential"},
+                },
+                {"r0": "35%", "r": "70%", "label": {"align": "right"}},
+                {
+                    "r0": "70%",
+                    "r": "72%",
+                    "label": {"position": "outside", "padding": 3, "silent": False},
+                    "itemStyle": {"borderWidth": 3},
+                },
+            ],
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Sunburst-官方示例"))
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/57567164-bdd5a880-7407-11e9-8d19-9be2776c57fa.png)
 
 
 ## ThemeRiver：主题河流图

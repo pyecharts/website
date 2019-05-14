@@ -62,7 +62,7 @@ def add_yaxis(
     series_name: str,
 
     # 系列数据
-    yaxis_data: Sequence,
+    yaxis_data: Sequence[Numeric, opts.BarItem, dict],
 
     # 是否选中图例
     is_selected: bool = True,
@@ -79,8 +79,12 @@ def add_yaxis(
     # 数据堆叠，同个类目轴上系列配置相同的　stack　值可以堆叠放置。
     stack: Optional[str] = None,
 
-    # 同一系列的柱间距离，默认为类目间距的20%，可设固定值
+    # 同一系列的柱间距离，默认为类目间距的 20%，可设固定值
     category_gap: Union[Numeric, str] = "20%",
+
+    # 不同系列的柱间距离，为百分比（如 '30%'，表示柱子宽度的 30%）。
+    # 如果想要两个系列的柱子重叠，可以设置 gap 为 '-100%'。这在用柱子做背景的时候有用。
+    gap: Optional[str] = None,
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
@@ -96,6 +100,27 @@ def add_yaxis(
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+)
+```
+
+### BarItem：柱状图数据项
+
+```python
+class BarItem(
+    # 数据项名称。
+    name: Optional[str] = None,
+
+    # 单个数据项的数值。
+    value: Optional[Numeric] = None,
+
+    # 单个柱条文本的样式设置，参考 `series_options.LabelOpts`。
+    label_opts: Union[LabelOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[TooltipOpts, dict, None] = None,
 )
 ```
 
@@ -154,6 +179,76 @@ def bar_toolbox() -> Bar:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/56866240-816a7b80-6a09-11e9-9fce-1443541b36dd.png)
+
+> Bar-单系列柱间距离
+
+```python
+def bar_same_series_gap() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values(), category_gap="80%")
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-单系列柱间距离"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57543834-11a0ad00-7388-11e9-8416-918ad00ca2a2.png)
+
+> Bar-不同系列柱间距离
+
+```python
+def bar_different_series_gap() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values(), gap="0%")
+        .add_yaxis("商家B", Faker.values(), gap="0%")
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-不同系列柱间距离"),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57316521-955c5e80-7128-11e9-9f95-adf413015472.png)
+
+> Bar-Y 轴 formatter
+
+```python
+def bar_yaxis_formatter() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-Y 轴 formatter"),
+            yaxis_opts=opts.AxisOpts(
+                axislabel_opts=opts.LabelOpts(formatter="{value} /月")
+            ),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57181491-1ae0d400-6ec7-11e9-9db5-6e07b0c9f431.png)
+
+> Bar-XY 轴名称
+
+```python
+def bar_xyaxis_name() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-XY 轴名称"),
+            yaxis_opts=opts.AxisOpts(name="我是 Y 轴"),
+            xaxis_opts=opts.AxisOpts(name="我是 X 轴"),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57306732-edd63080-7115-11e9-8bde-b207c4e6f785.png)
 
 > Bar-翻转 XY 轴
 
@@ -380,6 +475,68 @@ def bar_histogram() -> Bar:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/55603313-a36f3600-579c-11e9-80bd-38efb033daf8.png)
+
+> Bar-直方图（颜色区分）
+
+```python
+def bar_histogram_color() -> Bar:
+    x = Faker.dogs + Faker.animal
+    xlen = len(x)
+    y = []
+    for idx, item in enumerate(x):
+        if idx <= xlen / 2:
+            y.append(
+                opts.BarItem(
+                    name=item,
+                    value=(idx + 1) * 10,
+                    itemstyle_opts=opts.ItemStyleOpts(color="#749f83"),
+                )
+            )
+        else:
+            y.append(
+                opts.BarItem(
+                    name=item,
+                    value=(xlen + 1 - idx) * 10,
+                    itemstyle_opts=opts.ItemStyleOpts(color="#d48265"),
+                )
+            )
+
+    c = (
+        Bar()
+        .add_xaxis(x)
+        .add_yaxis("series0", y, category_gap=0, color=Faker.rand_color())
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-直方图（颜色区分）"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57544117-f7b39a00-7388-11e9-9315-529511c924f6.png)
+
+> Bar-旋转 X 轴标签
+
+```python
+def bar_rorate_xaxis_label() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(
+            [
+                "名字很长的X轴标签1",
+                "名字很长的X轴标签2",
+                "名字很长的X轴标签3",
+                "名字很长的X轴标签4",
+                "名字很长的X轴标签5",
+                "名字很长的X轴标签6",
+            ]
+        )
+        .add_yaxis("商家A", [10, 20, 30, 40, 50, 40])
+        .add_yaxis("商家B", [20, 10, 40, 30, 40, 50])
+        .set_global_opts(
+            xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(rotate=-15)),
+            title_opts=opts.TitleOpts(title="Bar-旋转X轴标签", subtitle="解决标签名字过长的问题"),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/56972171-16ea4480-6b9d-11e9-834c-b8eb4357808c.png)
 
 
 ## Boxplot：箱形图
@@ -795,6 +952,30 @@ def kline_datazoom_slider() -> Kline:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55603567-d960ea00-579d-11e9-9368-2fa6f9c28cad.gif)
 
+> Kline-DataZoom-slider-Position（缩小 sliderbar）
+
+```python
+def kline_datazoom_slider_position() -> Kline:
+    c = (
+        Kline()
+        .add_xaxis(["2017/7/{}".format(i + 1) for i in range(31)])
+        .add_yaxis("kline", data)
+        .set_global_opts(
+            xaxis_opts=opts.AxisOpts(is_scale=True),
+            yaxis_opts=opts.AxisOpts(
+                is_scale=True,
+                splitarea_opts=opts.SplitAreaOpts(
+                    is_show=True, areastyle_opts=opts.AreaStyleOpts(opacity=1)
+                ),
+            ),
+            datazoom_opts=[opts.DataZoomOpts(pos_bottom="-2%")],
+            title_opts=opts.TitleOpts(title="Kline-DataZoom-slider-Position"),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57308413-e5cbc000-7118-11e9-932d-c0dd5356b1be.png)
+
 > Kline-ItemStyle
 
 ```python
@@ -926,7 +1107,7 @@ def add_yaxis(
 
     # 标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示宽和高，
     # 例如 [20, 10] 表示标记宽为 20，高为 10。
-    symbol_size: Union[Numeric, List] = 4,
+    symbol_size: Union[Numeric, Sequence] = 4,
 
     # 数据堆叠，同个类目轴上系列配置相同的　stack　值可以堆叠放置。
     stack: Optional[str] = None,
@@ -997,6 +1178,38 @@ def line_smooth() -> Line:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55603648-41afcb80-579e-11e9-946b-671f308dd4b8.png)
 
+> Line-对数轴示例
+
+```python
+def line_yaxis_log() -> Line:
+    c = (
+        Line()
+        .add_xaxis(xaxis_data=["一", "二", "三", "四", "五", "六", "七", "八", "九"])
+        .add_yaxis(
+            "2 的指数",
+            y_axis=[1, 2, 4, 8, 16, 32, 64, 128, 256],
+            linestyle_opts=opts.LineStyleOpts(width=2),
+        )
+        .add_yaxis(
+            "3 的指数",
+            y_axis=[1, 3, 9, 27, 81, 247, 741, 2223, 6669],
+            linestyle_opts=opts.LineStyleOpts(width=2),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Line-对数轴示例"),
+            xaxis_opts=opts.AxisOpts(name="x"),
+            yaxis_opts=opts.AxisOpts(
+                type_="log",
+                name="y",
+                splitline_opts=opts.SplitLineOpts(is_show=True),
+                is_scale=True,
+            ),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/57543749-d0a89880-7387-11e9-8b7b-18d46e73616c.png)
+
 > Line-MarkPoint
 
 ```python
@@ -1056,6 +1269,39 @@ def line_step() -> Line:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/55603664-542a0500-579e-11e9-9d5f-85ad3a605339.png)
+
+> Line-ItemStyle
+
+```python
+def line_itemstyle() -> Line:
+    c = (
+        Line()
+        .add_xaxis(xaxis_data=Faker.choose())
+        .add_yaxis(
+            "商家A",
+            Faker.values(),
+            symbol="triangle",
+            symbol_size=20,
+            linestyle_opts=opts.LineStyleOpts(color="green", width=4, type_="dashed"),
+            label_opts=opts.LabelOpts(is_show=False),
+            itemstyle_opts=opts.ItemStyleOpts(
+                border_width=3, border_color="yellow", color="blue"
+            ),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Line-ItemStyle"),
+            xaxis_opts=opts.AxisOpts(type_="category"),
+            yaxis_opts=opts.AxisOpts(
+                type_="value",
+                axistick_opts=opts.AxisTickOpts(is_show=True),
+                splitline_opts=opts.SplitLineOpts(is_show=True),
+            ),
+            tooltip_opts=opts.TooltipOpts(is_show=False),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/56972743-1b632d00-6b9e-11e9-8110-c52070cc2783.png)
 
 
 ## Scatter：散点图

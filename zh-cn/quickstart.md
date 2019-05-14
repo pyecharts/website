@@ -13,6 +13,7 @@ $ git clone https://github.com/pyecharts/pyecharts.git
 $ cd pyecharts
 $ pip install -r requirements.txt
 $ python setup.py install
+# 或者执行 python install.py
 ```
 
 ## 5 分钟上手
@@ -100,7 +101,7 @@ bar = (
 
 > Note: 在使用 Pandas&Numpy 时，请确保将数值类型转换为 python 原生的 int/float。比如整数类型请确保为 int，而不是 numpy.int32
 
-### Nootebook 示例
+### Notebook 示例
 
 > 当然你也可以采用更加酷炫的方式，使用 Notebook 来展示图表，matplotlib 有的，pyecharts 也会有的
 
