@@ -5,7 +5,7 @@
 ```python
 class Calendar(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -133,7 +133,7 @@ def calendar_base() -> Calendar:
 ```python
 class Funnel(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -233,7 +233,7 @@ def funnel_sort_ascending() -> Funnel:
 ```python
 class Gauge(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -321,7 +321,7 @@ def gauge_color() -> Gauge:
 ```python
 class Graph(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -625,7 +625,7 @@ def graph_npm_dependencies() -> Graph:
 ```python
 class Liquid(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -765,7 +765,7 @@ def liquid_shape_rect() -> Liquid:
 ```python
 class Parallel(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -975,7 +975,7 @@ def parallel_category() -> Parallel:
 ```python
 class Pie(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -1120,7 +1120,7 @@ def pie_rosetype() -> Pie:
 ```python
 class Polar(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -1458,7 +1458,7 @@ def polar_flower() -> Polar:
 ```python
 class Radar(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -1664,7 +1664,7 @@ def radar_air_quality() -> Radar:
 ```python
 class Saneky(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -1770,7 +1770,7 @@ def sankey_offical() -> Sankey:
 ```python
 class Sunburst(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -1964,7 +1964,7 @@ def sunburst_official() -> Sunburst:
 ```python
 class ThemeRiver(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -2104,7 +2104,7 @@ def themeriver_example() -> ThemeRiver:
 ```python
 class WordCloud(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
