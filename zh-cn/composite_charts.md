@@ -5,7 +5,7 @@
 ```python
 class Grid(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -281,7 +281,7 @@ page.render()
 ```python
 class Timeline(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 

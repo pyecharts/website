@@ -50,7 +50,7 @@ def overlap(
 ```python
 class Bar(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -546,7 +546,7 @@ def bar_rorate_xaxis_label() -> Bar:
 ```python
 class Boxplot(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -624,7 +624,7 @@ def boxpolt_base() -> Boxplot:
 ```python
 class EffectScatter(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -731,7 +731,7 @@ def effectscatter_symbol() -> EffectScatter:
 ```python
 class HeatMap(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -809,7 +809,7 @@ def heatmap_base() -> HeatMap:
 ```python
 class Kline(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -1070,7 +1070,7 @@ def kline_markline() -> Kline:
 ```python
 class Line(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -1311,7 +1311,7 @@ def line_itemstyle() -> Line:
 ```python
 class Scatter(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 

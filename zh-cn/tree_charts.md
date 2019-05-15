@@ -5,7 +5,7 @@
 ```python
 class Tree(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -241,7 +241,7 @@ def tree_layout() -> Tree:
 ```python
 class TreeMap(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
