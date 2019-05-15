@@ -5,7 +5,7 @@
 ```python
 class Geo(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -308,7 +308,7 @@ def geo_lines_background() -> Geo:
 ```python
 class Map(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
@@ -466,7 +466,7 @@ def map_guangdong() -> Map:
 ```python
 class BMap(
     # 初始化配置项，参考 `global_options.InitOpts`
-    init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()
+    init_opts: opts.InitOpts = opts.InitOpts()
 )
 ```
 
