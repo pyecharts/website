@@ -1178,6 +1178,51 @@ def line_smooth() -> Line:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55603648-41afcb80-579e-11e9-946b-671f308dd4b8.png)
 
+> Line-面积图
+
+```python
+def line_areastyle() -> Line:
+    c = (
+        Line()
+        .add_xaxis(Faker.choose())
+        .add_yaxis(
+            "商家A", Faker.values(), areastyle_opts=opts.AreaStyleOpts(opacity=0.5)
+        )
+        .add_yaxis(
+            "商家B", Faker.values(), areastyle_opts=opts.AreaStyleOpts(opacity=0.5)
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Line-面积图"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/58150164-5d145e80-7c98-11e9-828c-239fb8543098.png)
+
+> Line-面积图（紧贴 Y 轴）
+
+```python
+def line_areastyle()boundary_gap -> Line:
+    c = (
+        Line()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values(), is_smooth=True)
+        .add_yaxis("商家B", Faker.values(), is_smooth=True)
+        .set_series_opts(
+            areastyle_opts=opts.AreaStyleOpts(opacity=0.5),
+            label_opts=opts.LabelOpts(is_show=False),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Line-面积图（紧贴 Y 轴）"),
+            xaxis_opts=opts.AxisOpts(
+                axistick_opts=opts.AxisTickOpts(is_align_with_label=True),
+                is_scale=False,
+                boundary_gap=False,
+            ),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/58150186-6ac9e400-7c98-11e9-882b-3085dc6c5b76.png)
+
 > Line-对数轴示例
 
 ```python
