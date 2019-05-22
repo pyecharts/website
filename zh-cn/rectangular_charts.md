@@ -1200,7 +1200,7 @@ def line_areastyle() -> Line:
 > Line-面积图（紧贴 Y 轴）
 
 ```python
-def line_areastyle()boundary_gap -> Line:
+def line_areastyle_boundary_gap() -> Line:
     c = (
         Line()
         .add_xaxis(Faker.choose())

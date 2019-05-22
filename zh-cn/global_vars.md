@@ -30,6 +30,8 @@ NotebookType = _NotebookType()
 
 # 全局环境配置类
 class _CurrentConfig:
+    # 全局网页标题
+    PAGE_TITLE = "Awesome-pyecharts"
     # 全局 Host
     ONLINE_HOST = "https://assets.pyecharts.org/assets/"
     # 全局 Notebook 类型
