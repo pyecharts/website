@@ -1087,6 +1087,9 @@ def add_yaxis(
     # 是否选中图例
     is_selected: bool = True,
 
+    # 是否连接空数据，空数据使用 `None` 填充
+    is_connect_nones: bool = False,
+
     # 使用的 x 轴的 index，在单个图表实例中存在多个 x 轴的时候有用。
     xaxis_index: Optional[Numeric] = None,
 
@@ -1162,6 +1165,22 @@ def line_base() -> Line:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/55603644-3ceb1780-579e-11e9-818c-2841b0d66ff6.png)
+
+> Line-连接空数据
+
+```python
+def line_connect_null() -> Line:
+    y = Faker.values()
+    y[3], y[5] = None, None
+    c = (
+        Line()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", y, is_connect_nones=True)
+        .set_global_opts(title_opts=opts.TitleOpts(title="Line-连接空数据"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/58220358-2ba39d80-7d41-11e9-935f-17f12f617d7e.png)
 
 > Line-平滑曲线
 
