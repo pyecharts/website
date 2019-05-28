@@ -1040,6 +1040,21 @@ def pie_base() -> Pie:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55933061-9354cc00-5c5e-11e9-8f80-5e2f434a1ec4.png)
 
+> Pie-设置颜色
+
+```python
+def pie_set_colors() -> Pie:
+    c = (
+        Pie()
+        .add("", [list(z) for z in zip(Faker.choose(), Faker.values())])
+        .set_colors(["blue", "green", "yellow", "red", "pink", "orange", "purple"])
+        .set_global_opts(title_opts=opts.TitleOpts(title="Pie-设置颜色"))
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/58471056-96a40880-8175-11e9-835c-a9ac8c4fc784.png)
+
 > Pie-调整位置
 
 ```python
