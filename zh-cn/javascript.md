@@ -1,5 +1,7 @@
 pyecharts 支持传入原生 JS 函数，这些函数大都用于在设置 formatter 的时候使用，如 `Geo` 图的 formatter 默认就是通过回调函数设置的
 
+使用回调函数设置 `Tooltip Formatter`
+
 ```python
 GEO = """function (params) {
         return params.name + ' : ' + params.value[2];
@@ -16,6 +18,15 @@ from pyecharts.commons import utils
 geo.set_global_opts(
     opts.TooltipOpts(formatter=utils.JsCode(TooltipFormatterType.GEO)),
 )
+```
+
+使用回调函数设置 `Label Formatter` 浮点数位数
+
+```python
+FORMATTER = """"function (params) {
+    return window.parseFloat(params.value).toFixed(2)
+}
+""
 ```
 
 或者可以在任何图表上附加 JS 代码

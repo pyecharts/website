@@ -1,3 +1,5 @@
+> **Note: 配置项章节应该配合图表类型章节中的 example 阅读。**
+
 ## ItemStyleOpts：图元样式配置项
 > *class pyecharts.options.ItemStyleOpts*
 

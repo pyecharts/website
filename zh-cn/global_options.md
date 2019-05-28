@@ -1,5 +1,7 @@
 > 初识全局配置组件
 
+> **Note: 配置项章节应该配合图表类型章节中的 example 阅读。**
+
 全局配置项可通过 `set_global_options` 方法设置
 
 ![](https://user-images.githubusercontent.com/19553554/57307650-8a4d0280-7117-11e9-921f-69b8e9c5e4aa.png)
@@ -10,16 +12,17 @@
 
 ```python
 class InitOpts(
-    # 图表画布宽度
+    # 图表画布宽度，css 长度单位。
     width: str = "900px",
 
-    # 图表画布高度
+    # 图表画布高度，css 长度单位。
     height: str = "500px",
 
-    # 图表 ID
+    # 图表 ID，图表唯一标识，用于在多图表时区分。
     chart_id: Optional[str] = None,
 
     # 渲染风格，可选 "canvas", "svg"
+    # # 参考 `全局变量` 章节
     renderer: str = RenderType.CANVAS,
 
     # 网页标题
@@ -31,7 +34,8 @@ class InitOpts(
     # 图表背景颜色
     bg_color: Optional[str] = None,
 
-    # 远程 js host
+    # 远程 js host，如不设置默认为 https://assets.pyecharts.org/assets/"
+    # 参考 `全局变量` 章节
     js_host: str = "",
 )
 ```

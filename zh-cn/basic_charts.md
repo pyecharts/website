@@ -16,7 +16,7 @@ def add(
     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
-    # 系列数据
+    # 系列数据，格式为 [(date1, value1), (date2, value2), ...]
     yaxis_data: Sequence,
 
     # 是否选中图例
@@ -144,7 +144,7 @@ def add(
     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
-    # 系列数据项，[(key1, value1), (key2, value2)]
+    # 系列数据项，格式为 [(key1, value1), (key2, value2)]
     data_pair: Sequence,
 
     # 是否选中图例
@@ -244,7 +244,7 @@ def add(
     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
-    # 系列数据项，[(key1, value1), (key2, value2)]
+    # 系列数据项，格式为 [(key1, value1), (key2, value2)]
     data_pair: Sequence,
 
     # 是否选中图例
@@ -636,7 +636,7 @@ def add(
     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
-    # 系列数据
+    # 系列数据，格式为 [value1, value2, ....]
     data: Sequence,
 
     # 水球外形，有' circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow' 可选。
@@ -986,7 +986,7 @@ def add(
     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
-    # 系列数据项，[(key1, value1), (key2, value2)]
+    # 系列数据项，格式为 [(key1, value1), (key2, value2)]
     data_pair: Sequence,
 
     # 系列 label 颜色

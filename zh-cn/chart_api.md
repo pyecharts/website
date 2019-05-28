@@ -2,31 +2,37 @@
 
 > *func pyecharts.Base.add_js_funcs*
 
-新增 js 代码，js 代码会被渲染进 HTML 中执行
 ```python
-def add_js_funcs(self, *fns):
+# 新增 js 代码，js 代码会被渲染进 HTML 中执行
+def add_js_funcs(*fns):
+```
+
+> *func pyecharts.Base.set_colors*
+
+```python
+# 设置全局 Label 颜色
+def set_colors(colors: colors: Sequence[str])
 ```
 
 > *func pyecharts.Base.get_options*
 
-获取全局 options
 ```python
-def get_options(self) -> dict:
+# 获取全局 options
+def get_options() -> dict:
 ```
 
 > *func pyecharts.Base.dump_options*
 
-获取全局 options，JSON 格式
 ```python
-def dump_options(self) -> str:
+# 获取全局 options，JSON 格式
+def dump_options() -> str:
 ```
 
 > *func pyecharts.Base.render*
 
-渲染图表
 ```python
+# 渲染图表到 HTML 文件
 def render(
-    self,
     # 生成图片路径
     path: str = "render.html",
 
@@ -40,14 +46,14 @@ def render(
 
 > *func pyecharts.Base.render_notebook*
 
-将图形渲染到 notebook
 ```python
-def render_notebook(self)
+# 将图形渲染到 notebook
+def render_notebook()
 ```
 
 > *func pyecharts.Base.load_javascript*
 
-加载 js 资源，在 notebook 环境为 JupyterLab 时需要用到，仅在第一次渲染图前使用加载即可。
 ```python
-def load_javascript(self)
+# 加载 js 资源，在 notebook 环境为 JupyterLab 时需要用到，仅在第一次渲染图前使用加载即可。
+def load_javascript()
 ```
