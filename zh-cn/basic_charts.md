@@ -1392,13 +1392,13 @@ class AngleAxisOpts(
     # 也可以设置为负数，如 -3）。
     max_: Union[str, Numeric, None] = None,
 
-    # 分割线风格配置项，参考 `series_options.AxisLineOpts`
+    # 分割线风格配置项，参考 `series_options.SplitLineOpts`
     splitline_opts: Union[SplitLineOpts, dict, None] = None,
 
     # 坐标轴线风格配置项，参考 `series_options.AxisLineOpts`
     axisline_opts: Union[AxisLineOpts, dict, None] = None,
 
-    # 坐标轴标签风格配置项，参考 `series_options.AxisLineOpts`
+    # 坐标轴标签风格配置项，参考 `series_options.LabelOpts`
     axislabel_opts: Union[LabelOpts, dict, None] = None,
 
     # 半径轴组件的所有图形的 z 值。控制图形的前后顺序。z 值 小的图形会被 z 值大的图形覆盖
