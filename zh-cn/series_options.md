@@ -432,7 +432,7 @@ class MarkLineOpts(
     # 图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
     is_silent: bool = False,
 
-    # 标记线数据，参考 `series_options.MarkPointItem`
+    # 标记线数据，参考 `series_options.MarkLineItem`
     data: Sequence[Union[MarkLineItem, dict]] = None,
 
     # 标线两端的标记类型，可以是一个数组分别指定两端，也可以是单个统一指定，具体格式见 data.symbol。
