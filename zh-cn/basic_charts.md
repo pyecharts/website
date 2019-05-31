@@ -256,11 +256,17 @@ def add(
     # 最大的数据值
     max_: Numeric = 100,
 
+    # 仪表盘平均分割段数
+    split_number: Numeric = 10,
+
     # 仪表盘起始角度。圆心 正右手侧为0度，正上方为 90 度，正左手侧为 180 度。
     start_angle: Numeric = 225,
 
     # 仪表盘结束角度。
     end_angle: Numeric = -45,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
@@ -312,6 +318,32 @@ def gauge_color() -> Gauge:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/56973361-48640f80-6b9f-11e9-9196-5e1147e3ac91.png)
+
+> Gauge-分割段数-Label
+
+```python
+def gauge_splitnum_label() -> Gauge:
+    c = (
+        Gauge()
+        .add(
+            "业务指标",
+            [("完成率", 55.5)],
+            split_number=5,
+            axisline_opts=opts.AxisLineOpts(
+                linestyle_opts=opts.LineStyleOpts(
+                    color=[(0.3, "#67e0e3"), (0.7, "#37a2da"), (1, "#fd666d")], width=30
+                )
+            ),
+            label_opts=opts.LabelOpts(formatter="{value}"),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Gauge-分割段数-Label"),
+            legend_opts=opts.LegendOpts(is_show=False),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/58701514-bb96b680-83d5-11e9-8460-e5b0c4a39c0c.png)
 
 
 ## Graph：关系图

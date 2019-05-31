@@ -21,6 +21,9 @@ def add(
 
     # 直角坐标系网格索引
     grid_index: int = 0,
+
+    # 是否由自己控制 Axis 索引
+    is_control_axis_index: bool = False,
 )
 ```
 
@@ -209,9 +212,9 @@ def grid_mutil_yaxis() -> Grid:
     )
 
     bar.overlap(line)
-    return Grid().add(bar, opts.GridOpts(pos_left="5%", pos_right="20%"))
+    return Grid().add(bar, opts.GridOpts(pos_left="5%", pos_right="20%"), is_control_axis_index=True)
 ```
-![](https://user-images.githubusercontent.com/19553554/56976071-b9f28c80-6ba4-11e9-8efd-603203c77619.png)
+![](https://user-images.githubusercontent.com/19553554/58701300-1d0a5580-83d5-11e9-9fea-42feb9b5d42d.png)
 
 
 ## Page：顺序多图
@@ -224,7 +227,7 @@ class Page(
     page_title: str = "Awesome-pyecharts",
 
     # 远程 HOST，默认为 "https://assets.pyecharts.org/assets/"
-    js_host: str = CurrentConfig.ONLINE_HOST,
+    js_host: str = "",
 
     # 每个图例之间的间隔
     interval: int = 1,

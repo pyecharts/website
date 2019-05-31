@@ -347,6 +347,9 @@ class MarkPointItem(
     # 标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示宽和高，
     # 例如 [20, 10] 表示标记宽为 20，高为 10。
     symbol_size: Union[Numeric, Sequence] = None,
+
+    # 标记点样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
 )
 ```
 
@@ -443,6 +446,9 @@ class MarkLineOpts(
     
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: LabelOpts = LabelOpts(),
+
+    # 标记线样式配置项，参考 `series_options.LineStyleOpts`
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None,
 )
 ```
 
