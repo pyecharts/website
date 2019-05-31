@@ -12,6 +12,7 @@
 
 ***Updated***
 * [issue#1115](https://github.com/pyecharts/pyecharts/issues/1115) Scatter 图更新接收数据类型格式，支持多维度数据
+* [issue#1159](https://github.com/pyecharts/pyecharts/issues/1159) Echarts 版本从 4.1.0 更新至 4.2.1
 
 ***Fixed***
 * [issue#1139](https://github.com/pyecharts/pyecharts/issues/1139)，[issue#1119](https://github.com/pyecharts/pyecharts/issues/1119) 提供 `is_control_axis_index` 参数，修复 Overlap+Grid 叠加时坐标轴索引混乱的问题
