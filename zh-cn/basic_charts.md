@@ -16,7 +16,7 @@ def add(
     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
-    # 系列数据
+    # 系列数据，格式为 [(date1, value1), (date2, value2), ...]
     yaxis_data: Sequence,
 
     # 是否选中图例
@@ -144,7 +144,7 @@ def add(
     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
-    # 系列数据项，[(key1, value1), (key2, value2)]
+    # 系列数据项，格式为 [(key1, value1), (key2, value2)]
     data_pair: Sequence,
 
     # 是否选中图例
@@ -244,7 +244,7 @@ def add(
     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
-    # 系列数据项，[(key1, value1), (key2, value2)]
+    # 系列数据项，格式为 [(key1, value1), (key2, value2)]
     data_pair: Sequence,
 
     # 是否选中图例
@@ -256,11 +256,17 @@ def add(
     # 最大的数据值
     max_: Numeric = 100,
 
+    # 仪表盘平均分割段数
+    split_number: Numeric = 10,
+
     # 仪表盘起始角度。圆心 正右手侧为0度，正上方为 90 度，正左手侧为 180 度。
     start_angle: Numeric = 225,
 
     # 仪表盘结束角度。
     end_angle: Numeric = -45,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
@@ -312,6 +318,32 @@ def gauge_color() -> Gauge:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/56973361-48640f80-6b9f-11e9-9196-5e1147e3ac91.png)
+
+> Gauge-分割段数-Label
+
+```python
+def gauge_splitnum_label() -> Gauge:
+    c = (
+        Gauge()
+        .add(
+            "业务指标",
+            [("完成率", 55.5)],
+            split_number=5,
+            axisline_opts=opts.AxisLineOpts(
+                linestyle_opts=opts.LineStyleOpts(
+                    color=[(0.3, "#67e0e3"), (0.7, "#37a2da"), (1, "#fd666d")], width=30
+                )
+            ),
+            label_opts=opts.LabelOpts(formatter="{value}"),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Gauge-分割段数-Label"),
+            legend_opts=opts.LegendOpts(is_show=False),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/58701514-bb96b680-83d5-11e9-8460-e5b0c4a39c0c.png)
 
 
 ## Graph：关系图
@@ -636,7 +668,7 @@ def add(
     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
-    # 系列数据
+    # 系列数据，格式为 [value1, value2, ....]
     data: Sequence,
 
     # 水球外形，有' circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow' 可选。
@@ -986,7 +1018,7 @@ def add(
     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
-    # 系列数据项，[(key1, value1), (key2, value2)]
+    # 系列数据项，格式为 [(key1, value1), (key2, value2)]
     data_pair: Sequence,
 
     # 系列 label 颜色
@@ -1039,6 +1071,21 @@ def pie_base() -> Pie:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/55933061-9354cc00-5c5e-11e9-8f80-5e2f434a1ec4.png)
+
+> Pie-设置颜色
+
+```python
+def pie_set_colors() -> Pie:
+    c = (
+        Pie()
+        .add("", [list(z) for z in zip(Faker.choose(), Faker.values())])
+        .set_colors(["blue", "green", "yellow", "red", "pink", "orange", "purple"])
+        .set_global_opts(title_opts=opts.TitleOpts(title="Pie-设置颜色"))
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/58471056-96a40880-8175-11e9-835c-a9ac8c4fc784.png)
 
 > Pie-调整位置
 
@@ -1111,6 +1158,54 @@ def pie_rosetype() -> Pie:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/55933111-b4b5b800-5c5e-11e9-9dad-3aaa7870d858.png)
+
+> Pie-富文本示例
+
+```python
+def pie_rich_label() -> Pie:
+    c = (
+        Pie()
+        .add(
+            "",
+            [list(z) for z in zip(Faker.choose(), Faker.values())],
+            radius=["40%", "55%"],
+            label_opts=opts.LabelOpts(
+                position="outside",
+                formatter="{a|{a}}{abg|}\n{hr|}\n {b|{b}: }{c}  {per|{d}%}  ",
+                background_color="#eee",
+                border_color="#aaa",
+                border_width=1,
+                border_radius=4,
+                rich={
+                    "a": {"color": "#999", "lineHeight": 22, "align": "center"},
+                    "abg": {
+                        "backgroundColor": "#e3e3e3",
+                        "width": "100%",
+                        "align": "right",
+                        "height": 22,
+                        "borderRadius": [4, 4, 0, 0],
+                    },
+                    "hr": {
+                        "borderColor": "#aaa",
+                        "width": "100%",
+                        "borderWidth": 0.5,
+                        "height": 0,
+                    },
+                    "b": {"fontSize": 16, "lineHeight": 33},
+                    "per": {
+                        "color": "#eee",
+                        "backgroundColor": "#334455",
+                        "padding": [2, 4],
+                        "borderRadius": 2,
+                    },
+                },
+            ),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Pie-富文本示例"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/58702177-9dca5100-83d7-11e9-9204-37441a51d444.png)
 
 
 ## Polar：极坐标系
@@ -1297,13 +1392,13 @@ class AngleAxisOpts(
     # 也可以设置为负数，如 -3）。
     max_: Union[str, Numeric, None] = None,
 
-    # 分割线风格配置项，参考 `series_options.AxisLineOpts`
+    # 分割线风格配置项，参考 `series_options.SplitLineOpts`
     splitline_opts: Union[SplitLineOpts, dict, None] = None,
 
     # 坐标轴线风格配置项，参考 `series_options.AxisLineOpts`
     axisline_opts: Union[AxisLineOpts, dict, None] = None,
 
-    # 坐标轴标签风格配置项，参考 `series_options.AxisLineOpts`
+    # 坐标轴标签风格配置项，参考 `series_options.LabelOpts`
     axislabel_opts: Union[LabelOpts, dict, None] = None,
 
     # 半径轴组件的所有图形的 z 值。控制图形的前后顺序。z 值 小的图形会被 z 值大的图形覆盖

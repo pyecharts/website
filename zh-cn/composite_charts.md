@@ -21,6 +21,9 @@ def add(
 
     # 直角坐标系网格索引
     grid_index: int = 0,
+
+    # 是否由自己控制 Axis 索引
+    is_control_axis_index: bool = False,
 )
 ```
 
@@ -209,9 +212,9 @@ def grid_mutil_yaxis() -> Grid:
     )
 
     bar.overlap(line)
-    return Grid().add(bar, opts.GridOpts(pos_left="5%", pos_right="20%"))
+    return Grid().add(bar, opts.GridOpts(pos_left="5%", pos_right="20%"), is_control_axis_index=True)
 ```
-![](https://user-images.githubusercontent.com/19553554/56976071-b9f28c80-6ba4-11e9-8efd-603203c77619.png)
+![](https://user-images.githubusercontent.com/19553554/58701300-1d0a5580-83d5-11e9-9fea-42feb9b5d42d.png)
 
 
 ## Page：顺序多图
@@ -224,10 +227,13 @@ class Page(
     page_title: str = "Awesome-pyecharts",
 
     # 远程 HOST，默认为 "https://assets.pyecharts.org/assets/"
-    js_host: str = CurrentConfig.ONLINE_HOST,
+    js_host: str = "",
 
     # 每个图例之间的间隔
     interval: int = 1,
+
+    # 布局配置项，参考 `PageLayoutOpts`
+    layout: Union[PageLayoutOpts, dict] = PageLayoutOpts()
 )
 ```
 
@@ -237,7 +243,21 @@ class Page(
 def add(*charts)    # charts: 任意图表实例
 ```
 
+> *class pyecharts.options.PageLayoutOpts*
+
+```python
+class PageLayoutOpts(
+    # 配置均为原生 CSS 样式
+    justify_content: Optional[str] = None,
+    margin: Optional[str] = None,
+    display: Optional[str] = None,
+    flex_wrap: Optional[str] = None,
+)
+```
+
 ### Demo
+
+> Page-基本示例
 
 ```python
 from example.commons import Faker
@@ -272,6 +292,157 @@ page.add(bar_base(), line_base())
 page.render()
 ```
 ![](https://user-images.githubusercontent.com/19553554/56573687-3bba4700-65f4-11e9-8b7f-aacaf51ac305.png)
+
+> Page-布局示例
+
+```python
+from example.commons import Faker
+from pyecharts import options as opts
+from pyecharts.charts import Bar, Grid, Line, Page, Pie
+
+
+def bar_datazoom_slider() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.days_attrs)
+        .add_yaxis("商家A", Faker.days_values)
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-DataZoom（slider-水平）"),
+            datazoom_opts=[opts.DataZoomOpts()],
+        )
+    )
+    return c
+
+
+def line_markpoint() -> Line:
+    c = (
+        Line()
+        .add_xaxis(Faker.choose())
+        .add_yaxis(
+            "商家A",
+            Faker.values(),
+            markpoint_opts=opts.MarkPointOpts(data=[opts.MarkPointItem(type_="min")]),
+        )
+        .add_yaxis(
+            "商家B",
+            Faker.values(),
+            markpoint_opts=opts.MarkPointOpts(data=[opts.MarkPointItem(type_="max")]),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Line-MarkPoint"))
+    )
+    return c
+
+
+def pie_rosetype() -> Pie:
+    v = Faker.choose()
+    c = (
+        Pie()
+        .add(
+            "",
+            [list(z) for z in zip(v, Faker.values())],
+            radius=["30%", "75%"],
+            center=["25%", "50%"],
+            rosetype="radius",
+            label_opts=opts.LabelOpts(is_show=False),
+        )
+        .add(
+            "",
+            [list(z) for z in zip(v, Faker.values())],
+            radius=["30%", "75%"],
+            center=["75%", "50%"],
+            rosetype="area",
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Pie-玫瑰图示例"))
+    )
+    return c
+
+
+def grid_mutil_yaxis() -> Grid:
+    x_data = ["{}月".format(i) for i in range(1, 13)]
+    bar = (
+        Bar()
+        .add_xaxis(x_data)
+        .add_yaxis(
+            "蒸发量",
+            [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+            yaxis_index=0,
+            color="#d14a61",
+        )
+        .add_yaxis(
+            "降水量",
+            [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+            yaxis_index=1,
+            color="#5793f3",
+        )
+        .extend_axis(
+            yaxis=opts.AxisOpts(
+                name="蒸发量",
+                type_="value",
+                min_=0,
+                max_=250,
+                position="right",
+                axisline_opts=opts.AxisLineOpts(
+                    linestyle_opts=opts.LineStyleOpts(color="#d14a61")
+                ),
+                axislabel_opts=opts.LabelOpts(formatter="{value} ml"),
+            )
+        )
+        .extend_axis(
+            yaxis=opts.AxisOpts(
+                type_="value",
+                name="温度",
+                min_=0,
+                max_=25,
+                position="left",
+                axisline_opts=opts.AxisLineOpts(
+                    linestyle_opts=opts.LineStyleOpts(color="#675bba")
+                ),
+                axislabel_opts=opts.LabelOpts(formatter="{value} °C"),
+                splitline_opts=opts.SplitLineOpts(
+                    is_show=True, linestyle_opts=opts.LineStyleOpts(opacity=1)
+                ),
+            )
+        )
+        .set_global_opts(
+            yaxis_opts=opts.AxisOpts(
+                name="降水量",
+                min_=0,
+                max_=250,
+                position="right",
+                offset=80,
+                axisline_opts=opts.AxisLineOpts(
+                    linestyle_opts=opts.LineStyleOpts(color="#5793f3")
+                ),
+                axislabel_opts=opts.LabelOpts(formatter="{value} ml"),
+            ),
+            title_opts=opts.TitleOpts(title="Grid-多 Y 轴示例"),
+            tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross"),
+        )
+    )
+
+    line = (
+        Line()
+        .add_xaxis(x_data)
+        .add_yaxis(
+            "平均温度",
+            [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2],
+            yaxis_index=2,
+            color="#675bba",
+            label_opts=opts.LabelOpts(is_show=False),
+        )
+    )
+
+    bar.overlap(line)
+    return Grid().add(
+        bar, opts.GridOpts(pos_left="5%", pos_right="20%"), is_control_axis_index=True
+    )
+
+
+page = Page(layout=Page.SimplePageLayout)
+page.add(bar_datazoom_slider(), line_markpoint(), pie_rosetype(), grid_mutil_yaxis())
+page.render()
+```
+![](https://user-images.githubusercontent.com/19553554/58749778-c8420a00-84bc-11e9-87e5-2aeab78a8eef.png)
 
 
 ## Timeline：时间线轮播多图
@@ -391,50 +562,16 @@ from pyecharts.charts import Bar, Page, Pie, Timeline
 
 def timeline_bar() -> Timeline:
     x = Faker.choose()
-    bar0 = (
-        Bar()
-        .add_xaxis(x)
-        .add_yaxis("商家A", Faker.values())
-        .add_yaxis("商家B", Faker.values())
-        .set_global_opts(title_opts=opts.TitleOpts("某商店2015年营业额"))
-    )
-    bar1 = (
-        Bar()
-        .add_xaxis(x)
-        .add_yaxis("商家A", Faker.values())
-        .add_yaxis("商家B", Faker.values())
-        .set_global_opts(title_opts=opts.TitleOpts("某商店2016年营业额"))
-    )
-    bar2 = (
-        Bar()
-        .add_xaxis(x)
-        .add_yaxis("商家A", Faker.values())
-        .add_yaxis("商家B", Faker.values())
-        .set_global_opts(title_opts=opts.TitleOpts("某商店2017年营业额"))
-    )
-    bar3 = (
-        Bar()
-        .add_xaxis(x)
-        .add_yaxis("商家A", Faker.values())
-        .add_yaxis("商家B", Faker.values())
-        .set_global_opts(title_opts=opts.TitleOpts("某商店2018年营业额"))
-    )
-    bar4 = (
-        Bar()
-        .add_xaxis(x)
-        .add_yaxis("商家A", Faker.values())
-        .add_yaxis("商家B", Faker.values())
-        .set_global_opts(title_opts=opts.TitleOpts("某商店2019年营业额"))
-    )
-
-    tl = (
-        Timeline()
-        .add(bar0, "2015年")
-        .add(bar1, "2016年")
-        .add(bar2, "2017年")
-        .add(bar3, "2018年")
-        .add(bar4, "2019年")
-    )
+    tl = Timeline()
+    for i in range(2015, 2020):
+        bar = (
+            Bar()
+            .add_xaxis(x)
+            .add_yaxis("商家A", Faker.values())
+            .add_yaxis("商家B", Faker.values())
+            .set_global_opts(title_opts=opts.TitleOpts("某商店{}年营业额".format(i)))
+        )
+        tl.add(bar, "{}年".format(i))
     return tl
 ```
 ![](https://user-images.githubusercontent.com/19553554/56574342-91432380-65f5-11e9-85ee-f3e1982a2240.gif)
@@ -444,64 +581,19 @@ def timeline_bar() -> Timeline:
 ```python
 def timeline_pie() -> Timeline:
     attr = Faker.choose()
-    pie0 = (
-        Pie()
-        .add(
-            "商家A",
-            [list(z) for z in zip(attr, Faker.values())],
-            rosetype="radius",
-            radius=["30%", "55%"],
+    tl = Timeline()
+    for i in range(2015, 2020):
+        pie = (
+            Pie()
+            .add(
+                "商家A",
+                [list(z) for z in zip(attr, Faker.values())],
+                rosetype="radius",
+                radius=["30%", "55%"],
+            )
+            .set_global_opts(title_opts=opts.TitleOpts("某商店{}年营业额".format(i)))
         )
-        .set_global_opts(title_opts=opts.TitleOpts("某商店2015年营业额"))
-    )
-    pie1 = (
-        Pie()
-        .add(
-            "商家A",
-            [list(z) for z in zip(attr, Faker.values())],
-            rosetype="radius",
-            radius=["30%", "55%"],
-        )
-        .set_global_opts(title_opts=opts.TitleOpts("某商店2016年营业额"))
-    )
-    pie2 = (
-        Pie()
-        .add(
-            "商家A",
-            [list(z) for z in zip(attr, Faker.values())],
-            rosetype="radius",
-            radius=["30%", "55%"],
-        )
-        .set_global_opts(title_opts=opts.TitleOpts("某商店2017年营业额"))
-    )
-    pie3 = (
-        Pie()
-        .add(
-            "商家A",
-            [list(z) for z in zip(attr, Faker.values())],
-            rosetype="radius",
-            radius=["30%", "55%"],
-        )
-        .set_global_opts(title_opts=opts.TitleOpts("某商店2018年营业额"))
-    )
-    pie4 = (
-        Pie()
-        .add(
-            "商家A",
-            [list(z) for z in zip(attr, Faker.values())],
-            rosetype="radius",
-            radius=["30%", "55%"],
-        )
-        .set_global_opts(title_opts=opts.TitleOpts("某商店2019年营业额"))
-    )
-    tl = (
-        Timeline()
-        .add(pie0, "2015年")
-        .add(pie1, "2016年")
-        .add(pie2, "2017年")
-        .add(pie3, "2018年")
-        .add(pie4, "2019年")
-    )
+        tl.add(pie, "{}年".format(i))
     return tl
 ```
 ![](https://user-images.githubusercontent.com/19553554/56574394-b768c380-65f5-11e9-85a2-ecb6e4697028.gif)
@@ -510,54 +602,19 @@ def timeline_pie() -> Timeline:
 
 ```python
 def timeline_map() -> Timeline:
-    map0 = (
-        Map()
-        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
-        .set_global_opts(
-            title_opts=opts.TitleOpts(title="Map-2015年某些数据"),
-            visualmap_opts=opts.VisualMapOpts(max_=200),
+    tl = Timeline()
+    for i in range(2015, 2020):
+        map0 = (
+            Map()
+            .add(
+                "商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china"
+            )
+            .set_global_opts(
+                title_opts=opts.TitleOpts(title="Map-{}年某些数据".format(i)),
+                visualmap_opts=opts.VisualMapOpts(max_=200),
+            )
         )
-    )
-    map1 = (
-        Map()
-        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
-        .set_global_opts(
-            title_opts=opts.TitleOpts(title="Map-2016年某些数据"),
-            visualmap_opts=opts.VisualMapOpts(max_=200),
-        )
-    )
-    map2 = (
-        Map()
-        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
-        .set_global_opts(
-            title_opts=opts.TitleOpts(title="Map-2017年某些数据"),
-            visualmap_opts=opts.VisualMapOpts(max_=200),
-        )
-    )
-    map3 = (
-        Map()
-        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
-        .set_global_opts(
-            title_opts=opts.TitleOpts(title="Map-2018年某些数据"),
-            visualmap_opts=opts.VisualMapOpts(max_=200),
-        )
-    )
-    map4 = (
-        Map()
-        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
-        .set_global_opts(
-            title_opts=opts.TitleOpts(title="Map-2019年某些数据"),
-            visualmap_opts=opts.VisualMapOpts(max_=200),
-        )
-    )
-    tl = (
-        Timeline()
-        .add(map0, "2015年")
-        .add(map1, "2016年")
-        .add(map2, "2017年")
-        .add(map3, "2018年")
-        .add(map4, "2019年")
-    )
+        tl.add(map0, "{}年".format(i))
     return tl
 ```
 ![](https://user-images.githubusercontent.com/19553554/57547640-7d3b4800-7391-11e9-8187-a1483e0a617c.gif)

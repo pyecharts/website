@@ -17,6 +17,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。Echarts 是百度开�
   - [地理图表](zh-cn/geography_charts)
   - [3D 图表](zh-cn/3d_charts)
   - [组合图表](zh-cn/composite_charts)
+  - [HTML 组件](zh-cn/html_components)
 - 进阶话题
   - [定制主题](zh-cn/themes)
   - [定制地图](zh-cn/maps)
