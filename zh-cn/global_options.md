@@ -669,3 +669,266 @@ class SingleAxisOpts(
     type_: Optional[str] = None,
 )
 ```
+
+
+## GraphicGroup：原生图形元素组件
+> *class pyecharts.GraphicGroup*
+
+```python
+class GraphicGroup(
+    # 图形的配置项
+    graphic_item: Union[GraphicItem, dict, None] = None,
+    
+    # 根据其 children 中每个图形元素的 name 属性进行重绘
+    is_diff_children_by_name: bool = False,
+    
+    # 子节点列表，其中项都是一个图形元素定义。
+    # 目前可以选择 GraphicText，GraphicImage，GraphicRect
+    children: Optional[Sequence[BaseGraphic]] = None,
+)
+```
+
+### GraphicItem：原生图形配置项
+> *class pyecharts.GraphicItem*
+
+```python
+class GraphicItem(
+    # id 用于在更新或删除图形元素时指定更新哪个图形元素，如果不需要用可以忽略。
+    id_: Optional[str] = None,
+    
+    # setOption 时指定本次对该图形元素的操作行为。可选：
+    #  'merge'：如果已有元素，则新的配置项和已有的设定进行 merge。如果没有则新建。
+    #  'replace'：如果已有元素，删除之，新建元素替代之。
+    #  'remove'：删除元素。
+    action: str = "merge",
+    
+    # 平移（position）：默认值是 [0, 0]。表示 [横向平移的距离, 纵向平移的距离]。右和下为正值。
+    position: [Sequence, Numeric, None] = None,
+    
+    # 旋转（rotation）：默认值是 0。表示旋转的弧度值。正值表示逆时针旋转。
+    rotation: Union[Numeric, JSFunc, None] = 0,
+    
+    # 缩放（scale）：默认值是 [1, 1]。表示 [横向缩放的倍数, 纵向缩放的倍数]。
+    scale: Union[Sequence, Numeric, None] = None,
+    
+    # origin 指定了旋转和缩放的中心点，默认值是 [0, 0]。
+    origin: Union[Numeric, Sequence, None] = None,
+    
+    # 描述怎么根据父元素进行定位。
+    # 父元素是指：如果是顶层元素，父元素是 echarts 图表容器。如果是 group 的子元素，父元素就是 group 元素。
+    # 值的类型可以是：
+    # 数值：表示像素值。
+    # 百分比值：如 '33%'，用父元素的高和此百分比计算出最终值。
+    # 位置：如 'center'：表示自动居中。
+    # 注：left 和 right 只有一个可以生效。如果指定 left 或 right，则 shape 里的 x、cx 等定位属性不再生效。
+    left: Union[Numeric, str, None] = None,
+    
+    # 同上
+    right: Union[Numeric, str, None] = None,
+    
+    # 配置和 left 及 right 相同， 注：top 和 bottom 只有一个可以生效。
+    top: Union[Numeric, str, None] = None,
+    
+    # 同上
+    bottom: Union[Numeric, str, None] = None,
+    
+    # 决定此图形元素在定位时，对自身的包围盒计算方式。可选：
+    # 'all'：（默认） 表示用自身以及子节点整体的经过 transform 后的包围盒进行定位。这种方式易于使整体都限制在父元素范围中。
+    # 'raw'：表示仅仅用自身（不包括子节点）的没经过 tranform 的包围盒进行定位。这种方式易于内容超出父元素范围的定位方式。
+    bounding: str = "all",
+    
+    # z 方向的高度，决定层叠关系。
+    z: Numeric = 0,
+    
+    # 决定此元素绘制在哪个 canvas 层中。注意，越多 canvas 层会占用越多资源。
+    z_level: Numeric = 0,
+    
+    # 是否不响应鼠标以及触摸事件。
+    is_silent: bool = False,
+    
+    # 节点是否可见。
+    is_invisible: bool = False,
+    
+    # 节点是否完全被忽略（既不渲染，也不响应事件）。
+    is_ignore: bool = False,
+    
+    # 鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 cursor。
+    cursor: str = "pointer",
+    
+    # 图形元素是否可以被拖拽。
+    is_draggable: bool = False,
+    
+    # 是否渐进式渲染。当图形元素过多时才使用。
+    is_progressive: bool = False,
+    
+    # 用于描述此 group 的宽。这个宽只用于给子节点定位。
+    # 即便当宽度为零的时候，子节点也可以使用 left: 'center' 相对于父节点水平居中。
+    width: Numeric = 0,
+    
+    # 用于描述此 group 的高。这个高只用于给子节点定位。
+    # 即便当高度为零的时候，子节点也可以使用 top: 'middle' 相对于父节点垂直居中。
+    height: Numeric = 0,
+)
+```
+
+### GraphicBasicStyleOpts：原生图形基础配置项
+> *class pyecharts.GraphicBasicStyleOpts*
+
+```python
+class GraphicBasicStyleOpts(
+    # 填充色。
+    fill: str = "#000",
+    
+    # 笔画颜色。
+    stroke: Optional[str] = None,
+    
+    # 笔画宽度。
+    line_width: Numeric = 0,
+    
+    # 阴影宽度。
+    shadow_blur: Optional[Numeric] = None,
+    
+    # 阴影 X 方向偏移。
+    shadow_offset_x: Optional[Numeric] = None,
+    
+    # 阴影 Y 方向偏移。
+    shadow_offset_y: Optional[Numeric] = None,
+    
+    # 阴影颜色。
+    shadow_color: Optional[str] = None,
+)
+```
+
+### GraphicShapeOpts：原生图形形状配置项
+> *class pyecharts.GraphicShapeOpts*
+
+```python
+class GraphicShapeOpts(
+    # 图形元素的左上角在父节点坐标系（以父节点左上角为原点）中的横坐标值。
+    pos_x: Numeric = 0,
+    
+    # 图形元素的左上角在父节点坐标系（以父节点左上角为原点）中的横坐标值。
+    pos_y: Numeric = 0,
+    
+    # 图形元素的宽度。
+    width: Numeric = 0,
+    
+    # 图形元素的高度。
+    height: Numeric = 0,
+    
+    # 可以用于设置圆角矩形。r: [r1, r2, r3, r4]， 左上、右上、右下、左下角的半径依次为r1、r2、r3、r4。
+    #  可以缩写，例如：
+    #  r 缩写为 1 相当于 [1, 1, 1, 1]
+    #  r 缩写为 [1] 相当于 [1, 1, 1, 1]
+    #  r 缩写为 [1, 2] 相当于 [1, 2, 1, 2]
+    #  r 缩写为 [1, 2, 3]1 相当于[1, 2, 3, 2]`
+    r: Union[Sequence, Numeric, None] = None,
+)
+```
+
+### GraphicImage：原生图形图片配置项
+> *class pyecharts.GraphicImage*
+
+```python
+class GraphicImage(
+    # 图形的配置项，参考 GraphicItem
+    graphic_item: Union[GraphicItem, dict, None] = None,
+    
+    # 图形图片样式的配置项
+    graphic_imagestyle_opts: Union[GraphicImageStyleOpts, dict, None] = None,
+)
+```
+
+### GraphicImageStyleOpts：原生图形图片样式配置项
+> *class pyecharts.GraphicImageStyleOpts*
+
+```python
+class GraphicImageStyleOpts(
+    # 图片的内容，可以是图片的 URL。
+    image: Optional[str] = None,
+    
+    # 图形元素的左上角在父节点坐标系（以父节点左上角为原点）中的横坐标值。
+    pos_x: Numeric = 0,
+        
+    # 图形元素的左上角在父节点坐标系（以父节点左上角为原点）中的纵坐标值。
+    pos_y: Numeric = 0,
+    
+    # 图形元素的宽度。
+    width: Numeric = 0,
+    
+    # 图形元素的高度。
+    height: Numeric = 0,
+    
+    # 透明度 0 到 1。1 即完整显示
+    opacity: Numeric = 1,
+    
+    # 图形基本配置项，参考 GraphicBasicStyleOpts
+    graphic_basicstyle_opts: Union[GraphicBasicStyleOpts, dict, None] = None,
+)
+```
+
+
+### GraphicText：原生图形文本配置项
+> *class pyecharts.GraphicText*
+
+```python
+class GraphText(
+    # 图形的配置项，参考 GraphicItem
+    graphic_item: Union[GraphicItem, dict, None] = None,
+    
+    # 图形文本样式的配置项
+    graphic_textstyle_opts: Union[GraphicTextStyleOpts, dict, None] = None,
+)
+```
+
+### GraphicTextStyleOpts：原生图形文本样式配置项
+> *class pyecharts.GraphicTextStyleOpts*
+
+```python
+class GraphicTextStyleOpts(
+    # 文本块文字。可以使用 \n 来换行。
+    text: Optional[JSFunc] = None,
+    
+    # 图形元素的左上角在父节点坐标系（以父节点左上角为原点）中的横坐标值。
+    pos_x: Numeric = 0,
+    
+    # 图形元素的左上角在父节点坐标系（以父节点左上角为原点）中的纵坐标值。
+    pos_y: Numeric = 0,
+    
+    # 字体大小、字体类型、粗细、字体样式。
+    # 例如：
+    # // size | family
+    # font: '2em "STHeiti", sans-serif'
+    # // style | weight | size | family
+    # font: 'italic bolder 16px cursive'
+    # // weight | size | family
+    # font: 'bolder 2em "Microsoft YaHei", sans-serif'
+    font: Optional[str] = None,
+    
+    # 水平对齐方式，取值：'left', 'center', 'right'。默认值为：'left'
+    # 如果为 'left'，表示文本最左端在 x 值上。如果为 'right'，表示文本最右端在 x 值上。
+    text_align: str = "left",
+    
+    # 垂直对齐方式，取值：'top', 'middle', 'bottom'。默认值为：'None'
+    text_vertical_align: Optional[str] = None,
+    
+    # 图形基本配置项，参考 GraphicBasicStyleOpts
+    graphic_basicstyle_opts: Union[GraphicBasicStyleOpts, dict, None] = None,
+)
+```
+
+### GraphicRect：原生图形矩形配置项
+> *class pyecharts.GraphicRect*
+
+```python
+class GraphicRect(
+    # 图形的配置项，参考 GraphicItem
+    graphic_item: Union[GraphicItem, dict, None] = None,
+    
+    # 图形的形状配置项，参考 GraphicShapeOpts
+    graphic_shape_opts: Union[GraphicShapeOpts, dict, None] = None,
+    
+    # 图形基本配置项，参考 GraphicBasicStyleOpts
+    graphic_basicstyle_opts: Union[GraphicBasicStyleOpts, dict, None] = None,
+)
+```
