@@ -1,6 +1,11 @@
 # 版本日志
 
-### version 1.2.0（dev）
+### version 1.x.y - （dev）
+
+* TODO
+
+
+### version 1.2.0 - 2019.6.1（current）
 
 ***Add***
 * [issue#1155](https://github.com/pyecharts/pyecharts/issues/1155) 新增 PictorialBar 图表类型
@@ -23,7 +28,7 @@
 * [issue#1161](https://github.com/pyecharts/pyecharts/issues/1161) 修复 DataZoomOpts 不允许传入非 Sequence 类型的问题
 
 
-### version 1.1.0 - 2019.5.14（current）
+### version 1.1.0 - 2019.5.14
 
 ***Add***
 * [issue#1052](https://github.com/pyecharts/pyecharts/issues/1052)，[issue#1065](https://github.com/pyecharts/pyecharts/issues/1065) 新增 BMap 图形种类
