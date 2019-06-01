@@ -404,7 +404,7 @@ def bar_datazoom_slider() -> Bar:
         .add_yaxis("商家A", Faker.days_values)
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Bar-DataZoom（slider-水平）"),
-            datazoom_opts=[opts.DataZoomOpts()],
+            datazoom_opts=opts.DataZoomOpts(),
         )
     )
     return c
@@ -421,7 +421,7 @@ def bar_datazoom_slider_vertical() -> Bar:
         .add_yaxis("商家A", Faker.days_values, color=Faker.rand_color())
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Bar-DataZoom（slider-垂直）"),
-            datazoom_opts=[opts.DataZoomOpts(orient="vertical")],
+            datazoom_opts=opts.DataZoomOpts(orient="vertical"),
         )
     )
     return c
@@ -438,7 +438,7 @@ def bar_datazoom_inside() -> Bar:
         .add_yaxis("商家A", Faker.days_values, color=Faker.rand_color())
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Bar-DataZoom（inside）"),
-            datazoom_opts=[opts.DataZoomOpts(type_="inside")],
+            datazoom_opts=opts.DataZoomOpts(type_="inside"),
         )
     )
     return c
