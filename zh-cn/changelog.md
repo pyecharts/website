@@ -5,6 +5,8 @@
 ***Add***
 * [issue#1155](https://github.com/pyecharts/pyecharts/issues/1155) 新增 PictorialBar 图表类型
 * [issue#1126](https://github.com/pyecharts/pyecharts/issues/1126) 完善 Components 类，提供 Table/Image 类
+* [issue#1160](https://github.com/pyecharts/pyecharts/issues/1160) Page 类支持简单排版功能
+* [issue#1163](https://github.com/pyecharts/pyecharts/issues/1163) 新增 Graphic 组件配置项
 * [issue#1157](https://github.com/pyecharts/pyecharts/issues/1157) Gauge 新增 `label_opts` 以及 `split_number` 配置项
 * [issue#1136](https://github.com/pyecharts/pyecharts/issues/1136) Line 新增 `is_connect_nones` 提供断点连接功能
 * [issue#1118](https://github.com/pyecharts/pyecharts/issues/1118) Markline 新增 `linestyle_opts` 配置项
@@ -18,6 +20,7 @@
 * [issue#1139](https://github.com/pyecharts/pyecharts/issues/1139)，[issue#1119](https://github.com/pyecharts/pyecharts/issues/1119) 提供 `is_control_axis_index` 参数，修复 Overlap+Grid 叠加时坐标轴索引混乱的问题
 * [issue#1149](https://github.com/pyecharts/pyecharts/issues/1149) 修复 Page 中 js_host 与全局 CurrentConfig.ONLINE_HOST 表现不一致的问题
 * [issue#1131](https://github.com/pyecharts/pyecharts/issues/1131) 修复 set_global_opts 和 add_xaxis 方法顺序不一致表现不同的问题
+* [issue#1161](https://github.com/pyecharts/pyecharts/issues/1161) 修复 DataZoomOpts 不允许传入非 Sequence 类型的问题
 
 
 ### version 1.1.0 - 2019.5.14（current）
