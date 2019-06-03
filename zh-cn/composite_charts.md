@@ -438,6 +438,7 @@ def grid_mutil_yaxis() -> Grid:
     )
 
 
+# 需要自行调整每个 chart 的 height/width，显示效果在不同的显示器上可能不同
 page = Page(layout=Page.SimplePageLayout)
 page.add(bar_datazoom_slider(), line_markpoint(), pie_rosetype(), grid_mutil_yaxis())
 page.render()

@@ -16,6 +16,8 @@ class ComponentTitleOpts(
 )
 ```
 
+> Note: 目前 Table 和 Image 两者与 Page 类并不兼容
+
 ## Table：表格
 
 > *class pyecharts.components.Table*
