@@ -27,6 +27,10 @@ list            array
 [str(x) for x in your_numpy_array_or_something_else]
 ```
 
-**Q2: pyecharts 没有自动转换的原因？**
+**Q2: 有没有更方便的转换方法？**
+
+`Series.tolist()`
+
+**Q3: pyecharts 没有自动转换的原因？**
 
 pyecharts 是一个通用的第三方库，我们不可能关心开发者的所有使用场景，这个转换需要我们引入 `numpy/pandas` 两个第三方库，而这两个库 `太重了`，所以我们将这个工作交给了开发者。
