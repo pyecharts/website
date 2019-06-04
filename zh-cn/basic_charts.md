@@ -1159,6 +1159,35 @@ def pie_rosetype() -> Pie:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55933111-b4b5b800-5c5e-11e9-9dad-3aaa7870d858.png)
 
+> Pie-Legend 滚动
+
+```python
+def pie_scroll_legend() -> Pie:
+    c = (
+        Pie()
+        .add(
+            "",
+            [
+                list(z)
+                for z in zip(
+                    Faker.choose() + Faker.choose() + Faker.choose(),
+                    Faker.values() + Faker.values() + Faker.values(),
+                )
+            ],
+            center=["40%", "50%"],
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Pie-Legend 滚动"),
+            legend_opts=opts.LegendOpts(
+                type_="scroll", pos_left="80%", orient="vertical"
+            ),
+        )
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/58844718-0dc42a00-86ab-11e9-9a1d-93279046dde2.png)
+
 > Pie-富文本示例
 
 ```python
