@@ -1,8 +1,15 @@
 # 版本日志
 
-### version 1.x.y - （dev）
+### version 1.3.0 - （dev）
 
-* TODO
+***Add***
+* [pr#1175](https://github.com/pyecharts/pyecharts/pulls/1175)，[pr#1168](https://github.com/pyecharts/pyecharts/pulls/1168) 新增图表示例
+* [pr#1169](https://github.com/pyecharts/pyecharts/pulls/1169) `Geo` 图形新增 `zoom`，`center` 参数
+* [pr#1180](https://github.com/pyecharts/pyecharts/pulls/1180) `Map` 图形新增 `emphasis_label_opts`，`emphasis_itemstyle_opts` 参数
+
+***Updated***
+* [pr#1184](https://github.com/pyecharts/pyecharts/pulls/1184) `init_opts` 支持 dict 传参
+* [pr#1186](https://github.com/pyecharts/pyecharts/pulls/1186) 重构 Typehints，将 `types module` 移动至根目录
 
 
 ### version 1.2.0 - 2019.6.1（current）
