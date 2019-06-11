@@ -404,7 +404,7 @@ def bar_datazoom_slider() -> Bar:
         .add_yaxis("商家A", Faker.days_values)
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Bar-DataZoom（slider-水平）"),
-            datazoom_opts=[opts.DataZoomOpts()],
+            datazoom_opts=opts.DataZoomOpts(),
         )
     )
     return c
@@ -421,7 +421,7 @@ def bar_datazoom_slider_vertical() -> Bar:
         .add_yaxis("商家A", Faker.days_values, color=Faker.rand_color())
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Bar-DataZoom（slider-垂直）"),
-            datazoom_opts=[opts.DataZoomOpts(orient="vertical")],
+            datazoom_opts=opts.DataZoomOpts(orient="vertical"),
         )
     )
     return c
@@ -438,7 +438,7 @@ def bar_datazoom_inside() -> Bar:
         .add_yaxis("商家A", Faker.days_values, color=Faker.rand_color())
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Bar-DataZoom（inside）"),
-            datazoom_opts=[opts.DataZoomOpts(type_="inside")],
+            datazoom_opts=opts.DataZoomOpts(type_="inside"),
         )
     )
     return c
@@ -537,6 +537,59 @@ def bar_rorate_xaxis_label() -> Bar:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/56972171-16ea4480-6b9d-11e9-834c-b8eb4357808c.png)
+
+> Bar-Graphic 组件示例
+
+```python
+def bar_graphic_component() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-Graphic 组件示例"),
+            graphic_opts=[
+                opts.GraphicGroup(
+                    graphic_item=opts.GraphicItem(
+                        rotation=JsCode("Math.PI / 4"),
+                        bounding="raw",
+                        right=110,
+                        bottom=110,
+                        z=100,
+                    ),
+                    children=[
+                        opts.GraphicRect(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_shape_opts=opts.GraphicShapeOpts(
+                                width=400, height=50
+                            ),
+                            graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                fill="rgba(0,0,0,0.3)"
+                            ),
+                        ),
+                        opts.GraphicText(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_textstyle_opts=opts.GraphicTextStyleOpts(
+                                text="pyecharts bar chart",
+                                font="bold 26px Microsoft YaHei",
+                                graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                    fill="#fff"
+                                ),
+                            ),
+                        ),
+                    ],
+                )
+            ],
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/58749280-a80f4c80-84b6-11e9-9dbc-068a28255ccf.png)
 
 
 ## Boxplot：箱形图
@@ -1368,6 +1421,264 @@ def line_itemstyle() -> Line:
 ![](https://user-images.githubusercontent.com/19553554/56972743-1b632d00-6b9e-11e9-8110-c52070cc2783.png)
 
 
+## PictorialBar：象形柱状图
+
+> *class pyecharts.charts.PictorialBar(Bar)*
+
+```python
+class PictorialBar(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: opts.InitOpts = opts.InitOpts()
+)
+```
+
+> *func pyecharts.charts.PictorialBar.add_yaxis*
+
+```python
+def add_yaxis(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
+    series_name: str,
+
+    # 系列数据
+    yaxis_data: Sequence[Numeric, opts.BarItem, dict],
+
+    # 图形类型。
+    # ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 
+    # 'diamond', 'pin', 'arrow', 'none'
+    # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
+    # URL 为图片链接例如：'image://http://xxx.xxx.xxx/a/b.png'
+    # URL 为 dataURI 例如：'image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfO...
+    # 可以通过 'path://' 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，
+    # 而且可以设置为任意颜色。路径图形会自适应调整为合适的大小。路径的格式参见 SVG PathData。
+    # 可以从 Adobe Illustrator 等工具编辑导出。例如：
+    # 'path://M30.9,53.2C16.8,53.2,5.3,41.7,5.3,27.6S16.8,2,30.9,2C45,2,56.4,13.5,56.4,2...'
+    symbol: Optional[str] = None,
+
+    # 图形的大小。
+    # 可以用数组分开表示宽和高，例如 [20, 10] 表示标记宽为20，
+    # 高为 10，也可以设置成诸如 10 这样单一的数字，表示 [10, 10]。
+    # 可以设置成绝对值（如 10），也可以设置成百分比（如 '120%'、['55%', 23]）。
+    symbol_size: Union[Numeric, Sequence, None] = None,
+
+    # 图形的定位位置。可取值：
+    # 'start'：图形边缘与柱子开始的地方内切。
+    # 'end'：图形边缘与柱子结束的地方内切。
+    # 'center'：图形在柱子里居中。
+    symbol_pos: Optional[str] = None,
+
+    # 图形相对于原本位置的偏移。symbolOffset 是图形定位中最后计算的一个步骤，
+    # 可以对图形计算出来的位置进行微调。
+    # 可以设置成绝对值（如 10），也可以设置成百分比（如 '120%'、['55%', 23]）。
+    # 当设置为百分比时，表示相对于自身尺寸 symbolSize 的百分比。
+    # 例如 [0, '-50%'] 就是把图形向上移动了自身尺寸的一半的位置。
+    symbol_offset: Optional[Sequence] = None,
+
+    # 图形的旋转角度。
+    # 注意，symbolRotate 并不会影响图形的定位（哪怕超出基准柱的边界），而只是单纯得绕自身中心旋转。
+    # 此属性可以被设置在系列的 根部，表示对此系列中所有数据都生效；
+    # 也可以被设置在 data 中的 每个数据项中，表示只对此数据项生效。
+    symbol_rotate: Optional[Numeric] = None,
+
+    # 指定图形元素是否重复。值可为：
+    # false/null/undefined：不重复，即每个数据值用一个图形元素表示。
+    # true：使图形元素重复，即每个数据值用一组重复的图形元素表示。重复的次数依据 data 计算得到。
+    # a number：使图形元素重复，即每个数据值用一组重复的图形元素表示。重复的次数是给定的定值。
+    # 'fixed'：使图形元素重复，即每个数据值用一组重复的图形元素表示。
+    # 重复的次数依据 symbolBoundingData 计算得到，即与 data 无关。这在此图形被用于做背景时有用。
+    symbol_repeat: Optional[str] = None,
+
+    # 指定图形元素重复时，绘制的顺序。这个属性在两种情况下有用处：
+    # 当 symbolMargin 设置为负值时，重复的图形会互相覆盖，这是可以使用 symbolRepeatDirection 来指定覆盖顺序。
+    # 当 animationDelay 或 animationDelayUpdate 被使用时，symbolRepeatDirection 指定了 index 顺序。
+    # 这个属性的值可以是：'start' 或 'end'。
+    symbol_repeat_direction: Optional[str] = None,
+
+    # 图形的两边间隔（『两边』是指其数值轴方向的两边）。可以是绝对数值（如 20），或者百分比值（如 '-30%'），
+    # 表示相对于自身尺寸 symbolSize 的百分比。只有当 symbolRepeat 被使用时有意义。
+    # 可以是正值，表示间隔大；也可以是负数。当 symbolRepeat 被使用时，负数时能使图形重叠。
+    # 可以在其值结尾处加一个 "!"，如 "30%!" 或 25!，表示第一个图形的开始和最后一个图形结尾留白，
+    # 不紧贴边界。默认会紧贴边界。
+    symbol_margin: Union[Numeric, str, None] = None,
+
+    # 是否剪裁图形。
+    # false/null/undefined：图形本身表示数值大小。
+    # true：图形被剪裁后剩余的部分表示数值大小。
+    # symbolClip 常在这种场景下使用：同时表达『总值』和『当前数值』。在这种场景下，可以使用两个系列，
+    # 一个系列是完整的图形，当做『背景』来表达总数值，另一个系列是使用 symbolClip 进行剪裁过的图形，表达当前数值。
+    is_symbol_clip: bool = False,
+
+    # 是否选中图例
+    is_selected: bool = True,
+
+    # 使用的 x 轴的 index，在单个图表实例中存在多个 x 轴的时候有用。
+    xaxis_index: Optional[Numeric] = None,
+
+    # 使用的 y 轴的 index，在单个图表实例中存在多个 y 轴的时候有用。
+    yaxis_index: Optional[Numeric] = None,
+
+    # 系列 label 颜色
+    color: Optional[str] = None,
+
+    # 同一系列的柱间距离，默认为类目间距的 20%，可设固定值
+    category_gap: Union[Numeric, str] = "20%",
+
+    # 不同系列的柱间距离，为百分比（如 '30%'，表示柱子宽度的 30%）。
+    # 如果想要两个系列的柱子重叠，可以设置 gap 为 '-100%'。这在用柱子做背景的时候有用。
+    gap: Optional[str] = None,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+
+    # 标记点配置项，参考 `series_options.MarkPointOpts`
+    markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
+
+    # 标记线配置项，参考 `series_options.MarkLineOpts`
+    markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+)
+```
+
+### Demo
+
+> PictorialBar-各省份人口数量（虚假数据）
+
+```python
+import json
+import os
+
+from pyecharts import options as opts
+from pyecharts.charts import Page, PictorialBar
+from pyecharts.globals import SymbolType
+
+
+location = ["山西", "四川", "西藏", "北京", "上海", "内蒙古", "云南", "黑龙江", "广东", "福建"]
+values = [13, 42, 67, 81, 86, 94, 166, 220, 249, 262]
+
+with open(os.path.join("fixtures", "symbol.json"), "r", encoding="utf-8") as f:
+    symbols = json.load(f)
+
+def pictorialbar_base() -> PictorialBar:
+    c = (
+        PictorialBar()
+        .add_xaxis(location)
+        .add_yaxis(
+            "",
+            values,
+            label_opts=opts.LabelOpts(is_show=False),
+            symbol_size=18,
+            symbol_repeat="fixed",
+            symbol_offset=[0, 0],
+            is_symbol_clip=True,
+            symbol=SymbolType.ROUND_RECT,
+        )
+        .reversal_axis()
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="PictorialBar-各省份人口数量（虚假数据）"),
+            xaxis_opts=opts.AxisOpts(is_show=False),
+            yaxis_opts=opts.AxisOpts(
+                axistick_opts=opts.AxisTickOpts(is_show=False),
+                axisline_opts=opts.AxisLineOpts(
+                    linestyle_opts=opts.LineStyleOpts(opacity=0)
+                ),
+            ),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/58700715-72456780-83d3-11e9-86b2-fe913aadf168.png)
+
+> PictorialBar-自定义 Symbol
+
+```python
+def pictorialbar_custom_symbol() -> PictorialBar:
+    c = (
+        PictorialBar()
+        .add_xaxis(location)
+        .add_yaxis(
+            "",
+            values,
+            label_opts=opts.LabelOpts(is_show=False),
+            symbol_size=22,
+            symbol_repeat="fixed",
+            symbol_offset=[0, -5],
+            is_symbol_clip=True,
+            symbol=symbols["boy"],
+        )
+        .reversal_axis()
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="PictorialBar-自定义 Symbol"),
+            xaxis_opts=opts.AxisOpts(is_show=False),
+            yaxis_opts=opts.AxisOpts(
+                axistick_opts=opts.AxisTickOpts(is_show=False),
+                axisline_opts=opts.AxisLineOpts(
+                    linestyle_opts=opts.LineStyleOpts(opacity=0)
+                ),
+            ),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/58700722-77a2b200-83d3-11e9-91b5-0e5d04f9beff.png)
+
+> PictorialBar-Vehicles in X City
+
+```python
+def pictorialbar_multi_custom_symbols() -> PictorialBar:
+    c = (
+        PictorialBar()
+        .add_xaxis(["reindeer", "ship", "plane", "train", "car"])
+        .add_yaxis(
+            "2015",
+            [
+                {"value": 157, "symbol": symbols["reindeer"]},
+                {"value": 21, "symbol": symbols["ship"]},
+                {"value": 66, "symbol": symbols["plane"]},
+                {"value": 78, "symbol": symbols["train"]},
+                {"value": 123, "symbol": symbols["car"]},
+            ],
+            label_opts=opts.LabelOpts(is_show=False),
+            symbol_size=22,
+            symbol_repeat="fixed",
+            symbol_offset=[0, 5],
+            is_symbol_clip=True,
+        )
+        .add_yaxis(
+            "2016",
+            [
+                {"value": 184, "symbol": symbols["reindeer"]},
+                {"value": 29, "symbol": symbols["ship"]},
+                {"value": 73, "symbol": symbols["plane"]},
+                {"value": 91, "symbol": symbols["train"]},
+                {"value": 95, "symbol": symbols["car"]},
+            ],
+            label_opts=opts.LabelOpts(is_show=False),
+            symbol_size=22,
+            symbol_repeat="fixed",
+            symbol_offset=[0, -25],
+            is_symbol_clip=True,
+        )
+        .reversal_axis()
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="PictorialBar-Vehicles in X City"),
+            xaxis_opts=opts.AxisOpts(is_show=False),
+            yaxis_opts=opts.AxisOpts(
+                axistick_opts=opts.AxisTickOpts(is_show=False),
+                axisline_opts=opts.AxisLineOpts(
+                    linestyle_opts=opts.LineStyleOpts(opacity=0)
+                ),
+            ),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/58700732-7c676600-83d3-11e9-9d1d-01086c2f2efa.png)
+
+
 ## Scatter：散点图
 
 > *class pyecharts.charts.Scatter(RectChart)*
@@ -1501,6 +1812,38 @@ def scatter_visualmap_color() -> Scatter:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/55603785-03ff7280-579f-11e9-8208-c80f0e47871f.gif)
+
+> Scatter-多维度数据
+
+```python
+def scatter_muti_dimension_data() -> Scatter:
+    c = (
+        Scatter()
+        .add_xaxis(Faker.choose())
+        .add_yaxis(
+            "商家A",
+            [list(z) for z in zip(Faker.values(), Faker.choose())],
+            label_opts=opts.LabelOpts(
+                formatter=JsCode(
+                    "function(params){return params.value[1] +' : '+ params.value[2];}"
+                )
+            ),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Scatter-多维度数据"),
+            tooltip_opts=opts.TooltipOpts(
+                formatter=JsCode(
+                    "function (params) {return params.name + ' : ' + params.value[2];}"
+                )
+            ),
+            visualmap_opts=opts.VisualMapOpts(
+                type_="color", max_=150, min_=20, dimension=1
+            ),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/58701461-8ee29f00-83d5-11e9-9f43-ba73cc0946cf.png)
 
 
 ## Overlap：层叠多图
