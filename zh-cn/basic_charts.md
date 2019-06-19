@@ -823,6 +823,9 @@ def add(
     # 是否选中图例。
     is_selected: bool = True,
 
+    # 是否平滑曲线
+    is_smooth: bool = False,
+
     # 线条样式，参考 `series_options.LineStyleOpts`
     linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
 
@@ -1270,8 +1273,17 @@ def add(
     # 是否选中图例
     is_selected: bool = True,
 
+    # 图表类型，支持
+    # ChartType.SCATTER, ChartType.LINE, ChartType.BAR，ChartType.EFFECT_SCATTER
     type_: str = "line",
+
+    # ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 
+    # 'diamond', 'pin', 'arrow', 'none'
+    # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
     symbol: Optional[str] = None,
+
+    # 标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示宽和高，
+    # 例如 [20, 10] 表示标记宽为 20，高为 10。
     symbol_size: Numeric = 4,
 
     # 数据堆叠，同个类目轴上系列配置相同的　stack　值可以堆叠放置。
@@ -1282,6 +1294,9 @@ def add(
 
     # 区域填充样式配置项，参考 `series_options.AreaStyleOpts`
     areastyle_opts: Union[opts.AreaStyleOpts, dict] = opts.AreaStyleOpts(),
+
+    # 坐标轴刻度配置项，参考 `global_options.AxisTickOpts`
+    axistick_opts: Union[AxisTickOpts, dict, None] = None,
 
     # 涟漪特效配置项，参考 `series_options.EffectOpts`
     effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
