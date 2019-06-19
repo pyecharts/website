@@ -1,11 +1,23 @@
 # 版本日志
 
-### version 1.x.y - （dev）
+### version 1.2.1 - 2019.6.19（current）
 
-* TODO
+***Add***
+* [pr#1175](https://github.com/pyecharts/pyecharts/pulls/1175)，[pr#1168](https://github.com/pyecharts/pyecharts/pulls/1168) 新增图表示例
+* [pr#1169](https://github.com/pyecharts/pyecharts/pulls/1169) `Geo` 图新增 `zoom`，`center` 参数
+* [pr#1180](https://github.com/pyecharts/pyecharts/pulls/1180) `Map` 图新增 `emphasis_label_opts`，`emphasis_itemstyle_opts` 参数
+* [pr#1203](https://github.com/pyecharts/pyecharts/pulls/1203) `Parallel` 图新增 `is_smooth` 参数
+* [issue#1197](https://github.com/pyecharts/pyecharts/issues/1197) `Polar` 图新增 `axistick_opts` 参数
+
+***Updated***
+* [pr#1184](https://github.com/pyecharts/pyecharts/pulls/1184) `init_opts` 支持 dict 传参
+* [pr#1186](https://github.com/pyecharts/pyecharts/pulls/1186) 重构 Typehints，将 `types module` 移动至根目录
+
+***Fixed***
+* [pr#1188](https://github.com/pyecharts/pyecharts/pull/1188) 修复 `dump_options` 方法不能正确转义的问题
 
 
-### version 1.2.0 - 2019.6.1（current）
+### version 1.2.0
 
 ***Add***
 * [issue#1155](https://github.com/pyecharts/pyecharts/issues/1155) 新增 PictorialBar 图表类型

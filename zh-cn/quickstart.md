@@ -52,6 +52,8 @@ from pyecharts.charts import Bar
 from pyecharts import options as opts
 
 # V1 版本开始支持链式调用
+# 你所看到的格式其实是 `black` 格式化以后的效果
+# 可以执行 `pip install black` 下载使用
 bar = (
     Bar()
     .add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
