@@ -130,7 +130,63 @@ Jupyter Lab 渲染的时候有两点需要注意
     from pyecharts.globals import CurrentConfig, NotebookType
     CurrentConfig.NOTEBOOK_TYPE = NotebookType.JUPYTER_LAB
     ```
-2. 在第一次渲染的时候调用 `load_javasrcript()` 会预先加载基本 JavaScript 文件到 Notebook 中。如若后面其他图形渲染不出来，则请开发者尝试再次调用，因为 `load_javascript` 只会预先加载最基本的 js 引用。而主题、地图等 js 文件需要再次按需加载。
+2. 在第一次渲染的时候调用 `load_javascript()` 会预先加载基本 JavaScript 文件到 Notebook 中。如若后面其他图形渲染不出来，则请开发者尝试再次调用，因为 `load_javascript` 只会预先加载最基本的 js 引用。而主题、地图等 js 文件需要再次按需加载。
 
 ![](https://user-images.githubusercontent.com/19553554/55602584-f2b36780-5798-11e9-8ce4-b579344b3a8f.png)
 ![](https://user-images.githubusercontent.com/19553554/55602583-f2b36780-5798-11e9-9fcd-ad0de498f7f1.png)
+
+#### nteract
+
+nteract 渲染的时候在顶部引入 IPython.display 的两个方法
+```python
+from IPython.display import display, HTML
+```
+
+nteract 调用 `render_embed` 再通过 `IPython.display` 的方法即可渲染
+```python
+import pyecharts.options as opts
+from pyecharts.charts import Bar, Line
+from pyecharts.globals import ThemeType
+from IPython.display import HTML, display
+
+bar = (
+    Bar(init_opts=opts.InitOpts(theme=ThemeType.MACARONS))
+    .add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
+    .add_yaxis("商家A", [5, 20, 36, 10, 75, 90])
+    .add_yaxis("商家B", [15, 6, 45, 20, 35, 66])
+    .set_global_opts(title_opts=opts.TitleOpts(title="主标题", subtitle="副标题"))
+)
+
+# 渲染图例
+html_content = bar.render_embed()
+display(HTML(html_content))
+```
+
+![](https://user-images.githubusercontent.com/17564655/60080911-5c715b00-9763-11e9-9e14-7afaa0df2efe.png)
+
+#### Zeppelin
+
+Zeppelin 渲染的时候有需要注意
+1. Zeppelin 环境下的 Python 解释器需要切换到 Python3 且环境下的 Python3 版本为 Python 3.6+
+
+Zeppelin 直接调用 `render_embed` 之后通过 Zeppelin 的内置规则进行渲染
+```python
+%python
+import pyecharts.options as opts
+from pyecharts.charts import Bar
+from pyecharts.globals import ThemeType
+
+bar = (
+    Bar(init_opts=opts.InitOpts(theme=ThemeType.MACARONS))
+    .add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
+    .add_yaxis("商家A", [5, 20, 36, 10, 75, 90])
+    .add_yaxis("商家B", [15, 6, 45, 20, 35, 66])
+    .set_global_opts(title_opts=opts.TitleOpts(title="主标题", subtitle="副标题"))
+)
+
+# print 函数中的 %html 即是 Zeppelin 输出 HTML 代码的规则
+html_content = bar.render_embed()
+print("%html " + html_content)
+```
+
+![](https://user-images.githubusercontent.com/17564655/60081761-fd144a80-9764-11e9-9e88-f5056eecf871.png)
