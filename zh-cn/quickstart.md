@@ -137,56 +137,64 @@ Jupyter Lab 渲染的时候有两点需要注意
 
 #### nteract
 
-nteract 渲染的时候在顶部引入 IPython.display 的两个方法
+在顶部声明 Notebook 类型，必须在引入 pyecharts.charts 等模块前声明
 ```python
-from IPython.display import display, HTML
+from pyecharts.globals import CurrentConfig, NotebookType
+CurrentConfig.NOTEBOOK_TYPE = NotebookType.NTERACT
 ```
 
-nteract 调用 `render_embed` 再通过 `IPython.display` 的方法即可渲染
+nteract 调用 `render_notebook` 方法即可渲染
+
 ```python
+from pyecharts.globals import CurrentConfig, NotebookType
+CurrentConfig.NOTEBOOK_TYPE = NotebookType.NTERACT
+
 import pyecharts.options as opts
 from pyecharts.charts import Bar, Line
-from pyecharts.globals import ThemeType
-from IPython.display import HTML, display
 
 bar = (
-    Bar(init_opts=opts.InitOpts(theme=ThemeType.MACARONS))
+    Bar()
     .add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
     .add_yaxis("商家A", [5, 20, 36, 10, 75, 90])
     .add_yaxis("商家B", [15, 6, 45, 20, 35, 66])
     .set_global_opts(title_opts=opts.TitleOpts(title="主标题", subtitle="副标题"))
 )
 
-# 渲染图例
-html_content = bar.render_embed()
-display(HTML(html_content))
+bar.render_notebook()
 ```
 
-![](https://user-images.githubusercontent.com/17564655/60080911-5c715b00-9763-11e9-9e14-7afaa0df2efe.png)
+![](https://user-images.githubusercontent.com/17564655/60228718-2698b780-98c6-11e9-8d66-a9d8d057c344.png)
 
 #### Zeppelin
 
 Zeppelin 渲染的时候有需要注意
 1. Zeppelin 环境下的 Python 解释器需要切换到 Python3 且环境下的 Python3 版本为 Python 3.6+
 
-Zeppelin 直接调用 `render_embed` 之后通过 Zeppelin 的内置规则进行渲染
+2. 在顶部声明 Notebook 类型，必须在引入 pyecharts.charts 等模块前声明
+    ```python
+    from pyecharts.globals import CurrentConfig, NotebookType
+    CurrentConfig.NOTEBOOK_TYPE = NotebookType.ZEPPELIN
+    ```
+
+Zeppelin 调用 `render_notebook` 方法即可渲染
 ```python
 %python
+from pyecharts.globals import CurrentConfig, NotebookType
+CurrentConfig.NOTEBOOK_TYPE = NotebookType.ZEPPELIN
+
 import pyecharts.options as opts
 from pyecharts.charts import Bar
-from pyecharts.globals import ThemeType
 
 bar = (
-    Bar(init_opts=opts.InitOpts(theme=ThemeType.MACARONS))
+    Bar()
     .add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
     .add_yaxis("商家A", [5, 20, 36, 10, 75, 90])
     .add_yaxis("商家B", [15, 6, 45, 20, 35, 66])
     .set_global_opts(title_opts=opts.TitleOpts(title="主标题", subtitle="副标题"))
 )
 
-# print 函数中的 %html 即是 Zeppelin 输出 HTML 代码的规则
-html_content = bar.render_embed()
-print("%html " + html_content)
+bar.render_notebook()
 ```
 
-![](https://user-images.githubusercontent.com/17564655/60081761-fd144a80-9764-11e9-9e88-f5056eecf871.png)
+![](https://user-images.githubusercontent.com/17564655/60228824-8abb7b80-98c6-11e9-9435-0fc8777624d0.png)
+
