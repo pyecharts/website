@@ -130,7 +130,71 @@ Jupyter Lab 渲染的时候有两点需要注意
     from pyecharts.globals import CurrentConfig, NotebookType
     CurrentConfig.NOTEBOOK_TYPE = NotebookType.JUPYTER_LAB
     ```
-2. 在第一次渲染的时候调用 `load_javasrcript()` 会预先加载基本 JavaScript 文件到 Notebook 中。如若后面其他图形渲染不出来，则请开发者尝试再次调用，因为 `load_javascript` 只会预先加载最基本的 js 引用。而主题、地图等 js 文件需要再次按需加载。
+2. 在第一次渲染的时候调用 `load_javascript()` 会预先加载基本 JavaScript 文件到 Notebook 中。如若后面其他图形渲染不出来，则请开发者尝试再次调用，因为 `load_javascript` 只会预先加载最基本的 js 引用。而主题、地图等 js 文件需要再次按需加载。
 
 ![](https://user-images.githubusercontent.com/19553554/55602584-f2b36780-5798-11e9-8ce4-b579344b3a8f.png)
 ![](https://user-images.githubusercontent.com/19553554/55602583-f2b36780-5798-11e9-9fcd-ad0de498f7f1.png)
+
+#### nteract
+
+在顶部声明 Notebook 类型，必须在引入 pyecharts.charts 等模块前声明
+```python
+from pyecharts.globals import CurrentConfig, NotebookType
+CurrentConfig.NOTEBOOK_TYPE = NotebookType.NTERACT
+```
+
+nteract 调用 `render_notebook` 方法即可渲染
+
+```python
+from pyecharts.globals import CurrentConfig, NotebookType
+CurrentConfig.NOTEBOOK_TYPE = NotebookType.NTERACT
+
+import pyecharts.options as opts
+from pyecharts.charts import Bar, Line
+
+bar = (
+    Bar()
+    .add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
+    .add_yaxis("商家A", [5, 20, 36, 10, 75, 90])
+    .add_yaxis("商家B", [15, 6, 45, 20, 35, 66])
+    .set_global_opts(title_opts=opts.TitleOpts(title="主标题", subtitle="副标题"))
+)
+
+bar.render_notebook()
+```
+
+![](https://user-images.githubusercontent.com/17564655/60228718-2698b780-98c6-11e9-8d66-a9d8d057c344.png)
+
+#### Zeppelin
+
+Zeppelin 渲染的时候有需要注意
+1. Zeppelin 环境下的 Python 解释器需要切换到 Python3 且环境下的 Python3 版本为 Python 3.6+
+
+2. 在顶部声明 Notebook 类型，必须在引入 pyecharts.charts 等模块前声明
+    ```python
+    from pyecharts.globals import CurrentConfig, NotebookType
+    CurrentConfig.NOTEBOOK_TYPE = NotebookType.ZEPPELIN
+    ```
+
+Zeppelin 调用 `render_notebook` 方法即可渲染
+```python
+%python
+from pyecharts.globals import CurrentConfig, NotebookType
+CurrentConfig.NOTEBOOK_TYPE = NotebookType.ZEPPELIN
+
+import pyecharts.options as opts
+from pyecharts.charts import Bar
+
+bar = (
+    Bar()
+    .add_xaxis(["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"])
+    .add_yaxis("商家A", [5, 20, 36, 10, 75, 90])
+    .add_yaxis("商家B", [15, 6, 45, 20, 35, 66])
+    .set_global_opts(title_opts=opts.TitleOpts(title="主标题", subtitle="副标题"))
+)
+
+bar.render_notebook()
+```
+
+![](https://user-images.githubusercontent.com/17564655/60228824-8abb7b80-98c6-11e9-9435-0fc8777624d0.png)
+
