@@ -364,3 +364,57 @@ def surface3d_flower() -> Surface3D:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/55605020-20061280-57a5-11e9-8813-8f8818bd524b.png)
+
+> Map3D - 三维地图
+
+有待加强。
+
+```python
+
+from pyecharts.charts import Map3D
+
+Map3D().add_schema().render()
+
+```
+
+![](https://user-images.githubusercontent.com/4280312/60053207-3306ef80-96cf-11e9-96c1-adc1675894e4.png)
+
+
+> Map3D - 地球地图
+
+API 用法和 map 一样。
+
+
+```
+import pyecharts.options as opts
+from example.commons import POPULATION
+from pyecharts.charts import MapGlobe
+
+high = max([x for _, x in POPULATION[1:]])
+low = min([x for _, x in POPULATION[1:]])
+
+m = (
+    MapGlobe()
+    .add_schema()
+    .add(
+        maptype="world",
+        series_name="World Population",
+        data_pair=POPULATION[1:],
+        is_map_symbol_show=False,
+        label_opts=opts.LabelOpts(is_show=False),
+    )
+    .set_global_opts(
+        visualmap_opts=opts.VisualMapOpts(
+            min_=low,
+            max_=high,
+            range_text=["max", "min"],
+            is_calculable=True,
+            range_color=["lightskyblue", "yellow", "orangered"],
+        )
+    )
+)
+m.render()
+
+```
+
+![](https://user-images.githubusercontent.com/4280312/60053228-3dc18480-96cf-11e9-809e-c8ccf243d7dc.png)
