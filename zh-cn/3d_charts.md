@@ -370,11 +370,9 @@ def surface3d_flower() -> Surface3D:
 有待加强。
 
 ```python
-
 from pyecharts.charts import Map3D
 
 Map3D().add_schema().render()
-
 ```
 
 ![](https://user-images.githubusercontent.com/4280312/60053207-3306ef80-96cf-11e9-96c1-adc1675894e4.png)
@@ -384,8 +382,7 @@ Map3D().add_schema().render()
 
 API 用法和 map 一样。
 
-
-```
+```python
 import pyecharts.options as opts
 from example.commons import POPULATION
 from pyecharts.charts import MapGlobe
@@ -414,7 +411,6 @@ m = (
     )
 )
 m.render()
-
 ```
 
 ![](https://user-images.githubusercontent.com/4280312/60053228-3dc18480-96cf-11e9-809e-c8ccf243d7dc.png)
