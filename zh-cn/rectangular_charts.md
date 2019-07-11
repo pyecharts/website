@@ -146,6 +146,81 @@ def bar_base() -> Bar:
 ```
 ![](https://user-images.githubusercontent.com/19553554/56866199-32bce180-6a09-11e9-9e1c-35273a2770e5.png)
 
+> Bar-动画配置基本示例
+
+```python
+def bar_base_with_animation() -> Bar:
+    c = (
+        Bar(
+            init_opts=opts.InitOpts(
+                animation_opts=opts.AnimationOpts(
+                    animation_delay=1000, animation_easing="elasticOut"
+                )
+            )
+        )
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-动画配置基本示例", subtitle="我是副标题")
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/61018779-8dd86080-a3ca-11e9-85da-5e9cefd4bbd4.png)
+
+> Bar-背景图基本示例
+
+```python
+def bar_base_with_custom_background_image() -> Bar:
+    c = (
+        Bar(
+            init_opts=opts.InitOpts(
+                bg_color={
+                    "type": "pattern",
+                    "image": JsCode("img"),
+                    "repeat": "no-repeat",
+                }
+            )
+        )
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(
+                title="Bar-背景图基本示例",
+                subtitle="我是副标题",
+                title_textstyle_opts=opts.TextStyleOpts(color="white"),
+            )
+        )
+    )
+    c.add_js_funcs(
+        """
+        var img = new Image(); img.src = 'https://s2.ax1x.com/2019/07/08/ZsS0fK.jpg';
+        """
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/61018825-b1031000-a3ca-11e9-97e3-6e5af30ce878.png)
+
+> Bar-通过 dict 进行配置
+
+```python
+def bar_base_dict_config() -> Bar:
+    c = (
+        Bar({"theme": ThemeType.MACARONS})
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts={"text": "Bar-通过 dict 进行配置", "subtext": "我也是通过 dict 进行配置的"}
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/61018875-d263fc00-a3ca-11e9-9722-6bcd11d93340.png)
+
+
 > Bar-默认取消显示某 Series
 
 ```python
@@ -803,6 +878,24 @@ def bar_graphic_image_with_js_component() -> Grid:
 ```
 ![](https://user-images.githubusercontent.com/17564655/59005286-75b37580-884f-11e9-9619-dcf3887dd66b.png)
 
+> Bar-Brush示例
+
+```python
+def bar_with_brush() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-Brush示例", subtitle="我是副标题"),
+            brush_opts=opts.BrushOpts(),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/61018926-f7f10580-a3ca-11e9-9719-39142c0195f6.png)
+
 
 ## Boxplot：箱形图
 
@@ -1385,6 +1478,9 @@ def add_yaxis(
 
     # 是否显示成阶梯图
     is_step: bool = False,
+    
+    # 是否开启 hover 在拐点标志上的提示动画效果。
+    is_hover_animation: bool = True,
 
     # 标记点配置项，参考 `series_options.MarkPointOpts`
     markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
