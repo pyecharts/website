@@ -53,6 +53,8 @@ index.html
 
 ### Step 2: 编写 Sanic 和 pyecharts 的代码
 
+注: 目前由于 json 数据类型的问题，无法将 pyecharts 中的 JSCode 类型的数据转换成 json 数据格式返回到前端页面中使用。因此在使用前后端分离的情况下尽量避免使用 JSCode 进行画图。
+
 示例代码
 ```python
 from random import randrange
