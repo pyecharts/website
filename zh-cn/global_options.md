@@ -7,6 +7,42 @@
 ![](https://user-images.githubusercontent.com/19553554/57307650-8a4d0280-7117-11e9-921f-69b8e9c5e4aa.png)
 ![](https://user-images.githubusercontent.com/19553554/58749659-3554a000-84bb-11e9-9421-b1905e2f3430.png)
 
+## AnimationOpts：Echarts 画图动画配置项
+> *class pyecharts.options.Animation*
+
+```python
+class AnimationOpts(
+    # 是否开启动画，默认为 True 开启。
+    animation: bool = True,
+    
+    # 是否开启动画的阈值，当单个系列显示的图形数量大于这个阈值时会关闭动画。默认 2000。
+    animation_threshold: Numeric = 2000,
+    
+    # 初始动画的时长，默认值为 1000。
+    # 支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的初始动画效果：
+    animation_duration: Union[Numeric, JSFunc] = 1000,
+    
+    # 初始动画的缓动效果。
+    # 不同的缓动效果可以参考，缓动示例 (https://www.echartsjs.com/gallery/editor.html?c=line-easing)。
+    animation_easing: Union[str] = "cubicOut",
+    
+    # 初始动画的延迟，默认值为 0。
+    # 支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的初始动画效果。
+    animation_delay: Union[Numeric, JSFunc] = 0,
+    
+    # 数据更新动画的时长，默认值为 300。
+    # 支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果：
+    animation_duration_update: Union[Numeric, JSFunc] = 300,
+    
+    # 数据更新动画的缓动效果。
+    # 不同的缓动效果可以参考，缓动示例 (https://www.echartsjs.com/gallery/editor.html?c=line-easing)。
+    animation_easing_update: Union[Numeric] = "cubicOut",
+    
+    # 数据更新动画的延迟，默认值为 0。
+    # 支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。
+    animation_delay_update: Union[Numeric, JSFunc] = 0,
+)
+```
 
 ## InitOpts：初始化配置项
 > *class pyecharts.options.InitOpts*
@@ -38,6 +74,9 @@ class InitOpts(
     # 远程 js host，如不设置默认为 https://assets.pyecharts.org/assets/"
     # 参考 `全局变量` 章节
     js_host: str = "",
+    
+    # 画图动画初始化配置，参考 `global_options.AnimationOpts`
+    animation_opts: Union[AnimationOpts, dict] = AnimationOpts(),
 )
 ```
 
@@ -96,6 +135,128 @@ class ToolboxOpts(
     feature: Union[ToolBoxFeatureOpts, dict] = ToolBoxFeatureOpts(),
 )
 ```
+
+## BrushOpts：区域选择组件配置项
+> *class pyecharts.options.BrushOpts*
+
+```python
+class BrushOpts(
+    # 使用在 toolbox 中的按钮。默认值为 ["rect", "polygon", "keep", "clear"]
+    # brush 相关的 toolbox 按钮有：
+    # "rect"：开启矩形选框选择功能。
+    # "polygon"：开启任意形状选框选择功能。
+    # "lineX"：开启横向选择功能。
+    # "lineY"'：开启纵向选择功能。
+    # "keep"：切换『单选』和『多选』模式。后者可支持同时画多个选框。前者支持单击清除所有选框。
+    # "clear"：清空所有选框。
+    tool_box: Optional[Sequence] = None,
+    
+    # 不同系列间，选中的项可以联动。
+    # brush_link 配置项是一个列表，内容是 seriesIndex，指定了哪些 series 可以被联动。
+    # 例如可以是：
+    # [3, 4, 5] 表示 seriesIndex 为 3, 4, 5 的 series 可以被联动。
+    # "all" 表示所有 series 都进行 brushLink。
+    # None 表示不启用 brush_link 功能。
+    brush_link: Union[Sequence, str] = None,
+    
+    # 指定哪些 series 可以被刷选，可取值为：
+    # "all": 所有 series
+    # series index 列表, 如 [0, 4, 2]，表示指定这些 index 所对应的坐标系。
+    # 某个 series index, 如 0，表示这个 index 所对应的坐标系。
+    series_index: Union[Sequence, Numeric, str] = None,
+    
+    # 指定哪些 geo 可以被刷选。可以设置 brush 是全局的还是属于坐标系的。
+    # 全局 brush
+    # 在 echarts 实例中任意地方刷选。这是默认情况。如果没有指定为坐标系 brush，就是全局 brush。
+    # 坐标系 brush
+    # 在指定的坐标系中刷选。选框可以跟随坐标系的缩放和平移（ roam 和 dataZoom ）而移动。
+    # 坐标系 brush 实际更为常用，尤其是在 geo 中。
+    # 通过指定 brush.geoIndex 或 brush.xAxisIndex 或 brush.yAxisIndex 来规定可以在哪些坐标系中进行刷选。
+    # 指定哪些 series 可以被刷选，可取值为：
+    # "all": 表示所有 series
+    # series index 列表, 如 [0, 4, 2]，表示指定这些 index 所对应的坐标系。
+    # 某个 series index, 如 0，表示这个 index 所对应的坐标系。
+    geo_index: Union[Sequence, Numeric, str] = None,
+    
+    # 指定哪些 xAxisIndex 可以被刷选。可以设置 brush 是全局的还是属于坐标系的。
+    # 全局 brush
+    # 在 echarts 实例中任意地方刷选。这是默认情况。如果没有指定为坐标系 brush，就是全局 brush。
+    # 坐标系 brush
+    # 在指定的坐标系中刷选。选框可以跟随坐标系的缩放和平移（ roam 和 dataZoom ）而移动。
+    # 坐标系 brush 实际更为常用，尤其是在 geo 中。
+    # 通过指定 brush.geoIndex 或 brush.xAxisIndex 或 brush.yAxisIndex 来规定可以在哪些坐标系中进行刷选。
+    # 指定哪些 series 可以被刷选，可取值为：
+    # "all": 表示所有 series
+    # series index 列表, 如 [0, 4, 2]，表示指定这些 index 所对应的坐标系。
+    # 某个 series index, 如 0，表示这个 index 所对应的坐标系。
+    x_axis_index: Union[Sequence, Numeric, str] = None,
+    
+    # 指定哪些 yAxisIndex 可以被刷选。可以设置 brush 是全局的还是属于坐标系的。
+    # 全局 brush
+    # 在 echarts 实例中任意地方刷选。这是默认情况。如果没有指定为坐标系 brush，就是全局 brush。
+    # 坐标系 brush
+    # 在指定的坐标系中刷选。选框可以跟随坐标系的缩放和平移（ roam 和 dataZoom ）而移动。
+    # 坐标系 brush 实际更为常用，尤其是在 geo 中。
+    # 通过指定 brush.geoIndex 或 brush.xAxisIndex 或 brush.yAxisIndex 来规定可以在哪些坐标系中进行刷选。
+    # 指定哪些 series 可以被刷选，可取值为：
+    # "all": 表示所有 series
+    # series index 列表, 如 [0, 4, 2]，表示指定这些 index 所对应的坐标系。
+    # 某个 series index, 如 0，表示这个 index 所对应的坐标系。
+    y_axis_index: Union[Sequence, Numeric, str] = None,
+    
+    # 默认的刷子类型。默认值为 rect。
+    # 可选参数如下：
+    # "rect"：矩形选框。
+    # "polygon"：任意形状选框。
+    # "lineX"：横向选择。
+    # "lineY"：纵向选择。
+    brush_type: str = "rect",
+    
+    # 默认的刷子的模式。可取值为：
+    # 默认为 single
+    # "single"：单选。
+    # "multiple"：多选。
+    brush_mode: str = "single",
+    
+    # 已经选好的选框是否可以被调整形状或平移。默认值为 True
+    transformable: bool = True,
+    
+    # 选框的默认样式，值为
+    # {
+    #      "borderWidth": 1,
+    #      "color": "rgba(120,140,180,0.3)",
+    #      "borderColor": "rgba(120,140,180,0.8)"
+    # },
+    brush_style: Optional[dict] = None,
+    
+    # 默认情况，刷选或者移动选区的时候，会不断得发 brushSelected 事件，从而告诉外界选中的内容。
+    # 但是频繁的事件可能导致性能问题，或者动画效果很差。
+    # 所以 brush 组件提供了 brush.throttleType，brush.throttleDelay 来解决这个问题。
+    # throttleType 取值可以是：
+    # "debounce"：表示只有停止动作了（即一段时间没有操作了），才会触发事件。时间阈值由 brush.throttleDelay 指定。
+    # "fixRate"：表示按照一定的频率触发事件，时间间隔由 brush.throttleDelay 指定。
+    throttle_type: str = "fixRate",
+    
+    # 默认为 0 表示不开启 throttle。
+    throttle_delay: Numeric = 0,
+    
+    # 在 brush_mode 为 "single" 的情况下，是否支持单击清除所有选框。
+    remove_on_click: bool = True,
+    
+    # 定义在选中范围外的视觉元素。最终参数以字典的形式进行配置
+    # 可选的视觉元素有：
+    # symbol: 图元的图形类别。
+    # symbolSize: 图元的大小。
+    # color: 图元的颜色。
+    # colorAlpha: 图元的颜色的透明度。
+    # opacity: 图元以及其附属物（如文字标签）的透明度。
+    # colorLightness: 颜色的明暗度，参见 https://en.wikipedia.org/wiki/HSL_and_HSV。
+    # colorSaturation: 颜色的饱和度，参见 https://en.wikipedia.org/wiki/HSL_and_HSV。
+    # colorHue: 颜色的色调，参见 https://en.wikipedia.org/wiki/HSL_and_HSV。
+    out_of_brush: dict = None,
+)
+```
+
 
 ## TitleOpts：标题配置项
 > *class pyecharts.options.TitleOpts*
@@ -243,21 +404,21 @@ class LegendOpts(
     # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
     # 也可以是 'left', 'center', 'right'。
     # 如果 left 的值为'left', 'center', 'right'，组件会根据相应的位置自动对齐。
-    pos_left: Optional[str] = None,
+    pos_left: Union[str, Numeric, None] = None,
 
     # 图例组件离容器右侧的距离。
     # right 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
-    pos_right: Optional[str] = None,
+    pos_right: Union[str, Numeric, None] = None,
 
     # 图例组件离容器上侧的距离。
     # top 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
     # 也可以是 'top', 'middle', 'bottom'。
     # 如果 top 的值为'top', 'middle', 'bottom'，组件会根据相应的位置自动对齐。
-    pos_top: Optional[str] = None,
+    pos_top: Union[str, Numeric, None] = None,
 
     # 图例组件离容器下侧的距离。
     # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
-    pos_bottom: Optional[str] = None,
+    pos_bottom: Union[str, Numeric, None] = None,
 
     # 图例列表的布局朝向。可选：'horizontal', 'vertical'
     orient: Optional[str] = None,
@@ -272,6 +433,9 @@ class LegendOpts(
 
 ```python
 class VisualMapOpts(
+    # 是否显示视觉映射配置
+    is_show: bool = True,
+    
     # 映射过渡类型，可选，"color", "size"
     type_: str = "color",
 
@@ -315,6 +479,9 @@ class VisualMapOpts(
 
     # 对于连续型数据，自动平均切分成几段。默认为5段。连续数据的范围需要 max 和 min 来指定
     split_number: int = 5,
+    
+    # 指定取哪个系列的数据，默认取所有系列。
+    series_index: Union[Numeric, Sequence, None] = None,
 
     # 组件映射维度
     dimension: Optional[Numeric] = None,
@@ -483,6 +650,12 @@ class AxisTickOpts(
 class AxisPointerOpts(
     # 默认显示坐标轴指示器
     is_show: bool = True,
+    
+    # 不同轴的 axisPointer 可以进行联动，在这里设置。联动表示轴能同步一起活动。
+    # 轴依据他们的 axisPointer 当前对应的值来联动。
+    # link 是一个数组，其中每一项表示一个 link group，一个 group 中的坐标轴互相联动。
+    # 具体使用方式可以参见：https://www.echartsjs.com/option.html#axisPointer.link
+    link: Sequence[dict] = None,
     
     # 指示器类型。
     # 可选参数如下，默认为 'line'

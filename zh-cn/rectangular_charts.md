@@ -146,6 +146,81 @@ def bar_base() -> Bar:
 ```
 ![](https://user-images.githubusercontent.com/19553554/56866199-32bce180-6a09-11e9-9e1c-35273a2770e5.png)
 
+> Bar-动画配置基本示例
+
+```python
+def bar_base_with_animation() -> Bar:
+    c = (
+        Bar(
+            init_opts=opts.InitOpts(
+                animation_opts=opts.AnimationOpts(
+                    animation_delay=1000, animation_easing="elasticOut"
+                )
+            )
+        )
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-动画配置基本示例", subtitle="我是副标题")
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/61018779-8dd86080-a3ca-11e9-85da-5e9cefd4bbd4.png)
+
+> Bar-背景图基本示例
+
+```python
+def bar_base_with_custom_background_image() -> Bar:
+    c = (
+        Bar(
+            init_opts=opts.InitOpts(
+                bg_color={
+                    "type": "pattern",
+                    "image": JsCode("img"),
+                    "repeat": "no-repeat",
+                }
+            )
+        )
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(
+                title="Bar-背景图基本示例",
+                subtitle="我是副标题",
+                title_textstyle_opts=opts.TextStyleOpts(color="white"),
+            )
+        )
+    )
+    c.add_js_funcs(
+        """
+        var img = new Image(); img.src = 'https://s2.ax1x.com/2019/07/08/ZsS0fK.jpg';
+        """
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/61018825-b1031000-a3ca-11e9-97e3-6e5af30ce878.png)
+
+> Bar-通过 dict 进行配置
+
+```python
+def bar_base_dict_config() -> Bar:
+    c = (
+        Bar({"theme": ThemeType.MACARONS})
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts={"text": "Bar-通过 dict 进行配置", "subtext": "我也是通过 dict 进行配置的"}
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/61018875-d263fc00-a3ca-11e9-9722-6bcd11d93340.png)
+
+
 > Bar-默认取消显示某 Series
 
 ```python
@@ -590,6 +665,236 @@ def bar_graphic_component() -> Bar:
     return c
 ```
 ![](https://user-images.githubusercontent.com/17564655/58749280-a80f4c80-84b6-11e9-9dbc-068a28255ccf.png)
+
+> Bar-Graphic (Rect + Text) 组件示例 1
+
+```python
+def bar_graphic_rect_text_one_component() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-Graphic Rect+Text 1 组件示例"),
+            graphic_opts=[
+                opts.GraphicGroup(
+                    graphic_item=opts.GraphicItem(
+                        rotation=JsCode("Math.PI / 4"),
+                        bounding="raw",
+                        right=110,
+                        bottom=110,
+                        z=100,
+                    ),
+                    children=[
+                        opts.GraphicRect(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_shape_opts=opts.GraphicShapeOpts(
+                                width=400, height=50
+                            ),
+                            graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                fill="rgba(0,0,0,0.3)"
+                            ),
+                        ),
+                        opts.GraphicText(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_textstyle_opts=opts.GraphicTextStyleOpts(
+                                text="pyecharts bar chart",
+                                font="bold 26px Microsoft YaHei",
+                                graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                    fill="#fff"
+                                ),
+                            ),
+                        ),
+                    ],
+                )
+            ],
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/59005268-6502ff80-884f-11e9-95d9-7dfbcce96169.png)
+
+> Bar-Graphic (Rect + Text) 组件示例 2
+
+```python
+def bar_graphic_rect_text_two_component() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-Graphic Rect+Text 2 组件示例"),
+            graphic_opts=[
+                opts.GraphicGroup(
+                    graphic_item=opts.GraphicItem(
+                        left="50%",
+                        top="15%",
+                    ),
+                    children=[
+                        opts.GraphicRect(
+                            graphic_item=opts.GraphicItem(
+                                z=100,
+                                left="center",
+                                top="middle",
+                            ),
+                            graphic_shape_opts=opts.GraphicShapeOpts(
+                                width=190, height=90,
+                            ),
+                            graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                fill="#fff",
+                                stroke="#555",
+                                line_width=2,
+                                shadow_blur=8,
+                                shadow_offset_x=3,
+                                shadow_offset_y=3,
+                                shadow_color="rgba(0,0,0,0.3)",
+                            )
+                        ),
+                        opts.GraphicText(
+                            graphic_item=opts.GraphicItem(
+                                left="center",
+                                top="middle",
+                                z=100,
+                            ),
+                            graphic_textstyle_opts=opts.GraphicTextStyleOpts(
+                                text=JsCode(
+                                    "['横轴表示数据类别',"
+                                    "'纵轴表示数值的值',"
+                                    "'这个文本块可以放在图中各',"
+                                    "'种位置'].join('\\n')"
+                                ),
+                                font="14px Microsoft YaHei",
+                                graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                    fill="#333"
+                                )
+                            )
+                        )
+                    ]
+                )
+            ],
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/59005274-6af8e080-884f-11e9-824e-2fa7ff62a93e.png)
+
+> Bar-Graphic (Image) 组件示例
+
+```python
+def bar_graphic_image_component() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-Graphic Image 组件示例"),
+            graphic_opts=[
+                opts.GraphicImage(
+                    graphic_item=opts.GraphicItem(
+                        id_="logo",
+                        right=20,
+                        top=20,
+                        z=-10,
+                        bounding="raw",
+                        origin=[75, 75],
+                    ),
+                    graphic_imagestyle_opts=opts.GraphicImageStyleOpts(
+                        image="http://echarts.baidu.com/images/favicon.png",
+                        width=150,
+                        height=150,
+                        opacity=0.4,
+                    ),
+                )
+            ],
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/59005282-6fbd9480-884f-11e9-8a8b-abfbfd681056.png)
+
+> Bar-Graphic (Image-Rotate) 组件示例
+
+```python
+def bar_graphic_image_with_js_component() -> Grid:
+    bar = (
+        Bar(init_opts=opts.InitOpts(chart_id="1234"))
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-Graphic Image（旋转功能）组件示例"),
+            graphic_opts=[
+                opts.GraphicImage(
+                    graphic_item=opts.GraphicItem(
+                        id_="logo",
+                        right=20,
+                        top=20,
+                        z=-10,
+                        bounding="raw",
+                        origin=[75, 75],
+                    ),
+                    graphic_imagestyle_opts=opts.GraphicImageStyleOpts(
+                        image="http://echarts.baidu.com/images/favicon.png",
+                        width=150,
+                        height=150,
+                        opacity=0.4,
+                    ),
+                )
+            ],
+        )
+    )
+    c = (
+        Grid(
+            init_opts=opts.InitOpts(chart_id="1234")
+        )
+        .add(
+            chart=bar,
+            grid_opts=opts.GridOpts(
+                pos_left="5%",
+                pos_right="4%",
+                pos_bottom="5%",
+            )
+        )
+        .add_js_funcs("""
+            var rotation = 0;
+            setInterval(function () {
+                chart_1234.setOption({
+                    graphic: {
+                        id: 'logo',
+                        rotation: (rotation += Math.PI / 360) % (Math.PI * 2)
+                    }
+                });
+            }, 30);
+        """)
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/59005286-75b37580-884f-11e9-9619-dcf3887dd66b.png)
+
+> Bar-Brush示例
+
+```python
+def bar_with_brush() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-Brush示例", subtitle="我是副标题"),
+            brush_opts=opts.BrushOpts(),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/61018926-f7f10580-a3ca-11e9-9719-39142c0195f6.png)
 
 
 ## Boxplot：箱形图
@@ -1173,6 +1478,9 @@ def add_yaxis(
 
     # 是否显示成阶梯图
     is_step: bool = False,
+    
+    # 是否开启 hover 在拐点标志上的提示动画效果。
+    is_hover_animation: bool = True,
 
     # 标记点配置项，参考 `series_options.MarkPointOpts`
     markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,

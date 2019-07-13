@@ -19,6 +19,12 @@ def add_schema(
     # 是否开启鼠标缩放和平移漫游。
     is_roam: bool = True,
 
+    # 当前视角的缩放比例。默认为 1
+    zoom: Optional[Numeric] = None,
+
+    # 当前视角的中心点，用经纬度表示。例如：center: [115.97, 29.71]
+    center: Optional[Sequence] = None,
+
     # # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict, None] = None,
 
@@ -354,6 +360,12 @@ def add(
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+
+    # 高亮标签配置项，参考 `series_options.LabelOpts`
+    emphasis_label_opts: Union[opts.LabelOpts, dict, None] = None,
+
+    # 高亮图元样式配置项，参考 `series_options.ItemStyleOpts`
+    emphasis_itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 )
 ```
 

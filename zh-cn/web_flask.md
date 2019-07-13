@@ -168,7 +168,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route("barChart")
+@app.route("/barChart")
 def get_bar_chart():
     c = bar_base()
     return c.dump_options()
