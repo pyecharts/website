@@ -1,6 +1,14 @@
 # 版本日志
 
-### version 1.3.0 - 2019.7.13（current）
+### version 1.3.1 - 2019.7.15（current）
+
+***Fixed***
+* 修复 1.3.0 无法显示的问题 
+
+***Add***
+* [pr#1248](https://github.com/pyecharts/pyecharts/pulls/1248) Map下修改无数据部分的地图颜色
+
+### version 1.3.0 - 2019.7.13
 
 ***Add***
 * [pr#1213](https://github.com/pyecharts/pyecharts/pulls/1213) 新增 3D 地图
