@@ -1,13 +1,11 @@
 ## 如何安装
 
-### pyecharts
-
-#### pip 安装
+**pip 安装**
 ```shell
 $ pip install pyecharts
 ```
 
-#### 源码安装
+**源码安装**
 ```shell
 $ git clone https://github.com/pyecharts/pyecharts.git
 $ cd pyecharts
