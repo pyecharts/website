@@ -1,6 +1,21 @@
 # 版本日志
 
-### version 1.2.1 - 2019.6.19（current）
+### version 1.3.0 - 2019.7.13（current）
+
+***Add***
+* [pr#1213](https://github.com/pyecharts/pyecharts/pulls/1213) 新增 3D 地图
+* [pr#1215](https://github.com/pyecharts/pyecharts/pulls/1215) [issue#726](https://github.com/pyecharts/pyecharts/issues/726) 支持 Zeppelin 和 Nteract Notebook 环境
+* [pr#1231](https://github.com/pyecharts/pyecharts/pulls/1212) 新增 `AnimationsOpts` 配置项
+
+***Updated***
+* [pr#1223](https://github.com/pyecharts/pyecharts/pulls/1223) 更新 `AngleAxisOpts` 参数
+
+***Fixed***
+* [pr#1216](https://github.com/pyecharts/pyecharts/pull/1216) 修复 `dump_options` 方法不能正确处理 Nan 值的问题
+* [pr#1212](https://github.com/pyecharts/pyecharts/pulls/1212) [issue#1210](https://github.com/pyecharts/pyecharts/issues/1210) 修复 Chart 初始化不能使用 dict 传参的问题
+
+
+### version 1.2.1 - 2019.6.19
 
 ***Add***
 * [pr#1175](https://github.com/pyecharts/pyecharts/pulls/1175)，[pr#1168](https://github.com/pyecharts/pyecharts/pulls/1168) 新增图表示例
