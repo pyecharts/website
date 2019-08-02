@@ -1,6 +1,15 @@
 # 版本日志
 
-### version 1.3.0 - 2019.7.13（current）
+### version 1.3.1 - 2019.7.15（current）
+
+***Add***
+* [pr#1253](https://github.com/pyecharts/pyecharts/pulls/1253) `emphasis_itemstyle_opts` 新增 `area_color` 参数，用于设置区域颜色。
+
+***Fixed***
+* [pr#1252](https://github.com/pyecharts/pyecharts/pulls/1252) 修复 jshost 失效导致图形无法渲染的 bug。
+
+
+### version 1.3.0 - 2019.7.13
 
 ***Add***
 * [pr#1213](https://github.com/pyecharts/pyecharts/pulls/1213) 新增 3D 地图
