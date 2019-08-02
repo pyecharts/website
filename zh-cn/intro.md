@@ -16,13 +16,13 @@
 
 pyecharts 分为 v0.5.X 和 v1 两个大版本，v0.5.X 和 v1 间不兼容，v1 是一个全新的版本，详见 [ISSUE#892](https://github.com/pyecharts/pyecharts/issues/892)，[ISSUE#1033](https://github.com/pyecharts/pyecharts/issues/1033)。
 
-### V0.5.X
+### v0.5.X
 
 > 支持 Python2.7，3.4+
 
 经开发团队决定，0.5.x 版本将不再进行维护，0.5.x 版本代码位于 *05x* 分支，文档位于 [05x-docs.pyecharts.org](http://05x-docs.pyecharts.org)。
 
-### V1
+### v1
 
 > 仅支持 Python3.6+
 
