@@ -611,6 +611,8 @@ def graph_weibo() -> Graph:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55931763-5b975580-5c59-11e9-966c-b54705924b88.png)
 
+> Graph-les-miserables
+
 ```python
 def graph_les_miserables():
     with open(
@@ -1271,6 +1273,48 @@ def pie_rich_label() -> Pie:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/58702177-9dca5100-83d7-11e9-9204-37441a51d444.png)
+
+> Pie-多饼图基本示例
+
+```python
+def pie_multiple_base() -> Pie:
+    c = (
+        Pie()
+        .add(
+            "",
+            [list(z) for z in zip(["剧情", "其他"], [25, 75])],
+            center=["20%", "30%"],
+            radius=[40, 60],
+        )
+        .add(
+            "",
+            [list(z) for z in zip(["奇幻", "其他"], [24, 76])],
+            center=["55%", "30%"],
+            radius=[40, 60],
+        )
+        .add(
+            "",
+            [list(z) for z in zip(["爱情", "其他"], [14, 86])],
+            center=["20%", "70%"],
+            radius=[40, 60],
+        )
+        .add(
+            "",
+            [list(z) for z in zip(["惊悚", "其他"], [11, 89])],
+            center=["55%", "70%"],
+            radius=[40, 60],
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Pie-多饼图基本示例"),
+            legend_opts=opts.LegendOpts(
+                type_="scroll", pos_top="20%", pos_left="80%", orient="vertical"
+            ),
+        )
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/63037111-f5655c80-bef0-11e9-8751-bb42a3ed3c6b.png)
 
 
 ## Polar：极坐标系

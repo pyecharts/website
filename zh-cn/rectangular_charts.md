@@ -1696,6 +1696,27 @@ def line_markpoint() -> Line:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55603654-47a5ac80-579e-11e9-81a7-e4c3ce611de0.png)
 
+> Line-MarkPoint（自定义）
+
+```python
+def line_markpoint_custom() -> Line:
+    x, y = Faker.choose(), Faker.values()
+    c = (
+        Line()
+        .add_xaxis(x)
+        .add_yaxis(
+            "商家A",
+            y,
+            markpoint_opts=opts.MarkPointOpts(
+                data=[opts.MarkPointItem(name="自定义标记点", coord=[x[2], y[2]], value=y[2])]
+            ),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Line-MarkPoint（自定义）"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/63036891-8d167b00-bef0-11e9-8b61-cf65c313522c.png)
+
 > Line-MarkLine
 
 ```python
