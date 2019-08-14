@@ -17,8 +17,9 @@ $ git clone https://github.com/pyecharts/pyecharts-assets.git
 切换到离线使用的机器，执行以下步骤
 ```shell
 # 1.先安装 pyecharts-dep 中除 pyecharts-X.Y.Z-py2.py3-none-any.whl 的其他包
-$ pip install xx.whl/xx.gz
+$ ls | grep -v "^pyecharts*" | xargs pip install
 # 2.安装 pyecharts-X.Y.Z-py2.py3-none-any.whl 包
+$ ls | grep "pyecharts*" | xargs  pip install
 # 3.启动本地服务
 $ cd pyecharts-assets && python -m http.server
 ```
