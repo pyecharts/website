@@ -733,6 +733,20 @@ Page.save_resize_html("render.html", cfg_file="~/chart_config.json", dest="my_ne
 # 或者可以使用 json 数据
 # cfg_dict 为 json 文件里面的内容
 Page.save_resize_html("render.html", cfg_dict=cfg_dict, dest="my_new_charts.html")
+
+# Question：能否复用渲染模板？
+# Answer: 可以的，渲染配置 json 数据中是以 chart_id 来作为一个图形的唯一标识符的，所以只需要在
+# 第一次渲染的时候指定 chart_id 就可以啦。
+# example:
+# bar = bar_datazoom_slider()
+# bar.chart_id = "chenjiandongx_is_an_awesome_boy"
+# line = line_markpoint()
+# line.chart_id = "chenjiandongx_is_an_amazing_boy"
+# pie = pie_rosetype()
+# pie.chart_id = "chenjiandongx_is_an_adorable_boy"
+# 然后只要以后都按这个 chart_id 来渲染图表的时候，你的布局配置就可以复用啦。
+# cat chart_config.json，会发现 chart_id 是固定的啦。
+page.add(bar_datazoom_slider(), line_markpoint(), pie_rosetype()))
 ```
 
 演示视频
