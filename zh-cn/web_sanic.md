@@ -83,7 +83,7 @@ def bar_base() -> Bar:
 @app.route("/barChart", methods=["GET"])
 async def draw_bar_chart(request):
     c = bar_base()
-    return json(c.dump_options())
+    return json(c.dump_options_with_quotes())
 
 
 @app.route("/", methods=["GET"])
@@ -239,7 +239,7 @@ def line_base() -> Line:
 @app.route("/lineChart", methods=["GET"])
 async def draw_line_chart(request):
     c = line_base()
-    return json(c.dump_options())
+    return json(c.dump_options_with_quotes())
 
 cnt = 9
 

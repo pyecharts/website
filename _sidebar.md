@@ -24,6 +24,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。Echarts 是百度开�
   - [定制主题](zh-cn/themes)
   - [定制地图](zh-cn/maps)
   - [渲染图片](zh-cn/render_images)
+  - [Notebook](zh-cn/notebook)
   - [原生 Javascropt](zh-cn/javasrcipt)
   - [资源引用](zh-cn/assets_host)
 - Web 框架整合
@@ -36,6 +37,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。Echarts 是百度开�
   - [版本日志](zh-cn/changelog)
   - [发布日志](zh-cn/release-note/)
 - 项目开发
+  - [参与贡献](zh-cn/contribution)
   - [技术文档](zh-cn/technical)
   - [赞助者名单](zh-cn/donors)
   - [FAQ](zh-cn/faq)

@@ -611,6 +611,39 @@ def graph_weibo() -> Graph:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55931763-5b975580-5c59-11e9-966c-b54705924b88.png)
 
+```python
+def graph_les_miserables():
+    with open(
+        os.path.join("fixtures", "les-miserables.json"), "r", encoding="utf-8"
+    ) as f:
+        j = json.load(f)
+        nodes = j["nodes"]
+        links = j["links"]
+        categories = j["categories"]
+
+    c = (
+        Graph(init_opts=opts.InitOpts(width="1000px", height="600px"))
+        .add(
+            "",
+            nodes=nodes,
+            links=links,
+            categories=categories,
+            layout="circular",
+            is_rotate_label=True,
+            linestyle_opts=opts.LineStyleOpts(color="source", curve=0.3),
+            label_opts=opts.LabelOpts(position="right"),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Graph-Les Miserables"),
+            legend_opts=opts.LegendOpts(
+                orient="vertical", pos_left="2%", pos_top="20%"
+            ),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/62337103-cd93f300-b505-11e9-9bfd-165d4d1a870c.png)
+
 > Graph-NPM Dependencies
 
 ```python

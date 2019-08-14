@@ -878,7 +878,7 @@ def bar_graphic_image_with_js_component() -> Grid:
 ```
 ![](https://user-images.githubusercontent.com/17564655/59005286-75b37580-884f-11e9-9619-dcf3887dd66b.png)
 
-> Bar-Brush示例
+> Bar-Brush 示例
 
 ```python
 def bar_with_brush() -> Bar:
@@ -888,13 +888,51 @@ def bar_with_brush() -> Bar:
         .add_yaxis("商家A", Faker.values())
         .add_yaxis("商家B", Faker.values())
         .set_global_opts(
-            title_opts=opts.TitleOpts(title="Bar-Brush示例", subtitle="我是副标题"),
+            title_opts=opts.TitleOpts(title="Bar-Brush 示例", subtitle="我是副标题"),
             brush_opts=opts.BrushOpts(),
         )
     )
     return c
 ```
 ![](https://user-images.githubusercontent.com/17564655/61018926-f7f10580-a3ca-11e9-9719-39142c0195f6.png)
+
+> Bar-自定义柱状颜色
+
+```python
+def bar_custom_bar_color() -> Bar:
+    color_function = """
+        function (params) {
+            if (params.value > 0 && params.value < 50) {
+                return 'red';
+            } else if (params.value > 50 && params.value < 100) {
+                return 'blue';
+            }
+            return 'green';
+        }
+        """
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis(
+            "商家A",
+            Faker.values(),
+            itemstyle_opts=opts.ItemStyleOpts(color=JsCode(color_function)),
+        )
+        .add_yaxis(
+            "商家B",
+            Faker.values(),
+            itemstyle_opts=opts.ItemStyleOpts(color=JsCode(color_function)),
+        )
+        .add_yaxis(
+            "商家C",
+            Faker.values(),
+            itemstyle_opts=opts.ItemStyleOpts(color=JsCode(color_function)),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-自定义柱状颜色"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/63005440-1dcc6700-beaf-11e9-9281-8b20a047c113.png)
 
 
 ## Boxplot：箱形图
