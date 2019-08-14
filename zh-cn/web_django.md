@@ -195,11 +195,11 @@ index.html
 
         $(
             function () {
-                getData(chart);
+                fetchData(chart);
             }
         );
 
-        function getData() {
+        function fetchData() {
             $.ajax({
                 type: "GET",
                 url: "http://127.0.0.1:8000/demo/bar",
@@ -321,7 +321,7 @@ index.html
 
         $(
             function () {
-                getData(chart);
+                fetchData(chart);
                 setInterval(fetchData, 2000);
             }
         );
@@ -361,7 +361,7 @@ index.html
         var old_data = [];
         $(
             function () {
-                getData(chart);
+                fetchData(chart);
                 setInterval(fetchData, 2000);
             }
         );

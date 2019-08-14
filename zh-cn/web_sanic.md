@@ -32,11 +32,11 @@ index.html
 
         $(
             function () {
-                getData();
+                fetchData();
             }
         );
 
-        function getData() {
+        function fetchData() {
             $.ajax({
                 type: "GET",
                 url: "http://127.0.0.1:8000/barChart",

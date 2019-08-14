@@ -251,12 +251,12 @@ index.html
         var old_data = [];
         $(
             function () {
-                getData(chart);
+                fetchData(chart);
                 setInterval(getDynamicData, 2000);
             }
         );
 
-        function getData() {
+        function fetchData() {
             $.ajax({
                 type: "GET",
                 url: "http://127.0.0.1:5000/lineChart",
