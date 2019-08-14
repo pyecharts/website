@@ -736,7 +736,8 @@ Page.save_resize_html("render.html", cfg_dict=cfg_dict, dest="my_new_charts.html
 ```
 
 演示视频
-* TODO
+* [https://www.youtube.com/watch?v=gizMMGkUt80](https://www.youtube.com/watch?v=gizMMGkUt80&feature=youtu.be)
+
 
 ## Timeline：时间线轮播多图
 
