@@ -1,11 +1,12 @@
 # 版本日志
 
-### version 1.4.0 - 2019.8.14（current）
+### version 1.4.0 - 2019.8.15（current）
 
 ***Add***
 * [issue#1275](https://github.com/pyecharts/pyecharts/issues/1275) 新增对 Timeline 图支持多 X 轴的支持。
 * [pr#1260](https://github.com/pyecharts/pyecharts/pulls/1260) 新增对 Timeline 图 graphic_opts 的支持。
 * [pr#1273](https://github.com/pyecharts/pyecharts/pulls/1273) 新增对 Polar 图 label 配置项的支持以及 Page 图新增 `DraggablePageLayout` 布局。
+* [pr#1273](https://github.com/pyecharts/pyecharts/pulls/1273) Geo 图坐标支持模糊匹配。
 
 ***Fixed***
 * [pr#1271](https://github.com/pyecharts/pyecharts/pulls/1271) 修复 `dump_options` 出现不规则字符的问题，并新增 `dump_options_with_quotes` 方法。

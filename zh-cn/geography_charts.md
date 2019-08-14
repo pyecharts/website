@@ -137,6 +137,13 @@ def get_coordinate(
 ) -> Sequence
 ```
 
+Geo 图的坐标引用自 `pyecharts.datasets.COORDINATES`，`COORDINATES` 是一个支持模糊匹配的字典类。可设置匹配的阈值。
+```python
+from pyecharts.datasets import COORDINATES
+# cutoff 为匹配阈值，阈值越高相似性越高，1 为完全相同。默认为 0.6
+COORDINATES.cutoff = 0.75
+```
+
 ### Demo
 
 > Geo-基本示例
