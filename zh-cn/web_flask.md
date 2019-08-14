@@ -173,7 +173,7 @@ def index():
 @app.route("/barChart")
 def get_bar_chart():
     c = bar_base()
-    return c.dump_options()
+    return c.dump_options_with_quotes()
 
 
 if __name__ == "__main__":
@@ -329,7 +329,7 @@ def index():
 @app.route("/lineChart")
 def get_line_chart():
     c = line_base()
-    return c.dump_options()
+    return c.dump_options_with_quotes()
 
 
 idx = 9

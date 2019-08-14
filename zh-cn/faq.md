@@ -1,6 +1,27 @@
-**Q: 如何离线安装 pyecharts？**
+**Q: 如何离线使用 pyecharts？**
 
-A: TODO
+A: 如果需要在不能联网的环境上使用 pyecharts，需要离线安装 pyecharts 以及提供本地静态资源 HOST 服务。
+
+找一台可以联网的机器，执行以下步骤
+```shell
+# 先安装 pyecharts
+$ pip install pyecharts
+$ cd ~ && mkidr pyecharts-dep && cd pyecharts-dep
+# 将 pyecharts 用到的所有依赖下载到 pyecharts-dep 文件夹
+$ pip download pyecharts
+# clone pyecharts-assets 项目
+$ git clone https://github.com/pyecharts/pyecharts-assets.git
+# 将 pyecharts-dep 文件夹打包，传输到需要离线使用 pyecharts 的机器里
+```
+
+切换到离线使用的机器，执行以下步骤
+```shell
+# 1.先安装 pyecharts-dep 中除 pyecharts-X.Y.Z-py2.py3-none-any.whl 的其他包
+$ pip install xx.whl/xx.gz
+# 2.安装 pyecharts-X.Y.Z-py2.py3-none-any.whl 包
+# 3.启动本地服务
+$ cd pyecharts-assets && python -m http.server
+```
 
 ---
 
@@ -17,7 +38,7 @@ $.ajax({
     url: "<后端的数据接口>",
     dataType: 'json',
     success: function (result) {
-        console.log(result);
+        // console.log(result);
         let jsonResult = JSON.stringify(result);
         jsonResult = JSON.parse(jsonResult, function (key, value) {
            if (value.match(/(?:\/\*[\s\S]*?\*\/|\/\/.*?\r?\n|[^{])+\{([\s\S]*)\}$/) !== null) {
@@ -32,7 +53,7 @@ $.ajax({
 });
 ```
 
-后端部分(只给出画图核心的代码部分, 以 Line 图为例子)
+后端部分(只给出画图核心的代码部分, 以 Line 图为例)
 ```python
 def line_base() -> Line:
     line = (
@@ -46,14 +67,12 @@ def line_base() -> Line:
                 )
             )
         )
-        .dump_options()
+        .dump_options_with_quotes()  # 保留 JS 方法引号
     )
     return line
 ```
 
-目前解决在 Web 框架下前后端分离模式的情况下出现 json 解析异常的核心就是在需要用到 JSCode 的地方都不使用 JSCode 进行传参。
-前端主要就是在解析 json 的情况下通过 JSON.parse 的回调函数进行处理。
-通过右侧的正则表达式判断是否为 js 的 function `/(?:\/\*[\s\S]*?\*\/|\/\/.*?\r?\n|[^{])+\{([\s\S]*)\}$/`，从而避免字符串的同名冲突的问题。
+前端主要就是在解析 json 的情况下通过 JSON.parse 的回调函数进行处理。通过右侧的正则表达式判断是否为 js 的 function `/(?:\/\*[\s\S]*?\*\/|\/\/.*?\r?\n|[^{])+\{([\s\S]*)\}$/`，从而避免字符串的同名冲突的问题。
 
 示例如下:
 ![](https://user-images.githubusercontent.com/17564655/61172141-24677600-a5b3-11e9-9425-5cafae45a315.png)
