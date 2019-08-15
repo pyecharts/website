@@ -173,7 +173,7 @@ def index():
 @app.route("/barChart")
 def get_bar_chart():
     c = bar_base()
-    return c.dump_options()
+    return c.dump_options_with_quotes()
 
 
 if __name__ == "__main__":
@@ -251,12 +251,12 @@ index.html
         var old_data = [];
         $(
             function () {
-                getData(chart);
+                fetchData(chart);
                 setInterval(getDynamicData, 2000);
             }
         );
 
-        function getData() {
+        function fetchData() {
             $.ajax({
                 type: "GET",
                 url: "http://127.0.0.1:5000/lineChart",
@@ -329,7 +329,7 @@ def index():
 @app.route("/lineChart")
 def get_line_chart():
     c = line_base()
-    return c.dump_options()
+    return c.dump_options_with_quotes()
 
 
 idx = 9

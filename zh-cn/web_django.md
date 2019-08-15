@@ -195,11 +195,11 @@ index.html
 
         $(
             function () {
-                getData(chart);
+                fetchData(chart);
             }
         );
 
-        function getData() {
+        function fetchData() {
             $.ajax({
                 type: "GET",
                 url: "http://127.0.0.1:8000/demo/bar",
@@ -272,7 +272,7 @@ def bar_base() -> Bar:
         .add_yaxis("商家A", [randrange(0, 100) for _ in range(6)])
         .add_yaxis("商家B", [randrange(0, 100) for _ in range(6)])
         .set_global_opts(title_opts=opts.TitleOpts(title="Bar-基本示例", subtitle="我是副标题"))
-        .dump_options()
+        .dump_options_with_quotes()
     )
     return c
 
@@ -321,7 +321,7 @@ index.html
 
         $(
             function () {
-                getData(chart);
+                fetchData(chart);
                 setInterval(fetchData, 2000);
             }
         );
@@ -361,7 +361,7 @@ index.html
         var old_data = [];
         $(
             function () {
-                getData(chart);
+                fetchData(chart);
                 setInterval(fetchData, 2000);
             }
         );
@@ -471,7 +471,7 @@ def line_base() -> Line:
             xaxis_opts=opts.AxisOpts(type_="value"),
             yaxis_opts=opts.AxisOpts(type_="value")
         )
-        .dump_options()
+        .dump_options_with_quotes()
     )
     return line
 

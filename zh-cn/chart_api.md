@@ -24,8 +24,13 @@ def get_options() -> dict:
 > *func pyecharts.Base.dump_options*
 
 ```python
-# 获取全局 options，JSON 格式
+# 获取全局 options，JSON 格式（JsCode 生成的函数不带引号）
 def dump_options() -> str:
+```
+
+```python
+# 获取全局 options，JSON 格式（JsCode 生成的函数带引号，在前后端分离传输数据时使用）
+def dump_options_with_quotes() -> str:
 ```
 
 > *func pyecharts.Base.render*
