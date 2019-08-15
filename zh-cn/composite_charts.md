@@ -689,7 +689,6 @@ page = Page()
 page.add(bar_datazoom_slider(), line_markpoint(), pie_rosetype(), grid_mutil_yaxis())
 page.render()
 ```
-![](https://user-images.githubusercontent.com/19553554/58749778-c8420a00-84bc-11e9-87e5-2aeab78a8eef.png)
 
 **SimplePageLayout 布局**
 ```python
@@ -698,6 +697,7 @@ page = Page(layout=Page.SimplePageLayout)
 page.add(bar_datazoom_slider(), line_markpoint(), pie_rosetype(), grid_mutil_yaxis())
 page.render()
 ```
+![](https://user-images.githubusercontent.com/19553554/58749778-c8420a00-84bc-11e9-87e5-2aeab78a8eef.png)
 
 **DraggablePageLayout 布局**
 ```python
@@ -750,7 +750,8 @@ page.add(bar_datazoom_slider(), line_markpoint(), pie_rosetype()))
 ```
 
 演示视频
-* [https://www.youtube.com/watch?v=gizMMGkUt80](https://www.youtube.com/watch?v=gizMMGkUt80&feature=youtu.be)
+* [油管视频](https://www.youtube.com/watch?v=gizMMGkUt80&feature=youtu.be)
+* [腾讯视频](https://v.qq.com/x/page/u0914vsm901.html)
 
 
 ## Timeline：时间线轮播多图
@@ -904,7 +905,7 @@ def timeline_pie() -> Timeline:
         tl.add(pie, "{}年".format(i))
     return tl
 ```
-![](https://user-images.githubusercontent.com/19553554/56574394-b768c380-65f5-11e9-85a2-ecb6e4697028.gif)
+![](https://user-images.githubusercontent.com/19553554/63081655-ba0d7100-bf76-11e9-96dc-aee6d84f0310.png)
 
 > Map 图 Timeline 效果
 
