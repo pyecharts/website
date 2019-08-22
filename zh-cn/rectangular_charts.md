@@ -146,6 +146,33 @@ def bar_base() -> Bar:
 ```
 ![](https://user-images.githubusercontent.com/19553554/56866199-32bce180-6a09-11e9-9e1c-35273a2770e5.png)
 
+> Bar-渐变圆柱
+
+```python
+def bar_border_radius():
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values(), category_gap="60%")
+        .set_series_opts(itemstyle_opts={
+            "normal": {
+                "color": JsCode("""new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'rgba(0, 244, 255, 1)'
+                }, {
+                    offset: 1,
+                    color: 'rgba(0, 77, 167, 1)'
+                }], false)"""),
+                "barBorderRadius": [30, 30, 30, 30],
+                "shadowColor": 'rgb(0, 160, 221)',
+            }})
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-渐变圆柱"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/63487345-6acac180-c4dd-11e9-8392-fedac9ac6f91.png)
+
+
 > Bar-动画配置基本示例
 
 ```python
