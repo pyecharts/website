@@ -1278,31 +1278,46 @@ def pie_rich_label() -> Pie:
 
 ```python
 def pie_multiple_base() -> Pie:
+    fn = """
+    function(params) {
+        if(params.name == '其他')
+            return '\\n\\n\\n' + params.name + ' : ' + params.value + '%';
+        return params.name + ' : ' + params.value + '%';
+    }
+    """
+
+    def new_label_opts():
+        return opts.LabelOpts(formatter=JsCode(fn), position="center")
+
     c = (
         Pie()
         .add(
             "",
             [list(z) for z in zip(["剧情", "其他"], [25, 75])],
             center=["20%", "30%"],
-            radius=[40, 60],
+            radius=[60, 80],
+            label_opts=new_label_opts(),
         )
         .add(
             "",
             [list(z) for z in zip(["奇幻", "其他"], [24, 76])],
             center=["55%", "30%"],
-            radius=[40, 60],
+            radius=[60, 80],
+            label_opts=new_label_opts(),
         )
         .add(
             "",
             [list(z) for z in zip(["爱情", "其他"], [14, 86])],
             center=["20%", "70%"],
-            radius=[40, 60],
+            radius=[60, 80],
+            label_opts=new_label_opts(),
         )
         .add(
             "",
             [list(z) for z in zip(["惊悚", "其他"], [11, 89])],
             center=["55%", "70%"],
-            radius=[40, 60],
+            radius=[60, 80],
+            label_opts=new_label_opts(),
         )
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Pie-多饼图基本示例"),
@@ -1310,11 +1325,10 @@ def pie_multiple_base() -> Pie:
                 type_="scroll", pos_top="20%", pos_left="80%", orient="vertical"
             ),
         )
-        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
     )
     return c
 ```
-![](https://user-images.githubusercontent.com/19553554/63037111-f5655c80-bef0-11e9-8751-bb42a3ed3c6b.png)
+![](https://user-images.githubusercontent.com/19553554/63604758-26cfdd80-c5ff-11e9-9b94-46eeba85ecd9.png)
 
 
 ## Polar：极坐标系
