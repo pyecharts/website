@@ -1,6 +1,22 @@
 # 版本日志
 
-### version 1.4.0 - 2019.8.15（current）
+### version 1.5.0 - 2019.9.1（current）
+
+***Add***
+* [pr#1302](https://github.com/pyecharts/pyecharts/pulls/1302) 新增 Tab 图形种类。
+* [pr#1299](https://github.com/pyecharts/pyecharts/pulls/1299) `render` 函数新增 `**kwargs` 传参方式
+* [pr#1314](https://github.com/pyecharts/pyecharts/pulls/1314) Tree 图新增 `is_expand_and_collapse`，`initial_tree_depth:` 参数。
+
+***Updated***
+* [pr#1309](https://github.com/pyecharts/pyecharts/pulls/1309) Page 图 resize 后设置为不可拖动和不可重置大小。
+* [pr#1308](https://github.com/pyecharts/pyecharts/pulls/1308)，[pr#1313](https://github.com/pyecharts/pyecharts/pulls/1313) 重构模板，使 Image/Tabel 类兼容 Page/Tab，且 Image/Table 类不能多次执行 add 方法，如若需要展示多个 Image/Table 请使用 Page。
+
+***Fixed***
+* [pr#1293](https://github.com/pyecharts/pyecharts/pulls/1293) 修复 Page 图 `save_resize_html` 传递 cfg_file 参数时出错的 BUG。
+* [pr#1295](https://github.com/pyecharts/pyecharts/pulls/1295) 修复 Page 图 label 颜色修改无效的 BUG.
+
+
+### version 1.4.0 - 2019.8.15
 
 ***Add***
 * [issue#1275](https://github.com/pyecharts/pyecharts/issues/1275) 新增对 Timeline 图支持多 X 轴的支持。
@@ -54,7 +70,7 @@
 * [pr#1188](https://github.com/pyecharts/pyecharts/pull/1188) 修复 `dump_options` 方法不能正确转义的问题
 
 
-### version 1.2.0
+### version 1.2.0 - 2019.6.1
 
 ***Add***
 * [issue#1155](https://github.com/pyecharts/pyecharts/issues/1155) 新增 PictorialBar 图表类型
@@ -100,7 +116,7 @@
 * [issue#1051](https://github.com/pyecharts/pyecharts/issues/1051) 修复 Timeline 图无法添加多个 visualMap
 
 
-### version 1.0.0
+### version 1.0.0 - 2019.4.28
 
 ***Updated***
 * 全新版本的 pyecharts，详见 [v1.0.0 发布日志](zh-cn/release-note/v100)
