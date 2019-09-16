@@ -1,8 +1,18 @@
+> pyecharts 不做版本管理，您所看到的当前文档为最新版文档，若文档与您使用的版本出现不一致情况，请及时更新 pyecharts。
+
+如何查看使用的 pyecharts 版本？
+
+```python
+import pyecharts
+
+print(pyecharts.__version__)
+```
+
 ## 如何安装
 
 **pip 安装**
 ```shell
-$ pip install pyecharts
+$ pip(3) install pyecharts
 ```
 
 **源码安装**

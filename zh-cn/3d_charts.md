@@ -128,7 +128,7 @@ class Bar3D(
 ### Demo
 
 ```python
-from example.commons import Faker
+from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar3D
 
@@ -171,7 +171,7 @@ class Line3D(
 ```python
 import math
 
-from example.commons import Faker
+from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Line3D
 
@@ -256,7 +256,7 @@ class Scatter3D(
 ```python
 import random
 
-from example.commons import Faker
+from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Scatter3D
 
@@ -297,7 +297,7 @@ class Surface3D(
 ```python
 import math
 
-from example.commons import Faker
+from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Surface3D
 
@@ -384,7 +384,7 @@ API 用法和 map 一样。
 
 ```python
 import pyecharts.options as opts
-from example.commons import POPULATION
+from pyecharts.faker import POPULATION
 from pyecharts.charts import MapGlobe
 
 high = max([x for _, x in POPULATION[1:]])

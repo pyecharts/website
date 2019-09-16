@@ -65,7 +65,7 @@ class GridOpts(
 > Grid-上下布局
 
 ```python
-from example.commons import Faker
+from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Grid, Line,Scatter
 
@@ -505,7 +505,7 @@ Page 内置了以下布局
 > Page-基本示例
 
 ```python
-from example.commons import Faker
+from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Line, Page
 
@@ -541,7 +541,7 @@ page.render()
 > Page-布局示例
 
 ```python
-from example.commons import Faker
+from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Grid, Line, Page, Pie
 
@@ -781,7 +781,7 @@ def add(
 ```
 
 ```python
-from example.commons import Faker
+from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Tab, Pie, Line
 from pyecharts.components import Table
@@ -981,7 +981,7 @@ def add(
 > Bar 图 Timeline 效果
 
 ```python
-from example.commons import Faker
+from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Page, Pie, Timeline
 

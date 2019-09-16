@@ -149,7 +149,7 @@ COORDINATES.cutoff = 0.75
 > Geo-基本示例
 
 ```python
-from example.commons import Faker
+from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Geo
 from pyecharts.globals import ChartType, SymbolType
@@ -381,7 +381,7 @@ def add(
 > Map-基本示例
 
 ```python
-from example.commons import Faker
+from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Map
 
