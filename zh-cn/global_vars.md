@@ -28,12 +28,15 @@ BMapType = _BMapType
 # Notebook 环境类型
 NotebookType = _NotebookType()
 
+# 远程资源 Host
+OnlineHostType = _OnlineHost()
+
 # 全局环境配置类
 class _CurrentConfig:
     # 全局网页标题
     PAGE_TITLE = "Awesome-pyecharts"
     # 全局 Host
-    ONLINE_HOST = "https://assets.pyecharts.org/assets/"
+    ONLINE_HOST = OnlineHostType.DEFAULT_HOST
     # 全局 Notebook 类型
     NOTEBOOK_TYPE = NotebookType.JUPYTER_NOTEBOOK
     # 全局 jinja2.Environment 实例

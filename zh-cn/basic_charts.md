@@ -175,7 +175,7 @@ def add(
 > Funnel-基本示例
 
 ```python
-from example.commons import Faker
+from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Funnel, Page
 
@@ -1094,7 +1094,7 @@ def add(
 > Pie-基本示例
 
 ```python
-from example.commons import Faker
+from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Page, Pie
 
@@ -1549,7 +1549,7 @@ class AngleAxisOpts(
 import math
 import random
 
-from example.commons import Faker
+from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Page, Polar
 

@@ -763,6 +763,30 @@ def bmap_base() -> BMap:
     )
     return c
 ```
+![](https://user-images.githubusercontent.com/19553554/64969813-362d0880-d8d7-11e9-86f2-a93a61c4ccd8.png)
+
+> BMap-热力图
+
+```python
+def bmap_heatmap() -> BMap:
+    c = (
+        BMap()
+        .add_schema(baidu_ak=BAIDU_MAP_AK, center=[120.13066322374, 30.240018034923])
+        .add(
+            "bmap",
+            [list(z) for z in zip(Faker.provinces, Faker.values())],
+            type_="heatmap",
+            label_opts=opts.LabelOpts(formatter="{b}"),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="BMap-热力图"),
+            visualmap_opts=opts.VisualMapOpts(),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/64969674-f403c700-d8d6-11e9-84c9-40a0194ba514.png)
+
 
 > BMap-杭州热门步行路线
 

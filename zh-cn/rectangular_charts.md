@@ -129,7 +129,7 @@ class BarItem(
 > Bar-基本示例
 
 ```python
-from example.commons import Faker
+from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar
 
@@ -1098,7 +1098,7 @@ class EffectScatter(
 > EffectScatter-基本示例
 
 ```python
-from example.commons import Faker
+from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import EffectScatter
 from pyecharts.globals import SymbolType
@@ -1204,7 +1204,7 @@ def add_yaxis(
 ```python
 import random
 
-from example.commons import  Faker
+from pyecharts.faker import  Faker
 from pyecharts import options as opts
 from pyecharts.charts import HeatMap
 
@@ -1576,7 +1576,7 @@ def add_yaxis(
 
 ```python
 import pyecharts.options as opts
-from example.commons import  Faker
+from pyecharts.faker import  Faker
 from pyecharts.charts import Line
 
 
@@ -2138,7 +2138,7 @@ def add_yaxis(
 > Scatter-基本示例
 
 ```python
-from example.commons import Faker
+from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Scatter
 

@@ -1,6 +1,16 @@
 # 版本日志
 
-### version 1.5.0 - 2019.9.1（current）
+### version 1.5.1 - 2019.9.16（current）
+
+***Add***
+* [pr#1324](https://github.com/pyecharts/pyecharts/pulls/1324) 新增 `pyecharts.faker` 包，提供示例数据。
+* [pr#1333](https://github.com/pyecharts/pyecharts/pulls/1333) 提供 Jupyter Notebook 插件，提供离线渲染服务。[资源引用](https://pyecharts.org/#/zh-cn/assets_host)
+
+***Fixed***
+* [pr#1321](https://github.com/pyecharts/pyecharts/pulls/1321) 修复 Heatmap 无法渲染的问题。
+
+
+### version 1.5.0 - 2019.9.1
 
 ***Add***
 * [pr#1302](https://github.com/pyecharts/pyecharts/pulls/1302) 新增 Tab 图形种类。
