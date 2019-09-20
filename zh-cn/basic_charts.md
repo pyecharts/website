@@ -1777,7 +1777,7 @@ class RadarIndicatorItem(
 
 ```python
 from pyecharts import options as opts
-from pyecharts.charts import Page, Radar
+from pyecharts.charts import Radar
 
 
 v1 = [[4300, 10000, 28000, 35000, 50000, 19000]]
