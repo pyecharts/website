@@ -1592,6 +1592,24 @@ def line_base() -> Line:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55603644-3ceb1780-579e-11e9-818c-2841b0d66ff6.png)
 
+> Line-数值 X 轴
+
+```python
+def line_xaxis_type() -> Line:
+    c = (
+        Line()
+        .add_xaxis(Faker.values())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Line-数值 X 轴"),
+            xaxis_opts=opts.AxisOpts(type_="value"),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/65735412-d837c680-e109-11e9-80cf-b888fc5b5efe.png)
+
 > Line-连接空数据
 
 ```python
