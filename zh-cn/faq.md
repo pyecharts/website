@@ -77,3 +77,8 @@ def line_base() -> Line:
 
 示例如下:
 ![](https://user-images.githubusercontent.com/17564655/61172141-24677600-a5b3-11e9-9425-5cafae45a315.png)
+
+
+**Q: Tooltip 中使用 '\\n' 换行无效的问题**
+
+A: 请使用 '<br/>' 代替 '\\n'
