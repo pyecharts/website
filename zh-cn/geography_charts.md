@@ -77,6 +77,12 @@ def add(
     
     # 开启绘制优化的阈值。
     large_threshold: Numeric = 2000,
+    
+    # 配置该系列每一帧渲染的图形数
+    progressive: types.Numeric = 400,
+    
+    # 启用渐进式渲染的图形数量阈值，在单个系列的图形数量超过该阈值时启用渐进式渲染。
+    progressive_threshold: types.Numeric = 3000,
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
