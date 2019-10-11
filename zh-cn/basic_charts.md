@@ -264,9 +264,12 @@ def add(
 
     # 仪表盘结束角度。
     end_angle: Numeric = -45,
+    
+    # 轮盘内标题文本项标签配置项，参考 `series_options.LabelOpts`
+    title_label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
 
-    # 标签配置项，参考 `series_options.LabelOpts`
-    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+    # 轮盘内数据项标签配置项，参考 `series_options.LabelOpts`
+    detail_label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
@@ -345,6 +348,25 @@ def gauge_splitnum_label() -> Gauge:
 ```
 ![](https://user-images.githubusercontent.com/19553554/58701514-bb96b680-83d5-11e9-8460-e5b0c4a39c0c.png)
 
+> Gauge-改变轮盘内的字体
+
+```python
+def gauge_label_title_setting() -> Gauge:
+    c = (
+        Gauge()
+        .add(
+            "",
+            [("完成率", 66.6)],
+            title_label_opts=opts.LabelOpts(
+                font_size=40, color="blue", font_family="Microsoft YaHei"
+            ),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Gauge-改变轮盘内的字体"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/66656043-c90b5980-ec6f-11e9-91f2-106010e35864.png)
+
 
 ## Graph：关系图
 
@@ -381,6 +403,9 @@ def add(
 
     # 是否开启鼠标缩放和平移漫游。
     is_roam: bool = True,
+    
+    # 节点是否可拖拽，只在使用力引导布局的时候有用。
+    is_draggable: bool = False,
 
     # 是否旋转标签，默认不旋转。
     is_rotate_label: bool = False,
@@ -396,6 +421,11 @@ def add(
     # 'diamond', 'pin', 'arrow', 'none'
     # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
     symbol: Optional[str] = None,
+    
+    # 关系图节点标记的大小
+    # 可以设置成诸如 10 这样单一的数字
+    # 也可以用数组分开表示宽和高，例如 [20, 10] 表示标记宽为20，高为10。
+    symbol_size: types.Numeric = 10,
 
     # 边的两个节点之间的距离，这个距离也会受 repulsion。
     # 支持设置成数组表达边长的范围，此时不同大小的值会线性映射到不同的长度。值越小则长度越长。
