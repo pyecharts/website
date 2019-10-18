@@ -1126,7 +1126,7 @@ def add(
 ```python
 from pyecharts.faker import Faker
 from pyecharts import options as opts
-from pyecharts.charts import Page, Pie
+from pyecharts.charts import Pie
 
 
 def pie_base() -> Pie:
