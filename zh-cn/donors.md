@@ -40,3 +40,4 @@
 * https://github.com/wqw547243068
 * https://github.com/starlightme
 * https://github.com/Dengnj
+* https://github.com/kinslyzhu
