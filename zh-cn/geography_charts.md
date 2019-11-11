@@ -597,7 +597,7 @@ def add_control_panel(
 
 ### BMapNavigationControlOpts：地图的平移缩放控件
 
-> *class pyecahrts.options.BMapNavigationControlOpts*
+> *class pyecharts.options.BMapNavigationControlOpts*
 
 ```python
 class BMapNavigationControlOpts(
@@ -631,7 +631,7 @@ class BMapNavigationControlOpts(
 
 ### BMapOverviewMapControlOpts：缩略地图控件
 
-> *class pyecahrts.options.BMapOverviewMapControlOpts*
+> *class pyecharts.options.BMapOverviewMapControlOpts*
 
 ```python
 class BMapOverviewMapControlOpts(
@@ -655,7 +655,7 @@ class BMapOverviewMapControlOpts(
 
 ### BMapScaleControlOpts：比例尺控件
 
-> *class pyecahrts.options.BMapScaleControlOpts*
+> *class pyecharts.options.BMapScaleControlOpts*
 
 ```python
 class BMapScaleControlOpts(
@@ -676,7 +676,7 @@ class BMapScaleControlOpts(
 
 ### BMapTypeControl：切换地图类型的控件
 
-> *class pyecahrts.options.BMapTypeControl*
+> *class pyecharts.options.BMapTypeControl*
 
 ```python
 class BMapTypeControl(
@@ -697,7 +697,7 @@ class BMapTypeControl(
 
 ### BMapCopyrightType：版权控件
 
-> *class pyecahrts.options.BMapCopyrightType*
+> *class pyecharts.options.BMapCopyrightType*
 
 ```python
 class BMapCopyrightType(
@@ -721,7 +721,7 @@ class BMapCopyrightType(
 
 ### BMapGeoLocationControlOpts：地图定位的控件
 
-> *class pyecahrts.options.BMapGeoLocationControlOpts*
+> *class pyecharts.options.BMapGeoLocationControlOpts*
 
 ```python
 class BMapGeoLocationControlOpts(

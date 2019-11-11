@@ -87,7 +87,7 @@ def add(
 
 ### TreeItem
 
-> *class pyecahrts.options.TreeItem*
+> *class pyecharts.options.TreeItem*
 
 ```python
 class TreeItem(

@@ -38,7 +38,7 @@ def add(
 
 ### CalendarOpts：日历坐标系组件配置项
 
-> *class pyecahrts.options.CalendarOpts*
+> *class pyecharts.options.CalendarOpts*
 
 ```python
 class CalendarOpts(
@@ -461,7 +461,7 @@ def add(
 
 ### GraphNode：关系图的节点数据项
 
-> *class pyecahrts.options.GraphNode*
+> *class pyecharts.options.GraphNode*
 
 ```python
 class GraphNode(
@@ -500,7 +500,7 @@ class GraphNode(
 
 ### GraphLink：节点间的关系数据
 
-> *class pyecahrts.options.GraphLink*
+> *class pyecharts.options.GraphLink*
 
 ```python
 class GraphLink(
@@ -1429,7 +1429,7 @@ def add(
 
 ### RadiusAxisItem：极坐标系径向轴数据项
 
-> *class pyecahrts.options.RadiusAxisItem*
+> *class pyecharts.options.RadiusAxisItem*
 
 ```python
 class RadiusAxisItem(
@@ -1783,7 +1783,7 @@ def add(
 
 ### RadarIndicatorItem
 
-> *class pyecahrts.options.RadarIndicatorItem*
+> *class pyecharts.options.RadarIndicatorItem*
 
 ```python
 class RadarIndicatorItem(

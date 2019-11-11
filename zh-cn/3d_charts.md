@@ -1,7 +1,7 @@
 > Grid3Dopts，Axis3DOpts 为 3D 图形需要配置项
 
 ### Grid3DOpts：三维笛卡尔坐标系配置项
-> *class pyecahrts.options.Grid3DOpts*
+> *class pyecharts.options.Grid3DOpts*
 
 ```python
 class Grid3DOpts(
