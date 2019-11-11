@@ -127,6 +127,8 @@ class Bar3D(
 
 ### Demo
 
+> Bar3D-基本示例
+
 ```python
 from pyecharts.faker import Faker
 from pyecharts import options as opts
@@ -152,6 +154,106 @@ def bar3d_base() -> Bar3D:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55604530-d3213c80-57a2-11e9-8a13-45289fe88d17.png)
 
+> Bar3D-堆叠柱状图示例
+
+```python
+def bar3d_stack() -> Bar3D:
+    def generate_data():
+        data = []
+        for j in range(10):
+            for k in range(10):
+                value = random.randint(0, 9)
+                data.append([j, k, value * 2 + 4])
+        return data
+
+    c = (
+        Bar3D()
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts("Bar3D-堆叠柱状图示例"))
+        .set_series_opts(**{"stack": "stack"})
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/68597558-23e6d980-04d8-11ea-8342-6a36dad4ab49.png)
 
 ## Line3D：3D折线图
 

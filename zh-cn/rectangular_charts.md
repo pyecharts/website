@@ -961,6 +961,44 @@ def bar_custom_bar_color() -> Bar:
 ```
 ![](https://user-images.githubusercontent.com/19553554/63005440-1dcc6700-beaf-11e9-9281-8b20a047c113.png)
 
+> Bar-堆叠显示百分比
+
+```python
+def stack_bar_percent() -> Bar:
+    list2 = [
+        {"value": 12, "percent": 12 / (12 + 3)},
+        {"value": 23, "percent": 23 / (23 + 21)},
+        {"value": 33, "percent": 33 / (33 + 5)},
+        {"value": 3, "percent": 3 / (3 + 52)},
+        {"value": 33, "percent": 33 / (33 + 43)},
+    ]
+
+    list3 = [
+        {"value": 3, "percent": 3 / (12 + 3)},
+        {"value": 21, "percent": 21 / (23 + 21)},
+        {"value": 5, "percent": 5 / (33 + 5)},
+        {"value": 52, "percent": 52 / (3 + 52)},
+        {"value": 43, "percent": 43 / (33 + 43)},
+    ]
+
+    c = (
+        Bar(init_opts=opts.InitOpts(theme=ThemeType.LIGHT))
+        .add_xaxis([1, 2, 3, 4, 5])
+        .add_yaxis("product1", list2, stack="stack1", category_gap="50%")
+        .add_yaxis("product2", list3, stack="stack1", category_gap="50%")
+        .set_series_opts(
+            label_opts=opts.LabelOpts(
+                position="right",
+                formatter=JsCode(
+                    "function(x){return Number(x.data.percent * 100).toFixed() + '%';}"
+                ),
+            )
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/68597426-e5e9b580-04d7-11ea-882f-d5cce5ccd484.png)
+
 
 ## Boxplot：箱形图
 
@@ -1831,6 +1869,84 @@ def line_itemstyle() -> Line:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/56972743-1b632d00-6b9e-11e9-8110-c52070cc2783.png)
+
+> Line图-高级自定义
+
+```python
+def line_color_with_js_func() -> Line:
+    x_data = ["14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]
+    y_data = [393, 438, 485, 631, 689, 824, 987, 1000, 1100, 1200]
+
+    background_color_js = (
+        "new echarts.graphic.LinearGradient(0, 0, 0, 1, "
+        "[{offset: 0, color: '#c86589'}, {offset: 1, color: '#06a7ff'}], false)"
+    )
+    area_color_js = (
+        "new echarts.graphic.LinearGradient(0, 0, 0, 1, "
+        "[{offset: 0, color: '#eb64fb'}, {offset: 1, color: '#3fbbff0d'}], false)"
+    )
+
+    c = (
+        Line(init_opts=opts.InitOpts(bg_color=JsCode(background_color_js)))
+        .add_xaxis(xaxis_data=x_data)
+        .add_yaxis(
+            series_name="注册总量",
+            y_axis=y_data,
+            is_smooth=True,
+            is_symbol_show=True,
+            symbol="circle",
+            symbol_size=6,
+            linestyle_opts=opts.LineStyleOpts(color="#fff"),
+            label_opts=opts.LabelOpts(is_show=True, position="top", color="white"),
+            itemstyle_opts=opts.ItemStyleOpts(
+                color="red", border_color="#fff", border_width=3
+            ),
+            tooltip_opts=opts.TooltipOpts(is_show=False),
+            areastyle_opts=opts.AreaStyleOpts(color=JsCode(area_color_js), opacity=1),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(
+                title="OCTOBER 2015",
+                pos_bottom="5%",
+                pos_left="center",
+                title_textstyle_opts=opts.TextStyleOpts(color="#fff", font_size=16),
+            ),
+            xaxis_opts=opts.AxisOpts(
+                type_="category",
+                boundary_gap=False,
+                axislabel_opts=opts.LabelOpts(margin=30, color="#ffffff63"),
+                axisline_opts=opts.AxisLineOpts(is_show=False),
+                axistick_opts=opts.AxisTickOpts(
+                    is_show=True,
+                    length=25,
+                    linestyle_opts=opts.LineStyleOpts(color="#ffffff1f"),
+                ),
+                splitline_opts=opts.SplitLineOpts(
+                    is_show=True, linestyle_opts=opts.LineStyleOpts(color="#ffffff1f")
+                ),
+            ),
+            yaxis_opts=opts.AxisOpts(
+                type_="value",
+                position="right",
+                axislabel_opts=opts.LabelOpts(margin=20, color="#ffffff63"),
+                axisline_opts=opts.AxisLineOpts(
+                    linestyle_opts=opts.LineStyleOpts(width=2, color="#fff")
+                ),
+                axistick_opts=opts.AxisTickOpts(
+                    is_show=True,
+                    length=15,
+                    linestyle_opts=opts.LineStyleOpts(color="#ffffff1f"),
+                ),
+                splitline_opts=opts.SplitLineOpts(
+                    is_show=True, linestyle_opts=opts.LineStyleOpts(color="#ffffff1f")
+                ),
+            ),
+            legend_opts=opts.LegendOpts(is_show=False),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/68598066-09f9c680-04d9-11ea-9390-9d161c9228e8.png)
 
 
 ## PictorialBar：象形柱状图

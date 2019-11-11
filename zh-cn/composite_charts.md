@@ -57,6 +57,9 @@ class GridOpts(
 
     # grid 组件的高度。默认自适应。
     height: Union[Numeric, str, None] = None,
+
+    # grid 区域是否包含坐标轴的刻度标签。
+    is_contain_label: bool = False,
 )
 ```
 

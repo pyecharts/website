@@ -516,6 +516,12 @@ class VisualMapOpts(
     #  colorHue: 颜色的色调，参见 HSL。
     out_of_range: Optional[Sequence] = None,
     
+    # 图形的宽度，即长条的宽度。
+    item_width: int = 0,
+
+    # 图形的高度，即长条的高度。
+    item_height: int = 0,
+    
     # 文字样式配置项，参考 `series_options.TextStyleOpts`
     textstyle_opts: Union[TextStyleOpts, dict, None] = None,
 )
