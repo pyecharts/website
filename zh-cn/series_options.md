@@ -131,7 +131,7 @@ class TextStyleOpts(
 
 
 ## LabelOpts：标签配置项
-> *class pyecahrts.options.LabelOpts*
+> *class pyecharts.options.LabelOpts*
 
 ```python
 class LabelOpts(
@@ -228,7 +228,7 @@ class LabelOpts(
 ```
 
 ## LineStyleOpts：线样式配置项
-> *class pyecahrts.options.LineStyleOpts*
+> *class pyecharts.options.LineStyleOpts*
 
 ```python
 class LineStyleOpts(
@@ -354,7 +354,7 @@ class MarkPointItem(
 ```
 
 ## MarkPointOpts：标记点配置项
-> *class pyecahrts.options.MarkPointOpts*
+> *class pyecharts.options.MarkPointOpts*
 
 ```python
 class MarkPointOpts(

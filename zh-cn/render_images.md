@@ -1,4 +1,4 @@
-使用 pyecharts 渲染成图片一直是开发者比较关心的功能，pyecharts 提供了 `selenium` 和 `phantomjs` 两种方式。
+使用 pyecharts 渲染成图片一直是开发者比较关心的功能，pyecharts 提供了 `selenium`, `phantomjs` 和 `pyppeteer` 三种方式。
 
 ## make_snapshot
 
@@ -105,4 +105,43 @@ def bar_chart() -> Bar:
     return c
 
 make_snapshot(snapshot, bar_chart().render(), "bar0.png")
+```
+
+## snapshot-pyppeteer
+
+### 安装
+
+```shell
+$ pip install snapshot-pyppeteer
+
+# 安装完后建议执行 chromium 安装命令
+pyppeteer-install
+```
+
+[snapshot-pyppeteer](https://github.com/pyecharts/snapshot-pyppeteer) 是 pyecharts + pyppeteer 渲染图片的扩展，需要先安装 pyppeteer 和 Chromium 安装方法请参照仓库地址 [snapshot-pyppeteer](https://github.com/pyecharts/snapshot-pyppeteer)
+
+### 使用
+
+```python
+from snapshot_pyppeteer import snapshot
+
+from pyecharts.charts import Bar
+from pyecharts.faker import Faker
+from pyecharts import options as opts
+from pyecharts.render import make_snapshot
+
+
+def bar_base() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-基本示例", subtitle="我是副标题"))
+    )
+    make_snapshot(snapshot, c.render(), "bar.png")
+
+
+if __name__ == '__main__':
+    bar_base()
 ```

@@ -1,7 +1,7 @@
 > Grid3Dopts，Axis3DOpts 为 3D 图形需要配置项
 
 ### Grid3DOpts：三维笛卡尔坐标系配置项
-> *class pyecahrts.options.Grid3DOpts*
+> *class pyecharts.options.Grid3DOpts*
 
 ```python
 class Grid3DOpts(
@@ -127,6 +127,8 @@ class Bar3D(
 
 ### Demo
 
+> Bar3D-基本示例
+
 ```python
 from pyecharts.faker import Faker
 from pyecharts import options as opts
@@ -152,6 +154,34 @@ def bar3d_base() -> Bar3D:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55604530-d3213c80-57a2-11e9-8a13-45289fe88d17.png)
 
+> Bar3D-堆叠柱状图示例
+
+```python
+def generate_data():
+    data = []
+    for j in range(10):
+        for k in range(10):
+            value = random.randint(0, 9)
+            data.append([j, k, value * 2 + 4])
+    return data
+
+def bar3d_stack() -> Bar3D:
+    x_data = y_data = list(range(10))
+    bar3d = Bar3D()
+    for _ in range(10):
+        bar3d.add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=x_data, type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=y_data, type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+    bar3d.set_global_opts(title_opts=opts.TitleOpts("Bar3D-堆叠柱状图示例"))
+    bar3d.set_series_opts(**{"stack": "stack"})
+    return bar3d
+```
+![](https://user-images.githubusercontent.com/17564655/68597558-23e6d980-04d8-11ea-8342-6a36dad4ab49.png)
 
 ## Line3D：3D折线图
 

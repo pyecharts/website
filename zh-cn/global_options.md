@@ -422,9 +422,37 @@ class LegendOpts(
 
     # 图例列表的布局朝向。可选：'horizontal', 'vertical'
     orient: Optional[str] = None,
+    
+    # 图例标记和文本的对齐。默认自动（auto）
+    # 根据组件的位置和 orient 决定
+    # 当组件的 left 值为 'right' 以及纵向布局（orient 为 'vertical'）的时候为右对齐，即为 'right'。
+    # 可选参数: `auto`, `left`, `right`
+    align: Optional[str] = None,
+    
+    # 图例内边距，单位px，默认各方向内边距为5
+    padding: int = 5,
+
+    # 图例每项之间的间隔。横向布局时为水平间隔，纵向布局时为纵向间隔。
+    # 默认间隔为 10
+    item_gap: int = 10,
+    
+    # 图例标记的图形宽度。默认宽度为 25
+    item_width: int = 25,
+    
+    # 图例标记的图形高度。默认高度为 14
+    item_height: int = 14,
+
+    # 图例关闭时的颜色。默认是 #ccc
+    inactive_color: Optional[str] = None,
 
     # 图例组件字体样式，参考 `series_options.TextStyleOpts`
     textstyle_opts: Union[TextStyleOpts, dict, None] = None,
+    
+    # 图例项的 icon。
+    # ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none'
+    # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
+    # 可以通过 'path://' 将图标设置为任意的矢量路径。
+    legend_icon: Optional[str] = None,
 )
 ```
 
@@ -515,6 +543,12 @@ class VisualMapOpts(
     #  colorSaturation: 颜色的饱和度，参见 HSL。
     #  colorHue: 颜色的色调，参见 HSL。
     out_of_range: Optional[Sequence] = None,
+    
+    # 图形的宽度，即长条的宽度。
+    item_width: int = 0,
+
+    # 图形的高度，即长条的高度。
+    item_height: int = 0,
     
     # 文字样式配置项，参考 `series_options.TextStyleOpts`
     textstyle_opts: Union[TextStyleOpts, dict, None] = None,

@@ -1,6 +1,22 @@
 # 版本日志
 
-### version 1.5.1 - 2019.9.16（current）
+### version 1.6.0 - 2019-11.12 (current)
+
+***Add***
+* [pr#1371](https://github.com/pyecharts/pyecharts/pull/1371) 新增 gauge 的 title 配置 `title_label_opts`。更新后 `title_label_opts` 是用来控制轮盘内部文本的配置项，`detail_label_opts` 是用来控制轮盘内部数据的配置项。
+
+***Fixed***
+* [pr#1367](https://github.com/pyecharts/pyecharts/pull/1367) 更新了 `Geo`，`BMap` 的一些配置项。
+* [pr#1404](https://github.com/pyecharts/pyecharts/pull/1404) `Geo` 图的 `ChartType` 为 `Lines` 无法设置弧线上的 `label`。
+
+***Updated***
+* [pr#1371](https://github.com/pyecharts/pyecharts/pull/1371) 更新 `Gauge` 的配置将原有的 `label_opts` 修改为 `detail_label_opts`。
+* [pr#1374](https://github.com/pyecharts/pyecharts/pull/1374) 更新 `Grid` 图坐标轴的刻度标签的配置。
+* [pr#1404](https://github.com/pyecharts/pyecharts/pull/1404) `LegendOpts` 设置图例的 icon，大小，宽度，间隔以及未激活的颜色。
+* [pr#1404](https://github.com/pyecharts/pyecharts/pull/1404) `VisualMapOpts` 设置 `itemWidth` 和 `itemHeight` 的设置。
+
+
+### version 1.5.1 - 2019.9.16
 
 ***Add***
 * [pr#1324](https://github.com/pyecharts/pyecharts/pulls/1324) 新增 `pyecharts.faker` 包，提供示例数据。
