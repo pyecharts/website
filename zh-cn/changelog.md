@@ -3,6 +3,7 @@
 ### version 1.6.1 - 2020-01-03 (current)
 
 ***Add***
+* [pr#1470](https://github.com/pyecharts/pyecharts/pull/1470) 通过 CI 和 Appveyor 的测试，支持 Python 3.8
 * [pr#1469](https://github.com/pyecharts/pyecharts/pull/1469) 更新 `Graph` 图配置 `Edge` 的 `Option`。
 * [pr#1469](https://github.com/pyecharts/pyecharts/pull/1469) 更新 `Line` 图的 `zlevel` 和 `z` 的参数配置
 * [pr#1469](https://github.com/pyecharts/pyecharts/pull/1469) 更新 `TitleOpts` 支持一些 `Padding` 和 `Gap` 的配置
