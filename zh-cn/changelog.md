@@ -1,6 +1,20 @@
 # 版本日志
 
-### version 1.6.0 - 2019-11.12 (current)
+### version 1.6.1 - 2020-01-03 (current)
+
+***Add***
+* [pr#1469](https://github.com/pyecharts/pyecharts/pull/1469) 更新 `Graph` 图配置 `Edge` 的 `Option`。
+* [pr#1469](https://github.com/pyecharts/pyecharts/pull/1469) 更新 `Line` 图的 `zlevel` 和 `z` 的参数配置
+* [pr#1469](https://github.com/pyecharts/pyecharts/pull/1469) 更新 `TitleOpts` 支持一些 `Padding` 和 `Gap` 的配置
+
+***Fixed***
+* [pr#1469](https://github.com/pyecharts/pyecharts/pull/1469) 修复 `Timeline` 添加 `GraphicOpts` 无法使用的问题
+
+***Updated***
+* [pr#1412](https://github.com/pyecharts/pyecharts/pull/1412) 更新非关键字传参，导致 `delay` 和 `pixel_ratio` 参数作用错位
+
+ 
+### version 1.6.0 - 2019-11.12
 
 ***Add***
 * [pr#1371](https://github.com/pyecharts/pyecharts/pull/1371) 新增 gauge 的 title 配置 `title_label_opts`。更新后 `title_label_opts` 是用来控制轮盘内部文本的配置项，`detail_label_opts` 是用来控制轮盘内部数据的配置项。

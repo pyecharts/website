@@ -1262,6 +1262,29 @@ def heatmap_base() -> HeatMap:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55603513-9ef74d00-579d-11e9-837b-5e5288569e8c.gif)
 
+> HeatMap-Label 显示
+
+```python
+def heatmap_with_label_show() -> HeatMap:
+    value = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
+    c = (
+        HeatMap()
+        .add_xaxis(Faker.clock)
+        .add_yaxis(
+            "series0",
+            Faker.week,
+            value,
+            label_opts=opts.LabelOpts(is_show=True, position="inside"),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="HeatMap-Label 显示"),
+            visualmap_opts=opts.VisualMapOpts(),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/71709711-c9149300-2e33-11ea-8e89-56c38dac4bc9.png)
+
 
 ## Kline/Candlestick：K线图
 

@@ -307,6 +307,23 @@ class TitleOpts(
     # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
     pos_bottom: Optional[str] = None,
 
+    # 标题内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距。
+    # // 设置内边距为 5
+    # padding: 5
+    # // 设置上下的内边距为 5，左右的内边距为 10
+    # padding: [5, 10]
+    # // 分别设置四个方向的内边距
+    # padding: [
+    #     5,  // 上
+    #     10, // 右
+    #     5,  // 下
+    #     10, // 左
+    # ]
+    padding: Union[Sequence, Numeric] = 5,
+
+    # 主副标题之间的间距。
+    item_gap: Numeric = 10,
+
     # 主标题字体样式配置项，参考 `series_options.TextStyleOpts`
     title_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
 
