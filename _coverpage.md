@@ -1,4 +1,6 @@
-![logo](https://user-images.githubusercontent.com/19553554/34926690-2bac6002-f9ec-11e7-8b30-aceef8a814e3.png)
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/19553554/71825144-2d568180-30d6-11ea-8ee0-63c849cfd934.png" alt="pyecharts logo" width=200 height=200 />
+</p>
 
 # pyecharts
 
