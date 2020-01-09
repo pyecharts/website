@@ -132,7 +132,7 @@ class BarItem(
 from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar
-
+from pyecharts.commons.utils import JsCode
 
 def bar_base() -> Bar:
     c = (
