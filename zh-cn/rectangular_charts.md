@@ -132,7 +132,7 @@ class BarItem(
 from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar
-
+from pyecharts.commons.utils import JsCode
 
 def bar_base() -> Bar:
     c = (
@@ -1116,6 +1116,9 @@ class EffectScatter(
 
     # 标记的大小
     symbol_size: Numeric = 10,
+
+    # 标记的旋转角度。注意在 markLine 中当 symbol 为 'arrow' 时会忽略 symbolRotate 强制设置为切线的角度。
+    symbol_rotate: types.Optional[types.Numeric] = None,
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
@@ -2272,6 +2275,9 @@ def add_yaxis(
     # 标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示宽和高，
     # 例如 [20, 10] 表示标记宽为 20，高为 10。
     symbol_size: Numeric = 10,
+    
+    # 标记的旋转角度。注意在 markLine 中当 symbol 为 'arrow' 时会忽略 symbolRotate 强制设置为切线的角度。
+    symbol_rotate: types.Optional[types.Numeric] = None,
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(position="right"),
