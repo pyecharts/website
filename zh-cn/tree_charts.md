@@ -61,6 +61,10 @@ def add(
     # 折叠节点间隔，当节点过多时可以解决节点显示过杂间隔。
     collapse_interval: Numeric = 0,
 
+    # 是否开启鼠标缩放和平移漫游。默认不开启。如果只想要开启缩放或者平移。
+    # 可以设置成 'scale' 或者 'move'。设置成 true 为都开启
+    is_roam: bool = False,
+
     # 子树折叠和展开的交互，默认打开 。由于绘图区域是有限的，而通常一个树图的节点可能会比较多，
     # 这样就会出现节点之间相互遮盖的问题。为了避免这一问题，可以将暂时无关的子树折叠收起，
     # 等到需要时再将其展开。如上面径向布局树图示例，节点中心用蓝色填充的就是折叠收起的子树，可以点击将其展开。
@@ -258,6 +262,44 @@ class TreeMap(
 )
 ```
 
+> *class pyecharts.options.TreeMapBreadcrumbOpts*
+
+```python
+class TreeMapBreadcrumbOpts(
+    # 是否显示面包屑。
+    is_show: bool = True,
+    
+    # 组件离容器左侧的距离。
+    # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，也可以是 'left', 'center', 'right'。
+    # 如果 left 的值为'left', 'center', 'right'，组件会根据相应的位置自动对齐。
+    pos_left: Union[str, Numeric] = "center",
+
+    # 组件离容器右侧的距离。
+    # right 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
+    # 默认自适应。
+    pos_right: Union[str, Numeric] = "auto",
+    
+    # 组件离容器上侧的距离。
+    # top 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，也可以是 'top', 'middle', 'bottom'。
+    # 如果 top 的值为'top', 'middle', 'bottom'，组件会根据相应的位置自动对齐。
+    pos_top: Union[str, Numeric] = "auto",
+    
+    # 组件离容器下侧的距离。
+    # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
+    # 默认自适应。
+    pos_bottom: Union[str, Numeric] = 0,
+    
+    # 面包屑的高度。
+    height: Numeric = 22,
+    
+    # 当面包屑没有内容时候，设个最小宽度。
+    empty_item_width: Numeric = 25,
+
+    # 图形样式。参考 `global_options.ItemStyleOpts`
+    item_opts: ItemStyleOpts = ItemStyleOpts(),
+)
+```
+
 > *func pyecharts.charts.TreeMap.add*
 
 ```python
@@ -295,9 +337,28 @@ def add(
     # treemap 组件离容器下侧的距离。
     # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
     pos_bottom: Optional[str] = None,
+    
+    # treemap 组件的宽度。
+    width: types.Union[str, types.Numeric] = "80%",
+    
+    # treemap 组件的高度。
+    height: types.Union[str, types.Numeric] = "80%",
 
     # 当节点可以下钻时的提示符。只能是字符。
     drilldown_icon: str = "▶",
+
+    # 是否开启拖拽漫游（移动和缩放）。可取值有：
+    # false：关闭。
+    # 'scale' 或 'zoom'：只能够缩放。
+    # 'move' 或 'pan'：只能够平移。
+    # true：缩放和平移均可。
+    roam: types.Union[bool, str] = True,
+
+    # 点击节点后的行为。可取值为
+    # false：节点点击无反应。
+    # 'zoomToNode'：点击节点后缩放到节点。
+    # 'link'：如果节点数据中有 link 点击节点后会进行超链接跳转。
+    node_click: types.Union[bool, str] = "zoomToNode",
 
     # 当前层级的最小 value 值。如果不设置则自动统计。
     visual_min: Optional[Numeric] = None,
@@ -310,6 +371,12 @@ def add(
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # 图形样式配置，参考 `global_options.ItemStyleOpts`
+    itemstyle_opts: types.ItemStyle = None,
+
+    # 面包屑控件配置，参考 `TreeMapBreadcrumbOpts`
+    breadcrumb_opts: types.TreeMapBreadcrumb = None,
 )
 ```
 

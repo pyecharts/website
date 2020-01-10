@@ -481,6 +481,9 @@ class VisualMapOpts(
 
     # visualMap 组件过渡 symbol 大小
     range_size: Union[Sequence[int]] = None,
+    
+    # visualMap 图元以及其附属物（如文字标签）的透明度。
+    range_opacity: Optional[Numeric] = None,
 
     # 如何放置 visualMap 组件，水平（'horizontal'）或者竖直（'vertical'）。
     orient: str = "vertical",
@@ -519,6 +522,9 @@ class VisualMapOpts(
 
     # 是否为分段型
     is_piecewise: bool = False,
+    
+    # 是否反转 visualMap 组件
+    is_inverse: bool = False,
 
     # 自定义的每一段的范围，以及每一段的文字，以及每一段的特别的样式。例如：
     # pieces: [
@@ -549,6 +555,15 @@ class VisualMapOpts(
 
     # 图形的高度，即长条的高度。
     item_height: int = 0,
+    
+    # visualMap 组件的背景色。
+    background_color: Optional[str] = None,
+    
+    # visualMap 组件的边框颜色。
+    border_color: Optional[str] = None,
+    
+    # visualMap 边框线宽，单位px。
+    border_width: int = 0,
     
     # 文字样式配置项，参考 `series_options.TextStyleOpts`
     textstyle_opts: Union[TextStyleOpts, dict, None] = None,
@@ -1138,5 +1153,26 @@ class GraphicRect(
     
     # 图形基本配置项，参考 GraphicBasicStyleOpts
     graphic_basicstyle_opts: Union[GraphicBasicStyleOpts, dict, None] = None,
+)
+```
+
+
+### PolarOpts：极坐标系配置
+> *class pyecharts.PolarOpts*
+
+```python
+class PolarOpts(
+    # 极坐标系的中心（圆心）坐标，数组的第一项是横坐标，第二项是纵坐标。
+    # 支持设置成百分比，设置成百分比时第一项是相对于容器宽度，第二项是相对于容器高度。
+    center: Optional[Sequence] = None,
+    
+    # 极坐标系的半径。可以为如下类型：
+    # number：直接指定外半径值。
+    # string：例如，'20%'，表示外半径为可视区尺寸（容器高宽中较小一项）的 20% 长度。
+    # Array.<number|string>：数组的第一项是内半径，第二项是外半径。每一项遵从上述 number string 的描述。
+    radius: Optional[Union[Sequence, str]] = None,
+    
+    # 本坐标系特定的 tooltip 设定。参考 `global_options.TooltipOpts`
+    tooltip_opts: TooltipOpts = None,
 )
 ```

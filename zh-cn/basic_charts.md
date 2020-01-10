@@ -259,6 +259,9 @@ def add(
     # 仪表盘平均分割段数
     split_number: Numeric = 10,
 
+    # 仪表盘半径，可以是相对于容器高宽中较小的一项的一半的百分比，也可以是绝对的数值。
+    radius: types.Union[types.Numeric, str] = "75%",
+
     # 仪表盘起始角度。圆心 正右手侧为0度，正上方为 90 度，正左手侧为 180 度。
     start_angle: Numeric = 225,
 
@@ -1440,7 +1443,7 @@ class RadiusAxisItem(
 
 ### RadiusAxisOpts：极坐标系径向轴配置项
 
-> *class pyecharts.optiones.RadiusAxisOpts*
+> *class pyecharts.options.RadiusAxisOpts*
 
 ```python
 class RadiusAxisOpts(
@@ -1490,9 +1493,15 @@ class RadiusAxisOpts(
     # 是否是脱离 0 值比例。设置成 true 后坐标刻度不会强制包含零刻度。在双数值轴的散点图中比较有用。
     # 在设置 min 和 max 之后该配置项无效。
     is_scale: bool = False,
+    
+    # 强制设置坐标轴分割间隔。
+    interval: Optional[Numeric] = None,
 
     # 分割线配置项，参考 `series_options.SplitLineOpts`
     splitline_opts: Union[SplitLineOpts, dict, None] = None,
+
+    # 坐标轴在 grid 区域中的分隔区域，默认不显示。参考 `series_options.SplitAreaOpts`
+    splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
 
     # 坐标轴线风格配置项，参考 `series_options.AxisLineOpts`
     axisline_opts: Union[AxisLineOpts, dict, None] = None,
@@ -1556,6 +1565,18 @@ class AngleAxisOpts(
     # 在类目轴中，也可以设置为类目的序数（如类目轴 data: ['类A', '类B', '类C'] 中，序数 2 表示 '类C'
     # 也可以设置为负数，如 -3）。
     max_: Union[str, Numeric, None] = None,
+
+    # 只在数值轴中（type: 'value'）有效。
+    # 是否是脱离 0 值比例。设置成 true 后坐标刻度不会强制包含零刻度。在双数值轴的散点图中比较有用。
+    # 在设置 min 和 max 之后该配置项无效。
+    is_scale: bool = False,
+
+    # 坐标轴的分割段数，需要注意的是这个分割段数只是个预估值，最后实际显示的段数会在这个基础上根据分割后坐标轴刻度显示的易读程度作调整。
+    # 在类目轴中无效。
+    split_number: Numeric = 5,
+
+    # 强制设置坐标轴分割间隔。
+    interval: Optional[Numeric] = None,
 
     # 分割线风格配置项，参考 `series_options.SplitLineOpts`
     splitline_opts: Union[SplitLineOpts, dict, None] = None,
@@ -1743,6 +1764,15 @@ def add_schema(
 
     # 坐标轴轴线配置项，参考 `global_options.AxisLineOpts`
     axisline_opt: Union[opts.AxisLineOpts, dict] = opts.AxisLineOpts(),
+
+    # 极坐标系的径向轴。参考 `basic_charts.RadiusAxisOpts`
+    radiusaxis_opts: types.RadiusAxis = None,
+    
+    # 极坐标系的角度轴。参考 `basic_charts.AngleAxisOpts`
+    angleaxis_opts: types.AngleAxis = None,
+
+    # 极坐标系配置，参考 `global_options.PolorOpts`
+    polar_opts: types.Polar = None,
 )
 ```
 
@@ -1917,14 +1947,92 @@ def radar_air_quality() -> Radar:
 ![](https://user-images.githubusercontent.com/19553554/55933630-8fc24480-5c60-11e9-9fd6-740b11fd33b5.png)
 
 
+> Radar-轴线（Polar）
+
+```python
+def radar_angle_radius_axis_opts() -> Radar:
+    data = [
+        {
+            "value": [4, -4, 2, 3, 0, 1],
+            "name": "预算分配"
+        },
+    ]
+    c_schema = [
+        {"name": "销售", "max": 4, "min": -4},
+        {"name": "管理", "max": 4, "min": -4},
+        {"name": "技术", "max": 4, "min": -4},
+        {"name": "客服", "max": 4, "min": -4},
+        {"name": "研发", "max": 4, "min": -4},
+        {"name": "市场", "max": 4, "min": -4},
+    ]
+    c = (
+        Radar()
+        .set_colors(["#4587E7"])
+        .add_schema(
+            schema=c_schema,
+            shape="circle",
+            center=["50%", "50%"],
+            radius="80%",
+            angleaxis_opts=opts.AngleAxisOpts(
+                min_=0,
+                max_=360,
+                is_clockwise=False,
+                interval=5,
+                axistick_opts=opts.AxisTickOpts(is_show=False),
+                axislabel_opts=opts.LabelOpts(is_show=False),
+                axisline_opts=opts.AxisLineOpts(is_show=False),
+                splitline_opts=opts.SplitLineOpts(is_show=False),
+            ),
+            radiusaxis_opts=opts.RadiusAxisOpts(
+                min_=-4,
+                max_=4,
+                interval=2,
+                splitarea_opts=opts.SplitAreaOpts(
+                    is_show=True,
+                    areastyle_opts=opts.AreaStyleOpts(opacity=1),
+                )
+            ),
+            polar_opts=opts.PolarOpts(),
+            splitarea_opt=opts.SplitAreaOpts(is_show=False),
+            splitline_opt=opts.SplitLineOpts(is_show=False),
+        )
+        .add(
+            series_name="预算",
+            data=data,
+            areastyle_opts=opts.AreaStyleOpts(opacity=0.1),
+            linestyle_opts=opts.LineStyleOpts(width=1),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/72131077-34231400-33b6-11ea-9a5c-d1ca8e3e94c3.png)
+
+
 ## Sankey：桑基图
 
 > *class pyecharts.charts.Sankey*
 
 ```python
-class Saneky(
+class Sankey(
     # 初始化配置项，参考 `global_options.InitOpts`
     init_opts: opts.InitOpts = opts.InitOpts()
+)
+```
+
+> *class pyechart.options.SankeyLevelsOpts*
+
+```python
+class SankeyLevelsOpts(
+    # 指定设置的是桑基图哪一层，取值从 0 开始。
+    depth: Numeric = None,
+
+    # 桑基图指定层节点的样式。参考 `global_opts.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # 桑基图指定层出边的样式。
+    # 其中 lineStyle.color 支持设置为'source'或者'target'特殊值，此时出边会自动取源节点或目标节点的颜色作为自己的颜色。
+    # 参考 `global_opts.LineStyleOpts`
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None,
 )
 ```
 
@@ -1939,12 +2047,53 @@ def add(
 
     # 是否选中图例
     is_selected: bool = True,
+    
+    # Sankey 组件离容器左侧的距离。
+    pos_left: types.Union[str, types.Numeric] = "5%",
 
+    # Sankey 组件离容器上侧的距离。
+    pos_top: types.Union[str, types.Numeric] = "5%",
 
+    # Sankey 组件离容器右侧的距离。
+    pos_right: types.Union[str, types.Numeric] = "20%",
+    
+    # Sankey 组件离容器下侧的距离。
+    pos_bottom: types.Union[str, types.Numeric] = "5%",
+
+    # 桑基图中每个矩形节点的宽度。
     node_width: Numeric = 20,
 
-
+    # 桑基图中每一列任意两个矩形节点之间的间隔。
     node_gap: Numeric = 8,
+    
+    # 桑基图中节点的对齐方式，默认是双端对齐，可以设置为左对齐或右对齐，对应的值分别是：
+    # justify: 节点双端对齐。
+    # left: 节点左对齐。
+    # right: 节点右对齐。
+    node_align: str = "justify",
+    
+    # 布局的迭代次数，用来不断优化图中节点的位置，以减少节点和边之间的相互遮盖。
+    # 默认布局迭代次数：32。
+    # 注: 布局迭代次数不要低于默认值。
+    layout_iterations: types.Numeric = 32,
+
+    # 桑基图中节点的布局方向，可以是水平的从左往右，也可以是垂直的从上往下。
+    # 对应的参数值分别是 horizontal, vertical。
+    orient: str = "horizontal",
+
+    # 控制节点拖拽的交互，默认开启。开启后，用户可以将图中任意节点拖拽到任意位置。若想关闭此交互，只需将值设为 false 就行了。
+    is_draggable: bool = True,
+    
+    # 鼠标 hover 到节点或边上，相邻接的节点和边高亮的交互，默认关闭，可手动开启。
+    # false：hover 到节点或边时，只有被 hover 的节点或边高亮。
+    # true：同 'allEdges'。
+    # 'allEdges'：hover 到节点时，与节点邻接的所有边以及边对应的节点全部高亮。hover 到边时，边和相邻节点高亮。
+    # 'outEdges'：hover 的节点、节点的出边、出边邻接的另一节点 会被高亮。hover 到边时，边和相邻节点高亮。
+    # 'inEdges'：hover 的节点、节点的入边、入边邻接的另一节点 会被高亮。hover 到边时，边和相邻节点高亮。
+    focus_node_adjacency: types.Union[bool, str] = False,
+    
+    # 桑基图每一层的设置。可以逐层设置
+    levels: types.SankeyLevel = None,
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
@@ -2022,6 +2171,106 @@ def sankey_offical() -> Sankey:
 ```
 ![](https://user-images.githubusercontent.com/19553554/55933787-1ecf5c80-5c61-11e9-8217-cf34864a6ee9.png)
 
+> Sankey-垂直布局
+
+```python
+def sankey_vertical() -> Sankey:
+    colors = [
+        "#67001f",
+        "#b2182b",
+        "#d6604d",
+        "#f4a582",
+        "#fddbc7",
+        "#d1e5f0",
+        "#92c5de",
+        "#4393c3",
+        "#2166ac",
+        "#053061",
+    ]
+    nodes = [
+        {"name": "a"},
+        {"name": "b"},
+        {"name": "a1"},
+        {"name": "b1"},
+        {"name": "c"},
+        {"name": "e"},
+    ]
+    links = [
+        {"source": "a", "target": "a1", "value": 5},
+        {"source": "e", "target": "b", "value": 3},
+        {"source": "a", "target": "b1", "value": 3},
+        {"source": "b1", "target": "a1", "value": 1},
+        {"source": "b1", "target": "c", "value": 2},
+        {"source": "b", "target": "c", "value": 1},
+    ]
+    c = (
+        Sankey()
+        .set_colors(colors)
+        .add(
+            "sankey",
+            nodes=nodes,
+            links=links,
+            pos_bottom="10%",
+            focus_node_adjacency="allEdges",
+            orient="vertical",
+            linestyle_opt=opts.LineStyleOpts(opacity=0.2, curve=0.5, color="source"),
+            label_opts=opts.LabelOpts(position="top"),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Sankey-Vertical"),
+            tooltip_opts=opts.TooltipOpts(trigger="item", trigger_on="mousemove"),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/72131198-86fccb80-33b6-11ea-815e-b04f7297c7e4.png)
+
+> Sankey-With Level Setting
+
+```python
+def sankey_with_level_setting() -> Sankey:
+    with open(os.path.join("fixtures", "product.json"), "r", encoding="utf-8") as f:
+        j = json.load(f)
+    c = (
+        Sankey()
+        .add(
+            "sankey",
+            nodes=j["nodes"],
+            links=j["links"],
+            pos_top="10%",
+            focus_node_adjacency=True,
+            levels=[
+                opts.SankeyLevelsOpts(
+                    depth=0,
+                    itemstyle_opts=opts.ItemStyleOpts(color="#fbb4ae"),
+                    linestyle_opts=opts.LineStyleOpts(color="source", opacity=0.6),
+                ),
+                opts.SankeyLevelsOpts(
+                    depth=1,
+                    itemstyle_opts=opts.ItemStyleOpts(color="#b3cde3"),
+                    linestyle_opts=opts.LineStyleOpts(color="source", opacity=0.6),
+                ),
+                opts.SankeyLevelsOpts(
+                    depth=2,
+                    itemstyle_opts=opts.ItemStyleOpts(color="#ccebc5"),
+                    linestyle_opts=opts.LineStyleOpts(color="source", opacity=0.6),
+                ),
+                opts.SankeyLevelsOpts(
+                    depth=3,
+                    itemstyle_opts=opts.ItemStyleOpts(color="#decbe4"),
+                    linestyle_opts=opts.LineStyleOpts(color="source", opacity=0.6),
+                ),
+            ],
+            linestyle_opt=opts.LineStyleOpts(curve=0.5),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Sankey-Level Settings"),
+            tooltip_opts=opts.TooltipOpts(trigger="item", trigger_on="mousemove"),
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/72131243-a09e1300-33b6-11ea-9e72-7da0d292dc8f.png)
 
 ## Sunburst：旭日图
 

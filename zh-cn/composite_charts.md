@@ -13,8 +13,8 @@ class Grid(
 
 ```python
 def add(
-    # 图表实例，仅 `RectChart` 类或者其子类
-    chart: RectChart,
+    # 图表实例，仅 `Chart` 类或者其子类
+    chart: Chart,
 
     # 直角坐标系网格配置项，参见 `GridOpts`
     grid_opts: Union[opts.GridOpts, dict],
@@ -440,6 +440,215 @@ def kline_profession_example() -> Grid:
     return grid_chart
 ```
 ![](https://user-images.githubusercontent.com/17564655/60956163-d1808b00-a334-11e9-8580-67d3bcd27284.png)
+
+
+> Grid-多 X/Y 轴
+
+```python
+def grid_overlap_multi_x_y_axis() -> Grid:
+    bar = (
+        Bar()
+        .add_xaxis(["{}月".format(i) for i in range(1, 13)])
+        .add_yaxis(
+            "蒸发量",
+            [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+            yaxis_index=0,
+            color="#d14a61",
+        )
+        .add_yaxis(
+            "降水量",
+            [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+            yaxis_index=1,
+            color="#5793f3",
+        )
+        .extend_axis(
+            yaxis=opts.AxisOpts(
+                name="蒸发量",
+                type_="value",
+                min_=0,
+                max_=250,
+                position="right",
+                axisline_opts=opts.AxisLineOpts(
+                    linestyle_opts=opts.LineStyleOpts(color="#d14a61")
+                ),
+                axislabel_opts=opts.LabelOpts(formatter="{value} ml"),
+            )
+        )
+        .extend_axis(
+            yaxis=opts.AxisOpts(
+                type_="value",
+                name="温度",
+                min_=0,
+                max_=25,
+                position="left",
+                axisline_opts=opts.AxisLineOpts(
+                    linestyle_opts=opts.LineStyleOpts(color="#675bba")
+                ),
+                axislabel_opts=opts.LabelOpts(formatter="{value} °C"),
+                splitline_opts=opts.SplitLineOpts(
+                    is_show=True, linestyle_opts=opts.LineStyleOpts(opacity=1)
+                ),
+            )
+        )
+        .set_global_opts(
+            yaxis_opts=opts.AxisOpts(
+                name="降水量",
+                min_=0,
+                max_=250,
+                position="right",
+                offset=80,
+                axisline_opts=opts.AxisLineOpts(
+                    linestyle_opts=opts.LineStyleOpts(color="#5793f3")
+                ),
+                axislabel_opts=opts.LabelOpts(formatter="{value} ml"),
+            ),
+            title_opts=opts.TitleOpts(title="Grid-Overlap-多 X/Y 轴示例"),
+            tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross"),
+            legend_opts=opts.LegendOpts(pos_left="25%"),
+        )
+    )
+
+    line = (
+        Line()
+        .add_xaxis(["{}月".format(i) for i in range(1, 13)])
+        .add_yaxis(
+            "平均温度",
+            [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2],
+            yaxis_index=2,
+            color="#675bba",
+            label_opts=opts.LabelOpts(is_show=False),
+        )
+    )
+
+    bar1 = (
+        Bar()
+        .add_xaxis(["{}月".format(i) for i in range(1, 13)])
+        .add_yaxis(
+            "蒸发量 1",
+            [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+            color="#d14a61",
+            xaxis_index=1,
+            yaxis_index=3,
+        )
+        .add_yaxis(
+            "降水量 2",
+            [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+            color="#5793f3",
+            xaxis_index=1,
+            yaxis_index=3,
+        )
+        .extend_axis(
+            yaxis=opts.AxisOpts(
+                name="蒸发量",
+                type_="value",
+                min_=0,
+                max_=250,
+                position="right",
+                axisline_opts=opts.AxisLineOpts(
+                    linestyle_opts=opts.LineStyleOpts(color="#d14a61")
+                ),
+                axislabel_opts=opts.LabelOpts(formatter="{value} ml"),
+            )
+        )
+        .extend_axis(
+            yaxis=opts.AxisOpts(
+                type_="value",
+                name="温度",
+                min_=0,
+                max_=25,
+                position="left",
+                axisline_opts=opts.AxisLineOpts(
+                    linestyle_opts=opts.LineStyleOpts(color="#675bba")
+                ),
+                axislabel_opts=opts.LabelOpts(formatter="{value} °C"),
+                splitline_opts=opts.SplitLineOpts(
+                    is_show=True, linestyle_opts=opts.LineStyleOpts(opacity=1)
+                ),
+            )
+        )
+        .set_global_opts(
+            xaxis_opts=opts.AxisOpts(grid_index=1),
+            yaxis_opts=opts.AxisOpts(
+                name="降水量",
+                min_=0,
+                max_=250,
+                position="right",
+                offset=80,
+                grid_index=1,
+                axisline_opts=opts.AxisLineOpts(
+                    linestyle_opts=opts.LineStyleOpts(color="#5793f3")
+                ),
+                axislabel_opts=opts.LabelOpts(formatter="{value} ml"),
+            ),
+            tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross"),
+            legend_opts=opts.LegendOpts(pos_left="65%"),
+        )
+    )
+
+    line1 = (
+        Line()
+        .add_xaxis(["{}月".format(i) for i in range(1, 13)])
+        .add_yaxis(
+            "平均温度 1",
+            [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2],
+            color="#675bba",
+            label_opts=opts.LabelOpts(is_show=False),
+            xaxis_index=1,
+            yaxis_index=5,
+        )
+    )
+
+    overlap_1 = bar.overlap(line)
+    overlap_2 = bar1.overlap(line1)
+
+    grid = (
+        Grid(init_opts=opts.InitOpts(width="1200px", height="800px"))
+        .add(
+            overlap_1,
+            grid_opts=opts.GridOpts(pos_right="58%"),
+            is_control_axis_index=True,
+        )
+        .add(
+            overlap_2,
+            grid_opts=opts.GridOpts(pos_left="58%"),
+            is_control_axis_index=True,
+        )
+    )
+    return grid
+```
+![](https://user-images.githubusercontent.com/17564655/72130285-04730c80-33b4-11ea-9f62-8da27d082de2.png)
+
+
+> Grid-Geo-Bar
+
+```python
+def grid_geo_bar() -> Grid:
+    bar = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(legend_opts=opts.LegendOpts(pos_left="20%"))
+    )
+    geo = (
+        Geo()
+        .add_schema(maptype="china")
+        .add("geo", [list(z) for z in zip(Faker.provinces, Faker.values())])
+        .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
+        .set_global_opts(
+            visualmap_opts=opts.VisualMapOpts(),
+            title_opts=opts.TitleOpts(title="Grid-Geo-Bar"),
+        )
+    )
+
+    grid = (
+        Grid()
+        .add(bar, grid_opts=opts.GridOpts(pos_top="50%", pos_right="75%"))
+        .add(geo, grid_opts=opts.GridOpts(pos_left="60%"))
+    )
+    return grid
+```
+![](https://user-images.githubusercontent.com/17564655/72130323-25d3f880-33b4-11ea-9422-80152c728858.png)
 
 ## Page：顺序多图
 
@@ -915,6 +1124,9 @@ def add_schema(
     # 表示播放的速度（跳动的间隔），单位毫秒（ms）。
     play_interval: Optional[Numeric] = None,
 
+    # 表示播放按钮的位置。可选值：'left'、'right'。
+    control_position: str = "left",
+
     # 是否自动播放。
     is_auto_play: bool = False,
 
@@ -1005,6 +1217,88 @@ def timeline_bar() -> Timeline:
 ```
 ![](https://user-images.githubusercontent.com/19553554/56574342-91432380-65f5-11e9-85ee-f3e1982a2240.gif)
 
+> Bar 图（Reversal）Timeline 效果
+
+```python
+def timeline_bar_reversal() -> Timeline:
+    tl = Timeline()
+    for i in range(2015, 2020):
+        bar = (
+            Bar()
+            .add_xaxis(Faker.choose())
+            .add_yaxis(
+                "商家A", Faker.values(), label_opts=opts.LabelOpts(position="right")
+            )
+            .add_yaxis(
+                "商家B", Faker.values(), label_opts=opts.LabelOpts(position="right")
+            )
+            .reversal_axis()
+            .set_global_opts(
+                title_opts=opts.TitleOpts("Timeline-Bar-Reversal (时间: {} 年)".format(i))
+            )
+        )
+        tl.add(bar, "{}年".format(i))
+    return tl
+```
+![](https://user-images.githubusercontent.com/17564655/72130430-7ba8a080-33b4-11ea-8070-bd6b707da398.png)
+
+> Bar 图（With GraphicOpts）Timeline 效果
+
+```python
+def timeline_bar_with_graphic() -> Timeline:
+    x = Faker.choose()
+    tl = Timeline()
+    for i in range(2015, 2020):
+        bar = (
+            Bar()
+            .add_xaxis(x)
+            .add_yaxis("商家A", Faker.values())
+            .add_yaxis("商家B", Faker.values())
+            .set_global_opts(
+                title_opts=opts.TitleOpts("某商店{}年营业额 - With Graphic 组件".format(i)),
+                graphic_opts=[
+                    opts.GraphicGroup(
+                        graphic_item=opts.GraphicItem(
+                            rotation=JsCode("Math.PI / 4"),
+                            bounding="raw",
+                            right=100,
+                            bottom=110,
+                            z=100,
+                        ),
+                        children=[
+                            opts.GraphicRect(
+                                graphic_item=opts.GraphicItem(
+                                    left="center", top="center", z=100
+                                ),
+                                graphic_shape_opts=opts.GraphicShapeOpts(
+                                    width=400, height=50
+                                ),
+                                graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                    fill="rgba(0,0,0,0.3)"
+                                ),
+                            ),
+                            opts.GraphicText(
+                                graphic_item=opts.GraphicItem(
+                                    left="center", top="center", z=100
+                                ),
+                                graphic_textstyle_opts=opts.GraphicTextStyleOpts(
+                                    text="某商店{}年营业额".format(i),
+                                    font="bold 26px Microsoft YaHei",
+                                    graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                        fill="#fff"
+                                    ),
+                                ),
+                            ),
+                        ],
+                    )
+                ],
+            )
+        )
+        tl.add(bar, "{}年".format(i))
+    return tl
+```
+![](https://user-images.githubusercontent.com/17564655/72130469-9a0e9c00-33b4-11ea-8c5e-556095d529bd.png)
+
 > Pie 图 Timeline 效果
 
 ```python
@@ -1047,3 +1341,63 @@ def timeline_map() -> Timeline:
     return tl
 ```
 ![](https://user-images.githubusercontent.com/19553554/57547640-7d3b4800-7391-11e9-8187-a1483e0a617c.gif)
+
+> Sankey 图 Timeline 效果
+
+```python
+def timeline_sankey() -> Timeline:
+    tl = Timeline()
+    names = ("商家A", "商家B", "商家C")
+    nodes = [{"name": name} for name in names]
+    for i in range(2015, 2020):
+        links = [
+            {"source": names[0], "target": names[1], "value": Faker.values()[0]},
+            {"source": names[1], "target": names[2], "value": Faker.values()[0]},
+        ]
+        sankey = (
+            Sankey()
+            .add(
+                "sankey",
+                nodes,
+                links,
+                linestyle_opt=opts.LineStyleOpts(
+                    opacity=0.2, curve=0.5, color="source"
+                ),
+                label_opts=opts.LabelOpts(position="right"),
+            )
+            .set_global_opts(
+                title_opts=opts.TitleOpts(title="{}年商店（A, B, C）营业额差".format(i))
+            )
+        )
+        tl.add(sankey, "{}年".format(i))
+    return tl
+```
+![](https://user-images.githubusercontent.com/17564655/72130503-ac88d580-33b4-11ea-8cbb-878ebc29e2cc.png)
+
+> BMap 图 Timeline 效果
+
+```python
+def timeline_bmap() -> Timeline:
+    tl = Timeline()
+    tl.add_schema(pos_left="50%", pos_right="10px", pos_bottom="15px")
+    for i in range(2015, 2020):
+        bmap = (
+            BMap()
+            .add_schema(baidu_ak="FAKE_AK", center=[120.13066322374, 30.240018034923])
+            .add(
+                "bmap",
+                [list(z) for z in zip(Faker.provinces, Faker.values())],
+                type_="heatmap",
+            )
+            .set_global_opts(
+                title_opts=opts.TitleOpts(title="Timeline-BMap-热力图-{}年".format(i)),
+                visualmap_opts=opts.VisualMapOpts(
+                    pos_bottom="center", pos_right="10px"
+                ),
+                tooltip_opts=opts.TooltipOpts(formatter=None),
+            )
+        )
+        tl.add(bmap, "{}年".format(i))
+    return tl
+```
+![](https://user-images.githubusercontent.com/17564655/72130558-db06b080-33b4-11ea-9dc4-71c6e16b2ba4.png)
