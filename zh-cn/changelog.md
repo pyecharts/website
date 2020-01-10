@@ -1,6 +1,29 @@
 # 版本日志
 
-### version 1.6.1 - 2020-01-03 (current)
+### version 1.6.2 - 2020-01-10 (current)
+
+***Add***
+
+* [pr#1477](https://github.com/pyecharts/pyecharts/pull/1477) 新增多个 example (`BMap`, `Gauge`, `Grid`, `Timeline`)
+
+***Fixed***
+* [pr#1483](https://github.com/pyecharts/pyecharts/pull/1477) 修复 `Grid` 图无法将 `Geo` 和 `Bar` 一起组合的问题
+* [pr#1483](https://github.com/pyecharts/pyecharts/pull/1477) 修复 `Timeline` 图，当 `Bar` 图设置 `reversal` 时无法更新反转后的 `x` 轴的问题
+
+***Updated***
+
+* [pr#1483](https://github.com/pyecharts/pyecharts/pull/1477) 更新相对应的单元测试代码
+* [pr#1483](https://github.com/pyecharts/pyecharts/pull/1477) 更新 `Radar` 图的配置，支持 `AngleAxis`，`Polar`(区别于 `Polar` 图), `RadiusAxis` 的配置
+* [pr#1483](https://github.com/pyecharts/pyecharts/pull/1477) 更新 `Sankey` 图的配置，支持垂直布局和修改 `Sankey` 图每一层的配置(`levels`)
+* [pr#1483](https://github.com/pyecharts/pyecharts/pull/1477) 更新 `tree`, `treemap` 的部分配置
+* [pr#1483](https://github.com/pyecharts/pyecharts/pull/1477) 更新 `treemap` 的 `breadcrump` 的配置(`treemap` 下方的层级面包屑框)
+* [pr#1477](https://github.com/pyecharts/pyecharts/pull/1477) 更新 `BMap` 对 `custom` 的支持(新增参数在 `GeoChartBase` 中体现)
+* [pr#1477](https://github.com/pyecharts/pyecharts/pull/1477) 更新 `Scatter`, `EffectScatter` 对 `symbolRotate`(标记的旋转角度) 的支持 
+* [pr#1477](https://github.com/pyecharts/pyecharts/pull/1477) 更新 `Gauge` 对 `radius` 参数的支持
+* [pr#1477](https://github.com/pyecharts/pyecharts/pull/1477) 更新 `Timeline` 对 `BMap` 图的支持，以及新增参数调整时间轴控制键的方向 `control_position`
+* [pr#1477](https://github.com/pyecharts/pyecharts/pull/1477) 更新 `VisualMapOpts` 对映射控件的一些效果参数的支持
+
+### version 1.6.1 - 2020-01-03
 
 ***Add***
 * [pr#1470](https://github.com/pyecharts/pyecharts/pull/1470) 通过 CI 和 Appveyor 的测试，支持 Python 3.8
