@@ -441,6 +441,9 @@ def add(
     # 支持设置成数组表达斥力的范围，此时不同大小的值会线性映射到不同的斥力。值越大则斥力越大
     repulsion: Numeric = 50,
 
+     # Graph 图节点边的 Label 配置（即在边上显示数据或标注的配置）
+    edge_label: types.Label = None,
+
     # 边两端的标记类型，可以是一个数组分别指定两端，也可以是单个统一指定。
     # 默认不显示标记，常见的可以设置为箭头，如下：edgeSymbol: ['circle', 'arrow']
     edge_symbol: Optional[str] = None,
@@ -616,6 +619,47 @@ def graph_with_opts() -> Graph:
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/55931745-47535880-5c59-11e9-8728-9216afd2975b.png)
+
+> Graph-GraphNode-GraphLink-WithEdgeLabel
+
+```python
+def graph_with_edge_opts() -> Graph:
+    nodes_data = [
+        opts.GraphNode(name="结点1", symbol_size=10),
+        opts.GraphNode(name="结点2", symbol_size=20),
+        opts.GraphNode(name="结点3", symbol_size=30),
+        opts.GraphNode(name="结点4", symbol_size=40),
+        opts.GraphNode(name="结点5", symbol_size=50),
+        opts.GraphNode(name="结点6", symbol_size=60),
+    ]
+    links_data = [
+        opts.GraphLink(source="结点1", target="结点2", value=2),
+        opts.GraphLink(source="结点2", target="结点3", value=3),
+        opts.GraphLink(source="结点3", target="结点4", value=4),
+        opts.GraphLink(source="结点4", target="结点5", value=5),
+        opts.GraphLink(source="结点5", target="结点6", value=6),
+        opts.GraphLink(source="结点6", target="结点1", value=7),
+    ]
+    c = (
+        Graph()
+        .add(
+            "",
+            nodes_data,
+            links_data,
+            repulsion=4000,
+            edge_label=opts.LabelOpts(
+                is_show=True,
+                position="middle",
+                formatter="{b} 的数据 {c}",
+            ),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Graph-GraphNode-GraphLink-WithEdgeLabel")
+        )
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/71709673-9b2f4e80-2e33-11ea-977e-60d7f0b5b01a.png)
 
 > Graph-微博转发关系图
 

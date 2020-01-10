@@ -1242,7 +1242,7 @@ def timeline_bar_reversal() -> Timeline:
 ```
 ![](https://user-images.githubusercontent.com/17564655/72130430-7ba8a080-33b4-11ea-8070-bd6b707da398.png)
 
-> Bar 图（With GraphicOpts）Timeline 效果
+> Bar 图 Timeline + GraphicOpts 效果
 
 ```python
 def timeline_bar_with_graphic() -> Timeline:
@@ -1297,7 +1297,7 @@ def timeline_bar_with_graphic() -> Timeline:
         tl.add(bar, "{}年".format(i))
     return tl
 ```
-![](https://user-images.githubusercontent.com/17564655/72130469-9a0e9c00-33b4-11ea-8c5e-556095d529bd.png)
+![](https://user-images.githubusercontent.com/17564655/71709732-dc276300-2e33-11ea-865a-9db65e1a0abd.png)
 
 > Pie 图 Timeline 效果
 
@@ -1401,3 +1401,4 @@ def timeline_bmap() -> Timeline:
     return tl
 ```
 ![](https://user-images.githubusercontent.com/17564655/72130558-db06b080-33b4-11ea-9dc4-71c6e16b2ba4.png)
+
