@@ -1610,6 +1610,15 @@ def add_yaxis(
     
     # 是否开启 hover 在拐点标志上的提示动画效果。
     is_hover_animation: bool = True,
+    
+    # 折线图所有图形的 zlevel 值。
+    # zlevel用于 Canvas 分层，不同zlevel值的图形会放置在不同的 Canvas 中，Canvas 分层是一种常见的优化手段。
+    # zlevel 大的 Canvas 会放在 zlevel 小的 Canvas 的上面。
+    z_level: types.Numeric = 0,
+    
+    # 折线图组件的所有图形的z值。控制图形的前后顺序。z值小的图形会被z值大的图形覆盖。
+    # z 相比 zlevel 优先级更低，而且不会创建新的 Canvas。
+    z: types.Numeric = 0,
 
     # 标记点配置项，参考 `series_options.MarkPointOpts`
     markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
