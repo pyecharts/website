@@ -590,11 +590,11 @@ def add_control_panel(
     scale_control_opts: Union[opts.BMapScaleControlOpts, dict, None] = None,
     
     # 切换地图类型的控件
-    maptype_control_opts: Union[opts.BMapTypeControl, dict, None] = None,
+    maptype_control_opts: Union[opts.BMapTypeControlOpts, dict, None] = None,
     
     # 版权控件，您可以在地图上添加自己的版权信息。
     # 每一个版权信息需要包含如下内容：版权的唯一标识、版权内容和其适用的区域范围。
-    copyright_control_opts: Union[opts.BMapCopyrightType, dict, None] = None,
+    copyright_control_opts: Union[opts.BMapCopyrightTypeOpts, dict, None] = None,
     
     # 地图定位的控件，使用 HTML5 浏览器定位功能
     geo_location_control_opts: Union[opts.BMapGeoLocationControlOpts, dict, None] = None,
