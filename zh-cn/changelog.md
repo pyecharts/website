@@ -1,6 +1,13 @@
 # 版本日志
 
-### version 1.6.2 - 2020-01-10 (current)
+### version 1.7.0 - 2020-02-26 (Current)
+
+***Updated***
+
+* [pr#1527](https://github.com/pyecharts/pyecharts/pull/1527) 更新 `Map3D` 的实现（现在支持 `Map3D` 的作图）
+* [pr#1491](https://github.com/pyecharts/pyecharts/pull/1491) 更新 `Calendar` 图对年，月，日标签的配置（支持中文设置）
+
+### version 1.6.2 - 2020-01-10
 
 ***Add***
 
