@@ -977,7 +977,7 @@ def map3d_china_base() -> Map3D:
         Map3D()
         .add_schema(
             itemstyle_opts=opts.ItemStyleOpts(
-                area_color="rgb(5,101,123)",
+                color="rgb(5,101,123)",
                 opacity=1,
                 border_width=0.8,
                 border_color="rgb(62,215,213)",
@@ -1049,7 +1049,7 @@ def map3d_with_bar3d() -> Map3D:
         Map3D()
         .add_schema(
             itemstyle_opts=opts.ItemStyleOpts(
-                area_color="rgb(5,101,123)",
+                color="rgb(5,101,123)",
                 opacity=1,
                 border_width=0.8,
                 border_color="rgb(62,215,213)",
@@ -1113,7 +1113,7 @@ def map3d_with_lines3d() -> Map3D:
         .add_schema(
             maptype="山东",
             itemstyle_opts=opts.ItemStyleOpts(
-                area_color="rgb(5,101,123)",
+                color="rgb(5,101,123)",
                 opacity=1,
                 border_width=0.8,
                 border_color="rgb(62,215,213)",
