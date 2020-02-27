@@ -62,7 +62,7 @@ def add_yaxis(
     series_name: str,
 
     # 系列数据
-    yaxis_data: Sequence[Numeric, opts.BarItem, dict],
+    y_axis: Sequence[Numeric, opts.BarItem, dict],
 
     # 是否选中图例
     is_selected: bool = True,
