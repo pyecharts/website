@@ -1,6 +1,6 @@
 # 版本日志
 
-### version 1.7.0 - 2020-02-27 (Current)
+### version 1.7.0 - 2020-02-28 (Current)
 
 ***Add***
 * [pr#1527](https://github.com/pyecharts/pyecharts/pull/1527) 新增两个自定义异常类
