@@ -6,6 +6,9 @@
 class Geo(
     # 初始化配置项，参考 `global_options.InitOpts`
     init_opts: opts.InitOpts = opts.InitOpts()
+
+    # 是否忽略不存在的坐标，默认值为 False，即不忽略
+    is_ignore_nonexistent_coord: bool = False
 )
 ```
 
@@ -498,6 +501,9 @@ def map_guangdong() -> Map:
 class BMap(
     # 初始化配置项，参考 `global_options.InitOpts`
     init_opts: opts.InitOpts = opts.InitOpts()
+
+    # 是否忽略不存在的坐标，默认值为 False，即不忽略
+    is_ignore_nonexistent_coord: bool = False
 )
 ```
 
