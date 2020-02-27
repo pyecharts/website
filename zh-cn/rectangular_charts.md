@@ -2313,6 +2313,7 @@ def add_yaxis(
 from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Scatter
+from pyecharts.commons.utils import JsCode
 
 
 def scatter_base() -> Scatter:
