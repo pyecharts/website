@@ -1,16 +1,22 @@
 # 版本日志
 
-### version 1.7.0 - 2020-02-26 (Current)
+### version 1.7.0 - 2020-02-27 (Current)
+
+***Add***
+* [pr#1527](https://github.com/pyecharts/pyecharts/pull/1527) 新增两个自定义异常类
+
+***Fixed***
+* [pr#1527](https://github.com/pyecharts/pyecharts/pull/1527) 修复 `Geo` 和 `BMap` 图传入与源码坐标数据不存在的地点会导致程序异常的问题（通过参数进行控制是否忽略）
+* [pr#1527](https://github.com/pyecharts/pyecharts/pull/1527) 修复 `BMap` 的资源地址被 Chrome 浏览器拦截的问题（HTTP 修改成 HTTPS）
 
 ***Updated***
-
-* [pr#1527](https://github.com/pyecharts/pyecharts/pull/1527) 更新 `Map3D` 的实现（现在支持 `Map3D` 的作图）
+* [pr#1527](https://github.com/pyecharts/pyecharts/pull/1527) 更新 `WordCloud` 词云图对自定义图片的配置，文字样式的配置以及其他功能的配置
+* [pr#1527](https://github.com/pyecharts/pyecharts/pull/1527) 更新 `Map3D` 的实现（现在可以支持 `Map3D` 的作图）
 * [pr#1491](https://github.com/pyecharts/pyecharts/pull/1491) 更新 `Calendar` 图对年，月，日标签的配置（支持中文设置）
 
 ### version 1.6.2 - 2020-01-10
 
 ***Add***
-
 * [pr#1477](https://github.com/pyecharts/pyecharts/pull/1477) 新增多个 example (`BMap`, `Gauge`, `Grid`, `Timeline`)
 
 ***Fixed***

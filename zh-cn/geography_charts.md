@@ -329,6 +329,52 @@ def geo_lines_background() -> Geo:
 ![](https://user-images.githubusercontent.com/19553554/55609133-8cd3d980-57b2-11e9-89c9-ed7e5fd15420.png)
 
 
+> Geo-国家的地图（以瑞士为例）
+
+```python
+from pyecharts import options as opts
+from pyecharts.charts import Geo
+from pyecharts.datasets import register_url
+
+# 如果出现 ssl 异常的话加上下面两行代码
+# import ssl
+# ssl._create_default_https_context = ssl._create_unverified_context
+
+def geo_echart_countries_js() -> Geo:
+    register_url("https://echarts-maps.github.io/echarts-countries-js/")
+
+    geo = (
+        Geo()
+        .add_schema(maptype="瑞士")
+        .set_global_opts(title_opts=opts.TitleOpts(title="瑞士"))
+    )
+    return geo
+```
+![](https://user-images.githubusercontent.com/17564655/75451356-665ef400-59ab-11ea-8839-fdeb41bb0e4f.png)
+
+> Geo-中国城市行政区地图（以北京海淀区为例）
+
+```python
+from pyecharts import options as opts
+from pyecharts.charts import Geo
+from pyecharts.datasets import register_url
+
+# 如果出现 ssl 异常的话加上下面两行代码
+# import ssl
+# ssl._create_default_https_context = ssl._create_unverified_context
+
+def geo_echart_china_js() -> Geo:
+    register_url("https://echarts-maps.github.io/echarts-china-counties-js/")
+
+    geo = (
+        Geo()
+        .add_schema(maptype="海淀区")
+        .set_global_opts(title_opts=opts.TitleOpts(title="海淀区"))
+    )
+    return geo
+```
+![](https://user-images.githubusercontent.com/17564655/75451471-95756580-59ab-11ea-9e24-0bc20b3f0116.png)
+
 ## Map：地图
 
 > *class pyecharts.charts.Map*
