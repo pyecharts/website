@@ -62,7 +62,7 @@ def add_yaxis(
     series_name: str,
 
     # 系列数据
-    yaxis_data: Sequence[Numeric, opts.BarItem, dict],
+    y_axis: Sequence[Numeric, opts.BarItem, dict],
 
     # 是否选中图例
     is_selected: bool = True,
@@ -2313,6 +2313,7 @@ def add_yaxis(
 from pyecharts.faker import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Scatter
+from pyecharts.commons.utils import JsCode
 
 
 def scatter_base() -> Scatter:
