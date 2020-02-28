@@ -232,6 +232,9 @@ class LabelOpts(
 
 ```python
 class LineStyleOpts(
+    # 是否显示
+    is_show: bool = True,
+    
     # 线宽。
     width: Numeric = 1,
 
@@ -286,6 +289,35 @@ class LineStyleOpts(
     #    repeat: 'repeat' // 是否平铺, 可以是 'repeat-x', 'repeat-y', 'no-repeat'
     # }
     color: Union[str, Sequence, None] = None,
+)
+```
+
+## Lines3DEffectOpts: 3D线样式配置项
+> *class pyecharts.options.Lines3DEffectOpts*
+
+```python
+class Line3DEffectOpts(
+    # 是否显示尾迹特效，默认不显示。
+    is_show: bool = True,
+
+    # 尾迹特效的周期。
+    period: Numeric = 4,
+
+    # 轨迹特效的移动动画是否是固定速度，单位按三维空间的尺寸
+    # 设置为非 null 的值后会忽略 period 配置项。
+    constant_speed: Optional[Numeric] = None,
+
+    # 尾迹的宽度。
+    trail_width: Numeric = 4,
+
+    # 尾迹的长度，范围从 0 到 1，为线条长度的百分比。
+    trail_length: Numeric = 0.1,
+
+    # 尾迹的颜色，默认跟线条颜色相同。
+    trail_color: Optional[str] = None,
+
+    # 尾迹的不透明度，默认跟线条不透明度相同。
+    trail_opacity: Optional[Numeric] = None,
 )
 ```
 
