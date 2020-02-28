@@ -261,7 +261,7 @@ def kline_profession_example() -> Grid:
     def calculate_ma(day_count: int, d):
         result: List[Union[float, str]] = []
         for i in range(len(d)):
-            if i < day_count:
+            if i+1 < day_count:
                 result.append("-")
                 continue
             sum_total = 0.0
