@@ -300,6 +300,68 @@ class TreeMapBreadcrumbOpts(
 )
 ```
 
+> *class pyecharts.options.TreeMapItemStyleOpts*
+
+```python
+class TreeMapItemStyleOpts(
+    # 矩形的颜色。
+    color: Optional[str] = None,
+
+    # 矩形颜色的透明度。取值范围是 0 ~ 1 之间的浮点数。
+    color_alpha: Union[Numeric, Sequence] = None,
+
+    # 矩形颜色的饱和度。取值范围是 0 ~ 1 之间的浮点数。
+    color_saturation: Union[Numeric, Sequence] = None,
+
+    # 矩形边框 和 矩形间隔（gap）的颜色。
+    border_color: Optional[str] = None,
+    
+    # 矩形边框线宽。为 0 时无边框。而矩形的内部子矩形（子节点）的间隔距离是由 gapWidth 指定的。
+    border_width: Numeric = 0,
+    
+    # 矩形边框的颜色的饱和度。取值范围是 0 ~ 1 之间的浮点数。
+    border_color_saturation: Union[Numeric, Sequence] = None,
+
+    # 矩形内部子矩形（子节点）的间隔距离。
+    gap_width: Numeric = 0,
+
+    # 每个矩形的描边颜色。
+    stroke_color: Optional[str] = None,
+
+    # 每个矩形的描边宽度。
+    stroke_width: Optional[Numeric] = None,
+)
+```
+
+> *class pyecharts.options.TreeMapLevelsOpts*
+
+```python
+class TreeMapLevelsOpts(
+    # 矩形颜色的透明度。取值范围是 0 ~ 1 之间的浮点数。
+    color_alpha: Union[Numeric, Sequence] = None,
+
+    # 矩形颜色的饱和度。取值范围是 0 ~ 1 之间的浮点数。
+    color_saturation: Union[Numeric, Sequence] = None,
+
+    # 表示同一层级节点，在颜色列表中（参见 color 属性）选择时，按照什么来选择。可选值:
+    # 'value' 将节点的值（即 series-treemap.data.value）映射到颜色列表中。这样得到的颜色，反应了节点值的大小。
+    # 'index' 将节点的 index（序号）映射到颜色列表中。即同一层级中，第一个节点取颜色列表中第一个颜色，第二个节点取第二个。
+    # 这样得到的颜色，便于区分相邻节点。
+    # 'id' 将节点的 id 映射到颜色列表中。
+    # id 是用户指定的，这样能够使得，在 treemap 通过 setOption 变化数值时，同一 id 映射到同一颜色，保持一致性。
+    color_mapping_by: str = "index",
+
+    # 矩形树图的 Item 配置，参考 `class pyecharts.options.TreeMapItemStyleOpts`
+    treemap_itemstyle_opts: Union[TreeMapItemStyleOpts, dict, None] = None,
+
+    # 每个矩形中，文本标签的样式，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 用于显示矩形的父节点的标签。参考 `series_options.LabelOpts`
+    upper_label_opts: Union[LabelOpts, dict, None] = None,
+)
+```
+
 > *func pyecharts.charts.TreeMap.add*
 
 ```python
@@ -344,6 +406,10 @@ def add(
     # treemap 组件的高度。
     height: types.Union[str, types.Numeric] = "80%",
 
+    # 期望矩形长宽比率。布局计算时会尽量向这个比率靠近。
+    # 默认为黄金比：0.5 * (1 + Math.sqrt(5))。
+    square_ratio: types.Optional[types.JSFunc] = None,
+
     # 当节点可以下钻时的提示符。只能是字符。
     drilldown_icon: str = "▶",
 
@@ -360,14 +426,50 @@ def add(
     # 'link'：如果节点数据中有 link 点击节点后会进行超链接跳转。
     node_click: types.Union[bool, str] = "zoomToNode",
 
+    # 点击某个节点，会自动放大那个节点到合适的比例（节点占可视区域的面积比例），这个配置项就是这个比例。
+    zoom_to_node_ratio: types.Numeric = 0.32 * 0.32,
+
+    # treemap 中采用『三级配置』：
+    #『每个节点』->『每个层级』->『每个系列』。
+    # 即我们可以对每个节点进行配置，也可以对树的每个层级进行配置，也可以 series 上设置全局配置。节点上的设置，优先级最高。
+    # 最常用的是『每个层级进行配置』，levels 配置项就是每个层级的配置
+    levels: types.TreeMapLevel = None,
+
     # 当前层级的最小 value 值。如果不设置则自动统计。
     visual_min: Optional[Numeric] = None,
 
     # 当前层级的最大 value 值。如果不设置则自动统计。
     visual_max: Optional[Numeric] = None,
 
+    # 本系列默认的 颜色透明度 选取范围。数值范围 0 ~ 1。
+    color_alpha: types.Union[types.Numeric, types.Sequence] = None,
+    
+    # 本系列默认的 颜色饱和度 选取范围。数值范围 0 ~ 1。
+    color_saturation: types.Union[types.Numeric, types.Sequence] = None,
+    
+    # 表示同一层级节点，在颜色列表中（参见 color 属性）选择时，按照什么来选择。可选值:
+    # 'value' 将节点的值（即 series-treemap.data.value）映射到颜色列表中。这样得到的颜色，反应了节点值的大小。
+    # 'index' 将节点的 index（序号）映射到颜色列表中。即同一层级中，第一个节点取颜色列表中第一个颜色，第二个节点取第二个。
+    # 这样得到的颜色，便于区分相邻节点。
+    # 'id' 将节点的 id 映射到颜色列表中。
+    # id 是用户指定的，这样能够使得，在 treemap 通过 setOption 变化数值时，同一 id 映射到同一颜色，保持一致性。
+    color_mapping_by: str = "index",
+    
+    # 如果某个节点的矩形的面积，小于这个数值（单位：px平方），这个节点就不显示。
+    # 如果不加这个限制，很小的节点会影响显示效果。
+    # 关于视觉设置，详见 series-treemap.levels。
+    visible_min: types.Numeric = 10,
+    
+    # 如果某个节点的矩形面积，小于这个数值（单位：px平方），则不显示这个节点的子节点。
+    # 这能够在矩形面积不足够大时候，隐藏节点的细节。当用户用鼠标缩放节点时，如果面积大于此阈值，又会显示子节点。
+    # 关于视觉设置，详见 series-treemap.levels。
+    children_visible_min: types.Optional[types.Numeric] = None,
+
     # 标签配置项，参考 `series_options.LabelOpts`
-    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(position="inside"),
+
+    # 父级标签配置项，参考 `series_options.LabelOpts`
+    upper_label_opts: types.Label = opts.LabelOpts(position="inside"),
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
@@ -436,3 +538,48 @@ def treemap_official():
     return c
 ```
 ![](https://user-images.githubusercontent.com/19553554/55934306-c13c0f80-5c62-11e9-98f1-c9c0296736be.png)
+
+> TreeMap-Levels-配置
+
+```python
+def treemap_levels_example():
+    with open(os.path.join("fixtures", "treemap.json"), "r", encoding="utf-8") as f:
+        data = json.load(f)
+    c = (
+        TreeMap()
+        .add(
+            series_name="演示数据",
+            data=data,
+            levels=[
+                opts.TreeMapLevelsOpts(
+                    treemap_itemstyle_opts=opts.TreeMapItemStyleOpts(
+                        border_color="#555",
+                        border_width=4,
+                        gap_width=4,
+                    )
+                ),
+                opts.TreeMapLevelsOpts(
+                    color_saturation=[0.3, 0.6],
+                    treemap_itemstyle_opts=opts.TreeMapItemStyleOpts(
+                        border_color_saturation=0.7,
+                        gap_width=2,
+                        border_width=2,
+                    ),
+                ),
+                opts.TreeMapLevelsOpts(
+                    color_saturation=[0.3, 0.5],
+                    treemap_itemstyle_opts=opts.TreeMapItemStyleOpts(
+                        border_color_saturation=0.6,
+                        gap_width=1,
+                    ),
+                ),
+                opts.TreeMapLevelsOpts(
+                    color_saturation=[0.3, 0.5],
+                ),
+            ]
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="TreeMap-Levels-配置"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/17564655/75642736-8296b580-5c77-11ea-90e4-7ac6e839dd85.png)
