@@ -66,6 +66,12 @@ def add(
     # 标记的大小
     symbol_size: Numeric = 12,
 
+    # 每个点的大小，在地理坐标系(coordinateSystem: 'geo')上有效。
+    blur_size: types.Numeric = 20,
+    
+    # 每个点模糊的大小，在地理坐标系(coordinateSystem: 'geo')上有效。
+    point_size: types.Numeric = 20,
+
     # 系列 label 颜色
     color: Optional[str] = None,
     
