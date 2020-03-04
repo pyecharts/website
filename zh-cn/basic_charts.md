@@ -1163,6 +1163,9 @@ def add(
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+
+    # 可以定义 data 的哪个维度被编码成什么。
+    encode: types.Union[types.JSFunc, dict, None] = None,
 )
 ```
 

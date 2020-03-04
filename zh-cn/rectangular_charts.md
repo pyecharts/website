@@ -43,6 +43,25 @@ def overlap(
 )
 ```
 
+> *func Chart.add_dataset*
+
+添加 dataset 组件
+```python
+def add_dataset(
+    # 原始数据。一般来说，原始数据表达的是二维表。
+    source: types.Union[types.Sequence, types.JSFunc] = None,
+    
+    # 使用 dimensions 定义 series.data 或者 dataset.source 的每个维度的信息。
+    dimensions: types.Optional[types.Sequence] = None,
+    
+    # dataset.source 第一行/列是否是 维度名 信息。可选值：
+    # null/undefine（对应 Python 的 None 值）：默认，自动探测。
+    # true：第一行/列是维度名信息。
+    # false：第一行/列直接开始是数据。
+    source_header: types.Optional[bool] = None,
+)
+```
+
 ## Bar：柱状图/条形图
 
 > *class pyecharts.charts.Bar(RectChart)*
@@ -100,6 +119,9 @@ def add_yaxis(
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # 可以定义 data 的哪个维度被编码成什么。
+    encode: types.Union[types.JSFunc, dict, None] = None,
 )
 ```
 
@@ -2302,6 +2324,9 @@ def add_yaxis(
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+
+    # 可以定义 data 的哪个维度被编码成什么。
+    encode: types.Union[types.JSFunc, dict, None] = None,
 )
 ```
 

@@ -80,22 +80,248 @@ class InitOpts(
 )
 ```
 
+## ToolBoxFeatureSaveAsImagesOpts：工具箱保存图片配置项
+> *class pyecharts.options.ToolBoxFeatureSaveAsImagesOpts*
+
+```python
+class ToolBoxFeatureSaveAsImageOpts(
+    # 保存的图片格式。支持 'png' 和 'jpeg'。
+    type_: str = "png",
+    
+    # 保存的文件名称，默认使用 title.text 作为名称。
+    name: Optional[str] = None,
+    
+    # 保存的图片背景色，默认使用 backgroundColor，如果backgroundColor不存在的话会取白色。
+    background_color: str = "auto",
+    
+    # 如果图表使用了 echarts.connect 对多个图表进行联动，则在导出图片时会导出这些联动的图表。该配置项决定了图表与图表之间间隙处的填充色。
+    connected_background_color: str = "#fff",
+    
+    # 保存为图片时忽略的组件列表，默认忽略工具栏。
+    exclude_components: Optional[Sequence[str]] = None,
+    
+    # 是否显示该工具。
+    is_show: bool = True,
+    
+    # 提示语
+    title: str = "保存为图片",
+    
+    # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
+    icon: Optional[JSFunc] = None,
+    
+    # 保存图片的分辨率比例，默认跟容器相同大小，如果需要保存更高分辨率的，可以设置为大于 1 的值，例如 2。
+    pixel_ratio: Numeric = 1,
+):
+```
+
+## ToolBoxFeatureRestoreOpts：工具箱还原配置项
+> *class pyecharts.options.ToolBoxFeatureRestoreOpts*
+
+```python
+class ToolBoxFeatureRestoreOpts(
+    # 是否显示该工具。
+    is_show: bool = True, 
+    
+    # 提示语
+    title: str = "还原", 
+    
+    # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
+    icon: Optional[JSFunc] = None
+):
+```
+
+## ToolBoxFeatureDataViewOpts：工具箱数据视图工具
+> *class pyecharts.options.ToolBoxFeatureDataViewOpts*
+
+```python
+class ToolBoxFeatureDataViewOpts(
+    # 是否显示该工具。
+    is_show: bool = True, 
+        
+    # 提示语
+    title: str = "还原", 
+        
+    # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
+    icon: Optional[JSFunc] = None
+    
+    # 是否不可编辑（只读）。默认为 False
+    is_read_only: bool = False,
+
+    # 自定义 dataView 展现函数，用以取代默认的 textarea 使用更丰富的数据编辑。可以返回 dom 对象或者 html 字符串。
+    option_to_content: Optional[JSFunc] = None,
+    
+    # 在使用 optionToContent 的情况下，如果支持数据编辑后的刷新，需要自行通过该函数实现组装 option 的逻辑。
+    content_to_option: Optional[JSFunc] = None,
+    
+    # 数据视图上有三个话术，默认是['数据视图', '关闭', '刷新']。
+    lang: Optional[Sequence[str]] = None,
+    
+    # 数据视图浮层背景色。
+    background_color: str = "#fff",
+    
+    # 数据视图浮层文本输入区背景色。
+    text_area_color: str = "#fff",
+    
+    # 数据视图浮层文本输入区边框颜色。
+    text_area_border_color: str = "#333",
+    
+    # 文本颜色。
+    text_color: str = "#000",
+    
+    # 按钮颜色。
+    button_color: str = "#c23531",
+    
+    # 按钮文本颜色。
+    button_text_color: str = "#fff",
+):
+```
+
+## ToolBoxFeatureDataZoomOpts：工具箱区域缩放配置项
+> *class pyecharts.options.ToolBoxFeatureDataZoomOpts*
+
+```python
+class ToolBoxFeatureDataZoomOpts(
+    # 是否显示该工具。
+    is_show: bool = True,
+    
+    # 提示语
+    zoom_title: str = "区域缩放",
+    
+    # 提示语
+    back_title: str = "区域缩放还原",
+    
+    # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
+    zoom_icon: Optional[JSFunc] = None,
+    
+    # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
+    back_icon: Optional[JSFunc] = None,
+    
+    # 指定哪些 xAxis 被控制。如果缺省则控制所有的 x 轴。
+    # 如果设置为 false 则不控制任何x轴。如果设置成 3 则控制 axisIndex 为 3 的 x 轴。
+    # 如果设置为 [0, 3] 则控制 axisIndex 为 0 和 3 的 x 轴。
+    xaxis_index: Union[Numeric, Sequence, bool] = None,
+    
+    # 指定哪些 yAxis 被控制。如果缺省则控制所有的 y 轴。
+    # 如果设置为 false 则不控制任何y轴。如果设置成 3 则控制 axisIndex 为 3 的 y 轴。
+    # 如果设置为 [0, 3] 则控制 axisIndex 为 0 和 3 的 y 轴。
+    yaxis_index: Union[Numeric, Sequence, bool] = None,
+):
+```
+
+## ToolBoxFeatureMagicTypeOpts：工具箱动态类型切换配置项
+> *class pyecharts.options.ToolBoxFeatureMagicTypeOpts*
+
+```python
+class ToolBoxFeatureMagicTypeOpts(
+    # 是否显示该工具。
+    is_show: bool = True,
+    
+    # 启用的动态类型
+    # 包括'line'（切换为折线图）, 'bar'（切换为柱状图）,
+    # 'stack'（切换为堆叠模式）, 'tiled'（切换为平铺模式）。
+    type_: Optional[Sequence] = None,    
+
+    # 各个类型的标题文本，可以分别配置。
+    line_title: str = "切换为折线图",
+    
+    # 各个类型的标题文本，可以分别配置。
+    bar_title: str = "切换为柱状图",
+    
+    # 各个类型的标题文本，可以分别配置。
+    stack_title: str = "切换为堆叠",
+    
+    # 各个类型的标题文本，可以分别配置。
+    tiled_title: str = "切换为平铺",
+    
+    # 各个类型的 icon path，可以分别配置。
+    line_icon: Optional[JSFunc] = None,
+    
+    # 各个类型的 icon path，可以分别配置。
+    bar_icon: Optional[JSFunc] = None,
+    
+    # 各个类型的 icon path，可以分别配置。
+    stack_icon: Optional[JSFunc] = None,
+    
+    # 各个类型的 icon path，可以分别配置。
+    tiled_icon: Optional[JSFunc] = None,
+):
+```
+
+## ToolBoxFeatureBrushOpts：工具箱选框组件配置项
+> *class pyecharts.options.ToolBoxFeatureBrushOpts*
+
+```python
+class ToolBoxFeatureBrushOpts(
+    # 使用的按钮，取值：
+    # 'rect'：开启矩形选框选择功能。
+    # 'polygon'：开启任意形状选框选择功能。
+    # 'lineX'：开启横向选择功能。
+    # 'lineY'：开启纵向选择功能。
+    # 'keep'：切换『单选』和『多选』模式。后者可支持同时画多个选框。前者支持单击清除所有选框。
+    # 'clear'：清空所有选框。
+    type_: Optional[str] = None,
+
+    # 每个按钮的 icon path。
+    rect_icon: Optional[JSFunc] = None,
+    
+    # 每个按钮的 icon path。
+    polygon_icon: Optional[JSFunc] = None,
+    
+    # 每个按钮的 icon path。
+    line_x_icon: Optional[JSFunc] = None,
+    
+    # 每个按钮的 icon path。
+    line_y_icon: Optional[JSFunc] = None,
+    
+    # 每个按钮的 icon path。
+    keep_icon: Optional[JSFunc] = None,
+    
+    # 每个按钮的 icon path。
+    clear_icon: Optional[JSFunc] = None,
+    
+    # 标题文本。
+    rect_title: str = "矩形选择",
+    
+    # 标题文本。
+    polygon_title: str = "圈选",
+    
+    # 标题文本。
+    line_x_title: str = "横向选择",
+    
+    # 标题文本。
+    line_y_title: str = "纵向选择",
+    
+    # 标题文本。
+    keep_title: str = "保持选择",
+    
+    # 标题文本。
+    clear_title: str = "清除选择",
+):
+```
+
+ 
 ## ToolBoxFeatureOpts：工具箱工具配置项
 > *class pyecharts.options.ToolBoxFeatureOpts*
 
 ```python
 class ToolBoxFeatureOpts(
     # 保存为图片
-    save_as_image: Optional[dict] = None,
-
-    # 配置项还原
-    restore: Optional[dict] = None,
-
-    # 数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新
-    data_view: Optional[dict] = None,
+    save_as_image: Union[ToolBoxFeatureSaveAsImageOpts, dict] = ToolBoxFeatureSaveAsImageOpts(),
     
-    # 数据区域缩放。目前只支持直角坐标系的缩放
-    data_zoom: Optional[dict] = None,
+    # 配置项还原    
+    restore: Union[ToolBoxFeatureRestoreOpts, dict] = ToolBoxFeatureRestoreOpts(),
+    
+    # 数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新
+    data_view: Union[ToolBoxFeatureDataViewOpts, dict] = ToolBoxFeatureDataViewOpts(),
+    
+    # 数据区域缩放。（目前只支持直角坐标系的缩放）
+    data_zoom: Union[ToolBoxFeatureDataZoomOpts, dict] = ToolBoxFeatureDataZoomOpts(),
+    
+    # 动态类型切换。
+    magic_type: Union[ToolBoxFeatureMagicTypeOpts, dict] = ToolBoxFeatureMagicTypeOpts(),
+    
+    # 选框组件的控制按钮。
+    brush: Union[ToolBoxFeatureBrushOpts, dict] = ToolBoxFeatureBrushOpts(),
 )
 ```
 
