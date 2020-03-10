@@ -988,7 +988,7 @@ class AxisOpts(
     # 在设置 min 和 max 之后该配置项无效。
     is_scale: bool = False,
 
-    # 是否强制设置坐标轴分割间隔。
+    # 是否反向坐标轴。
     is_inverse: bool = False,
 
     # 坐标轴名称显示位置。可选：
