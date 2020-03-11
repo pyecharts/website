@@ -8,7 +8,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。Echarts 是百度开�
   - [系列配置项](zh-cn/series_options)
 - 基本使用
   - [图表 API](zh-cn/chart_api)
-  - [示例数据](zh-cn/demo_data)
+  - [图表示例](zh-cn/demo_data)
   - [全局变量](zh-cn/global_vars)
 - 图表类型
   - [基本图表](zh-cn/basic_charts)

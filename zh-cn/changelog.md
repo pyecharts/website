@@ -1,6 +1,6 @@
 # 版本日志
 
-### version 1.7.1 - 2020-03-04 (Current)
+### version 1.7.1 - 2020-03-11 (Current)
 
 ***Add***
 * [pr#1534](https://github.com/pyecharts/pyecharts/pull/1534) 新增支持 `dataset` 组件（目前的示例代码仅涉及 `Bar`，`Pie`，`Line`，`Scatter` 四种图）
@@ -8,9 +8,12 @@
 ***Updated***
 * [pr#1527](https://github.com/pyecharts/pyecharts/pull/1527) 更新 `TreeMap` 的配置和 `example`
 * [pr#1528](https://github.com/pyecharts/pyecharts/pull/1527) 更新 `ToolBoxFeatureOpts` 的配置项
+* [pr#1536](https://github.com/pyecharts/pyecharts/pull/1536) 更新 `map_filename.json` 让 `Geo`，`Map` 支持 `china-cities` 的图例（即在中国地图下展示所有城市的区域划分）。
 
 ***Deleted***
 * [pr#1534](https://github.com/pyecharts/pyecharts/pull/1534) 移除 `Sankey` 错误的配置
+* [pr#1536](https://github.com/pyecharts/pyecharts/pull/1534) 移除源码的 `Example` 文件夹以及[官方文档](https://pyecharts.org)中的所有 `demo` ；转移至 [pyecharts-gallery](https://pyecharts.gallery.org) 的中进行动态展示，且保留跳转链接直达 `demo` 目录
+
 
 ### version 1.7.0 - 2020-02-28
 
