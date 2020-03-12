@@ -1,6 +1,6 @@
 # 版本日志
 
-### version 1.7.1 - 2020-03-11 (Current)
+### version 1.7.1 - 2020-03-12 (Current)
 
 ***Add***
 * [pr#1534](https://github.com/pyecharts/pyecharts/pull/1534) 新增支持 `dataset` 组件（目前的示例代码仅涉及 `Bar`，`Pie`，`Line`，`Scatter` 四种图）
