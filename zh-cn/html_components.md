@@ -58,30 +58,7 @@ def set_global_opts(
 
 ### Demo
 
-```python
-from pyecharts.components import Table
-from pyecharts.options import ComponentTitleOpts
-
-
-def table_base() -> Table:
-    table = Table()
-
-    headers = ["City name", "Area", "Population", "Annual Rainfall"]
-    rows = [
-        ["Brisbane", 5905, 1857594, 1146.4],
-        ["Adelaide", 1295, 1158259, 600.5],
-        ["Darwin", 112, 120900, 1714.7],
-        ["Hobart", 1357, 205556, 619.5],
-        ["Sydney", 2058, 4336374, 1214.8],
-        ["Melbourne", 1566, 3806092, 646.9],
-        ["Perth", 5386, 1554769, 869.4],
-    ]
-    table.add(headers, rows).set_global_opts(
-        title_opts=ComponentTitleOpts(title="Table-我是主标题", subtitle="我是副标题支持换行哦")
-    )
-    return table
-```
-![](https://user-images.githubusercontent.com/19553554/58699998-7d979380-83d1-11e9-835f-cab3cfdbee06.png)
+[gallery 示例](http://gallery.pyecharts.org/#/Table/README)
 
 
 ## Image：图像
@@ -121,24 +98,4 @@ def set_global_opts(
 
 ### Demo
 
-```python
-from pyecharts.components import Image
-from pyecharts.options import ComponentTitleOpts
-
-
-def image_base() -> Image:
-    image = Image()
-
-    img_src = (
-        "https://user-images.githubusercontent.com/19553554/396123"
-        "58-499eb2ae-4f91-11e8-8f56-179c4f0bf2df.png"
-    )
-    image.add(
-        src=img_src,
-        style_opts={"width": "200px", "height": "200px", "style": "margin-top: 20px"},
-    ).set_global_opts(
-        title_opts=ComponentTitleOpts(title="Image-基本示例", subtitle="我是副标题支持换行哦")
-    )
-    return image
-```
-![](https://user-images.githubusercontent.com/19553554/58700076-b3d51300-83d1-11e9-90e2-2225f71f5a57.png)
+[gallery 示例](http://gallery.pyecharts.org/#/Image/README)
