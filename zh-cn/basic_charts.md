@@ -181,18 +181,109 @@ def add(
 
     # 仪表盘结束角度。
     end_angle: Numeric = -45,
-    
-    # 轮盘内标题文本项标签配置项，参考 `series_options.LabelOpts`
-    title_label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
 
-    # 轮盘内数据项标签配置项，参考 `series_options.LabelOpts`
-    detail_label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+    # 仪表盘刻度是否是顺时针增长。
+    is_clock_wise: bool = True,
+    
+    # 轮盘内标题文本项标签配置项，参考 `chart_options.GaugeTitleOpts`
+    title_label_opts: types.GaugeTitle = opts.GaugeTitleOpts(),
+    
+    # 轮盘内数据项标签配置项，参考 `chart_options.GaugeDetailOpts`
+    detail_label_opts: types.GaugeDetail = opts.GaugeDetailOpts(formatter="{value}%"),
+
+    # 仪表盘指针配置项目，参考 `chart_options.GaugePointerOpts`
+    pointer: types.GaugePointer = opts.GaugePointerOpts(),
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+)
+```
+
+### GaugeTitleOpts：仪表盘数据标题配置项
+
+```python
+class GaugeTitleOpts(
+)
+```
+
+### GaugeDetailOpts：仪表盘数据内容配置项
+
+```python
+class GaugeDetailOpts(
+    # 是否显示详情。
+    is_show: bool = True,
+
+    # 文字块背景色。
+    # 可以是直接的颜色值，例如：'#123234', 'red', 'rgba(0,23,11,0.3)'。
+    background_color: str = "transparent",
+
+    # 文字块边框宽度。
+    border_width: Numeric = 0,
+
+    # 文字块边框颜色。
+    border_color: str = "transparent",
+
+    # 相对于仪表盘中心的偏移位置，数组第一项是水平方向的偏移，第二项是垂直方向的偏移。
+    # 可以是绝对的数值，也可以是相对于仪表盘半径的百分比。
+    offset_center: Sequence = [0, "-40%"],
+
+    # 格式化函数或者字符串
+    formatter: Optional[JSFunc] = None,
+
+    # 文字的颜色。
+    color: str = "auto",
+
+    # 文字字体的风格。可选：'normal'，'italic'，'oblique'
+    font_style: str = "normal",
+
+    # 文字字体的粗细。可选：'normal'，'bold'，'bolder'， 'lighter'， 100 | 200 | 300 | 400...
+    font_weight: str = "normal",
+    
+    # 文字的字体系列。还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+    font_family: str = "sans-serif",
+
+    # 文字的字体大小
+    font_size: Numeric = 15,
+
+    # 文字块的圆角。
+    border_radius: Numeric = 0,
+
+    # 文字块的内边距。例如：
+    # padding: [3, 4, 5, 6]：表示 [上, 右, 下, 左] 的边距。
+    # padding: 4：表示 padding: [4, 4, 4, 4]。
+    # padding: [3, 4]：表示 padding: [3, 4, 3, 4]。
+    # 注意，文字块的 width 和 height 指定的是内容高宽，不包含 padding。
+    padding: Numeric = 0,
+
+    # 文字块的背景阴影颜色。
+    shadow_color: Optional[str] = "transparent",
+
+    # 文字块的背景阴影长度。
+    shadow_blur: Optional[Numeric] = 0,
+
+    # 文字块的背景阴影 X 偏移。
+    shadow_offset_x: Numeric = 0,
+
+    # 文字块的背景阴影 Y 偏移。
+    shadow_offset_y: Numeric = 0,
+)
+```
+
+### GaugePointerOpts：仪表盘指针配置项
+
+```python
+class GaugePointerOpts(
+    # 是否显示指针。
+    is_show: bool = True,
+    
+    # 指针长度，可以是绝对数值，也可以是相对于半径的半分比。
+    length: Union[str, Numeric] = "80%",
+
+    # 指针宽度。
+    width: Numeric = 8,
 )
 ```
 
@@ -420,11 +511,20 @@ def add(
     # 波浪颜色。
     color: Optional[Sequence[str]] = None,
 
+    # 背景颜色
+    background_color: types.Union[str, dict, None] = None,
+
     # 是否显示波浪动画。
     is_animation: bool = True,
 
     # 是否显示边框。
     is_outline_show: bool = True,
+
+    # 外沿边框宽度
+    outline_border_distance: types.Numeric = 8,
+
+    # 外沿样式
+    outline_itemstyle_opts: types.ItemStyle = None,
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(font_size=50, position="inside"),
@@ -467,7 +567,7 @@ def add(
     series_name: str,
 
     # 系列数据
-    data: Sequence,
+    data: types.Sequence[types.Union[opts.ParallelItem, dict]],
 
     # 是否选中图例。
     is_selected: bool = True,
@@ -563,6 +663,33 @@ class ParallelAxisOpts(
 )
 ```
 
+### ParallelItem：平行坐标系数据项
+
+```python
+class ParallelItem(
+    # 数据项名称。
+    name: Optional[str] = None,
+
+    # 数据项值。
+    value: Optional[Sequence] = None,
+
+    # 线条样式。
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+
+    # 线的颜色。
+    color: Union[str, dict] = "#000",
+
+    # 线宽。
+    width: Numeric = 2,
+
+    # 线的类型。可选'solid'，'dashed'，'dotted'
+    type_: str = "solid",
+
+    # 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+    opacity: Numeric = 0.45,
+)
+```
+
 ### Demo
 
 [gallery 示例](http://gallery.pyecharts.org/#/Parallel/README)
@@ -587,7 +714,7 @@ def add(
     series_name: str,
 
     # 系列数据项，格式为 [(key1, value1), (key2, value2)]
-    data_pair: Sequence,
+    data_pair: types.Sequence[types.Union[types.Sequence, opts.PieItem, dict]],
 
     # 系列 label 颜色
     color: Optional[str] = None,
@@ -619,6 +746,30 @@ def add(
 
     # 可以定义 data 的哪个维度被编码成什么。
     encode: types.Union[types.JSFunc, dict, None] = None,
+)
+```
+
+### PieItem：饼图数据项
+
+```python
+class PieItem(
+    # 数据项名称。
+    name: Optional[str] = None,
+
+    # 数据值。
+    value: Optional[Numeric] = None,
+
+    # 该数据项是否被选中。
+    is_selected: bool = False,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[TooltipOpts, dict, None] = None,
 )
 ```
 
@@ -881,6 +1032,10 @@ def add_schema(
     # 雷达图绘制类型，可选 'polygon' 和 'circle'
     shape: Optional[str] = None,
 
+    # 雷达的中心（圆心）坐标，数组的第一项是横坐标，第二项是纵坐标。
+    # 支持设置成百分比，设置成百分比时第一项是相对于容器宽度，第二项是相对于容器高度。
+    center: Optional[types.Sequence] = None,
+
     # 文字样式配置项，参考 `series_options.TextStyleOpts`
     textstyle_opts: Union[opts.TextStyleOpts, dict] = opts.TextStyleOpts(),
 
@@ -912,7 +1067,7 @@ def add(
     series_name: str,
 
     # 系列数据项
-    data: Sequence,
+    data: types.Sequence[types.Union[opts.RadarItem, dict]],
 
     # 是否选中图例
     is_selected: bool = True,
@@ -956,6 +1111,48 @@ class RadarIndicatorItem(
 
     # 标签特定的颜色。
     color: Optional[str] = None,
+)
+```
+
+### RadarItem：雷达图数据项
+
+```python
+class RadarItem(
+    # 数据项名称
+    name: Optional[str] = None,
+
+    # 单个数据项的数值。
+    value: Optional[Numeric] = None,
+
+    # 单个数据标记的图形。
+    symbol: Optional[str] = None,
+
+    # 单个数据标记的大小
+    symbol_size: Union[Sequence[Numeric], Numeric] = None,
+
+    # 单个数据标记的旋转角度（而非弧度）。
+    symbol_rotate: Optional[Numeric] = None,
+
+    # 如果 symbol 是 path:// 的形式，是否在缩放时保持该图形的长宽比。
+    symbol_keep_aspect: bool = False,
+
+    # 单个数据标记相对于原本位置的偏移。
+    symbol_offset: Optional[Sequence] = None,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[TooltipOpts, dict, None] = None,
+
+    # 线样式配置项，参考 `series_options.LineStyleOpts`
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+
+    # 区域填充样式配置项，参考 `series_options.AreaStyleOpts`
+    areastyle_opts: Union[AreaStyleOpts, dict, None] = None,
 )
 ```
 
@@ -1184,7 +1381,7 @@ def add(
     series_name: Sequence,
 
     # 系列数据项
-    data: Sequence,
+    data: types.Sequence[types.Union[opts.ThemeRiverItem, dict]],
 
     # 是否选中图例
     is_selected: bool = True,
@@ -1198,6 +1395,21 @@ def add(
     # 单轴组件配置项，参考 `global_options.SingleAxisOpts`
     singleaxis_opts: Union[opts.SingleAxisOpts, dict] = opts.SingleAxisOpts(),
 ):
+```
+
+### ThemeRiverItem：主题河流图数据项
+
+```python
+class ThemeRiverItem(
+    # 时间或主题的时间属性。
+    date: Optional[str] = None,
+
+    # 事件或主题在某个时间点的值。
+    value: Optional[Numeric] = None,
+
+    # 事件或主题的名称。
+    name: Optional[str] = None,
+)
 ```
 
 ### Demo

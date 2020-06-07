@@ -189,7 +189,7 @@ def add(
     series_name: str,
 
     # 数据项 (坐标点名称，坐标点值)
-    data_pair: Sequence,
+    data_pair: types.Sequence[types.Union[types.Sequence, opts.MapItem, dict]],
 
     # 地图类型，具体参考 pyecharts.datasets.map_filenames.json 文件
     maptype: str = "china",
@@ -229,6 +229,30 @@ def add(
 
     # 高亮图元样式配置项，参考 `series_options.ItemStyleOpts`
     emphasis_itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+)
+```
+
+### MapItem：地图数据项
+
+```python
+class MapItem(
+    # 数据所对应的地图区域的名称，例如 '广东'，'浙江'。
+    name: Optional[str] = None,
+
+    # 该区域的数据值。
+    value: Optional[Numeric] = None,
+
+    # 该区域是否选中。
+    is_selected: bool = False,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[TooltipOpts, dict, None] = None,
 )
 ```
 

@@ -32,25 +32,34 @@ def add(
 
 ```python
 class GridOpts(
+    # 是否显示直角坐标系网格。
+    is_show: bool = False,
+
+    # 所有图形的 zlevel 值。
+    z_level: Numeric = 0,
+
+    # 组件的所有图形的z值。
+    z: Numeric = 2,
+    
     # grid 组件离容器左侧的距离。
     # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
     # 也可以是 'left', 'center', 'right'。
     # 如果 left 的值为'left', 'center', 'right'，组件会根据相应的位置自动对齐。
-    pos_left: Optional[str] = None,
+    pos_left: Union[Numeric, str, None] = None,
 
     # grid 组件离容器上侧的距离。
     # top 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
     # 也可以是 'top', 'middle', 'bottom'。
     # 如果 top 的值为'top', 'middle', 'bottom'，组件会根据相应的位置自动对齐。
-    pos_top: Optional[str] = None,
+    pos_top: Union[Numeric, str, None]  = None,
 
     # grid 组件离容器右侧的距离。
     # right 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
-    pos_right: Optional[str] = None,
+    pos_right: Union[Numeric, str, None]  = None,
 
     # grid 组件离容器下侧的距离。
     # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
-    pos_bottom: Optional[str] = None,
+    pos_bottom: Union[Numeric, str, None]  = None,
 
     # grid 组件的宽度。默认自适应。
     width: Union[Numeric, str, None] = None,
@@ -60,6 +69,18 @@ class GridOpts(
 
     # grid 区域是否包含坐标轴的刻度标签。
     is_contain_label: bool = False,
+
+    # 网格背景色，默认透明。
+    background_color: str = "transparent",
+    
+    # 网格的边框颜色。支持的颜色格式同 backgroundColor。
+    border_color: str = "#ccc",
+
+    # 网格的边框线宽。
+    border_width: Numeric = 1,
+
+    # 本坐标系特定的 tooltip 设定。
+    tooltip_opts: Union[TooltipOpts, dict, None] = None,
 )
 ```
 
