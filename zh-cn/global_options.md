@@ -205,6 +205,15 @@ class ToolBoxFeatureDataZoomOpts(
     # 如果设置为 false 则不控制任何y轴。如果设置成 3 则控制 axisIndex 为 3 的 y 轴。
     # 如果设置为 [0, 3] 则控制 axisIndex 为 0 和 3 的 y 轴。
     yaxis_index: Union[Numeric, Sequence, bool] = None,
+
+    # dataZoom 的运行原理是通过数据过滤以及在内部设置轴的显示窗口来达到数据窗口缩放的效果。
+    # 'filter'：当前数据窗口外的数据，被过滤掉。即会影响其他轴的数据范围。
+    #  每个数据项，只要有一个维度在数据窗口外，整个数据项就会被过滤掉。
+    # 'weakFilter'：当前数据窗口外的数据，被过滤掉。即会影响其他轴的数据范围。
+    #  每个数据项，只有当全部维度都在数据窗口同侧外部，整个数据项才会被过滤掉。
+    # 'empty'：当前数据窗口外的数据，被设置为空。即不会影响其他轴的数据范围。
+    # 'none': 不过滤数据，只改变数轴范围。
+    filter_mode: str = "filter",
 ):
 ```
 
@@ -573,10 +582,10 @@ class DataZoomOpts(
     is_realtime: bool = True,
 
     # 数据窗口范围的起始百分比。范围是：0 ~ 100。表示 0% ~ 100%。
-    range_start: Numeric = 20,
+    range_start: Union[Numeric, None] = 20,
 
     # 数据窗口范围的结束百分比。范围是：0 ~ 100
-    range_end: Numeric = 80,
+    range_end: Union[Numeric, None] = 80,
     
     # 数据窗口范围的起始数值。如果设置了 start 则 startValue 失效。
     start_value: Union[int, str, None] = None,
@@ -623,6 +632,15 @@ class DataZoomOpts(
     # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
     # 默认自适应。
     pos_bottom: Optional[str] = None,
+
+    # dataZoom 的运行原理是通过数据过滤以及在内部设置轴的显示窗口来达到数据窗口缩放的效果。
+    # 'filter'：当前数据窗口外的数据，被过滤掉。即会影响其他轴的数据范围。
+    #  每个数据项，只要有一个维度在数据窗口外，整个数据项就会被过滤掉。
+    # 'weakFilter'：当前数据窗口外的数据，被过滤掉。即会影响其他轴的数据范围。
+    #  每个数据项，只有当全部维度都在数据窗口同侧外部，整个数据项才会被过滤掉。
+    # 'empty'：当前数据窗口外的数据，被设置为空。即不会影响其他轴的数据范围。
+    # 'none': 不过滤数据，只改变数轴范围。
+    filter_mode: str = "filter"
 )
 ```
 
@@ -769,6 +787,11 @@ class VisualMapOpts(
     # 是否反转 visualMap 组件
     is_inverse: bool = False,
 
+    # 数据展示的小数精度。
+    # 连续型数据平均分段，精度根据数据自动适应。
+    # 连续型数据自定义分段或离散数据根据类别分段模式，精度默认为0（没有小数）。
+    precision: Optional[int] = None,
+
     # 自定义的每一段的范围，以及每一段的文字，以及每一段的特别的样式。例如：
     # pieces: [
     #   {"min": 1500}, // 不指定 max，表示 max 为无限大（Infinity）。
@@ -840,6 +863,28 @@ class TooltipOpts(
     # 'none'：无指示器
     # 'cross'：十字准星指示器。其实是种简写，表示启用两个正交的轴的 axisPointer。
     axis_pointer_type: str = "line",
+
+    # 是否显示提示框浮层，默认显示。
+    # 只需 tooltip 触发事件或显示 axisPointer 而不需要显示内容时可配置该项为 false。
+    is_show_content: bool = True,
+
+    # 是否永远显示提示框内容，
+    # 默认情况下在移出可触发提示框区域后一定时间后隐藏，设置为 true 可以保证一直显示提示框内容。
+    is_always_show_content: bool = False,
+
+    # 浮层显示的延迟，单位为 ms，默认没有延迟，也不建议设置。
+    show_delay: Numeric = 0,
+    
+    # 浮层隐藏的延迟，单位为 ms，在 alwaysShowContent 为 true 的时候无效。
+    hide_delay: Numeric = 100,
+
+    # 提示框浮层的位置，默认不设置时位置会跟随鼠标的位置。
+    # 1、通过数组配置：
+    # 绝对位置，相对于容器左侧 10px, 上侧 10 px ===> position: [10, 10]
+    # 相对位置，放置在容器正中间 ===> position: ['50%', '50%']
+    # 2、通过回调函数配置
+    # 3、固定参数配置：'inside'，'top'，'left'，'right'，'bottom'
+    position: Union[str, Sequence, JSFunc] = None,
 
     # 标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 \n 换行。
     # 字符串模板 模板变量有：
@@ -1072,6 +1117,12 @@ class AxisOpts(
 
     # 分割线配置项，参考 `series_options.SplitLineOpts`
     splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(),
+
+    # 坐标轴次刻度线相关设置，参考 `series_options.MinorTickOpts`
+    minor_tick_opts: Union[MinorTickOpts, dict, None] = None,
+
+    # 坐标轴在 grid 区域中的次分隔线。次分割线会对齐次刻度线 minorTick，参考 `series_options.MinorSplitLineOpts`
+    minor_split_line_opts: Union[MinorSplitLineOpts, dict, None] = None,
 )
 ```
 

@@ -1,6 +1,27 @@
 # 版本日志
 
-### version 1.7.1 - 2020-03-12 (Current)
+### version 1.8.0 - 2020-06-07 (Current)
+
+***Add***
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) 地图 `maptype` 新增 `world_china_provinces`，在世界地图中显示中国的省份。
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) `PictorialBar` 新增 `encode` 参数。
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) `VisualMapOpts` 新增精度的参数 `precision`
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) `TooltipOpts` 新增 position 参数
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) 大部分 Chart 新增对应的 ChartItem 参数（后续会在 `gallery` 进行展示如何使用）
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) `GridOpts` 的参数更新。
+
+***Fixed***
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) 修复 `ToolboxFeature` 中 `ToolBoxFeatureDataZoomOpts` 的 `xaxis_index` 和 `yaxis_index` 的默认值。原默认值均为 None，会导致 `Bar` 图在 stack 模式，出现轴数据展示异常，现修复默认值为 False 解决改问题。
+
+***Updated***
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) 更新 `Bar` 图中 `add_yaxis` 的参数 `yaxis_data` 的参数名，更改为 `y_axis`，为了和其他图保持统一。
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) 更新 `Gauge` 图中的 `detail_label_opts` 和 `title_detail_opts` 的配置项
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) 更新 `Liquid` 图中的部分参数
+* [pr#1580](https://github.com/pyecharts/pyecharts/pull/1580) 更新 README.md 和 LICENSE
+* [pr#1602](https://github.com/pyecharts/pyecharts/pull/1602) 更新 `InitOpts` 设置宽度和高度，支持使用百分比进行修改图表的大小。
+* 将目前 pyecharts-assets 中的 echarts.min.js 更新至最新版的版本.
+
+### version 1.7.1 - 2020-03-12
 
 ***Add***
 * [pr#1534](https://github.com/pyecharts/pyecharts/pull/1534) 新增支持 `dataset` 组件（目前的示例代码仅涉及 `Bar`，`Pie`，`Line`，`Scatter` 四种图）

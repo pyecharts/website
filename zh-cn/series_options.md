@@ -55,9 +55,18 @@ class ItemStyleOpts(
     
     # 阴线 图形的描边颜色。
     border_color0: Optional[str] = None,
+
+    # 描边宽度，默认不描边。
+    border_width: Optional[Numeric] = None,
+
+    # 支持 'dashed', 'dotted'。
+    border_type: Optional[str] = None,
     
     # 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
     opacity: Optional[Numeric] = None,
+
+    # 区域的颜色。    
+    area_color: Optional[str] = None,
 )
 ```
 
@@ -147,6 +156,9 @@ class LabelOpts(
     # 文字的颜色。
     # 如果设置为 'auto'，则为视觉映射得到的颜色，如系列色。
     color: Optional[str] = None,
+
+    # 距离图形元素的距离。当 position 为字符描述值（如 'top'、'insideRight'）时候有效。
+    distance: Union[Numeric, Sequence, None] = None,
 
     # 文字的字体大小
     font_size: Numeric = 12,
@@ -532,7 +544,10 @@ class MarkAreaOpts(
     label_opts: LabelOpts = LabelOpts(),
     
     # 标记区域数据，参考 `series_options.MarkAreaItem`
-    data: Sequence[Union[MarkAreaItem, dict]] = None,
+    data: Sequence[Union[MarkAreaItem, Sequence, dict]] = None,
+
+    # 该数据项区域的样式。参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: ItemStyleOpts = None,
 )
 ```
 
@@ -631,5 +646,46 @@ class SplitAreaOpts(
     is_show=True, 
     # 分隔区域的样式配置项，参考 `series_options.AreaStyleOpts`
     areastyle_opts: AreaStyleOpts = AreaStyleOpts()
+)
+```
+
+## MinorTickOpts：次级刻度配置项
+> *class pyecharts.options.MinorTickOpts*
+
+```python
+class MinorTickOpts(
+    # 是否显示次刻度线。
+    is_show: bool = False,
+
+    # 次刻度线分割数，默认会分割成 5 段
+    split_number: Numeric = 5,
+
+    # 次刻度线的长度。
+    length: Numeric = 3,
+
+    # 次刻度线的样式
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+)
+```
+
+## MinorSplitLineOpts：次级分割线配置项
+> *class pyecharts.options.MinorSplitLineOpts*
+
+```python
+class MinorSplitLineOpts(
+    # 是否显示次分隔线。默认不显示。
+    is_show: bool = False,
+
+    # 次分隔线线宽。
+    width: Numeric = 1,
+
+    # 次分隔线线的类型。可选：'solid'，'dashed'，'dotted'
+    type_: str = "solid",
+
+    # 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+    opacity: Union[Numeric, None] = None,
+
+    # 线的样式
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None,
 )
 ```

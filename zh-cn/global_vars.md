@@ -31,6 +31,9 @@ NotebookType = _NotebookType()
 # 远程资源 Host
 OnlineHostType = _OnlineHost()
 
+# Warning 控制类 - 将在 1.9.0 版本发布后舍弃
+WarningType = _WarningControl()
+
 # 全局环境配置类
 class _CurrentConfig:
     # 全局网页标题

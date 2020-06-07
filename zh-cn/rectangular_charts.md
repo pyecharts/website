@@ -92,18 +92,75 @@ def add_yaxis(
     # 使用的 y 轴的 index，在单个图表实例中存在多个 y 轴的时候有用。
     yaxis_index: Optional[Numeric] = None,
 
+    # 是否启用图例 hover 时的联动高亮
+    is_legend_hover_link: bool = True,
+
     # 系列 label 颜色
     color: Optional[str] = None,
 
+    # 是否显示柱条的背景色。通过 backgroundStyle 配置背景样式。
+    is_show_background: bool = False,
+    
+    # 每一个柱条的背景样式。需要将 showBackground 设置为 true 时才有效。
+    background_style: types.Union[types.BarBackground, dict, None] = None,
+
     # 数据堆叠，同个类目轴上系列配置相同的　stack　值可以堆叠放置。
     stack: Optional[str] = None,
+
+    # 柱条的宽度，不设时自适应。
+    # 可以是绝对值例如 40 或者百分数例如 '60%'。百分数基于自动计算出的每一类目的宽度。
+    # 在同一坐标系上，此属性会被多个 'bar' 系列共享。此属性应设置于此坐标系中最后一个 'bar' 系列上才会生效，并且是对此坐标系中所有 'bar' 系列生效。
+    bar_width: types.Union[types.Numeric, str] = None,
+    
+    # 柱条的最大宽度。比 barWidth 优先级高。
+    bar_max_width: types.Union[types.Numeric, str] = None,
+    
+    # 柱条的最小宽度。在直角坐标系中，默认值是 1。否则默认值是 null。比 barWidth 优先级高。
+    bar_min_width: types.Union[types.Numeric, str] = None,
+    
+    # 柱条最小高度，可用于防止某数据项的值过小而影响交互。
+    bar_min_height: types.Numeric = 0,
 
     # 同一系列的柱间距离，默认为类目间距的 20%，可设固定值
     category_gap: Union[Numeric, str] = "20%",
 
     # 不同系列的柱间距离，为百分比（如 '30%'，表示柱子宽度的 30%）。
     # 如果想要两个系列的柱子重叠，可以设置 gap 为 '-100%'。这在用柱子做背景的时候有用。
-    gap: Optional[str] = None,
+    gap: Optional[str] = "30%",
+
+    # 是否开启大数据量优化，在数据图形特别多而出现卡顿时候可以开启。
+    # 开启后配合 largeThreshold 在数据量大于指定阈值的时候对绘制进行优化。
+    # 缺点：优化后不能自定义设置单个数据项的样式。
+    is_large: bool = False,
+    
+    # 开启绘制优化的阈值。
+    large_threshold: types.Numeric = 400,
+
+    # 使用 dimensions 定义 series.data 或者 dataset.source 的每个维度的信息。
+    # 注意：如果使用了 dataset，那么可以在 dataset.source 的第一行/列中给出 dimension 名称。
+    # 于是就不用在这里指定 dimension。
+    # 但是，如果在这里指定了 dimensions，那么 ECharts 不再会自动从 dataset.source 的第一行/列中获取维度信息。
+    dimensions: types.Union[types.Sequence, None] = None,
+
+    # 当使用 dataset 时，seriesLayoutBy 指定了 dataset 中用行还是列对应到系列上，也就是说，系列“排布”到 dataset 的行还是列上。可取值：
+    # 'column'：默认，dataset 的列对应于系列，从而 dataset 中每一列是一个维度（dimension）。
+    # 'row'：dataset 的行对应于系列，从而 dataset 中每一行是一个维度（dimension）。
+    series_layout_by: str = "column",
+
+    # 如果 series.data 没有指定，并且 dataset 存在，那么就会使用 dataset。
+    # datasetIndex 指定本系列使用那个 dataset。
+    dataset_index: types.Numeric = 0,
+
+    # 是否裁剪超出坐标系部分的图形。柱状图：裁掉所有超出坐标系的部分，但是依然保留柱子的宽度
+    is_clip: bool = True,
+    
+    # 柱状图所有图形的 zlevel 值。
+    z_level: types.Numeric = 0,
+
+    # 柱状图组件的所有图形的z值。控制图形的前后顺序。
+    # z值小的图形会被z值大的图形覆盖。
+    # z相比zlevel优先级更低，而且不会创建新的 Canvas。
+    z: types.Numeric = 2,
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
@@ -146,6 +203,45 @@ class BarItem(
 )
 ```
 
+### BarBackgroundStyleOpts：柱状图背景样式配置
+
+```python
+class BarBackgroundStyleOpts(
+    # 柱条的颜色。
+    color: str = "rgba(180, 180, 180, 0.2)",
+
+    # 柱条的描边颜色。
+    border_color: str = "#000",
+
+    # 柱条的描边宽度，默认不描边。
+    border_width: Numeric = 0,
+
+    # 柱条的描边类型，默认为实线，支持 'dashed', 'dotted'。
+    border_type: str = "solid",
+
+    # 圆角半径，单位px，支持传入数组分别指定 4 个圆角半径。 如:
+    # barBorderRadius: 5, // 统一设置四个角的圆角大小
+    # barBorderRadius: [5, 5, 0, 0] //（顺时针左上，右上，右下，左下）
+    bar_border_radius: Union[Numeric, Sequence] = 0,
+
+    # 图形阴影的模糊大小。
+    # 该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+    shadow_blur: Optional[Numeric] = None,
+
+    # 阴影颜色。支持的格式同color。
+    shadow_color: Optional[str] = None,
+
+    # 阴影水平方向上的偏移距离。
+    shadow_offset_x: Numeric = 0,
+
+    # 阴影垂直方向上的偏移距离。
+    shadow_offset_y: Numeric = 0,
+
+    # 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+    opacity: Optional[Numeric] = None,
+)
+```
+
 ### Demo
 
 [gallery 示例](http://gallery.pyecharts.org/#/Bar/README)
@@ -170,7 +266,7 @@ def add_yaxis(
     series_name: str,
 
     # 系列数据
-    y_axis: Sequence,
+    y_axis: types.Sequence[types.Union[opts.BoxplotItem, dict]],
 
     # 是否选中图例
     is_selected: bool = True,
@@ -198,6 +294,27 @@ def add_yaxis(
 )
 ```
 
+### BoxplotItem：箱形图数据项
+
+```python
+class BoxplotItem(
+    # 数据项名称。
+    name: Optional[str] = None,
+
+    # 单个数据项的数值。
+    value: Optional[Numeric] = None,
+
+    # 文本的样式设置，参考 `series_options.LabelOpts`。
+    label_opts: Union[LabelOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[TooltipOpts, dict, None] = None,
+)
+```
+
 ### Demo
 
 [gallery 示例](http://gallery.pyecharts.org/#/Boxplot/README)
@@ -222,7 +339,7 @@ class EffectScatter(
     series_name: str,
 
     # 系列数据
-    y_axis: Sequence,
+    y_axis: types.Sequence[types.Union[opts.BoxplotItem, dict]],
 
     # 是否选中图例
     is_selected: bool = True,
@@ -259,6 +376,42 @@ class EffectScatter(
 )
 ```
 
+### EffectScatterItem：涟漪特效散点图数据项
+
+```python
+class EffectScatterItem(
+    # 数据项名称。
+    name: Union[str, Numeric] = None,
+
+    # 数据项的值
+    value: Union[str, Numeric] = None,
+
+    # 单个数据标记的图形。
+    symbol: Optional[str] = None,
+
+    # 单个数据标记的大小
+    symbol_size: Union[Sequence[Numeric], Numeric] = None,
+
+    # 单个数据标记的旋转角度（而非弧度）。
+    symbol_rotate: Optional[Numeric] = None,
+
+    # 如果 symbol 是 path:// 的形式，是否在缩放时保持该图形的长宽比。
+    symbol_keep_aspect: bool = False,
+
+    # 单个数据标记相对于原本位置的偏移。
+    symbol_offset: Optional[Sequence] = None,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[TooltipOpts, dict, None] = None,
+)
+```
+
 ### Demo
 
 [gallery 示例](http://gallery.pyecharts.org/#/EffectScatter/README)
@@ -283,10 +436,10 @@ def add_yaxis(
     series_name: str,
 
     # Y 坐标轴数据
-    yaxis_data: Sequence,
+    yaxis_data: types.Sequence[types.Union[opts.HeatMapItem, dict]],
 
     # 系列数据项
-    value: Sequence,
+    value: types.Sequence[types.Union[opts.HeatMapItem, dict]],
 
     # 是否选中图例
     is_selected: bool = True,
@@ -314,6 +467,24 @@ def add_yaxis(
 )
 ```
 
+### HeatMapItem：热力图数据项
+
+```python
+class HeatMapItem(
+    # 数据项名称。
+    name: Optional[str] = None,
+    
+    # 数据项的值。
+    value: Optional[Sequence] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[TooltipOpts, dict, None] = None,
+)
+```
+
 ### Demo
 
 [gallery 示例](http://gallery.pyecharts.org/#/Heatmap/README)
@@ -338,7 +509,7 @@ def add_yaxis(
     series_name: str,
 
     # 系列数据
-    y_axis: Sequence,
+    y_axis: types.Sequence[types.Union[opts.CandleStickItem, dict]],
 
     # 是否选中图例
     is_selected: bool = True,
@@ -360,6 +531,24 @@ def add_yaxis(
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+)
+```
+
+### CandleStickItem：K 线图数据项
+
+```python
+class CandleStickItem(
+    # 数据项名称。
+    name: Optional[str] = None,
+    
+    # 数据项的值。
+    value: Optional[Sequence] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[TooltipOpts, dict, None] = None,
 )
 ```
 
@@ -387,7 +576,7 @@ def add_yaxis(
     series_name: str,
 
     # 系列数据
-    y_axis: Sequence,
+    y_axis: types.Sequence[types.Union[opts.LineItem, dict]],
 
     # 是否选中图例
     is_selected: bool = True,
@@ -422,6 +611,9 @@ def add_yaxis(
 
     # 是否平滑曲线
     is_smooth: bool = False,
+    
+    # 是否裁剪超出坐标系部分的图形。折线图：裁掉所有超出坐标系的折线部分，拐点图形的逻辑按照散点图处理
+    is_clip: bool = True,
 
     # 是否显示成阶梯图
     is_step: bool = False,
@@ -461,6 +653,42 @@ def add_yaxis(
 )
 ```
 
+### LineItem：折线图数据项
+
+```python
+class LineItem(
+    # 数据项名称。
+    name: Union[str, Numeric] = None,
+
+    # 数据项的值
+    value: Union[str, Numeric] = None,
+
+    # 单个数据标记的图形。
+    symbol: Optional[str] = None,
+
+    # 单个数据标记的大小
+    symbol_size: Union[Sequence[Numeric], Numeric] = None,
+
+    # 单个数据标记的旋转角度（而非弧度）。
+    symbol_rotate: Optional[Numeric] = None,
+
+    # 如果 symbol 是 path:// 的形式，是否在缩放时保持该图形的长宽比。
+    symbol_keep_aspect: bool = False,
+
+    # 单个数据标记相对于原本位置的偏移。
+    symbol_offset: Optional[Sequence] = None,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[TooltipOpts, dict, None] = None,
+)
+```
+
 ### Demo
 
 [gallery 示例](http://gallery.pyecharts.org/#/Line/README)
@@ -468,7 +696,7 @@ def add_yaxis(
 
 ## PictorialBar：象形柱状图
 
-> *class pyecharts.charts.PictorialBar(Bar)*
+> *class pyecharts.charts.PictorialBar(RectChart)*
 
 ```python
 class PictorialBar(
@@ -485,7 +713,7 @@ def add_yaxis(
     series_name: str,
 
     # 系列数据
-    yaxis_data: Sequence[Numeric, opts.BarItem, dict],
+    y_axis: Sequence,
 
     # 图形类型。
     # ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 
@@ -585,6 +813,9 @@ def add_yaxis(
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+
+    # 可以定义 data 的哪个维度被编码成什么。
+    encode: types.Union[types.JsCode, dict] = None,
 )
 ```
 
@@ -648,6 +879,9 @@ def add_yaxis(
     # 标记线配置项，参考 `series_options.MarkLineOpts`
     markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
 
+    # 图表标域，常用于标记图表中某个范围的数据，参考 `series_options.MarkAreaOpts`
+    markarea_opts: types.MarkArea = None,
+
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
 
@@ -656,6 +890,47 @@ def add_yaxis(
 
     # 可以定义 data 的哪个维度被编码成什么。
     encode: types.Union[types.JSFunc, dict, None] = None,
+)
+```
+
+### ScatterItem：散点图数据项
+
+```python
+class ScatterItem(
+    # 数据项名称。
+    name: Union[str, Numeric] = None,
+
+    # 数据项值。
+    value: Union[str, Numeric] = None,
+
+    # 单个数据标记的图形。
+    # ECharts 提供的标记类型包括 
+    # 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none'
+    # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
+    # 可以通过 'path://' 将图标设置为任意的矢量路径。
+    symbol: Optional[str] = None,
+
+    # 单个数据标记的大小，可以设置成诸如 10 这样单一的数字
+    # 也可以用数组分开表示宽和高，例如 [20, 10] 表示标记宽为20，高为10。
+    symbol_size: Union[Sequence[Numeric], Numeric] = None,
+
+    # 单个数据标记的旋转角度（而非弧度）。正
+    symbol_rotate: Optional[Numeric] = None,
+
+    # 如果 symbol 是 path:// 的形式，是否在缩放时保持该图形的长宽比。
+    symbol_keep_aspect: bool = False,
+
+    # 单个数据标记相对于原本位置的偏移。
+    symbol_offset: Optional[Sequence] = None,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[TooltipOpts, dict, None] = None,
 )
 ```
 
