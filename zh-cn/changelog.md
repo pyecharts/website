@@ -1,6 +1,11 @@
 # 版本日志
 
-### version 1.8.0 - 2020-06-07 (Current)
+### version 1.8.1 - 2020-06-09 (Current)
+
+***Add***
+* [pr#1641](https://github.com/pyecharts/pyecharts/pull/1641) 新增多个国家地图 js 文件。
+
+### version 1.8.0 - 2020-06-07
 
 ***Add***
 * [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) 地图 `maptype` 新增 `world_china_provinces`，在世界地图中显示中国的省份。
