@@ -1,6 +1,24 @@
 # 版本日志
 
-### version 1.8.0 - 2020-06-07 (Current)
+### version 1.9.0 - 2020-10-29 (Current)
+
+***Add***
+* [pr#1737](https://github.com/pyecharts/pyecharts/pull/1737) 新增部分图的 `ChartItem` 配置（已移除 `warning` 提示）
+* [pr#1737](https://github.com/pyecharts/pyecharts/pull/1726) 新增 `MarkLineItem` 的 `xcoord` 和 `ycoord` 配置项
+
+***Updated***
+* [pr#1724](https://github.com/pyecharts/pyecharts/pull/1724) 更新 `Geo` 和 `Map` 的配置项
+* [pr#1694](https://github.com/pyecharts/pyecharts/pull/1694) 更新 `Echarts` 为 `Apache Echarts`
+* [pr#1691](https://github.com/pyecharts/pyecharts/pull/1691) 更新 `README.md`
+* [pr#1661](https://github.com/pyecharts/pyecharts/pull/1661) 更新 `Timeline` 图的 style 配置项
+* [pr#1660](https://github.com/pyecharts/pyecharts/pull/1660) 更新 `Pie` 图的 `LabelLine` 配置项
+
+### version 1.8.1 - 2020-06-10
+
+***Add***
+* [pr#1642](https://github.com/pyecharts/pyecharts/pull/1642) 更新 `Geo/Map` 的地区图映射关系(新增多个地区图)
+
+### version 1.8.0 - 2020-06-07
 
 ***Add***
 * [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) 地图 `maptype` 新增 `world_china_provinces`，在世界地图中显示中国的省份。

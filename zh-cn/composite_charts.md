@@ -350,6 +350,15 @@ def add_schema(
     
     # 时间轴的图形样式，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+
+    # Graphic 样式
+    graphic_opts: types.Graphic = None,
+
+    # 『当前项』（checkpoint）的图形样式。
+    checkpointstyle_opts: types.TimeLinkCheckPoint = None,
+
+    # 控制按钮』的样式。『控制按钮』包括：『播放按钮』、『前进按钮』、『后退按钮』。
+    controlstyle_opts: types.TimeLineControl = None,
 )
 ```
 
@@ -362,6 +371,105 @@ def add(
 
     # 时间点
     time_point: str
+)
+```
+
+### TimeLinkCheckPoint: 时间轴 checkpoint 样式配置
+
+```python
+class TimelineCheckPointerStyle(
+    # ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none'
+    # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
+    # 可以通过 'path://' 将图标设置为任意的矢量路径。
+    #    这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。
+    #    路径图形会自适应调整为合适的大小。路径的格式参见 SVG PathData。
+    #    可以从 Adobe Illustrator 等工具编辑导出。
+    symbol: str = "circle",
+
+    # 标记的大小。
+    symbol_size: Union[Numeric, Sequence[Numeric]] = 13,
+
+    # 标记的旋转角度（而非弧度）。正值表示逆时针旋转。
+    symbol_rotate: Optional[Numeric] = None,
+
+    # 如果 symbol 是 path:// 的形式，是否在缩放时保持该图形的长宽比。
+    symbol_keep_aspect: bool = False,
+
+    # 标记相对于原本位置的偏移。
+    symbol_offset: Optional[Sequence[Union[str, Numeric]]] = None,
+    
+    # 『当前项』（checkpoint）的颜色。
+    color: str = "#c23531",
+
+    # 『当前项』（checkpoint）的边框宽度。
+    border_width: Numeric = 5,
+
+    # 『当前项』（checkpoint）的边框颜色。
+    border_color: str = "rgba(194,53,49,0.5)",
+
+    # 『当前项』（checkpoint）在 timeline 播放切换中的移动，是否有动画。
+    is_animation: bool = True,
+
+    # 『当前项』（checkpoint）的动画时长。
+    animation_duration: Numeric = 300,
+
+    # 『当前项』（checkpoint）的动画的缓动效果。
+    animation_easing: str = "quinticInOut",
+)
+```
+
+### TimelineControlStyle： 时间轴控制按钮样式
+
+```python
+class TimelineControlStyle(
+    # 是否显示『控制按钮』。设置为 false 则全不显示。
+    is_show: bool = True,
+
+    # 是否显示『播放按钮』。
+    is_show_play_button: bool = True,
+
+    # 是否显示『后退按钮』。
+    is_show_prev_button: bool = True,
+
+    # 是否显示『前进按钮』。
+    is_show_next_button: bool = True,
+
+    # 『控制按钮』的尺寸，单位为像素（px）。
+    item_size: Numeric = 22,
+
+    # 『控制按钮』的间隔，单位为像素（px）。
+    item_gap: Numeric = 12,
+
+    # 『控制按钮』的位置。
+    # 当 timeline.orient 为 'horizontal'时，'left'、'right'有效。
+    # 当 timeline.orient 为 'vertical'时，'top'、'bottom'有效。
+    position: str = "left",
+
+    # 『播放按钮』的『可播放状态』的图形。
+    # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
+    # 可以通过 'path://' 将图标设置为任意的矢量路径。
+    #    这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。
+    #    路径图形会自适应调整为合适的大小。路径的格式参见 SVG PathData。
+    #    可以从 Adobe Illustrator 等工具编辑导出。
+    play_icon: Optional[str] = None,
+
+    # 同上
+    stop_icon: Optional[str] = None,
+
+    # 同上
+    prev_icon: Optional[str] = None,
+
+    # 同上
+    next_icon: Optional[str] = None,
+
+    # 按钮颜色。
+    color: str = "#304654",
+
+    # 按钮边框颜色。
+    border_color: str = "#304654",
+
+    # 按钮边框线宽。
+    border_width: Numeric = 1,
 )
 ```
 
