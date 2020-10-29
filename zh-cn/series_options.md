@@ -440,8 +440,14 @@ class MarkLineItem(
     # 相对容器的屏幕 x 坐标，单位像素。
     x: Union[str, Numeric, None] = None,
 
+    # x 数据坐标。
+    xcoord: Union[str, Numeric, None] = None,
+
     # 相对容器的屏幕 y 坐标，单位像素。
     y: Union[str, Numeric, None] = None,
+
+    # y 数据坐标。
+    ycoord: Union[str, Numeric, None] = None,
 
     # 在使用 type 时有效，用于指定在哪个维度上指定最大值最小值，可以是 
     # 0（xAxis, radiusAxis），

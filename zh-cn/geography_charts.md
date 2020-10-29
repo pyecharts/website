@@ -28,6 +28,39 @@ def add_schema(
     # 当前视角的中心点，用经纬度表示。例如：center: [115.97, 29.71]
     center: Optional[Sequence] = None,
 
+    # 参数用于 scale 地图的长宽比。
+    aspect_scale: types.Numeric = 0.75,
+
+    # 二维数组，定义定位的左上角以及右下角分别所对应的经纬度。
+    bounding_coords: types.Optional[types.Sequence[types.Numeric]] = None,
+
+    # 最小的缩放值。
+    min_scale_limit: types.Optional[types.Numeric] = None,
+
+    # 最大的缩放值。
+    max_scale_limit: types.Optional[types.Numeric] = None,
+
+    # 默认是 'name'，针对 GeoJSON 要素的自定义属性名称，作为主键用于关联数据点和 GeoJSON 地理要素。
+    name_property: str = "name",
+
+    # 选中模式，表示是否支持多个选中，默认关闭，支持布尔值和字符串。
+    # 字符串取值可选'single'表示单选，或者'multiple'表示多选。
+    selected_mode: types.Union[bool, str] = False,
+
+    # pyecharts 暂时没有提供 left/top/right/bottom 的配置
+    # layoutCenter 和 layoutSize 提供了除了 left/right/top/bottom/width/height 之外的布局手段。
+    # 在使用 left/right/top/bottom/width/height 的时候
+    # 可能很难在保持地图高宽比的情况下把地图放在某个盒形区域的正中间，并且保证不超出盒形的范围。
+    # 此时可以通过 layoutCenter 属性定义地图中心在屏幕中的位置，layoutSize 定义地图的大小。
+    # 如下示例
+    # layoutCenter: ['30%', '30%'],
+    # // 如果宽高比大于 1 则宽度为 100，如果小于 1 则高度为 100，保证了不超过 100x100 的区域
+    # layoutSize: 100
+    layout_center: types.Optional[types.Sequence[str]] = None,
+
+    # 地图的大小，见 layoutCenter。支持相对于屏幕宽高的百分比或者绝对的像素大小。
+    layout_size: types.Union[str, types.Numeric] = None,
+
     # # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict, None] = None,
 
@@ -202,6 +235,25 @@ def add(
     
     # 当前视角的中心点，用经纬度表示
     center: Optional[Sequence] = None,
+
+    # 参数用于 scale 地图的长宽比。
+    aspect_scale: types.Numeric = 0.75,
+
+    # 二维数组，定义定位的左上角以及右下角分别所对应的经纬度。
+    bounding_coords: types.Optional[types.Sequence[types.Numeric]] = None,
+
+    # 最小的缩放值。
+    min_scale_limit: types.Optional[types.Numeric] = None,
+
+    # 最大的缩放值。
+    max_scale_limit: types.Optional[types.Numeric] = None,
+
+    # 默认是 'name'，针对 GeoJSON 要素的自定义属性名称，作为主键用于关联数据点和 GeoJSON 地理要素。
+    name_property: str = "name",
+
+    # 选中模式，表示是否支持多个选中，默认关闭，支持布尔值和字符串。
+    # 字符串取值可选'single'表示单选，或者'multiple'表示多选。
+    selected_mode: types.Union[bool, str] = False,
     
     # 当前视角的缩放比例。
     zoom: Optional[Numeric] = 1,
@@ -211,9 +263,32 @@ def add(
     
     # 标记图形形状
     symbol: Optional[str] = None,
+    
+    # 多个拥有相同地图类型的系列会使用同一个地图展现。
+    # 如果多个系列都在同一个区域有值，ECharts 会对这些值统计得到一个数据。
+    # 这个配置项就是用于配置统计的方式，目前有：
+    # 'sum' 取和。
+    # 'average' 取平均值。
+    # 'max' 取最大值。
+    # 'min' 取最小值。
+    map_value_calculation: str = "sum",
 
     # 是否显示标记图形
     is_map_symbol_show: bool = True,
+
+    # pyecharts 暂时没有提供 left/top/right/bottom 的配置
+    # layoutCenter 和 layoutSize 提供了除了 left/right/top/bottom/width/height 之外的布局手段。
+    # 在使用 left/right/top/bottom/width/height 的时候
+    # 可能很难在保持地图高宽比的情况下把地图放在某个盒形区域的正中间，并且保证不超出盒形的范围。
+    # 此时可以通过 layoutCenter 属性定义地图中心在屏幕中的位置，layoutSize 定义地图的大小。
+    # 如下示例
+    # layoutCenter: ['30%', '30%'],
+    # // 如果宽高比大于 1 则宽度为 100，如果小于 1 则高度为 100，保证了不超过 100x100 的区域
+    # layoutSize: 100
+    layout_center: types.Optional[types.Sequence[str]] = None,
+
+    # 地图的大小，见 layoutCenter。支持相对于屏幕宽高的百分比或者绝对的像素大小。
+    layout_size: types.Union[str, types.Numeric] = None,
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
