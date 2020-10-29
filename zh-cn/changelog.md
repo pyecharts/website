@@ -17,6 +17,7 @@
 
 ***Add***
 * [pr#1642](https://github.com/pyecharts/pyecharts/pull/1642) 更新 `Geo/Map` 的地区图映射关系(新增多个地区图)
+* [pr#1641](https://github.com/pyecharts/pyecharts/pull/1641) 新增多个国家地图 js 文件。
 
 ### version 1.8.0 - 2020-06-07
 
