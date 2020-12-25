@@ -2,7 +2,7 @@
 
 > **Note: 配置项章节应该配合图表类型章节中的 example 阅读。**
 
-全局配置项可通过 `set_global_options` 方法设置
+全局配置项可通过 `set_global_opts` 方法设置
 
 ![](https://user-images.githubusercontent.com/19553554/57307650-8a4d0280-7117-11e9-921f-69b8e9c5e4aa.png)
 ![](https://user-images.githubusercontent.com/19553554/58749659-3554a000-84bb-11e9-9421-b1905e2f3430.png)
