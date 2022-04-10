@@ -362,7 +362,7 @@ index.html
         $(
             function () {
                 fetchData(chart);
-                setInterval(fetchData, 2000);
+                setInterval(getDynamicData, 2000);
             }
         );
 
