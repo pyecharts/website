@@ -23,10 +23,10 @@ geo.set_global_opts(
 使用回调函数设置 `Label Formatter` 浮点数位数
 
 ```python
-FORMATTER = """"function (params) {
+FORMATTER = """function (params) {
     return window.parseFloat(params.value).toFixed(2)
 }
-""
+"""
 ```
 
 或者可以在任何图表上附加 JS 代码
