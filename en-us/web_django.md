@@ -1,19 +1,19 @@
-> 本指南介绍了如何在 Django 中使用 pyecharts。
+> This guide describes how to use pyecharts in Django.
 
-## Django 模板渲染
+## Django Template Rendering
 
-### Step 0: 新建一个 Django 项目
+### Step 0: Create a new Django project
 
 ```shell
 $ django-admin startproject pyecharts_django_demo
 ```
 
-创建一个应用程序
+Create an application
 
 ```shell
 $ python manage.py startapp demo
 ```
-在 `pyecharts_django_demo/settings.py` 中注册应用程序
+Register the application in `pyecharts_django_demo/settings.py`
 
 ```python
 # pyecharts_django_demo/settings.py
@@ -28,7 +28,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-编辑 `demo/urls.py` 文件
+Edit the `demo/urls.py` file
 
 ```python
 # demo/urls.py
@@ -41,7 +41,7 @@ urlpatterns = [
 ]
 ```
 
-在 `pyecharts_django_demo/urls.py` 中新增 'demo.urls'
+Add 'demo.urls' to `pyecharts_django_demo/urls.py`
 
 ```python
 pyecharts_django_demo/urls.py
@@ -54,16 +54,16 @@ urlpatterns = [
 ]
 ```
 
-### Step 1: 拷贝 pyecharts 模板
+### Step 1: Copy the pyecharts template
 
-先在 `demo` 文件夹下新建 templates 文件夹
+First, create a new templates folder under the `demo` folder
 
 ```shell
 chenjiandongx@DESKTOP-E83NUHA:/mnt/d/Python/pyecharts-django-demo/pyecharts_django_demo/demo$ ls
 __init__.py  __pycache__  admin.py  apps.py  migrations  models.py  templates  tests.py  urls.py  views.py
 ```
 
-将 pyecharts 模板，位于 `pyecharts.render.templates` 拷贝至刚新建的 templates 文件夹
+Copy the pyecharts template, located in `pyecharts.render.templates`, to the templates folder you just created
 
 ```shell
 chenjiandongx@DESKTOP-E83NUHA:/mnt/d/Python/pyecharts-django-demo/pyecharts_django_demo/demo/templates$ tree
@@ -77,9 +77,9 @@ chenjiandongx@DESKTOP-E83NUHA:/mnt/d/Python/pyecharts-django-demo/pyecharts_djan
 └── table.html
 ```
 
-### Step 2: 渲染图表
+### Step 2: Render the chart
 
-将下列代码保存到 `demo/views.py` 中。
+Save the following code to `demo/views.py`.
 
 ```python
 from jinja2 import Environment, FileSystemLoader
@@ -103,31 +103,32 @@ def index(request):
     return HttpResponse(c.render_embed())
 ```
 
-### Step 3: 运行项目
+### Step 3: Run the project
+
 
 ```shell
 $ python manage.py runserver
 ```
 
-使用浏览器打开 http://127.0.0.1:8000/demo 即可访问服务
+Use your browser to open http://127.0.0.1:8000/demo to access the service
 
 ![](https://user-images.githubusercontent.com/19553554/56732269-5d9c0100-678f-11e9-9006-e23c62b4decf.png)
 
 
-## Django 前后端分离
+## Django front-end and back-end separation
 
-### Step 0: 新建一个 Django 项目
+### Step 0: Create a new Django project
 
 ```shell
 $ django-admin startproject pyecharts_django_demo
 ```
 
-创建一个应用程序
+Create an application
 
 ```shell
 $ python manage.py startapp demo
 ```
-在 `pyecharts_django_demo/settings.py` 中注册应用程序
+Register the application in `pyecharts_django_demo/settings.py`
 
 ```python
 # pyecharts_django_demo/settings.py
@@ -143,7 +144,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-在 `pyecharts_django_demo/urls.py` 中新增 'demo.urls'
+Add 'demo.urls' to `pyecharts_django_demo/urls.py`
 
 ```python
 from django.contrib import admin
@@ -156,7 +157,7 @@ urlpatterns = [
 ]
 ```
 
-编辑 `demo/urls.py` 文件(没有就新建一个)
+Edit the `demo/urls.py` file (create a new one if you don't have one)
 
 ```python
 from django.conf.urls import url
@@ -168,13 +169,13 @@ urlpatterns = [
 ]
 ```
 
-### Step 2 编写画图 HTML 代码
+### Step 2 Write HTML code for drawing
 
-先在根目录文件夹下新建 templates 文件夹，新建一个 index.html
+First, create a new templates folder in the root folder, create a new index.html
 
 ```shell
 sunhailindeMacBook-Pro:pyecharts_django_demo sunhailin$ ls
-__pycache__   db.sqlite3   demo   manage.py  pyecharts_django_demo  templates
+__pycache__ db.sqlite3 demo manage.py pyecharts_django_demo templates
 ```
 
 index.html
@@ -214,11 +215,11 @@ index.html
 </html>
 ```
 
-### Step 3: 编写 Django 和 pyecharts 代码渲染图表
+### Step 3: Write Django and pyecharts code to render charts
 
-注: 目前由于 json 数据类型的问题，无法将 pyecharts 中的 JSCode 类型的数据转换成 json 数据格式返回到前端页面中使用。因此在使用前后端分离的情况下尽量避免使用 JSCode 进行画图。
+Note: Currently, due to the problem of json data type, it is not possible to convert JSCode data in pyecharts to json data format and return it to the front-end page. Therefore, avoid using JSCode for charting if you are using front-end and back-end separation.
 
-将下列代码保存到 `demo/views.py` 中
+Save the following code to `demo/views.py`
 
 ```python
 import json
@@ -287,21 +288,21 @@ class IndexView(APIView):
         return HttpResponse(content=open("./templates/index.html").read())
 ```
 
-### Step 4: 运行项目
+### Step 4: Run the project
 
 ```shell
 $ python manage.py runserver
 ```
 
-使用浏览器打开 http://127.0.0.1:8000/demo/index 即可访问服务
+Use your browser to open http://127.0.0.1:8000/demo/index to access the service
 
 ![](https://user-images.githubusercontent.com/17564655/57363412-a30af600-71b3-11e9-934b-0caa11c979b7.png)
 
 
-## 定时全量更新图表
-> 前端主动向后端进行数据刷新
+## Timed full update of charts
+> Active data refresh from front-end to back-end
 
-定时刷新的核心在于 html 的 `setInterval` 方法。
+The core of timed refresh is the `setInterval` method of html.
 
 index.html
 ```html
@@ -341,8 +342,7 @@ index.html
 </html>
 ```
 
-## 定时增量更新图表
-
+## Timed incremental chart update
 index.html
 ```html
 <!DOCTYPE html>
@@ -401,9 +401,9 @@ index.html
 </html>
 ```
 
-后端代码也需要相应做出改变
+The backend code needs to be changed accordingly
 
-编辑 `demo/urls.py` 文件(没有就新建一个)
+Edit the `demo/urls.py` file (or create a new one if you don't have one)
 
 ```python
 from django.conf.urls import url

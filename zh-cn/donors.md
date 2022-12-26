@@ -42,4 +42,8 @@
 * https://github.com/Dengnj
 * https://github.com/kinslyzhu
 * https://github.com/hl9565
-
+* https://github.com/kopes18
+* https://github.com/Ruo-xu
+* https://github.com/peler-little-pig
+* https://github.com/jiaopengzi
+* https://github.com/zhanglei1101

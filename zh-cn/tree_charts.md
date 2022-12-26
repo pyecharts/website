@@ -26,11 +26,11 @@ def add(
 
     # 标记的图形。ECharts 提供的标记类型包括 'emptyCircle', 'circle', 'rect', 'roundRect', 
     # 'triangle', 'diamond', 'pin', 'arrow', 'none'。
-    symbol: str = "emptyCircle",
+    symbol: types.JSFunc = "emptyCircle",
 
     # 标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示宽和高，
     # 例如 [20, 10] 表示标记宽为 20，高为 10。
-    symbol_size: Numeric = 7,
+    symbol_size: types.Union[types.JSFunc, types.Numeric, types.Sequence] = 7,
 
     # 树图中 正交布局 的方向，也就是说只有在 layout = 'orthogonal' 的时候，
     # 该配置项才生效。对应有 水平 方向的 从左到右，从右到左；以及垂直方向的从上到下，
@@ -60,6 +60,16 @@ def add(
 
     # 折叠节点间隔，当节点过多时可以解决节点显示过杂间隔。
     collapse_interval: Numeric = 0,
+
+    # 树图在 正交布局 下，边的形状。分别有曲线和折线两种，对应的取值是 curve 和 polyline.
+    # 注意：该配置项只在 正交布局 下有效，在经向布局下的开发环境中会报错。
+    edge_shape: str = "curve",
+
+    # 正交布局下当边的形状是折线时，子树中折线段分叉的位置。
+    # 这里的位置指的是分叉点与子树父节点的距离占整个子树高度的百分比。
+    # 默认取值是 '50%'，可以是 ['0', '100%'] 之间。
+    # 注意：该配置项只有在 edgeShape = 'curve' 时才有效。
+    edge_fork_position: str = "50%",
 
     # 是否开启鼠标缩放和平移漫游。默认不开启。如果只想要开启缩放或者平移。
     # 可以设置成 'scale' 或者 'move'。设置成 true 为都开启
@@ -200,6 +210,10 @@ class TreeMapItemStyleOpts(
 
 ```python
 class TreeMapLevelsOpts(
+    # 表示同一层级的节点的 颜色 选取列表（选择规则见 colorMappingBy）。
+    # 默认为空时，选取系统color列表。
+    color: Union[str, Sequence] = None,
+
     # 矩形颜色的透明度。取值范围是 0 ~ 1 之间的浮点数。
     color_alpha: Union[Numeric, Sequence] = None,
 
@@ -303,6 +317,12 @@ def add(
 
     # 当前层级的最大 value 值。如果不设置则自动统计。
     visual_max: Optional[Numeric] = None,
+    
+    # treemap 中支持对数据其他维度进行视觉映射。
+    # 首先，treemap的数据格式（参见 series-treemap.data）中，每个节点的 value 都可以是数组。
+    # 数组每项是一个『维度』（dimension）。visualDimension 指定了额外的『视觉映射』使用的是数组的哪一项。
+    # 默认为第 0 项。
+    visual_dimension: types.Optional[types.Numeric] = None,
 
     # 本系列默认的 颜色透明度 选取范围。数值范围 0 ~ 1。
     color_alpha: types.Union[types.Numeric, types.Sequence] = None,

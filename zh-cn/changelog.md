@@ -1,6 +1,85 @@
 # 版本日志
 
-### version 1.7.1 - 2020-03-12 (Current)
+### version 2.0.0 - 2022-12-24 (Current)
+
+***Add***
+* [issue#1859](https://github.com/pyecharts/pyecharts/issues/1859) 在`Grid3DOpts`中增加对`option.grid3D.viewControl.alpha`和`beta`的视角控制
+* [issue#1825](https://github.com/pyecharts/pyecharts/issues/1825) 新增多个平行坐标系的参数
+* [issue#1785](https://github.com/pyecharts/pyecharts/issues/1785) `Boxplot` 新增对 `boxWidth` 的配置支持
+* Timeline 新增轴索引设置（通过 `add_schema` 设置 `current_index` 设置 timeline 起始的索引位置）
+* [pull#1934](https://github.com/pyecharts/pyecharts/pull/1934) 增加 `DataZoomOpts` 和 `TooltipOpts` 的配置
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/3547c50434400e6bd347204afff56331f27ea767) 增加 `ThreeAxisChart` 和 `Axis3DOpts` 的配置
+* [pull#1971](https://github.com/pyecharts/pyecharts/pull/1971) 修复 `MarkLineItem` 缺少 `linestyle_opts` 参数
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/2b6fd503349b72b6addad57ff33d253c22743a78) [issue#2004](https://github.com/pyecharts/pyecharts/issues/2004) 系列配置项 `ItemStyle` 中添加 `borderRadius` 参数
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/2b6fd503349b72b6addad57ff33d253c22743a78) [issue#1990](https://github.com/pyecharts/pyecharts/issues/1990) 日历图添加 `Scatter` 模式数据
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/d25cca137b13fdd852bf91d74de816847877bd05) 新增 `Custom` 图形
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/a85711c3114127d866ffac16d27672802d009e81) 新增 `Lines3D` 的图形配置
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/a85711c3114127d866ffac16d27672802d009e81) 增加 3D 图形的 `globe` 配置
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/73a5b11689d9626b61122a58d48e85536800a135) `InitOpts` 增加 `bg_color` 和 `is_fill_bg_color` 用于填充画布颜色。
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/73a5b11689d9626b61122a58d48e85536800a135) `Tab` 增加 `tab_css_opts`, `TabChartGlobalOpts` 用于配置 Tab 相关的 CSS 样式 https://github.com/pyecharts/pyecharts/issues/2076
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/7f5a2eae7cc15b0929a42b0082d7409040e6d382) `Gauge` 新增画图配置
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/84483fd6165db0cf607fb95dd4e431d83f2871fe) 新增 `add_geo_json` API 用于给 `Geo` 和 `Map` 添加自定义 `GeoJson` 数据
+
+***Fixed***
+* [issue#1794](https://github.com/pyecharts/pyecharts/issues/1794) 修复 `Toolbox` 异常的问题
+* [issue#1805](https://github.com/pyecharts/pyecharts/issues/1805) 修复 `Gauge` 的数据标签异常的问题
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/2b6fd503349b72b6addad57ff33d253c22743a78) [issue#2003](https://github.com/pyecharts/pyecharts/issues/2003) 修复 `Grid` 中添加多个 `Gauge` 异常的问题
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/2b6fd503349b72b6addad57ff33d253c22743a78) [issue#1994](https://github.com/pyecharts/pyecharts/issues/1994) 修复 `Bar` 图在 `Timeline` 中无法使用 `add_dataset` 方法
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/2b6fd503349b72b6addad57ff33d253c22743a78) [issue#1974](https://github.com/pyecharts/pyecharts/issues/1974) 修复 `logBase` 刻度轴异常的问题
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/2b6fd503349b72b6addad57ff33d253c22743a78) [issue#1946](https://github.com/pyecharts/pyecharts/issues/1946) 修复 `Timeline` 中使用 `Toolbox` 异常的问题
+* [pull#1978](https://github.com/pyecharts/pyecharts/pull/1978) 修复颜色添加异常的问题 @jackzhenguo
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/2b6fd503349b72b6addad57ff33d253c22743a78) [issue#1871](https://github.com/pyecharts/pyecharts/issues/1871) 修复 `Timeline` 中使用多个 `Radar` 图异常的问题
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/d25cca137b13fdd852bf91d74de816847877bd05) 修复 `add_dataset` 在特定场景下异常的问题
+* [issue#2075](https://github.com/pyecharts/pyecharts/issues/2075) 修复 `Grid` 无法正常添加多个 `Radar` 图的问题
+* [issue#2059](https://github.com/pyecharts/pyecharts/issues/2059) 修复 `animationOpts` 无法使用字典配置 https://github.com/pyecharts/pyecharts/commit/8129d79120c9222a598a9fa3fd8cf6a50eb8b6ce
+
+***Updated***
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/d25cca137b13fdd852bf91d74de816847877bd05) [commit/dev](https://github.com/pyecharts/pyecharts/commit/a85711c3114127d866ffac16d27672802d009e81) 更新部分配置项的参数
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/a85711c3114127d866ffac16d27672802d009e81) 更新大量的单元测试代码（目前单元测试覆盖率达到 99%）
+* [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/73d56348de063b3135687f23c876a47dcc7ccd73) Make CI Remove Python 3.6
+* [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/29a6c4249bce6dea209e81f58065f9e8486a9beb) Make CI Support Python 3.11
+
+### version 1.9.0 - 2020-10-29 (Current)
+
+***Add***
+* [pr#1737](https://github.com/pyecharts/pyecharts/pull/1737) 新增部分图的 `ChartItem` 配置（已移除 `warning` 提示）
+* [pr#1737](https://github.com/pyecharts/pyecharts/pull/1726) 新增 `MarkLineItem` 的 `xcoord` 和 `ycoord` 配置项
+
+***Updated***
+* [pr#1724](https://github.com/pyecharts/pyecharts/pull/1724) 更新 `Geo` 和 `Map` 的配置项
+* [pr#1694](https://github.com/pyecharts/pyecharts/pull/1694) 更新 `Echarts` 为 `Apache Echarts`
+* [pr#1691](https://github.com/pyecharts/pyecharts/pull/1691) 更新 `README.md`
+* [pr#1661](https://github.com/pyecharts/pyecharts/pull/1661) 更新 `Timeline` 图的 style 配置项
+* [pr#1660](https://github.com/pyecharts/pyecharts/pull/1660) 更新 `Pie` 图的 `LabelLine` 配置项
+
+### version 1.8.1 - 2020-06-10
+
+***Add***
+* [pr#1642](https://github.com/pyecharts/pyecharts/pull/1642) 更新 `Geo/Map` 的地区图映射关系(新增多个地区图)
+* [pr#1641](https://github.com/pyecharts/pyecharts/pull/1641) 新增多个国家地图 js 文件。
+
+### version 1.8.0 - 2020-06-07
+
+***Add***
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) 地图 `maptype` 新增 `world_china_provinces`，在世界地图中显示中国的省份。
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) `PictorialBar` 新增 `encode` 参数。
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) `VisualMapOpts` 新增精度的参数 `precision`
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) `TooltipOpts` 新增 position 参数
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) 大部分 Chart 新增对应的 ChartItem 参数（后续会在 `gallery` 进行展示如何使用）
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) `GridOpts` 的参数更新。
+
+***Fixed***
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) 修复 `ToolboxFeature` 中 `ToolBoxFeatureDataZoomOpts` 的 `xaxis_index` 和 `yaxis_index` 的默认值。原默认值均为 None，会导致 `Bar` 图在 stack 模式，出现轴数据展示异常，现修复默认值为 False 解决改问题。
+
+***Updated***
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) 更新 `Bar` 图中 `add_yaxis` 的参数 `yaxis_data` 的参数名，更改为 `y_axis`，为了和其他图保持统一。
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) 更新 `Gauge` 图中的 `detail_label_opts` 和 `title_detail_opts` 的配置项
+* [pr#1578](https://github.com/pyecharts/pyecharts/pull/1578) 更新 `Liquid` 图中的部分参数
+* [pr#1580](https://github.com/pyecharts/pyecharts/pull/1580) 更新 README.md 和 LICENSE
+* [pr#1602](https://github.com/pyecharts/pyecharts/pull/1602) 更新 `InitOpts` 设置宽度和高度，支持使用百分比进行修改图表的大小。
+* 将目前 pyecharts-assets 中的 echarts.min.js 更新至最新版的版本.
+
+### version 1.7.1 - 2020-03-12
 
 ***Add***
 * [pr#1534](https://github.com/pyecharts/pyecharts/pull/1534) 新增支持 `dataset` 组件（目前的示例代码仅涉及 `Bar`，`Pie`，`Line`，`Scatter` 四种图）

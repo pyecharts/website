@@ -1,48 +1,48 @@
-pyecharts 内置了多个全局变量，位于 pyecharts.globals 文件
+pyecharts has several global variables built in, located in the pyecharts.globals file
 
 ```python
-# 渲染方式
+# Render type
 RenderType = _RenderType()
 
-# 允许的生成的文件类型
+# Allowed generated file types
 FileType = _FileType()
 
-# Symbol 样式类型
+# Symbol style type
 SymbolType = _SymbolType()
 
-# 图表类型
+# Chart types
 ChartType = _ChartType
 
-# Tooltip 格式器类型
+# TooltipFormatter type
 TooltipFormatterType = _ToolTipFormatterType()
 
-# 主题类型
+# Theme type
 ThemeType = _ThemeType()
 
-# Geo 图形类型
+# Geo graphical type
 GeoType = _GeoType()
 
-# BMap 图形全局参数
+# BMap graph global parameters
 BMapType = _BMapType
 
-# Notebook 环境类型
+# Notebook environment type
 NotebookType = _NotebookType()
 
-# 远程资源 Host
+# Remote resource Host
 OnlineHostType = _OnlineHost()
 
-# Warning 控制类 - 将在 1.9.0 版本发布后舍弃
+# Warning control class - will be deprecated after the 1.9.0 release
 WarningType = _WarningControl()
 
-# 全局环境配置类
+# Global environment configuration class
 class _CurrentConfig:
-    # 全局网页标题
+    # Global page title
     PAGE_TITLE = "Awesome-pyecharts"
-    # 全局 Host
+    # Global Host
     ONLINE_HOST = OnlineHostType.DEFAULT_HOST
-    # 全局 Notebook 类型
+    # Global Notebook type
     NOTEBOOK_TYPE = NotebookType.JUPYTER_NOTEBOOK
-    # 全局 jinja2.Environment 实例
+    # global jinja2.Environment instance
     GLOBAL_ENV = Environment(
         keep_trailing_newline=True,
         trim_blocks=True,
@@ -54,6 +54,6 @@ class _CurrentConfig:
         ),
     )
 
-# 全局环境唯一实例
+# Unique instance of the global environment
 CurrentConfig = _CurrentConfig()
 ```

@@ -32,25 +32,34 @@ def add(
 
 ```python
 class GridOpts(
+    # 是否显示直角坐标系网格。
+    is_show: bool = False,
+
+    # 所有图形的 zlevel 值。
+    z_level: Numeric = 0,
+
+    # 组件的所有图形的z值。
+    z: Numeric = 2,
+    
     # grid 组件离容器左侧的距离。
     # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
     # 也可以是 'left', 'center', 'right'。
     # 如果 left 的值为'left', 'center', 'right'，组件会根据相应的位置自动对齐。
-    pos_left: Optional[str] = None,
+    pos_left: Union[Numeric, str, None] = None,
 
     # grid 组件离容器上侧的距离。
     # top 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
     # 也可以是 'top', 'middle', 'bottom'。
     # 如果 top 的值为'top', 'middle', 'bottom'，组件会根据相应的位置自动对齐。
-    pos_top: Optional[str] = None,
+    pos_top: Union[Numeric, str, None]  = None,
 
     # grid 组件离容器右侧的距离。
     # right 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
-    pos_right: Optional[str] = None,
+    pos_right: Union[Numeric, str, None]  = None,
 
     # grid 组件离容器下侧的距离。
     # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
-    pos_bottom: Optional[str] = None,
+    pos_bottom: Union[Numeric, str, None]  = None,
 
     # grid 组件的宽度。默认自适应。
     width: Union[Numeric, str, None] = None,
@@ -60,6 +69,30 @@ class GridOpts(
 
     # grid 区域是否包含坐标轴的刻度标签。
     is_contain_label: bool = False,
+
+    # 网格背景色，默认透明。
+    background_color: str = "transparent",
+    
+    # 网格的边框颜色。支持的颜色格式同 backgroundColor。
+    border_color: str = "#ccc",
+
+    # 网格的边框线宽。
+    border_width: Numeric = 1,
+    
+    # 图形阴影的模糊大小
+    shadow_blur: Optional[Numeric] = None,
+    
+    # 阴影颜色
+    shadow_color: Optional[str] = None,
+    
+    # 阴影水平方向上的偏移距离
+    shadow_offset_x: Numeric = 0,
+    
+    # 阴影垂直方向上的偏移距离
+    shadow_offset_y: Numeric = 0,
+
+    # 本坐标系特定的 tooltip 设定。
+    tooltip_opts: Union[TooltipOpts, dict, None] = None,
 )
 ```
 
@@ -329,6 +362,15 @@ def add_schema(
     
     # 时间轴的图形样式，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+
+    # Graphic 样式
+    graphic_opts: types.Graphic = None,
+
+    # 『当前项』（checkpoint）的图形样式。
+    checkpointstyle_opts: types.TimeLinkCheckPoint = None,
+
+    # 控制按钮』的样式。『控制按钮』包括：『播放按钮』、『前进按钮』、『后退按钮』。
+    controlstyle_opts: types.TimeLineControl = None,
 )
 ```
 
@@ -341,6 +383,105 @@ def add(
 
     # 时间点
     time_point: str
+)
+```
+
+### TimeLinkCheckPoint: 时间轴 checkpoint 样式配置
+
+```python
+class TimelineCheckPointerStyle(
+    # ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none'
+    # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
+    # 可以通过 'path://' 将图标设置为任意的矢量路径。
+    #    这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。
+    #    路径图形会自适应调整为合适的大小。路径的格式参见 SVG PathData。
+    #    可以从 Adobe Illustrator 等工具编辑导出。
+    symbol: str = "circle",
+
+    # 标记的大小。
+    symbol_size: Union[Numeric, Sequence[Numeric]] = 13,
+
+    # 标记的旋转角度（而非弧度）。正值表示逆时针旋转。
+    symbol_rotate: Optional[Numeric] = None,
+
+    # 如果 symbol 是 path:// 的形式，是否在缩放时保持该图形的长宽比。
+    symbol_keep_aspect: bool = False,
+
+    # 标记相对于原本位置的偏移。
+    symbol_offset: Optional[Sequence[Union[str, Numeric]]] = None,
+    
+    # 『当前项』（checkpoint）的颜色。
+    color: str = "#c23531",
+
+    # 『当前项』（checkpoint）的边框宽度。
+    border_width: Numeric = 5,
+
+    # 『当前项』（checkpoint）的边框颜色。
+    border_color: str = "rgba(194,53,49,0.5)",
+
+    # 『当前项』（checkpoint）在 timeline 播放切换中的移动，是否有动画。
+    is_animation: bool = True,
+
+    # 『当前项』（checkpoint）的动画时长。
+    animation_duration: Numeric = 300,
+
+    # 『当前项』（checkpoint）的动画的缓动效果。
+    animation_easing: str = "quinticInOut",
+)
+```
+
+### TimelineControlStyle： 时间轴控制按钮样式
+
+```python
+class TimelineControlStyle(
+    # 是否显示『控制按钮』。设置为 false 则全不显示。
+    is_show: bool = True,
+
+    # 是否显示『播放按钮』。
+    is_show_play_button: bool = True,
+
+    # 是否显示『后退按钮』。
+    is_show_prev_button: bool = True,
+
+    # 是否显示『前进按钮』。
+    is_show_next_button: bool = True,
+
+    # 『控制按钮』的尺寸，单位为像素（px）。
+    item_size: Numeric = 22,
+
+    # 『控制按钮』的间隔，单位为像素（px）。
+    item_gap: Numeric = 12,
+
+    # 『控制按钮』的位置。
+    # 当 timeline.orient 为 'horizontal'时，'left'、'right'有效。
+    # 当 timeline.orient 为 'vertical'时，'top'、'bottom'有效。
+    position: str = "left",
+
+    # 『播放按钮』的『可播放状态』的图形。
+    # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
+    # 可以通过 'path://' 将图标设置为任意的矢量路径。
+    #    这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。
+    #    路径图形会自适应调整为合适的大小。路径的格式参见 SVG PathData。
+    #    可以从 Adobe Illustrator 等工具编辑导出。
+    play_icon: Optional[str] = None,
+
+    # 同上
+    stop_icon: Optional[str] = None,
+
+    # 同上
+    prev_icon: Optional[str] = None,
+
+    # 同上
+    next_icon: Optional[str] = None,
+
+    # 按钮颜色。
+    color: str = "#304654",
+
+    # 按钮边框颜色。
+    border_color: str = "#304654",
+
+    # 按钮边框线宽。
+    border_width: Numeric = 1,
 )
 ```
 

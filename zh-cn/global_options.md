@@ -2,7 +2,7 @@
 
 > **Note: 配置项章节应该配合图表类型章节中的 example 阅读。**
 
-全局配置项可通过 `set_global_options` 方法设置
+全局配置项可通过 `set_global_opts` 方法设置
 
 ![](https://user-images.githubusercontent.com/19553554/57307650-8a4d0280-7117-11e9-921f-69b8e9c5e4aa.png)
 ![](https://user-images.githubusercontent.com/19553554/58749659-3554a000-84bb-11e9-9421-b1905e2f3430.png)
@@ -41,6 +41,143 @@ class AnimationOpts(
     # 数据更新动画的延迟，默认值为 0。
     # 支持回调函数，可以通过每个数据返回不同的 delay 时间实现更戏剧的更新动画效果。
     animation_delay_update: Union[Numeric, JSFunc] = 0,
+)
+```
+
+## AriaLabelOpts：无障碍标签配置项
+> *class pyecharts.options.AriaLabelOpts*
+
+```python
+class AriaLabelOpts(
+    # 是否开启无障碍访问的标签生成。开启后将生成 aria-label 属性。
+    is_enable: bool = True,
+    
+    # 默认采用算法自动生成图表描述，如果用户需要完全自定义，可以将这个值设为描述。
+    # 如将其设置为 '这是一个展示了价格走势的图表'
+    # 则图表 DOM 元素的 aria-label 属性值即为该字符串。
+    # 这一配置项常用于展示单个的数据并不能展示图表内容时
+    # 用户显示指定概括性描述图表的文字。
+    # 例如图表是一个包含大量散点图的地图，默认的算法只能显示数据点的位置
+    # 不能从整体上传达作者的意图。
+    # 这时候，可以将 description 指定为作者想表达的内容即可。
+    description: Optional[str] = None,
+    
+    # 对于图表的整体性描述。
+    # 如果图表存在 title.text，则采用 withTitle。
+    # 其中包括模板变量 {title}：将被替换为图表的 title.text。
+    general_with_title: str = "这是一个关于“{title}”的图表。",
+    
+    # 如果图表不存在 title.text，则采用 withoutTitle。
+    general_without_title: str = "这是一个图表，",
+    
+    # 描述中最多出现的系列个数。
+    series_max_count: int = 10,
+    
+    # 对于所有系列的整体性描述，显示在每个系列描述之前。其中包括模板变量：
+    # {seriesCount}：将被替换为系列个数，这里始终为 1。
+    series_single_prefix: str = "",
+    
+    # 如果系列有 name 属性，则采用该描述。其中包括模板变量：
+    # {seriesName}：将被替换为系列的 name；
+    # {seriesType}：将被替换为系列的类型名称，如：'柱状图'、 '折线图' 等等。
+    series_single_with_name: str = "图表类型是{seriesType}，表示{seriesName}。",
+    
+    # 如果系列没有 name 属性，则采用该描述。其中包括模板变量：
+    # {seriesType}：将被替换为系列的类型名称，如：'柱状图'、 '折线图' 等等。
+    series_single_without_name: str = "图表类型是{seriesType}。",
+    
+    # 对于所有系列的整体性描述，显示在每个系列描述之前。其中包括模板变量：
+    # {seriesCount}：将被替换为系列个数。
+    series_multiple_prefix: str = "它由{seriesCount}个图表系列组成。",
+    
+    # 如果系列有 name 属性，则采用该描述。其中包括模板变量：
+    # {seriesName}：将被替换为系列的 name；
+    # {seriesType}：将被替换为系列的类型名称，如：'柱状图'、 '折线图' 等等。
+    series_multiple_with_name: str = "图表类型是{seriesType}，表示{seriesName}。",
+    
+    # 如果系列没有 name 属性，则采用该描述。其中包括模板变量：
+    # {seriesType}：将被替换为系列的类型名称，如：'柱状图'、 '折线图' 等等。
+    series_multiple_without_name: str = "图表类型是{seriesType}。",
+    
+    # 除了最后一个系列后的分隔符。
+    series_multiple_separator_middle: str = "；",
+    
+    # 最后一个系列后的分隔符。
+    series_multiple_separator_end: str = "。",
+    
+    # 描述中每个系列最多出现的数据个数。
+    data_max_count: int = 10,
+    
+    # 当数据全部显示时采用的描述。这一配置项不会使得数据全部显示。
+    # 可以通过将 aria.data.maxCount 设置为 Number.MAX_VALUE 实现全部显示的效果。
+    data_all_data: str = "其数据是——",
+    
+    # 当只有部分数据显示时采用的描述。其中包括模板变量：
+    # {displayCnt}：将被替换为显示的数据个数。
+    data_partial_data: str = "其中，前{displayCnt}项是——",
+    
+    # 如果数据有 name 属性，则采用该描述。其中包括模板变量：
+    # {name}：将被替换为数据的 name；
+    # {value}：将被替换为数据的值。
+    data_with_name: str = "{name}的数据是{value}",
+    
+    # 如果数据没有 name 属性，则采用该描述。其中包括模板变量：
+    # {value}：将被替换为数据的值。
+    data_without_name: str = "{value}",
+    
+    # 除了最后一个数据后的分隔符。
+    data_separator_middle: str = "，",
+    
+    # 最后一个数据后的分隔符。
+    # 需要注意的是，通常最后一个数据后是系列的 separator.end
+    # 所以 data.separator.end 在大多数情况下为空字符串。
+    data_separator_end: str = "",
+)
+```
+
+## AriaDecalOpts：无障碍贴花配置项
+> *class pyecharts.options.AriaDecalOpts*
+
+```python
+class AriaDecalOpts(
+    # 是否显示贴花图案，默认不显示。如果要显示贴花.
+    # 需要保证 aria.enabled 与 aria.decal.show 都是 true。
+    is_show: bool = False,
+    
+    # 贴花的图案
+    # ECharts 提供的标记类型包括
+    # 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none'
+    # 也可以是 URL 或者 SVG 路径
+    decals_symbol: Union[str, Sequence] = "rect",
+    
+    # 取值范围：0 到 1，表示占图案区域的百分比。
+    decals_symbol_size: Numeric = 1,
+    
+    # 是否保持图案的长宽比。
+    decals_symbol_keep_aspect: bool = True,
+    
+    # 贴花图案的颜色，建议使用半透明色，这样能叠加在系列本身的颜色上。
+    decals_color: str = "rgba(0, 0, 0, 0.2)",
+    
+    # 贴花的背景色，将会覆盖在系列本身颜色之上，贴花图案之下。
+    decals_background_color: Optional[str] = None,
+    
+    # 贴花图案的水平配置
+    decals_dash_array_x: Union[Numeric, Sequence] = 5,
+    
+    # 贴花图案的垂直配置
+    decals_dash_array_y: Union[Numeric, Sequence] = 5,
+    
+    # 图案的整体旋转角度（弧度制），取值范围从 -Math.PI 到 Math.PI。
+    decals_rotation: Numeric = 0,
+    
+    # 生成的图案在未重复之前的宽度上限。
+    # 通常不需要设置该值，当你发现图案在重复的时候出现不连续的接缝时，可以尝试提高该值。
+    decals_max_tile_width: Numeric = 512,
+    
+    # 生成的图案在未重复之前的高度上限。
+    # 通常不需要设置该值，当你发现图案在重复的时候出现不连续的接缝时，可以尝试提高该值。
+    decals_max_tile_height: Numeric = 512,
 )
 ```
 
@@ -205,6 +342,15 @@ class ToolBoxFeatureDataZoomOpts(
     # 如果设置为 false 则不控制任何y轴。如果设置成 3 则控制 axisIndex 为 3 的 y 轴。
     # 如果设置为 [0, 3] 则控制 axisIndex 为 0 和 3 的 y 轴。
     yaxis_index: Union[Numeric, Sequence, bool] = None,
+
+    # dataZoom 的运行原理是通过数据过滤以及在内部设置轴的显示窗口来达到数据窗口缩放的效果。
+    # 'filter'：当前数据窗口外的数据，被过滤掉。即会影响其他轴的数据范围。
+    #  每个数据项，只要有一个维度在数据窗口外，整个数据项就会被过滤掉。
+    # 'weakFilter'：当前数据窗口外的数据，被过滤掉。即会影响其他轴的数据范围。
+    #  每个数据项，只有当全部维度都在数据窗口同侧外部，整个数据项才会被过滤掉。
+    # 'empty'：当前数据窗口外的数据，被设置为空。即不会影响其他轴的数据范围。
+    # 'none': 不过滤数据，只改变数轴范围。
+    filter_mode: str = "filter",
 ):
 ```
 
@@ -573,10 +719,10 @@ class DataZoomOpts(
     is_realtime: bool = True,
 
     # 数据窗口范围的起始百分比。范围是：0 ~ 100。表示 0% ~ 100%。
-    range_start: Numeric = 20,
+    range_start: Union[Numeric, None] = 20,
 
     # 数据窗口范围的结束百分比。范围是：0 ~ 100
-    range_end: Numeric = 80,
+    range_end: Union[Numeric, None] = 80,
     
     # 数据窗口范围的起始数值。如果设置了 start 则 startValue 失效。
     start_value: Union[int, str, None] = None,
@@ -623,6 +769,15 @@ class DataZoomOpts(
     # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
     # 默认自适应。
     pos_bottom: Optional[str] = None,
+
+    # dataZoom 的运行原理是通过数据过滤以及在内部设置轴的显示窗口来达到数据窗口缩放的效果。
+    # 'filter'：当前数据窗口外的数据，被过滤掉。即会影响其他轴的数据范围。
+    #  每个数据项，只要有一个维度在数据窗口外，整个数据项就会被过滤掉。
+    # 'weakFilter'：当前数据窗口外的数据，被过滤掉。即会影响其他轴的数据范围。
+    #  每个数据项，只有当全部维度都在数据窗口同侧外部，整个数据项才会被过滤掉。
+    # 'empty'：当前数据窗口外的数据，被设置为空。即不会影响其他轴的数据范围。
+    # 'none': 不过滤数据，只改变数轴范围。
+    filter_mode: str = "filter"
 )
 ```
 
@@ -769,6 +924,11 @@ class VisualMapOpts(
     # 是否反转 visualMap 组件
     is_inverse: bool = False,
 
+    # 数据展示的小数精度。
+    # 连续型数据平均分段，精度根据数据自动适应。
+    # 连续型数据自定义分段或离散数据根据类别分段模式，精度默认为0（没有小数）。
+    precision: Optional[int] = None,
+
     # 自定义的每一段的范围，以及每一段的文字，以及每一段的特别的样式。例如：
     # pieces: [
     #   {"min": 1500}, // 不指定 max，表示 max 为无限大（Infinity）。
@@ -840,6 +1000,28 @@ class TooltipOpts(
     # 'none'：无指示器
     # 'cross'：十字准星指示器。其实是种简写，表示启用两个正交的轴的 axisPointer。
     axis_pointer_type: str = "line",
+
+    # 是否显示提示框浮层，默认显示。
+    # 只需 tooltip 触发事件或显示 axisPointer 而不需要显示内容时可配置该项为 false。
+    is_show_content: bool = True,
+
+    # 是否永远显示提示框内容，
+    # 默认情况下在移出可触发提示框区域后一定时间后隐藏，设置为 true 可以保证一直显示提示框内容。
+    is_always_show_content: bool = False,
+
+    # 浮层显示的延迟，单位为 ms，默认没有延迟，也不建议设置。
+    show_delay: Numeric = 0,
+    
+    # 浮层隐藏的延迟，单位为 ms，在 alwaysShowContent 为 true 的时候无效。
+    hide_delay: Numeric = 100,
+
+    # 提示框浮层的位置，默认不设置时位置会跟随鼠标的位置。
+    # 1、通过数组配置：
+    # 绝对位置，相对于容器左侧 10px, 上侧 10 px ===> position: [10, 10]
+    # 相对位置，放置在容器正中间 ===> position: ['50%', '50%']
+    # 2、通过回调函数配置
+    # 3、固定参数配置：'inside'，'top'，'left'，'right'，'bottom'
+    position: Union[str, Sequence, JSFunc] = None,
 
     # 标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 \n 换行。
     # 字符串模板 模板变量有：
@@ -1072,6 +1254,12 @@ class AxisOpts(
 
     # 分割线配置项，参考 `series_options.SplitLineOpts`
     splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(),
+
+    # 坐标轴次刻度线相关设置，参考 `series_options.MinorTickOpts`
+    minor_tick_opts: Union[MinorTickOpts, dict, None] = None,
+
+    # 坐标轴在 grid 区域中的次分隔线。次分割线会对齐次刻度线 minorTick，参考 `series_options.MinorSplitLineOpts`
+    minor_split_line_opts: Union[MinorSplitLineOpts, dict, None] = None,
 )
 ```
 
@@ -1417,5 +1605,22 @@ class PolarOpts(
     
     # 本坐标系特定的 tooltip 设定。参考 `global_options.TooltipOpts`
     tooltip_opts: TooltipOpts = None,
+)
+```
+
+### DatasetTransformOpts：数据集转换配置项
+> *class pyecharts.options.DatasetTransformOpts*
+
+```python
+class DatasetTransformOpts(
+    # 变换类型
+    # filter，sort，Echarts 函数
+    type_: str = "filter",
+    
+    # 具体变换配置项
+    config: Optional[dict] = None,
+    
+    # debug 模式会通过浏览器 console 打印。
+    is_print: bool = False,
 )
 ```
