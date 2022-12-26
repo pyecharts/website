@@ -19,6 +19,7 @@
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/73a5b11689d9626b61122a58d48e85536800a135) `Tab` 增加 `tab_css_opts`, `TabChartGlobalOpts` 用于配置 Tab 相关的 CSS 样式 https://github.com/pyecharts/pyecharts/issues/2076
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/7f5a2eae7cc15b0929a42b0082d7409040e6d382) `Gauge` 新增画图配置
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/84483fd6165db0cf607fb95dd4e431d83f2871fe) 新增 `add_geo_json` API 用于给 `Geo` 和 `Map` 添加自定义 `GeoJson` 数据
+* [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/74c151a371ffb44336a3aea3d624e27535527711) 新增 `GraphGL`
 
 ***Fixed***
 * [issue#1794](https://github.com/pyecharts/pyecharts/issues/1794) 修复 `Toolbox` 异常的问题
@@ -38,6 +39,7 @@
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/a85711c3114127d866ffac16d27672802d009e81) 更新大量的单元测试代码（目前单元测试覆盖率达到 99%）
 * [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/73d56348de063b3135687f23c876a47dcc7ccd73) Make CI Remove Python 3.6
 * [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/29a6c4249bce6dea209e81f58065f9e8486a9beb) Make CI Support Python 3.11
+* [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/4d0edd9f8c1fd667c03b3fd575ffa759a89f311e) `Geo / BMap` 图支持 `scatterGL`, `flowGL`, `linesGL`
 
 ### version 1.9.0 - 2020-10-29 (Current)
 
