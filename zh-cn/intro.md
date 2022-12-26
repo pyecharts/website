@@ -27,3 +27,9 @@ pyecharts 分为 v0.5.X 和 v1 两个大版本，v0.5.X 和 v1 间不兼容，v1
 > 仅支持 Python3.6+
 
 新版本系列将从 v1.0.0 开始，文档位于 [pyecharts.org](https://pyecharts.org)，即本文档。
+
+### v2
+
+> 支持 Python3.6 ~ Python 3.11
+
+新版本系列从 Echarts 4 切换到 Echarts 5

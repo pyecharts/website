@@ -5,6 +5,9 @@
 
 ```python
 class Grid3DOpts(
+    # 是否显示三维笛卡尔积
+    show: Optional[bool] = None,
+    
     # 三维笛卡尔坐标系组件在三维场景中的宽度
     width: Numeric = 200,
 
@@ -23,6 +26,62 @@ class Grid3DOpts(
     # 旋转操作的灵敏度，值越大越灵敏。支持使用数组分别设置横向和纵向的旋转灵敏度。
     # 设置为0后无法旋转。
     rotate_sensitivity: Numeric = 1,
+    
+    # 坐标轴刻度线配置项，参考 `global_options.AxisLineOpts`
+    axisline_opts: Union[AxisLineOpts, dict, None] = None,
+    
+    # 坐标轴刻度配置项，参考 `global_options.AxisTickOpts`
+    axistick_opts: Union[AxisTickOpts, dict, None] = None,
+    
+    # 坐标轴线标签配置项，参考 `series_options.LabelOpts`
+    axislabel_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 坐标轴指示器配置项，参考 `global_options.AxisPointerOpts`
+    axispointer_opts: Union[AxisPointerOpts, dict, None] = None,
+    
+    # 坐标轴在 grid 区域中的分隔区域，默认不显示。参考 `series_options.SplitAreaOpts`
+    splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
+    
+    # 分割线配置项，参考 `series_options.SplitLineOpts`
+    splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(is_show=True),
+    
+    # 环境贴图。支持纯色、渐变色、全景贴图的 url。默认为 'auto'，
+    # 在配置有 light.ambientCubemap.texture 的时候会使用该纹理作为环境贴图。
+    # 否则则不显示环境贴图。
+    environment: JSFunc = "auto",
+    
+    # 视角绕 x 轴，即上下旋转的角度。配合 beta 可以控制视角的方向。
+    view_control_alpha: Numeric = 20,
+    
+    # 视角绕 y 轴，即左右旋转的角度。
+    view_control_beta: Numeric = 40,
+    
+    # 上下旋转的最小 alpha 值。即视角能旋转到达最上面的角度。
+    view_control_min_alpha: Numeric = -90,
+    
+    # 上下旋转的最大 alpha 值。即视角能旋转到达最下面的角度。
+    view_control_max_alpha: Numeric = 90,
+    
+    # 左右旋转的最小 beta 值。即视角能旋转到达最左的角度。
+    view_control_min_beta: Optional[int] = None,
+    
+    # 左右旋转的最大 beta 值。即视角能旋转到达最右的角度。
+    view_control_max_beta: Optional[int] = None,
+    
+    # 组件所在的层。
+    z_level: Numeric = -10,
+    
+    # 组件的视图离容器左侧的距离。
+    pos_left: Union[str, Numeric] = "auto",
+    
+    # 组件的视图离容器上侧的距离。
+    pos_top: Union[str, Numeric] = "auto",
+    
+    # 组件的视图离容器右侧的距离。
+    pos_right: Union[str, Numeric] = "auto",
+    
+    # 组件的视图离容器右侧的距离。
+    pos_bottom: Union[str, Numeric] = "auto",
 )
 ```
 
@@ -43,6 +102,16 @@ class Axis3DOpts(
 
     # 坐标轴名称。
     name: Optional[str] = None,
+    
+    # 是否显示轴
+    is_show: bool = True,
+    
+    # 针对 type: 'value' 有效。
+    # 是否脱离 0 值比例。
+    is_scale: bool = False,
+    
+    # 坐标轴使用的 Grid3D 组件的索引。默认使用第一个 Grid3D 组件。
+    grid_3d_index: Numeric = 0,
 
     # 坐标轴名称与轴线之间的距离，注意是三维空间的距离而非屏幕像素值。
     name_gap: Numeric = 20,
@@ -65,14 +134,36 @@ class Axis3DOpts(
     # 基础上根据分割后坐标轴刻度显示的易读程度作调整。
     # 在类目轴中无效。
     splitnum: Optional[Numeric] = None,
+    
+    # 对数轴的底数
+    log_base: Numeric = 10,
 
     # 强制设置坐标轴分割间隔。
     # 因为 splitNumber 是预估的值，实际根据策略计算出来的刻度可能无法达到想要的效果，
     # 这时候可以使用 interval 配合 min、max 强制设定刻度划分，一般不建议使用。
     # 无法在类目轴中使用。在时间轴（type: 'time'）中需要传时间戳，在对数轴（type: 'log'）中需要传指数值。
     interval: Optional[Numeric] = None,
-    margin: Numeric = 8,
+    
+    # 文字样式配置项，参考 `series_options.TextStyleOpts`
     textstyle_opts: Union[TextStyleOpts, dict, None] = None,
+    
+    # 坐标轴刻度线配置项，参考 `global_options.AxisLineOpts`
+    axisline_opts: Union[AxisLineOpts, dict, None] = None,
+    
+    # 坐标轴刻度配置项，参考 `global_options.AxisTickOpts`
+    axistick_opts: Union[AxisTickOpts, dict, None] = None,
+    
+    # 坐标轴线标签配置项，参考 `series_options.LabelOpts`
+    axislabel_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 坐标轴指示器配置项，参考 `global_options.AxisPointerOpts`
+    axispointer_opts: Union[AxisPointerOpts, dict, None] = None,
+    
+    # 坐标轴在 grid 区域中的分隔区域，默认不显示。参考 `series_options.SplitAreaOpts`
+    splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
+    
+    # 分割线配置项，参考 `series_options.SplitLineOpts`
+    splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(is_show=True),
 )
 ```
 
@@ -111,6 +202,21 @@ def add(
 
     # 三维笛卡尔坐标系配置项，参考 `Grid3DOpts`
     grid3d_opts: Union[opts.Grid3DOpts, dict] = opts.Grid3DOpts(),
+    
+    # 是否为参数曲面(仅 Surface3D 可用)
+    is_parametric: types.Optional[bool] = None,
+    
+    # 是否显示曲面图的网格线(仅 Surface3D 可用)
+    is_show_wire_frame: types.Optional[bool] = None,
+    
+    # 网格线样式
+    wire_frame_line_style_opts: types.Optional[opts.LineStyleOpts] = None,
+    
+    # 曲面的函数表达式
+    equation: types.Optional[dict] = None,
+    
+    # 曲面的参数方程
+    parametric_equation: types.Optional[dict] = None,
 )
 ```
 
@@ -169,6 +275,80 @@ class Scatter3D(
 class Surface3D(
     # 初始化配置项，参考 `global_options.InitOpts`
     init_opts: opts.InitOpts = opts.InitOpts()
+)
+```
+
+## Lines3D : 3D 路径图
+> *class pyecharts.charts.Lines3D(Chart3D)*
+
+```python
+class Surface3D(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: opts.InitOpts = opts.InitOpts()
+)
+```
+
+> *func pyecharts.charts.Lines3D.add*
+
+```python
+def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
+    series_name: str,
+    
+    # 数据项 (坐标点名称，坐标点值)
+    data_pair: types.Sequence,
+    
+    # 该系列使用的坐标系，可选：
+    # 'geo3D' 使用三维地理坐标系
+    coordinate_system: str,
+    
+    # 坐标轴使用的 geo3D 组件的索引。默认使用第一个 geo3D 组件。
+    geo_3d_index: types.Numeric = 0,
+    
+    # 坐标轴使用的 globe 组件的索引。默认使用第一个 globe 组件。
+    globe_index: types.Numeric = 0,
+    
+    # 是否是多段线。
+    # 默认为 false，只能用于绘制只有两个端点的线段（表现为被赛尔曲线）。
+    # 如果该配置项为 true，则可以在 data.coords 中设置多于 2 个的顶点用来绘制多段线，
+    # 在绘制路线轨迹的时候比较有用。
+    is_polyline: bool = False,
+    
+    # 是否显示尾迹特效，默认不显示。
+    is_show_lines_effect: bool = False,
+    
+    # 尾迹特效的周期。
+    lines_effect_period: types.Numeric = 4,
+    
+    # 轨迹特效的移动动画是否是固定速度，单位按三维空间的尺寸。
+    # 设置为非 null 的值后会忽略 period 配置项。
+    lines_effect_constant_speed: types.Optional[types.Numeric] = None,
+    
+    # 尾迹的宽度。
+    lines_effect_trail_width: types.Numeric = 4,
+    
+    # 尾迹的长度，范围从 0 到 1，为线条长度的百分比。
+    lines_effect_trail_length: types.Numeric = 0.1,
+    
+    # 尾迹的颜色，默认跟线条颜色相同。
+    lines_effect_trail_color: types.Optional[str] = None,
+    
+    # 尾迹的不透明度，默认跟线条不透明度相同。
+    lines_effect_trail_opacity: types.Optional[types.Numeric] = None,
+    
+    # 混合模式，目前支持'source-over'，'lighter'，
+    # 默认使用的'source-over'是通过 alpha 混合，
+    # 而'lighter'是叠加模式，该模式可以让数据集中的区域因为叠加而产生高亮的效果。
+    blend_mode: str = "source-over",
+    
+    # 标记线样式配置项，参考 `series_options.LineStyleOpts`
+    linestyle_opts: types.Optional[types.LineStyle] = None,
+    
+    # 组件所在的层。
+    z_level: types.Numeric = -10,
+    
+    # 图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+    is_silent: bool = False,
 )
 ```
 

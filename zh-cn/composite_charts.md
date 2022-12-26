@@ -78,6 +78,18 @@ class GridOpts(
 
     # 网格的边框线宽。
     border_width: Numeric = 1,
+    
+    # 图形阴影的模糊大小
+    shadow_blur: Optional[Numeric] = None,
+    
+    # 阴影颜色
+    shadow_color: Optional[str] = None,
+    
+    # 阴影水平方向上的偏移距离
+    shadow_offset_x: Numeric = 0,
+    
+    # 阴影垂直方向上的偏移距离
+    shadow_offset_y: Numeric = 0,
 
     # 本坐标系特定的 tooltip 设定。
     tooltip_opts: Union[TooltipOpts, dict, None] = None,

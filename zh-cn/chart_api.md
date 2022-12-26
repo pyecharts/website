@@ -49,6 +49,19 @@ def render(
 ) -> str
 ```
 
+> *func pyecharts.Base.render_embed*
+
+```python
+# 渲染图表到 HTML 字符串
+def render_embed(
+    # 模板路径
+    template_name: str = "simple_chart.html",
+    
+    # jinja2.Environment 类实例，可以配置各类环境参数
+    env: Optional[Environment] = None,
+) -> str:
+```
+
 > *func pyecharts.Base.render_notebook*
 
 ```python

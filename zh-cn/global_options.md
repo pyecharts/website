@@ -44,6 +44,143 @@ class AnimationOpts(
 )
 ```
 
+## AriaLabelOpts：无障碍标签配置项
+> *class pyecharts.options.AriaLabelOpts*
+
+```python
+class AriaLabelOpts(
+    # 是否开启无障碍访问的标签生成。开启后将生成 aria-label 属性。
+    is_enable: bool = True,
+    
+    # 默认采用算法自动生成图表描述，如果用户需要完全自定义，可以将这个值设为描述。
+    # 如将其设置为 '这是一个展示了价格走势的图表'
+    # 则图表 DOM 元素的 aria-label 属性值即为该字符串。
+    # 这一配置项常用于展示单个的数据并不能展示图表内容时
+    # 用户显示指定概括性描述图表的文字。
+    # 例如图表是一个包含大量散点图的地图，默认的算法只能显示数据点的位置
+    # 不能从整体上传达作者的意图。
+    # 这时候，可以将 description 指定为作者想表达的内容即可。
+    description: Optional[str] = None,
+    
+    # 对于图表的整体性描述。
+    # 如果图表存在 title.text，则采用 withTitle。
+    # 其中包括模板变量 {title}：将被替换为图表的 title.text。
+    general_with_title: str = "这是一个关于“{title}”的图表。",
+    
+    # 如果图表不存在 title.text，则采用 withoutTitle。
+    general_without_title: str = "这是一个图表，",
+    
+    # 描述中最多出现的系列个数。
+    series_max_count: int = 10,
+    
+    # 对于所有系列的整体性描述，显示在每个系列描述之前。其中包括模板变量：
+    # {seriesCount}：将被替换为系列个数，这里始终为 1。
+    series_single_prefix: str = "",
+    
+    # 如果系列有 name 属性，则采用该描述。其中包括模板变量：
+    # {seriesName}：将被替换为系列的 name；
+    # {seriesType}：将被替换为系列的类型名称，如：'柱状图'、 '折线图' 等等。
+    series_single_with_name: str = "图表类型是{seriesType}，表示{seriesName}。",
+    
+    # 如果系列没有 name 属性，则采用该描述。其中包括模板变量：
+    # {seriesType}：将被替换为系列的类型名称，如：'柱状图'、 '折线图' 等等。
+    series_single_without_name: str = "图表类型是{seriesType}。",
+    
+    # 对于所有系列的整体性描述，显示在每个系列描述之前。其中包括模板变量：
+    # {seriesCount}：将被替换为系列个数。
+    series_multiple_prefix: str = "它由{seriesCount}个图表系列组成。",
+    
+    # 如果系列有 name 属性，则采用该描述。其中包括模板变量：
+    # {seriesName}：将被替换为系列的 name；
+    # {seriesType}：将被替换为系列的类型名称，如：'柱状图'、 '折线图' 等等。
+    series_multiple_with_name: str = "图表类型是{seriesType}，表示{seriesName}。",
+    
+    # 如果系列没有 name 属性，则采用该描述。其中包括模板变量：
+    # {seriesType}：将被替换为系列的类型名称，如：'柱状图'、 '折线图' 等等。
+    series_multiple_without_name: str = "图表类型是{seriesType}。",
+    
+    # 除了最后一个系列后的分隔符。
+    series_multiple_separator_middle: str = "；",
+    
+    # 最后一个系列后的分隔符。
+    series_multiple_separator_end: str = "。",
+    
+    # 描述中每个系列最多出现的数据个数。
+    data_max_count: int = 10,
+    
+    # 当数据全部显示时采用的描述。这一配置项不会使得数据全部显示。
+    # 可以通过将 aria.data.maxCount 设置为 Number.MAX_VALUE 实现全部显示的效果。
+    data_all_data: str = "其数据是——",
+    
+    # 当只有部分数据显示时采用的描述。其中包括模板变量：
+    # {displayCnt}：将被替换为显示的数据个数。
+    data_partial_data: str = "其中，前{displayCnt}项是——",
+    
+    # 如果数据有 name 属性，则采用该描述。其中包括模板变量：
+    # {name}：将被替换为数据的 name；
+    # {value}：将被替换为数据的值。
+    data_with_name: str = "{name}的数据是{value}",
+    
+    # 如果数据没有 name 属性，则采用该描述。其中包括模板变量：
+    # {value}：将被替换为数据的值。
+    data_without_name: str = "{value}",
+    
+    # 除了最后一个数据后的分隔符。
+    data_separator_middle: str = "，",
+    
+    # 最后一个数据后的分隔符。
+    # 需要注意的是，通常最后一个数据后是系列的 separator.end
+    # 所以 data.separator.end 在大多数情况下为空字符串。
+    data_separator_end: str = "",
+)
+```
+
+## AriaDecalOpts：无障碍贴花配置项
+> *class pyecharts.options.AriaDecalOpts*
+
+```python
+class AriaDecalOpts(
+    # 是否显示贴花图案，默认不显示。如果要显示贴花.
+    # 需要保证 aria.enabled 与 aria.decal.show 都是 true。
+    is_show: bool = False,
+    
+    # 贴花的图案
+    # ECharts 提供的标记类型包括
+    # 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none'
+    # 也可以是 URL 或者 SVG 路径
+    decals_symbol: Union[str, Sequence] = "rect",
+    
+    # 取值范围：0 到 1，表示占图案区域的百分比。
+    decals_symbol_size: Numeric = 1,
+    
+    # 是否保持图案的长宽比。
+    decals_symbol_keep_aspect: bool = True,
+    
+    # 贴花图案的颜色，建议使用半透明色，这样能叠加在系列本身的颜色上。
+    decals_color: str = "rgba(0, 0, 0, 0.2)",
+    
+    # 贴花的背景色，将会覆盖在系列本身颜色之上，贴花图案之下。
+    decals_background_color: Optional[str] = None,
+    
+    # 贴花图案的水平配置
+    decals_dash_array_x: Union[Numeric, Sequence] = 5,
+    
+    # 贴花图案的垂直配置
+    decals_dash_array_y: Union[Numeric, Sequence] = 5,
+    
+    # 图案的整体旋转角度（弧度制），取值范围从 -Math.PI 到 Math.PI。
+    decals_rotation: Numeric = 0,
+    
+    # 生成的图案在未重复之前的宽度上限。
+    # 通常不需要设置该值，当你发现图案在重复的时候出现不连续的接缝时，可以尝试提高该值。
+    decals_max_tile_width: Numeric = 512,
+    
+    # 生成的图案在未重复之前的高度上限。
+    # 通常不需要设置该值，当你发现图案在重复的时候出现不连续的接缝时，可以尝试提高该值。
+    decals_max_tile_height: Numeric = 512,
+)
+```
+
 ## InitOpts：初始化配置项
 > *class pyecharts.options.InitOpts*
 
@@ -1468,5 +1605,22 @@ class PolarOpts(
     
     # 本坐标系特定的 tooltip 设定。参考 `global_options.TooltipOpts`
     tooltip_opts: TooltipOpts = None,
+)
+```
+
+### DatasetTransformOpts：数据集转换配置项
+> *class pyecharts.options.DatasetTransformOpts*
+
+```python
+class DatasetTransformOpts(
+    # 变换类型
+    # filter，sort，Echarts 函数
+    type_: str = "filter",
+    
+    # 具体变换配置项
+    config: Optional[dict] = None,
+    
+    # debug 模式会通过浏览器 console 打印。
+    is_print: bool = False,
 )
 ```

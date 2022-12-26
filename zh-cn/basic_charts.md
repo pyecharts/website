@@ -18,9 +18,15 @@ def add(
 
     # 系列数据，格式为 [(date1, value1), (date2, value2), ...]
     yaxis_data: Sequence,
-
+    
+    # ChartType 复合类型, 默认 `ChartType.HEATMAP`
+    type_: types.Union[str, ChartType]
+    
     # 是否选中图例
     is_selected: bool = True,
+    
+    # 日历图索引
+    calendar_index: types.Optional[types.Numeric] = None,
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
@@ -33,6 +39,9 @@ def add(
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # 数据映射配置项，参考 `global_options.VisualMapOpts`
+    visualmap_opts: types.VisualMap = None,
 )
 ```
 
@@ -172,6 +181,10 @@ def add(
 
     # 仪表盘平均分割段数
     split_number: Numeric = 10,
+    
+    # 仪表盘的中心（圆心）坐标，数组的第一项是横坐标，第二项是纵坐标。
+    # 支持设置成百分比，设置百分比时第一项是相对于容器宽度，第二项是相对于容器高度。
+    center: types.Sequence = None,
 
     # 仪表盘半径，可以是相对于容器高宽中较小的一项的一半的百分比，也可以是绝对的数值。
     radius: types.Union[types.Numeric, str] = "75%",
@@ -186,17 +199,32 @@ def add(
     is_clock_wise: bool = True,
     
     # 轮盘内标题文本项标签配置项，参考 `chart_options.GaugeTitleOpts`
-    title_label_opts: types.GaugeTitle = opts.GaugeTitleOpts(),
+    title_label_opts: types.GaugeTitle = opts.GaugeTitleOpts(offset_center=["0%", "20%"]),
     
     # 轮盘内数据项标签配置项，参考 `chart_options.GaugeDetailOpts`
-    detail_label_opts: types.GaugeDetail = opts.GaugeDetailOpts(formatter="{value}%"),
+    detail_label_opts: types.GaugeDetail = opts.GaugeDetailOpts(formatter="{value}%", offset_center=["0%", "40%"]),
 
-    # 仪表盘指针配置项目，参考 `chart_options.GaugePointerOpts`
+    # 仪表盘进度配置项，参考 `chart_options.GaugeProgressOpts`
+    progress: types.GaugeProgress = opts.GaugeProgressOpts(),
+
+    # 仪表盘指针配置项，参考 `chart_options.GaugePointerOpts`
     pointer: types.GaugePointer = opts.GaugePointerOpts(),
+    
+    # 仪表盘表盘中指针的固定点，参考 `chart_options.GaugeAnchorOpts`
+    anchor: types.GaugeAnchor = opts.GaugeAnchorOpts(),
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-
+    
+    # 坐标轴刻度线配置项，参考 `global_options.AxisLineOpts`
+    axisline_opts: types.AxisLine = None,
+    
+    # 坐标轴刻度指针样式配置项，参考 `global_options.AxisTickOpts`
+    axistick_opts: types.AxisTick = None,
+    
+    # 坐标轴刻度标签样式配置项，参考 `global_options.LabelOpts`
+    axislabel_opts: types.AxisLabel = None,
+    
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 )
@@ -206,6 +234,74 @@ def add(
 
 ```python
 class GaugeTitleOpts(
+    # 是否显示标题。
+    is_show: bool = True,
+       
+    # 相对于仪表盘中心的偏移位置，数组第一项是水平方向的偏移，第二项是垂直方向的偏移。
+    # 可以是绝对的数值，也可以是相对于仪表盘半径的百分比。
+    offset_center: Sequence = None,
+    
+    # 文字的颜色。
+    color: str = "#333",
+    
+    # 文字字体的风格。
+    # 可选：'normal'，'italic'，'oblique'
+    font_style: str = "normal",
+    
+    # 文字字体的粗细。
+    # 可选：'normal'，'bold'，'bolder'，'lighter'，100 | 200 | 300 | 400...
+    font_weight: str = "normal",
+    
+    # 文字的字体系列。
+    # 可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+    font_family: str = "sans-serif",
+    
+    # 文字的字体大小。
+    font_size: Numeric = 15,
+    
+    # 文字块背景色。
+    # 可以使用颜色值，例如：'#123234', 'red', 'rgba(0,23,11,0.3)'。
+    background_color: str = "transparent",
+    
+    # 文字块边框颜色。
+    border_color: str = "transparent",
+    
+    # 文字块边框宽度。
+    border_width: Numeric = 0,
+    
+    # 文字块的圆角。
+    border_radius: Numeric = 0,
+    
+    # 文字块的内边距。例如：
+    # padding: [3, 4, 5, 6]：表示 [上, 右, 下, 左] 的边距。
+    # padding: 4：表示 padding: [4, 4, 4, 4]。
+    # padding: [3, 4]：表示 padding: [3, 4, 3, 4]。
+    # 注意，文字块的 width 和 height 指定的是内容高宽，不包含 padding。
+    padding: Numeric = 0,
+    
+    # 文字块的背景阴影颜色。
+    shadow_color: Optional[str] = "transparent",
+    
+    # 文字块的背景阴影长度。
+    shadow_blur: Optional[Numeric] = 0,
+    
+    # 文字块的背景阴影 X 偏移。
+    shadow_offset_x: Numeric = 0,
+    
+    # 文字块的背景阴影 Y 偏移。
+    shadow_offset_y: Numeric = 0,
+    
+    # 文字超出宽度是否截断或者换行。配置width时有效
+    # 'truncate' 截断，并在末尾显示ellipsis配置的文本，默认为...
+    # 'break' 换行
+    # 'breakAll' 换行，跟'break'不同的是，在英语等拉丁文中，'breakAll'还会强制单词内换行
+    overflow: Optional[str] = "none",
+    
+    # 在 rich 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+    rich: Optional[dict] = None,
+    
+    # 是否开启标签的数字动画。
+    is_value_animation: bool = True,
 )
 ```
 
@@ -269,6 +365,42 @@ class GaugeDetailOpts(
 
     # 文字块的背景阴影 Y 偏移。
     shadow_offset_y: Numeric = 0,
+    
+    # 文字超出宽度是否截断或者换行。配置width时有效
+    # 'truncate' 截断，并在末尾显示ellipsis配置的文本，默认为...
+    # 'break' 换行
+    # 'breakAll' 换行，跟'break'不同的是，在英语等拉丁文中，'breakAll'还会强制单词内换行
+    overflow: Optional[str] = "none",
+    
+    # 在 rich 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+    rich: Optional[dict] = None,
+    
+    # 是否开启标签的数字动画。
+    is_value_animation: bool = True,
+)
+```
+
+### GaugeProgressOpts: 仪表盘进度配置项
+
+```python
+class GaugeProgressOpts(
+    # 是否显示进度。
+    is_show: bool = False,
+    
+    # 多组数据时进度条是否重叠。
+    is_overlap: bool = True,
+    
+    # 进度条宽度。
+    width: Numeric = 10,
+    
+    # 是否在两端显示成圆形。
+    is_round_cap: bool = False,
+    
+    # 是否裁掉超出部分。
+    is_clip: bool = False,
+    
+    # 进度条样式。
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
 )
 ```
 
@@ -286,6 +418,36 @@ class GaugePointerOpts(
     width: Numeric = 8,
 )
 ```
+
+### GaugeAnchorOpts: 仪表盘指针固定点配置项
+
+```python
+class GaugeAnchorOpts(
+    # 是否显示固定点。
+    is_show: bool = True,
+    
+    # 固定点是否显示在指针上面。
+    is_show_above: bool = False,
+    
+    # 固定点大小。
+    size: Numeric = 6,
+    
+    # ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none'
+    # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
+    # 可以通过 'path://' 将图标设置为任意的矢量路径。
+    icon: str = "circle",
+    
+    # 相对于仪表盘中心的偏移位置，数组第一项是水平方向的偏移，第二项是垂直方向的偏移。可以是绝对的数值，也可以是相对于仪表盘半径的百分比。
+    offset_center: Optional[Sequence] = None,
+    
+    # 如果图标是 path:// 的形式，是否在缩放时保持该图形的长宽比。
+    is_keep_aspect: bool = False,
+    
+    # 指针固定点样式。
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+)
+```
+
 
 ### Demo
 
@@ -616,6 +778,25 @@ class ParallelOpts(
     # 'horizontal'：水平排布各个坐标轴。
     # 'vertical'：竖直排布各个坐标轴。
     layout: Optional[str] = None,
+    
+    # 维度比较多时，比如有 50+ 的维度，那么就会有 50+ 个轴。那么可能会页面显示不下。
+    # 可以通过 parallel.axisExpandable 来改善显示效果。
+    # 是否允许点击展开折叠 axis。
+    is_axis_expandable: bool = False,
+    
+    # 初始时，以哪个轴为中心展开，这里给出轴的 index。没有默认值，需要手动指定。
+    axis_expand_center: Optional[Numeric] = None,
+    
+    # 初始时，有多少个轴会处于展开状态。建议根据你的维度个数而手动指定。
+    axis_expand_count: Numeric = 0,
+    
+    # 在展开状态，轴的间距是多少，单位为像素。
+    axis_expand_width: Numeric = 50,
+    
+    # 可取值：
+    # 'click'：鼠标点击的时候 expand。
+    # 'mousemove'：鼠标悬浮的时候 expand。
+    axis_expand_trigger_on: str = "click",
 )
 ```
 
@@ -630,6 +811,10 @@ class ParallelAxisOpts(
 
     # 坐标轴名称。
     name: str,
+    
+    # 是否坐标轴刷选的时候，实时刷新视图。如果设为 false，则在刷选动作结束时候，才刷新视图。
+    # 大数据量时，建议设置成 false，从而避免卡顿。
+    is_realtime: bool = True,
 
     # 坐标轴数据项
     data: Sequence = None,
@@ -641,7 +826,18 @@ class ParallelAxisOpts(
     # 例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
     # 'log' 对数轴。适用于对数数据。
     type_: Optional[str] = None,
-
+    
+    # 坐标轴名称显示位置。
+    # 可选：'start'，'middle' 或者 'center'，'end'
+    name_location: str = "end",
+    
+    # 坐标轴名称与轴线之间的距离。
+    name_gap: Numeric = 15,
+    
+    # 坐标轴名字旋转，角度值。
+    name_rotate: Optional[int] = None,
+    
+    is_inverse: bool = False,
     # 坐标轴刻度最小值。
     # 可以设置成特殊值 'dataMin'，此时取数据在该轴上的最小值作为最小刻度。
     # 不设置时会自动计算最小值保证坐标轴刻度的均匀分布。
@@ -660,6 +856,27 @@ class ParallelAxisOpts(
     # 是否是脱离 0 值比例。设置成 true 后坐标刻度不会强制包含零刻度。在双数值轴的散点图中比较有用。
     # 在设置 min 和 max 之后该配置项无效。
     is_scale: bool = False,
+    
+    # 对数轴的底数，只在对数轴中（type: 'log'）有效。
+    log_base: Numeric = 10,
+    
+    # 坐标轴是否是静态无法交互。
+    is_silent: bool = False,
+    
+    # 坐标轴的标签是否响应和触发鼠标事件，默认不响应。
+    is_trigger_event: bool = False,
+    
+    # 坐标轴刻度线配置项，参考 `global_options.AxisLineOpts`
+    axisline_opts: Union[AxisLineOpts, dict, None] = None,
+    
+    # 坐标轴刻度配置项，参考 `global_options.AxisTickOpts`
+    axistick_opts: Union[AxisTickOpts, dict, None] = None,
+    
+    # 坐标轴线标签配置项，参考 `series_options.LabelOpts`
+    axislabel_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 坐标轴次刻度线相关设置，参考 `series_options.MinorTickOpts`
+    minor_tick_opts: Union[MinorTickOpts, dict, None] = None,
 )
 ```
 
@@ -718,6 +935,21 @@ def add(
 
     # 系列 label 颜色
     color: Optional[str] = None,
+    
+    # 从调色盘 option.color 中取色的策略，可取值为：
+    # 'series'：按照系列分配调色盘中的颜色，同一系列中的所有数据都是用相同的颜色；
+    # 'data'：按照数据项分配调色盘中的颜色，每个数据项都使用不同的颜色。
+    color_by: types.Optional[str] = "data",
+    
+    # 是否启用图例 hover 时的联动高亮。
+    is_legend_hover_link: bool = True,
+    
+    # 选中模式的配置，表示是否支持多个选中，默认关闭，支持布尔值和字符串。
+    # 字符串取值可选'single'，'multiple'，'series' 分别表示单选，多选以及选择整个系列。
+    selected_mode: types.Union[str, bool] = False,
+    
+    # 选中扇区的偏移距离。
+    selected_offset: types.Numeric = 10,
 
     # 饼图的半径，数组的第一项是内半径，第二项是外半径
     # 默认设置成百分比，相对于容器高宽中较小的一项的一半
@@ -734,7 +966,32 @@ def add(
     
     # 饼图的扇区是否是顺时针排布。
     is_clockwise: bool = True,
-
+    
+    # 起始角度，支持范围 [0，360]
+    start_angle: types.Numeric = 90,
+    
+    # 最小的扇区角度（0 ~ 360），用于防止某个值过小导致扇区太小影响交互。
+    min_angle: types.Numeric = 0,
+    
+    # 小于这个角度（0 ~ 360）的扇区，不显示标签（label 和 labelLine）。
+    min_show_label_angle: types.Numeric = 0,
+    
+    # 是否启用防止标签重叠策略，默认开启，在标签拥挤重叠的情况下会挪动各个标签的位置，防止标签间的重叠。
+    # 如果不需要开启该策略，例如圆环图这个例子中需要强制所有标签放在中心位置，可以将该值设为 false。
+    is_avoid_label_overlap: bool = True,
+    
+    # 是否在数据和为0（一般情况下所有数据为0） 的时候仍显示扇区。
+    is_still_show_zero_sum: bool = True,
+    
+    # 饼图百分比数值的精度，默认保留小数点后两位。
+    percent_precision: types.Numeric = 2,
+    
+    # 是否在无数据的时候显示一个占位圆。
+    is_show_empty_circle: bool = True,
+    
+    # 占位圆样式。
+    empty_circle_style_opts: types.PieEmptyCircle = opts.PieEmptyCircleStyle(),
+    
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
 
@@ -746,6 +1003,9 @@ def add(
 
     # 可以定义 data 的哪个维度被编码成什么。
     encode: types.Union[types.JSFunc, dict, None] = None,
+    
+    # 饼图引导线配置，参考 `chart_options.PieLabelLineOpts`
+    label_line_opts: types.PieLabelLine = opts.PieLabelLineOpts(),
 )
 ```
 
@@ -780,6 +1040,9 @@ class PieLabelLineOpts(
     # 是否显示视觉引导线。
     is_show: bool = True,
     
+    # 是否显示在图形上方
+    is_show_above: bool = False,
+    
     # 视觉引导线第一段的长度。
     length: Numeric = None,
 
@@ -789,9 +1052,60 @@ class PieLabelLineOpts(
     # 是否平滑视觉引导线，默认不平滑，可以设置成 true 平滑显示。
     # 也可以设置为 0 到 1 的值，表示平滑程度。
     smooth: Union[bool, Numeric] = False,
-
+    
+    # 通过调整第二线段的长度，限制引导线两端之间最小的夹角
+    # 以防止过小的夹角导致显示不美观。
+    # 可以设置为 0 - 180 度。
+    min_turn_angle: Numeric = 90,
+    
     # 线条样式，参考 `LineStyleOpts`
     linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    
+    # 通过调整第二线段的长度，限制引导线与扇区法线的最大夹角
+    # 设置为小于 90 度的值保证引导线不会和扇区交叉。
+    # 可以设置为 0 - 180 度。
+    max_surface_angle: Numeric = 90,
+)
+```
+
+### PieEmptyCircleStyle: 饼图占位圆样式
+
+```python
+class PieEmptyCircleStyle(
+    # 图形的颜色。
+    color: str = "lightgray",
+    
+    # 图形的描边颜色。支持的颜色格式同 color，不支持回调函数。
+    border_color: str = "#000",
+    
+    # 描边线宽。为 0 时无描边。
+    border_width: Numeric = 0,
+    
+    # 描边类型。可选：'solid', 'dashed', 'dotted'
+    border_type: str = "solid",
+    
+    # 用于设置虚线的偏移量，可搭配 borderType 指定 dash array 实现灵活的虚线效果。
+    border_dash_offset: Numeric = 0,
+    
+    # 用于指定线段末端的绘制方式，可以是：
+    # 'butt': 线段末端以方形结束。
+    # 'round': 线段末端以圆形结束。
+    # 'square': 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+    border_cap: str = "butt",
+    
+    # 用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+    # 可以是：
+    # 'bevel': 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+    # 'round': 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+    # 'miter': 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 borderMiterLimit 属性看到效果。
+    border_join: str = "bevel",
+    
+    # 用于设置斜接面限制比例。只有当 borderJoin 为 miter 时， borderMiterLimit 才有效。
+    # 默认值为 10。负数、0、Infinity 和 NaN 均会被忽略。
+    border_miter_limit: Numeric = 10,
+    
+    # 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+    opacity: Numeric = 1,
 )
 ```
 
@@ -1116,7 +1430,7 @@ def add(
 )
 ```
 
-### RadarIndicatorItem
+### RadarIndicatorItem：雷达图指示器数据项
 
 > *class pyecharts.options.RadarIndicatorItem*
 
@@ -1194,6 +1508,7 @@ class Sankey(
 )
 ```
 
+### SankeyLevelsOpts：桑基图层级配置
 > *class pyechart.options.SankeyLevelsOpts*
 
 ```python
@@ -1416,6 +1731,9 @@ def add(
 
     # 单轴组件配置项，参考 `global_options.SingleAxisOpts`
     singleaxis_opts: Union[opts.SingleAxisOpts, dict] = opts.SingleAxisOpts(),
+    
+    # 标记点样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: types.ItemStyle = None,
 ):
 ```
 

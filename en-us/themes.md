@@ -1,149 +1,140 @@
-> Theme customization: Expand the theme plugin, diversified chart color matching. V0.5.2+ added
+> pyecharts provides 10+ different styles built-in, plus a convenient way to customize the theme.
 
-Since 0.5.2+, pyecharts has supported the replacement of themes. The following is an example of replacing with "dark":
+The effect of the default theme
+```python
+from pyecharts import options as opts
+from pyecharts.charts import Bar
+from pyecharts.globals import ThemeType
+
+def theme_default() -> Bar:
+    c = (
+        Bar()
+        # 等价于 Bar(init_opts=opts.InitOpts(theme=ThemeType.WHITE))
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .add_yaxis("商家C", Faker.values())
+        .add_yaxis("商家D", Faker.values())
+        .set_global_opts(title_opts=opts.TitleOpts("Theme-default"))
+    )
+    return c
+```
+![](https://user-images.githubusercontent.com/19553554/55897058-5bb03a80-5bf2-11e9-9ab8-7d6b5419b68b.png)
+
+## Theme Style
+
+### LIGHT
+
+```pyhon
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.LIGHT))
+```
+![](https://user-images.githubusercontent.com/19553554/55897092-6cf94700-5bf2-11e9-8fa9-e7d880481a90.png)
+
+### DARK
 
 ```python
-import random
-
-from pyecharts import Bar
-
-
-X_AXIS = ["T-shirt", "Sweater", "Georgette", "Trousers", "High-heels", "Socks"]
-bar = Bar("My first chart", "For our fashion shop client")
-bar.use_theme("dark")
-bar.add("Debenhams", X_AXIS, [random.randint(10, 100) for _ in range(6)])
-bar.add("Marks & Spencer", X_AXIS, [random.randint(10, 100) for _ in range(6)])
-bar.add("Premark", X_AXIS, [random.randint(10, 100) for _ in range(6)])
-bar.add("TK Maxx", X_AXIS, [random.randint(10, 100) for _ in range(6)])
-bar.render()
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.DARK))
 ```
-![dark](https://user-images.githubusercontent.com/4280312/48332539-2526c180-e64c-11e8-9482-d7e97cc50b93.png)
+![](https://user-images.githubusercontent.com/19553554/55897130-80a4ad80-5bf2-11e9-836d-748b15b260ce.png)
 
-Default theme effect
+### CHALK
 
-![default](https://user-images.githubusercontent.com/4280312/48332557-3a9beb80-e64c-11e8-8a49-b2e3afdb8aa7.png)
-
-
-## Theme plugins usage
-
-ECharts comes with the `dark` theme, and pyecharts comes with `dark`.  
-[echarts-themes-pypkg](https://github.com/pyecharts/echarts-themes-pypkg) theme plugin provides the following topics :  
-
-* [vintage](#vintage)
-* [macarons](#macarons)
-* [infographic](#infographic)
-* [shine](#shine)
-* [roma](#roma)
-* [westeros](#westeros)
-* [wonderland](#wonderland)
-* [chalk](#chalk)
-* [halloween](#halloween)
-* [essos](#essos)
-* [walden](#walden)
-* [purple-passion](#purple-passion)
-* [romantic](#romantic)
-
-### Installing theme plugin
-
-```shell
-$ pip install echarts-themes-pypkg
-```
-
-### Theme usage
-
-Replace a single graphic theme
 ```python
-bar.use_theme("vintage")
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.CHALK))
 ```
+![](https://user-images.githubusercontent.com/19553554/55897251-bd70a480-5bf2-11e9-805e-6c0bd5e76b48.png)
 
-Replace all chart topics in the operating environment
+### ESSOS
+
 ```python
-from pyecharts import configure
-
-# Put this line of code in the header
-configure(global_theme='dark')
-
-bar = Bar()
-# other code
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.ESSOS))
 ```
+![](https://user-images.githubusercontent.com/19553554/55897288-cfeade00-5bf2-11e9-8b45-1f8aa45a166b.png)
 
-### Example
+### INFOGRAPHIC
 
-#### vintage
-
-![vintage](https://user-images.githubusercontent.com/4280312/48332613-66b76c80-e64c-11e8-9c16-c98779a3a1ee.png)
-
-#### macarons
-
-![macarons](https://user-images.githubusercontent.com/4280312/48332667-91092a00-e64c-11e8-9a59-76d987c972c9.png)
-
-#### infographic
-
-![infographic](https://user-images.githubusercontent.com/4280312/48332700-aed68f00-e64c-11e8-9073-8e52b656a90d.png)
-
-#### shine
-
-![shine](https://user-images.githubusercontent.com/4280312/48332723-ca419a00-e64c-11e8-8664-3b38c15ad086.png)
-
-#### roma
-
-![roma](https://user-images.githubusercontent.com/4280312/48332772-e9d8c280-e64c-11e8-8167-21caa156104e.png)
-
-#### westeros
-
-![westeros](https://user-images.githubusercontent.com/4280312/48332802-0d037200-e64d-11e8-8f11-1fb6db6171ca.png)
-
-#### wonderland
-
-![wonderland](https://user-images.githubusercontent.com/4280312/48332842-33c1a880-e64d-11e8-992b-c40676a2fef6.png)
-
-#### chalk
-
-![chalk](https://user-images.githubusercontent.com/4280312/48332856-4a67ff80-e64d-11e8-913e-28deae7f8058.png)
-
-#### halloween
-
-![halloween](https://user-images.githubusercontent.com/4280312/48332927-8307d900-e64d-11e8-840a-cfa3e5ca405e.png)
-
-#### essos
-
-![essos](https://user-images.githubusercontent.com/4280312/48332950-9a46c680-e64d-11e8-91b6-5afa8c2f0a98.png)
-
-#### walden
-
-![walden](https://user-images.githubusercontent.com/4280312/48332982-afbbf080-e64d-11e8-8318-6274426add0c.png)
-
-#### purple-passion
-
-![purple-passion](https://user-images.githubusercontent.com/4280312/48333020-cd895580-e64d-11e8-9770-7b37eedc4e6e.png)
-
-#### romantic
-
-![romantic](https://user-images.githubusercontent.com/4280312/48333043-e134bc00-e64d-11e8-9319-77522965d1cc.png)
-
-
-## Use your own built theme
-
-ECharts provides [Theme Build Tools](http://echarts.baidu.com/theme-builder/), from which you can build favorite themes like `myTheme.js`. Then hack the *echarts-themes-pypkg* package. The specific operation is as follows
-
-1. cd to your Python installation environment `Lib/site-packages/echarts_themes_pypkg/resources`. The specific path varies by operating system
-2. Move `myTheme.js` to `resources/echarts-themes-js` folder
-3. Change the `resources/registry.json` file
-
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.INFOGRAPHIC))
 ```
-"PINYIN_MAP": {
-        "shine": "shine",
-        ...
-        "myTheme": "myTheme"    # here
-    },
-    "FILE_MAP": {
-        "shine": "shine",
-        ...
-        "myTheme": "myTheme"    # and here
-    }
-```
-4. cd to `jupyter/nbextensions/echarts-themes-js` directory in the notebook installation environment, the specific path varies by operating system
-5. Move `myTheme.js` to `echarts-themes-js` folder
-6. Use `chart.use_theme("myTheme")`
+![](https://user-images.githubusercontent.com/19553554/55897310-dc6f3680-5bf2-11e9-921a-cc8981570378.png)
 
-**4、5 as options, you can ignore this step if you don't use a notebook.**
+### MACARONS
+
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.MACARONS))
+```
+![](https://user-images.githubusercontent.com/19553554/55897352-ef820680-5bf2-11e9-8d4f-314c2abb40df.png)
+
+### PURPLE_PASSION
+
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.PURPLE_PASSION))
+```
+![](https://user-images.githubusercontent.com/19553554/55897399-ff99e600-5bf2-11e9-9135-0a186f0acad5.png)
+
+### ROMA
+
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.ROMA))
+```
+![](https://user-images.githubusercontent.com/19553554/55897419-0d4f6b80-5bf3-11e9-8314-f433ab1cca5c.png)
+
+### ROMANTIC
+
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.ROMANTIC))
+```
+![](https://user-images.githubusercontent.com/19553554/55897475-2821e000-5bf3-11e9-9079-e8a6458900b2.png)
+
+### SHINE
+
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.SHINE))
+```
+![](https://user-images.githubusercontent.com/19553554/55897502-366ffc00-5bf3-11e9-8492-ca9e162dafac.png)
+
+### VINTAGE
+
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.VINTAGE))
+```
+![](https://user-images.githubusercontent.com/19553554/55897530-47b90880-5bf3-11e9-89d8-5466f0f7f3b1.png)
+
+### WALDEN
+
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.WALDEN))
+```
+![](https://user-images.githubusercontent.com/19553554/55897553-556e8e00-5bf3-11e9-8146-67c3e4d30109.png)
+
+### WESTEROS
+
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS))
+```
+![](https://user-images.githubusercontent.com/19553554/55897595-6a4b2180-5bf3-11e9-97b1-61b9c575af9e.png)
+
+### WONDERLAND
+
+```python
+c = Bar(init_opts=opts.InitOpts(theme=ThemeType.WONDERLAND))
+```
+![](https://user-images.githubusercontent.com/19553554/55897678-8bac0d80-5bf3-11e9-9ca4-a85b3868cf81.png)
+
+
+## Use self-built themes
+
+Echarts provides [theme builder](http://echarts.baidu.com/theme-builder/) from which you can build your favorite theme, assuming you build the theme file as `myTheme.js`.
+
+To use your own built theme you must start the resource file server by the developer himself, please refer to **Advanced Topics - Resource References** for this part, then you need to do the following steps
+
+1. Place `myTheme.js` into the `pyecharts-assets/assets/themes` folder. (V2.X into the `pyecharts-assets/assets/v5/themes`)
+2. Register the theme to pyecharts
+    ```python
+    from pyecharts.datasets import register_files
+    register_files({"myTheme": ["themes/myTheme", "js"]})
+    ```
+3. Using themes
+    ```python
+    c = Bar(init_opts=opts.InitOpts(theme="myTheme"))
+    ```

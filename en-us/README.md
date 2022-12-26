@@ -5,26 +5,34 @@
 
 [Echarts](https://github.com/ecomfe/echarts) is easy-to-use, highly interactive and highly performant javascript visualization library under Apache license. Since its first public release in 2013, it now dominates over 74% of Chinese web front-end market. Yet Python is an expressive language and is loved by data science community. Combining the strength of both technologies, [pyecharts](https://github.com/pyecharts/pyecharts) is born.
 
+**Configuration**
+
+[Global Options](en-us/global_options) | [Series Options](en-us/series_options)
+
 **Basic Usage**
 
-[Get started](en-us/prepare) | [Chart Configuration](en-us/charts_configure) | [Basic Charts](en-us/charts_base) | [Custom Charts](en-us/charts_custom) | [Chart Style](en-us/charts_style) | [Data Analysis and Import](en-us/data_import)
+[Chart API](en-us/chart_api) | [Demo Data](en-us/demo_data) | [Global Vars](en-us/global_vars)
 
-**Advanced Topics**
+**Chart Types**
 
-[Chart API](en-us/api) | [Themes Customization](en-us/themes) | [Map Customization](en-us/customize_map) | [Callback Function & Event Handler](en-us/advanced) | [Language Translator Extension](en-us/translator)
+[Basic_Charts](en-us/basic_charts) | [Rectangular Charts](en-us/rectangular_charts) | [Tree Charts](en-us/tree_charts) | [Geography Charts](en-us/geography_charts) | [3D charts](en-us/3d_charts) | [Composite Charts](en-us/composite_charts) | [HTML Components](en-us/html_components)
 
-**Platform Support**
+**Advanced**
 
-[Jupyter Notebook](en-us/jupyter_notebook) | [Flask](en-us/flask) | [Django](en-us/django) | [Web Integration](en-us/web_integration)
+[Parameters](en-us/parameters) | [Data Format](en-us/data_format) | [Themes](en-us/themes) | [Maps](en-us/maps) | [Render Images](en-us/render_images) | [Notebook](en-us/notebook) | [Javascript](en-us/javasrcipt) | [Assets](en-us/assets_host)
 
-**Other Resources**
+**Web Framework**
 
-[Demo Projects](https://github.com/pyecharts/pyecharts-users-cases) | [Geography & Map](en-us/datasets)
+[Flask](en-us/web_flask) | [Sanic](en-us/web_sanic) | [Django](en-us/web_django) | [Tornado](en-us/web_tornado)
 
-**Project Release**
+**Other Resource**
 
-[Changelog](zh-cn/changelog) | [Release Note](zh-cn/release-note)
+[Gallery](https://github.com/pyecharts/pyecharts-gallery) | [Datasets](en-us/datasets)
 
-**Project Development**
+**Release**
 
-[Developer Guide](en-us/for_pyechart_developer) | [Technical Documents](en-us/technical) | [Team](en-us/team) | [Donors List](zh-cn/donors) | [FAQ](en-us/faq)
+[ChangeLog](zh-cn/changelog) | [Milestone](zh-cn/release-note/)
+
+**Project Develop**
+
+[Contribution](zh-cn/contribution) | [Technical](zh-cn/technical) | [Donors](zh-cn/donors)  | [FAQ](zh-cn/faq)
