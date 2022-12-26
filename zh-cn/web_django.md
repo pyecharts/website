@@ -494,3 +494,16 @@ class IndexView(APIView):
     def get(self, request, *args, **kwargs):
         return HttpResponse(content=open("./templates/index.html").read())
 ```
+
+## Django 4.0 的变化
+
+变化前
+```python
+from django.conf.urls import include, url 
+```
+
+变化后
+```python
+from django.urls import include
+from django.urls import re_path as url
+```
