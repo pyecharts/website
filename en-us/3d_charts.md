@@ -932,3 +932,60 @@ class Map3DViewControlOpts(
 ### Demo
 
 [gallery example](http://gallery.pyecharts.org/#/Map3D/README)
+
+
+## GraphGL - GL relational graphs
+
+> *class pyecharts.charts.GraphGL(Chart3D)*
+
+```python
+class GraphGL(
+    ## Initialize configuration items, refer to ``global_options.InitOpts`''
+    init_opts: opts.InitOpts = opts.
+)
+```
+
+> *func pyecharts.charts.GraphGL.add*
+
+``` python
+def add(
+    # series name for tooltip display, legend filtering for legends.
+    series_name: str,
+    
+    # The dataset of nodes. GraphGLNode like GraphNode
+    nodes: types.Sequence[types.GraphGLNode],
+    
+    # Relationship data between nodes. GraphGLLink like GraphLink
+    links: types.Sequence[types.GraphGLLink],
+    
+    # Algorithm for layout, supports layout using gephi's forceAtlas2 algorithm.
+    layout: str = "forceAtlas2",
+    
+    # forceAtlas2 layout algorithm configuration
+    force_atlas2_opts: types.GraphGLForceAtlas2 = None,
+    
+    # The shape of the scatter. Defaults to circular.
+    # ECharts provides token types including 'circle', 'rect', 'roundRect', 'triangle',
+    # 'diamond', 'pin', 'arrow', 'none'
+    # You can set the icon to an arbitrary vector path by using 'path://'. This way you don't have to worry about jaggies or blur due to scaling compared to using images, and you can set it to any color.
+    # The path graphic adapts to the appropriate (symbolSize in the case of symbols) size.
+    # See SVG PathData for the format of the path, which can be edited and exported from tools such as Adobe Illustrator.
+    symbol: types.Optional[str] = "circle",
+    
+    # The size of the symbol
+    symbol_size: types.Numeric = 5,
+    
+    # The style setting for the node.
+    itemstyle_opts: types.ItemStyle = None,
+    
+    # Style settings for relationship edges.
+    linestyle_opts: types.LineStyle = opts,
+    
+    # The level where the component is located.
+    z_level: types.Numeric = 10,
+)
+```
+
+### Demo
+
+[gallery example](http://gallery.pyecharts.org/#/GraphGL/README)

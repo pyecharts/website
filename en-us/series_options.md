@@ -694,3 +694,56 @@ class MinorSplitLineOpts(
     linestyle_opts: Union[LineStyleOpts, dict, None] = None,
 )
 ```
+
+
+## GraphGLForceAtlas2Opts: GraphGL Atlas2 algorithm configuration items
+> *class pyecharts.options.GraphGLForceAtlas2Opts*
+
+```python
+class GraphGLForceAtlas2Opts(
+    # Whether to enable GPU layouts.
+    is_gpu: bool = True,
+    
+    # The number of iterations for one update. Because force-guided algorithms usually plot the results of each iteration.
+    # but because the drawing time will often be greater than the layout time, it will result in a less efficient layout.
+    # At this point we can set a larger steps parameter to ensure that the layout and drawing times are balanced and speed up the layout.
+    steps: Numeric = 1,
+    
+    # The threshold to stop the layout when the global speed factor of the layout is less than this threshold. Set to 0 to never stop.
+    stop_threshold: Numeric = 1,
+    
+    # Whether to enable Barnes Hut optimization, valid when forceAtlas2.GPU is false.
+    # Default is on when node count > 1000.
+    is_barnes_hut_optimize: Optional[bool] = None,
+    
+    # Whether to calculate the repulsion factor of nodes based on the number of node edges, recommended to turn on.
+    is_repulsion_by_degree: bool = True,
+    
+    # Whether to be lin-log mode. lin-log mode will make the clustering of nodes more compact.
+    is_lin_log_mode: bool = False,
+    
+    # The centripetal force on the node. This force will make the nodes move closer to the center.
+    gravity: Numeric = 1,
+    
+    # The position of the center of the centripetal force. Default goes to the middle of the initial position.
+    gravity_center: Optional[Sequence] = None,
+    
+    # The scaling factor of the layout, the higher the value the higher the repulsion between the nodes.
+    scaling: Optional[Numeric] = None,
+    
+    # The influence factor of the edge weight. The larger the value, the greater the influence of the edge weights on the gravitational force.
+    # Note: This factor is exponential, so it is not valid for edge weights of 0 and 1.
+    edge_weight_influence: Numeric = 1,
+    
+    # The weight distribution of the edges. Mapped from links.value.
+    # Supports setting to a single number, which is then the uniform weight value.
+    edge_weight: Union[Sequence, Numeric] = None,
+    
+    # The weight distribution of the node. Mapped from nodes.value.
+    # Supports setting to a single number, which is then the uniform weight value.
+    node_weight: Union[Sequence, Numeric] = None,
+    
+    # Whether to turn on preventing nodes from overlapping.
+    is_prevent_overlap: bool = False,
+)
+```

@@ -932,3 +932,60 @@ class Map3DViewControlOpts(
 ### Demo
 
 [gallery 示例](http://gallery.pyecharts.org/#/Map3D/README)
+
+
+## GraphGL - GL 关系图
+
+> *class pyecharts.charts.GraphGL(Chart3D)*
+
+```python
+class GraphGL(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: opts.InitOpts = opts.InitOpts()
+)
+```
+
+> *func pyecharts.charts.GraphGL.add*
+
+```python
+def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
+    series_name: str,
+    
+    # 节点的数据集。
+    nodes: types.Sequence[types.GraphGLNode],
+    
+    # 节点间的关系数据
+    links: types.Sequence[types.GraphGLLink],
+    
+    # 布局的算法，支持使用 gephi 的 forceAtlas2 算法布局。
+    layout: str = "forceAtlas2",
+    
+    # forceAtlas2 布局算法配置
+    force_atlas2_opts: types.GraphGLForceAtlas2 = None,
+    
+    # 散点的形状。默认为圆形。
+    # ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle',
+    # 'diamond', 'pin', 'arrow', 'none'
+    # 可以通过 'path://' 将图标设置为任意的矢量路径。这种方式相比于使用图片的方式，不用担心因为缩放而产生锯齿或模糊，而且可以设置为任意颜色。
+    # 路径图形会自适应调整为合适（如果是 symbol 的话就是 symbolSize）的大小。
+    # 路径的格式参见 SVG PathData。可以从 Adobe Illustrator 等工具编辑导出。
+    symbol: types.Optional[str] = "circle",
+    
+    # 标记的大小
+    symbol_size: types.Numeric = 5,
+    
+    # 节点的样式设置。
+    itemstyle_opts: types.ItemStyle = None,
+    
+    # 关系边的样式设置。
+    linestyle_opts: types.LineStyle = opts.LineStyleOpts(),
+    
+    # 组件所在的层。
+    z_level: types.Numeric = 10,
+)
+```
+
+### Demo
+
+[gallery 示例](http://gallery.pyecharts.org/#/GraphGL/README)
