@@ -129,7 +129,7 @@ Echarts 提供了[主题构建工具](http://echarts.baidu.com/theme-builder/)�
 
 使用自己构建的主题必须由开发者自己启动资源文件服务器，这部分内容请参考 **进阶话题-资源引用**，然后你需要进行以下步骤的操作
 
-1. 将 `myTheme.js` 放入至 `pyecharts-assets/assets/themes` 文件夹。
+1. 将 `myTheme.js` 放入至 `pyecharts-assets/assets/themes` 文件夹。(V2.X 放入至 `pyecharts-assets/assets/v5/themes`)
 2. 注册主题到 pyecharts
     ```python
     from pyecharts.datasets import register_files

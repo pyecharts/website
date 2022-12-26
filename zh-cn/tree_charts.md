@@ -210,6 +210,10 @@ class TreeMapItemStyleOpts(
 
 ```python
 class TreeMapLevelsOpts(
+    # 表示同一层级的节点的 颜色 选取列表（选择规则见 colorMappingBy）。
+    # 默认为空时，选取系统color列表。
+    color: Union[str, Sequence] = None,
+
     # 矩形颜色的透明度。取值范围是 0 ~ 1 之间的浮点数。
     color_alpha: Union[Numeric, Sequence] = None,
 
@@ -313,6 +317,12 @@ def add(
 
     # 当前层级的最大 value 值。如果不设置则自动统计。
     visual_max: Optional[Numeric] = None,
+    
+    # treemap 中支持对数据其他维度进行视觉映射。
+    # 首先，treemap的数据格式（参见 series-treemap.data）中，每个节点的 value 都可以是数组。
+    # 数组每项是一个『维度』（dimension）。visualDimension 指定了额外的『视觉映射』使用的是数组的哪一项。
+    # 默认为第 0 项。
+    visual_dimension: types.Optional[types.Numeric] = None,
 
     # 本系列默认的 颜色透明度 选取范围。数值范围 0 ~ 1。
     color_alpha: types.Union[types.Numeric, types.Sequence] = None,

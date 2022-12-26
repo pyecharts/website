@@ -97,6 +97,9 @@ def add_yaxis(
 
     # 系列 label 颜色
     color: Optional[str] = None,
+    
+    # 是否开启实时排序，默认为 False
+    is_realtime_sort: bool = False,
 
     # 是否显示柱条的背景色。通过 backgroundStyle 配置背景样式。
     is_show_background: bool = False,
@@ -106,6 +109,20 @@ def add_yaxis(
 
     # 数据堆叠，同个类目轴上系列配置相同的　stack　值可以堆叠放置。
     stack: Optional[str] = None,
+    
+    # 数据堆叠，同个类目轴上系列配置相同的 stack 值可以堆叠放置。关于如何定制数值的堆叠方式，参见 stackStrategy。
+    # 注：目前 stack 只支持堆叠于 'value' 和 'log' 类型的类目轴上，不支持 'time' 和 'category' 类型的类目轴。
+    stack_strategy: types.Optional[str] = "samesign",
+    
+    # 堆积数值的策略，前提是stack属性已被设置。其值可以是：
+    # 'samesign' 只在要堆叠的值与当前累积的堆叠值具有相同的正负符号时才堆叠。
+    # 'all' 堆叠所有的值，不管当前或累积的堆叠值的正负符号是什么。
+    # 'positive' 只堆积正值。
+    # 'negative' 只堆叠负值。
+    sampling: types.Optional[str] = None,
+    
+    # 鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 cursor。
+    cursor: types.Optional[str] = "pointer",
 
     # 柱条的宽度，不设时自适应。
     # 可以是绝对值例如 40 或者百分数例如 '60%'。百分数基于自动计算出的每一类目的宽度。
@@ -513,6 +530,18 @@ def add_yaxis(
 
     # 是否选中图例
     is_selected: bool = True,
+    
+    # 从调色盘 option.color 中取色的策略，可取值为：
+    # 'series'：按照系列分配调色盘中的颜色，同一系列中的所有数据都是用相同的颜色；
+    # 'data'：按照数据项分配调色盘中的颜色，每个数据项都使用不同的颜色。
+    color_by: types.Optional[str] = "series",
+    
+    # 布局方式，可选值：
+    # 'horizontal'：水平排布各个 box。
+    # 'vertical'：竖直排布各个 box。
+    # 默认值根据当前坐标系状况决定：如果 category 轴为横轴，则水平排布；
+    # 否则竖直排布；如果没有 category 轴则水平排布。
+    layout: types.Optional[str] = None,
 
     # 使用的 x 轴的 index，在单个图表实例中存在多个 x 轴的时候有用。
     xaxis_index: Optional[Numeric] = None,

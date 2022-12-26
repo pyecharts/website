@@ -1,5 +1,44 @@
 # 版本日志
 
+### version 2.0.0 - 2022-12-24 (Current)
+
+***Add***
+* [issue#1859](https://github.com/pyecharts/pyecharts/issues/1859) 在`Grid3DOpts`中增加对`option.grid3D.viewControl.alpha`和`beta`的视角控制
+* [issue#1825](https://github.com/pyecharts/pyecharts/issues/1825) 新增多个平行坐标系的参数
+* [issue#1785](https://github.com/pyecharts/pyecharts/issues/1785) `Boxplot` 新增对 `boxWidth` 的配置支持
+* Timeline 新增轴索引设置（通过 `add_schema` 设置 `current_index` 设置 timeline 起始的索引位置）
+* [pull#1934](https://github.com/pyecharts/pyecharts/pull/1934) 增加 `DataZoomOpts` 和 `TooltipOpts` 的配置
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/3547c50434400e6bd347204afff56331f27ea767) 增加 `ThreeAxisChart` 和 `Axis3DOpts` 的配置
+* [pull#1971](https://github.com/pyecharts/pyecharts/pull/1971) 修复 `MarkLineItem` 缺少 `linestyle_opts` 参数
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/2b6fd503349b72b6addad57ff33d253c22743a78) [issue#2004](https://github.com/pyecharts/pyecharts/issues/2004) 系列配置项 `ItemStyle` 中添加 `borderRadius` 参数
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/2b6fd503349b72b6addad57ff33d253c22743a78) [issue#1990](https://github.com/pyecharts/pyecharts/issues/1990) 日历图添加 `Scatter` 模式数据
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/d25cca137b13fdd852bf91d74de816847877bd05) 新增 `Custom` 图形
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/a85711c3114127d866ffac16d27672802d009e81) 新增 `Lines3D` 的图形配置
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/a85711c3114127d866ffac16d27672802d009e81) 增加 3D 图形的 `globe` 配置
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/73a5b11689d9626b61122a58d48e85536800a135) `InitOpts` 增加 `bg_color` 和 `is_fill_bg_color` 用于填充画布颜色。
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/73a5b11689d9626b61122a58d48e85536800a135) `Tab` 增加 `tab_css_opts`, `TabChartGlobalOpts` 用于配置 Tab 相关的 CSS 样式 https://github.com/pyecharts/pyecharts/issues/2076
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/7f5a2eae7cc15b0929a42b0082d7409040e6d382) `Gauge` 新增画图配置
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/84483fd6165db0cf607fb95dd4e431d83f2871fe) 新增 `add_geo_json` API 用于给 `Geo` 和 `Map` 添加自定义 `GeoJson` 数据
+
+***Fixed***
+* [issue#1794](https://github.com/pyecharts/pyecharts/issues/1794) 修复 `Toolbox` 异常的问题
+* [issue#1805](https://github.com/pyecharts/pyecharts/issues/1805) 修复 `Gauge` 的数据标签异常的问题
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/2b6fd503349b72b6addad57ff33d253c22743a78) [issue#2003](https://github.com/pyecharts/pyecharts/issues/2003) 修复 `Grid` 中添加多个 `Gauge` 异常的问题
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/2b6fd503349b72b6addad57ff33d253c22743a78) [issue#1994](https://github.com/pyecharts/pyecharts/issues/1994) 修复 `Bar` 图在 `Timeline` 中无法使用 `add_dataset` 方法
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/2b6fd503349b72b6addad57ff33d253c22743a78) [issue#1974](https://github.com/pyecharts/pyecharts/issues/1974) 修复 `logBase` 刻度轴异常的问题
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/2b6fd503349b72b6addad57ff33d253c22743a78) [issue#1946](https://github.com/pyecharts/pyecharts/issues/1946) 修复 `Timeline` 中使用 `Toolbox` 异常的问题
+* [pull#1978](https://github.com/pyecharts/pyecharts/pull/1978) 修复颜色添加异常的问题 @jackzhenguo
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/2b6fd503349b72b6addad57ff33d253c22743a78) [issue#1871](https://github.com/pyecharts/pyecharts/issues/1871) 修复 `Timeline` 中使用多个 `Radar` 图异常的问题
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/d25cca137b13fdd852bf91d74de816847877bd05) 修复 `add_dataset` 在特定场景下异常的问题
+* [issue#2075](https://github.com/pyecharts/pyecharts/issues/2075) 修复 `Grid` 无法正常添加多个 `Radar` 图的问题
+* [issue#2059](https://github.com/pyecharts/pyecharts/issues/2059) 修复 `animationOpts` 无法使用字典配置 https://github.com/pyecharts/pyecharts/commit/8129d79120c9222a598a9fa3fd8cf6a50eb8b6ce
+
+***Updated***
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/d25cca137b13fdd852bf91d74de816847877bd05) [commit/dev](https://github.com/pyecharts/pyecharts/commit/a85711c3114127d866ffac16d27672802d009e81) 更新部分配置项的参数
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/a85711c3114127d866ffac16d27672802d009e81) 更新大量的单元测试代码（目前单元测试覆盖率达到 99%）
+* [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/73d56348de063b3135687f23c876a47dcc7ccd73) Make CI Remove Python 3.6
+* [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/29a6c4249bce6dea209e81f58065f9e8486a9beb) Make CI Support Python 3.11
+
 ### version 1.9.0 - 2020-10-29 (Current)
 
 ***Add***
