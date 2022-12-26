@@ -695,3 +695,55 @@ class MinorSplitLineOpts(
     linestyle_opts: Union[LineStyleOpts, dict, None] = None,
 )
 ```
+
+## GraphGLForceAtlas2Opts: GraphGL Atlas2 算法配置项
+> *class pyecharts.options.GraphGLForceAtlas2Opts*
+
+```python
+class GraphGLForceAtlas2Opts(
+    # 是否启用 GPU 布局。
+    is_gpu: bool = True,
+    
+    # 一次更新的迭代次数。因为力引导算法通常会把每次迭代的结果都绘制出来，
+    # 但是因为绘制时间往往会大于布局的时间，会导致布局的效率降低，
+    # 这时候我们可以设置更大的steps参数，保证布局和绘制的时间均衡，加快布局的速度。
+    steps: Numeric = 1,
+    
+    # 停止布局的阈值，当布局的全局速度因子小于这个阈值时停止布局。设为 0 则永远不停止。
+    stop_threshold: Numeric = 1,
+    
+    # 是否开启 Barnes Hut 优化，在 forceAtlas2.GPU 为 false 时有效。
+    # 默认在节点数 > 1000时开启。
+    is_barnes_hut_optimize: Optional[bool] = None,
+    
+    # 是否根据节点边的数量来计算节点的斥力因子，建议开启。
+    is_repulsion_by_degree: bool = True,
+    
+    # 是否是lin-log模式。lin-log 模式会让聚类的节点更加紧凑。
+    is_lin_log_mode: bool = False,
+    
+    # 节点受到的向心力。这个力会让节点像中心靠拢。
+    gravity: Numeric = 1,
+    
+    # 向心力中心的位置。默认去初始位置的中间点。
+    gravity_center: Optional[Sequence] = None,
+    
+    # 布局的缩放因子，值越大则节点间的斥力越大。
+    scaling: Optional[Numeric] = None,
+    
+    # 边权重的影响因子。值越大，则边权重对于引力的影响也越大。
+    # 注：这个因子是指数级的，因此在边权重为0和1的时候无效。
+    edge_weight_influence: Numeric = 1,
+    
+    # 边的权重分布。映射自 links.value。
+    # 支持设置为单个数字，这时候就是统一的权重值。
+    edge_weight: Union[Sequence, Numeric] = None,
+    
+    # 节点的权重分布。映射自 nodes.value。
+    # 支持设置为单个数字，这时候就是统一的权重值。
+    node_weight: Union[Sequence, Numeric] = None,
+    
+    # 是否开启防止节点重叠。
+    is_prevent_overlap: bool = False,
+)
+```
