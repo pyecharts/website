@@ -20,6 +20,7 @@
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/7f5a2eae7cc15b0929a42b0082d7409040e6d382) `Gauge` 新增画图配置
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/84483fd6165db0cf607fb95dd4e431d83f2871fe) 新增 `add_geo_json` API 用于给 `Geo` 和 `Map` 添加自定义 `GeoJson` 数据
 * [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/74c151a371ffb44336a3aea3d624e27535527711) 新增 `GraphGL`
+* [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/aaf8076e6d28787dd16d4219f1e473c3c076eb54) 增加 `GeoRegionsOpts` 用于 `Geo` 配置 `regions` 参数
 
 ***Fixed***
 * [issue#1794](https://github.com/pyecharts/pyecharts/issues/1794) 修复 `Toolbox` 异常的问题

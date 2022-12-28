@@ -20,6 +20,7 @@
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/7f5a2eae7cc15b0929a42b0082d7409040e6d382) `Gauge` add `tab_css_opts`, `TabChartGlobalOpts` to configure Tab related CSS styles
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/84483fd6165db0cf607fb95dd4e431d83f2871fe) Added `add_geo_json` API for adding custom `GeoJson` data to `Geo` and `Map`. 
 * [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/74c151a371ffb44336a3aea3d624e27535527711) Added `GraphGL`
+* [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/aaf8076e6d28787dd16d4219f1e473c3c076eb54) Added `GeoRegionsOpts` for `Geo` configure `regions` arguments
 
 ***Fixed***
 * [issue#1794](https://github.com/pyecharts/pyecharts/issues/1794) Fix `Toolbox` exception

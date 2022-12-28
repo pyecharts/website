@@ -72,6 +72,9 @@ def add_schema(
 
     # 高亮状态下的标签样式。
     emphasis_label_opts: Union[opts.LabelOpts, dict, None] =None,
+    
+    # 在地图中对特定的区域配置样式。具体配置参考 `charts_options.GeoRegionsOpts`
+    regions_opts: types.Union[types.Sequence[types.GeoRegions], types.Sequence[dict]] = None,
 ):
 ```
 
@@ -196,6 +199,48 @@ Geo 图的坐标引用自 `pyecharts.datasets.COORDINATES`，`COORDINATES` 是�
 from pyecharts.datasets import COORDINATES
 # cutoff 为匹配阈值，阈值越高相似性越高，1 为完全相同。默认为 0.6
 COORDINATES.cutoff = 0.75
+```
+
+> *func pyecharts.options.GeoRegionsOpts*
+
+```python
+class GeoRegionsOpts(
+    # 地图区域的名称，例如 '广东'，'浙江'。
+    name: Optional[str] = None,
+    
+    # 该区域是否选中。
+    is_selected: bool = False,
+    
+    # 该区域的多边形样式设置。
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # 图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
+    label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 高亮状态的样式设置。
+    emphasis_itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # 高亮状态的标签设置。
+    emphasis_label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 选中状态的样式设置。
+    select_itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # 选中状态的标签设置。
+    select_label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 淡出状态的样式设置。
+    blur_itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # 淡出状态的标签设置。
+    blur_label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 本 region 中特定的 tooltip 设定。
+    tooltip_opts: Union[TooltipOpts, dict, None] = None,
+    
+    # 图形是否不响应和触发鼠标事件，默认为 false，即响应和触发鼠标事件。
+    is_silent: bool = False,
+)
 ```
 
 ### Demo
