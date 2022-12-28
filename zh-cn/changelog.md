@@ -33,6 +33,8 @@
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/d25cca137b13fdd852bf91d74de816847877bd05) 修复 `add_dataset` 在特定场景下异常的问题
 * [issue#2075](https://github.com/pyecharts/pyecharts/issues/2075) 修复 `Grid` 无法正常添加多个 `Radar` 图的问题
 * [issue#2059](https://github.com/pyecharts/pyecharts/issues/2059) 修复 `animationOpts` 无法使用字典配置 https://github.com/pyecharts/pyecharts/commit/8129d79120c9222a598a9fa3fd8cf6a50eb8b6ce
+* [issue#2051](https://github.com/pyecharts/pyecharts/issues/2051) 修复湖南省的底图。
+* [commit/assets](https://github.com/pyecharts/pyecharts-assets/commit/5b95f0b0fbfd641b7cd74e6f597354df1abcbb6c) 更新中国地图底图（符合地图使用规范）; 更新湖南省的底图
 
 ***Updated***
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/d25cca137b13fdd852bf91d74de816847877bd05) [commit/dev](https://github.com/pyecharts/pyecharts/commit/a85711c3114127d866ffac16d27672802d009e81) 更新部分配置项的参数
