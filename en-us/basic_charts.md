@@ -1149,6 +1149,10 @@ def add(
     # Chart type, supports
     # ChartType.SCATTER, ChartType.LINE, ChartType.BAR, ChartType.EFFECT_SCATTER
     type_: str = "line",
+    
+    # The center (center of circle) coordinate of the polar coordinate system, the first item of the array is the horizontal coordinate, the second item is the vertical coordinate.
+    # Supports setting to percentage, when set to percentage the first term is relative to the container width, the second term is relative to the container height.
+    center: types.Optional[types.Sequence] = ["50%", "50%"],
 
     # The marker types provided by ECharts include 'circle', 'rect', 'roundRect', 'triangle', 
     # 'diamond', 'pin', 'arrow', 'none'
@@ -1369,6 +1373,15 @@ def add_schema(
     # The coordinates of the radar's center (circle), the first item of the array is the horizontal coordinate, the second is the vertical coordinate.
     # Support set to percentage, when set to percentage the first term is relative to the container width, the second term is relative to the container height.
     center: Optional[types.Sequence] = None,
+    
+    # Radius of the radar. Can be of the following type.
+    # number: specifies the outer radius value directly.
+    # string: for example, '20%', means that the outer radius is 20% of the length of the visible area size (the smaller of the container height and width).
+    # Array.<number|string>: The first item of the array is the inner radius and the second item is the outer radius. Each item follows the description of the number string above.
+    radius: types.Optional[types.Union[types.Sequence, str]] = None,
+    
+    # The angle at which the coordinate system starts, i.e. the angle of the first indicator axis.
+    start_angle: types.Numeric = 90,
 
     # Text style configuration items, refer to `series_options.TextStyleOpts`
     textstyle_opts: Union[opts.TextStyleOpts, dict] = opts,

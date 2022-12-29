@@ -724,6 +724,9 @@ class BrushOpts(
 
 ```python
 class TitleOpts(
+    # If or not to display the title component.
+    is_show: bool = True,
+
     ## Main title text, supports line breaks with \n.
     title: Optional[str] = None,
     
@@ -784,6 +787,17 @@ class TitleOpts(
 
     # Spacing between main and subheadings.
     item_gap: Numeric = 10,
+    
+    # Horizontal alignment of the whole (including text and subtext).
+    # Optional values: 'auto', 'left', 'right', 'center'.
+    text_align: str = "auto",
+    
+    # Vertical alignment of the whole (including text and subtext).
+    # Optional values: 'auto', 'left', 'right', 'center'.
+    text_vertical_align: str = "auto",
+    
+    # Whether or not to trigger the event.
+    is_trigger_event: bool = False,
 
     # Main title text style configuration items, refer to `series_options.TextStyleOpts`
     title_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
@@ -940,6 +954,71 @@ class LegendOpts(
     # Can be set to an image with 'image://url', where URL is the link to the image, or dataURI.
     # Can be set to an arbitrary vector path with 'path://'.
     legend_icon: Optional[str] = None,
+    
+    # The background color of the legend, transparent by default.
+    background_color: Optional[str] = "transparent",
+    
+    # The border color of the legend. The supported color format is the same as backgroundColor.
+    border_color: Optional[str] = "#ccc",
+    
+    # The border line width of the legend.
+    border_width: int = 1,
+    
+    # The radius of the rounded corners, in px, support passing in an array to specify 4 radii each. For example:
+    border_radius: Union[int, Sequence] = 0,
+    
+    # valid when legend.type is 'scroll'. The spacing between buttons and page information in the legend control block.
+    page_button_item_gap: int = 5,
+    
+    # valid when legend.type is 'scroll'. The gap between the legend control block and the legend item.
+    page_button_gap: Optional[int] = None,
+    
+    # Valid if legend.type is 'scroll'. The position of the legend control block. Optional values are.
+    # 'start': the control block is on the left or top.
+    # 'end': right or bottom of the legend.
+    page_button_position: str = "end",
+    
+    # valid when legend.type is 'scroll'.
+    # The format of the page information to be displayed in the legend control block. Default is '{current}/{total}', where {current} is the current page number (counting from 1) and {total} is the total number of pages.
+    # If pageFormatter uses a function, it shall return a string with the following parameters.
+    # {
+    # current: number
+    # total: number
+    # total: number # }
+    page_formatter: JSFunc = "{current}/{total}",
+    
+    # valid when legend.type is 'scroll'. Icon for the legend control block.
+    page_icon: Optional[str] = None,
+    
+    # Valid if legend.type is 'scroll'. The color of the page flip button.
+    page_icon_color: str = "#2f4554",
+    
+    # valid when legend.type is 'scroll'. The color of the page flip button when it is not active (i.e. when the page is turned to the top).
+    page_icon_inactive_color: str = "#aaa",
+    
+    # valid when legend.type is 'scroll'.
+    # The size of the page flip button. Can be a number or an array, e.g. [10, 3] for [width, height].
+    page_icon_size: Union[int, Sequence] = 15,
+    
+    # If or not the legend page flip uses animation.
+    is_page_animation: Optional[bool] = None,
+    
+    # The duration of the animation when the legend turns the page.
+    page_animation_duration_update: int = 800,
+    
+    # The selector button in the legend component, currently includes both select all and deselect functions.
+    # Not shown by default, user can turn it on manually or configure the title of each button manually.
+    selector: Union[bool, Sequence] = False,
+    
+    # The position of the selector, it can be placed at the end or the head of the legend, the corresponding values are 'end' and 'start' respectively.
+    # By default, when the legend is laid out horizontally, the selector is placed at the end of the legend; when the legend is laid out vertically, the selector is placed at the head of the legend.
+    selector_position: str = "auto",
+    
+    # The spacing between selector buttons.
+    selector_item_gap: int = 7,
+    
+    # The spacing between the selector button and the legend component.
+    selector_button_gap: int = 10,
 )
 ```
 

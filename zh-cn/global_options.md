@@ -635,6 +635,9 @@ class BrushOpts(
 
 ```python
 class TitleOpts(
+    # 是否显示标题组件。
+    is_show: bool = True,
+
     # 主标题文本，支持使用 \n 换行。
     title: Optional[str] = None,
     
@@ -695,6 +698,17 @@ class TitleOpts(
 
     # 主副标题之间的间距。
     item_gap: Numeric = 10,
+    
+    # 整体（包括 text 和 subtext）的水平对齐。
+    # 可选值：'auto'、'left'、'right'、'center'。
+    text_align: str = "auto",
+    
+    # 整体（包括 text 和 subtext）的垂直对齐。
+    # 可选值：'auto'、'left'、'right'、'center'。
+    text_vertical_align: str = "auto",
+    
+    # 是否触发事件。
+    is_trigger_event: bool = False,
 
     # 主标题字体样式配置项，参考 `series_options.TextStyleOpts`
     title_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
@@ -851,6 +865,71 @@ class LegendOpts(
     # 可以通过 'image://url' 设置为图片，其中 URL 为图片的链接，或者 dataURI。
     # 可以通过 'path://' 将图标设置为任意的矢量路径。
     legend_icon: Optional[str] = None,
+    
+    # 图例背景色，默认透明。
+    background_color: Optional[str] = "transparent",
+    
+    # 图例的边框颜色。支持的颜色格式同 backgroundColor。
+    border_color: Optional[str] = "#ccc",
+    
+    # 图例的边框线宽。
+    border_width: int = 1,
+    
+    # 圆角半径，单位px，支持传入数组分别指定 4 个圆角半径。 如:
+    border_radius: Union[int, Sequence] = 0,
+    
+    # legend.type 为 'scroll' 时有效。图例控制块中，按钮和页信息之间的间隔。
+    page_button_item_gap: int = 5,
+    
+    # legend.type 为 'scroll' 时有效。图例控制块和图例项之间的间隔。
+    page_button_gap: Optional[int] = None,
+    
+    # legend.type 为 'scroll' 时有效。图例控制块的位置。可选值为：
+    # 'start'：控制块在左或上。
+    # 'end'：控制块在右或下。
+    page_button_position: str = "end",
+    
+    # legend.type 为 'scroll' 时有效。
+    # 图例控制块中，页信息的显示格式。默认为 '{current}/{total}'，其中 {current} 是当前页号（从 1 开始计数），{total} 是总页数。
+    # 如果 pageFormatter 使用函数，须返回字符串，参数为：
+    # {
+    #     current: number
+    #     total: number
+    # }
+    page_formatter: JSFunc = "{current}/{total}",
+    
+    # legend.type 为 'scroll' 时有效。图例控制块的图标。
+    page_icon: Optional[str] = None,
+    
+    # legend.type 为 'scroll' 时有效。翻页按钮的颜色。
+    page_icon_color: str = "#2f4554",
+    
+    # legend.type 为 'scroll' 时有效。翻页按钮不激活时（即翻页到头时）的颜色。
+    page_icon_inactive_color: str = "#aaa",
+    
+    # legend.type 为 'scroll' 时有效。
+    # 翻页按钮的大小。可以是数字，也可以是数组，如 [10, 3]，表示 [宽，高]。
+    page_icon_size: Union[int, Sequence] = 15,
+    
+    # 图例翻页是否使用动画。
+    is_page_animation: Optional[bool] = None,
+    
+    # 图例翻页时的动画时长。
+    page_animation_duration_update: int = 800,
+    
+    # 图例组件中的选择器按钮，目前包括全选和反选两种功能。
+    # 默认不显示，用户可手动开启，也可以手动配置每个按钮的标题。
+    selector: Union[bool, Sequence] = False,
+    
+    # 选择器的位置，可以放在图例的尾部或者头部，对应的值分别为 'end' 和 'start'。
+    # 默认情况下，图例横向布局的时候，选择器放在图例的尾部；图例纵向布局的时候，选择器放在图例的头部。
+    selector_position: str = "auto",
+    
+    # 选择器按钮之间的间隔。
+    selector_item_gap: int = 7,
+    
+    # 选择器按钮与图例组件之间的间隔。
+    selector_button_gap: int = 10,
 )
 ```
 
