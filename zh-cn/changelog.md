@@ -20,6 +20,7 @@
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/7f5a2eae7cc15b0929a42b0082d7409040e6d382) `Gauge` 新增画图配置
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/84483fd6165db0cf607fb95dd4e431d83f2871fe) 新增 `add_geo_json` API 用于给 `Geo` 和 `Map` 添加自定义 `GeoJson` 数据
 * [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/74c151a371ffb44336a3aea3d624e27535527711) 新增 `GraphGL`
+* [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/aaf8076e6d28787dd16d4219f1e473c3c076eb54) 增加 `GeoRegionsOpts` 用于 `Geo` 配置 `regions` 参数
 
 ***Fixed***
 * [issue#1794](https://github.com/pyecharts/pyecharts/issues/1794) 修复 `Toolbox` 异常的问题
@@ -33,6 +34,8 @@
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/d25cca137b13fdd852bf91d74de816847877bd05) 修复 `add_dataset` 在特定场景下异常的问题
 * [issue#2075](https://github.com/pyecharts/pyecharts/issues/2075) 修复 `Grid` 无法正常添加多个 `Radar` 图的问题
 * [issue#2059](https://github.com/pyecharts/pyecharts/issues/2059) 修复 `animationOpts` 无法使用字典配置 https://github.com/pyecharts/pyecharts/commit/8129d79120c9222a598a9fa3fd8cf6a50eb8b6ce
+* [issue#2051](https://github.com/pyecharts/pyecharts/issues/2051) 修复湖南省的底图。
+* [commit/assets](https://github.com/pyecharts/pyecharts-assets/commit/5b95f0b0fbfd641b7cd74e6f597354df1abcbb6c) 更新中国地图底图（符合地图使用规范）; 更新湖南省的底图
 
 ***Updated***
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/d25cca137b13fdd852bf91d74de816847877bd05) [commit/dev](https://github.com/pyecharts/pyecharts/commit/a85711c3114127d866ffac16d27672802d009e81) 更新部分配置项的参数

@@ -72,6 +72,9 @@ def add_schema(
 
     # The label style in the highlighted state.
     emphasis_label_opts: Union[opts.LabelOpts, dict, None] = None,
+    
+    # Configure styles for specific regions in the map. Refer to `charts_options.GeoRegionsOpts` for specific configurations
+    regions_opts: types.Union[types.Sequence[types.GeoRegions], types.Sequence[dict]] = None,
 ):
 ```
 
@@ -196,6 +199,48 @@ The coordinates of the Geo chart are referenced from `pyecharts.datasets.COORDIN
 from pyecharts.datasets import COORDINATES
 # cutoff is the matching threshold, the higher the threshold the higher the similarity, 1 is identical. The default is 0.6
 COORDINATES.cutoff = 0.75
+```
+
+> *func pyecharts.options.GeoRegionsOpts*
+
+```python
+class GeoRegionsOpts(
+    # The name of the map region, e.g. 'Guangdong', 'Zhejiang'.
+    name: Optional[str] = None,
+    
+    # Whether the region is selected or not.
+    is_selected: bool = False,
+    
+    # The polygon style setting for the region.
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # Text labels on the graph that can be used to describe some data information about the graph, such as values, names, etc.
+    label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # Style settings for the highlighted state.
+    emphasis_itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # The label settings for the highlighted state.
+    emphasis_label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # The style settings for the selected state.
+    select_itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # The label settings of the selected state.
+    select_label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # The style settings of the fade state.
+    blur_itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # The label settings for the fadeout state.
+    blur_label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # The specific tooltip settings in this region.
+    tooltip_opts: Union[TooltipOpts, dict, None] = None,
+    
+    # Whether the graph does not respond and trigger mouse events, default is false, i.e. responds and triggers mouse events.
+    is_silent: bool = False,
+)
 ```
 
 ### Demo

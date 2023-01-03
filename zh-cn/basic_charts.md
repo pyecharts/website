@@ -1150,6 +1150,10 @@ def add(
     # 图表类型，支持
     # ChartType.SCATTER, ChartType.LINE, ChartType.BAR，ChartType.EFFECT_SCATTER
     type_: str = "line",
+    
+    # 极坐标系的中心（圆心）坐标，数组的第一项是横坐标，第二项是纵坐标。
+    # 支持设置成百分比，设置成百分比时第一项是相对于容器宽度，第二项是相对于容器高度。
+    center: types.Optional[types.Sequence] = ["50%", "50%"],
 
     # ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 
     # 'diamond', 'pin', 'arrow', 'none'
@@ -1371,6 +1375,15 @@ def add_schema(
     # 雷达的中心（圆心）坐标，数组的第一项是横坐标，第二项是纵坐标。
     # 支持设置成百分比，设置成百分比时第一项是相对于容器宽度，第二项是相对于容器高度。
     center: Optional[types.Sequence] = None,
+    
+    # 雷达的半径。可以为如下类型：
+    # number：直接指定外半径值。
+    # string：例如，'20%'，表示外半径为可视区尺寸（容器高宽中较小一项）的 20% 长度。
+    # Array.<number|string>：数组的第一项是内半径，第二项是外半径。每一项遵从上述 number string 的描述。
+    radius: types.Optional[types.Union[types.Sequence, str]] = None,
+    
+    # 坐标系起始角度，也就是第一个指示器轴的角度。
+    start_angle: types.Numeric = 90,
 
     # 文字样式配置项，参考 `series_options.TextStyleOpts`
     textstyle_opts: Union[opts.TextStyleOpts, dict] = opts.TextStyleOpts(),

@@ -1,6 +1,6 @@
 # Version log
 
-### version 2.0.0 - 2022-12-24 (Current)
+### version 2.0.0 - 2022-12-31 (Current)
 
 ***Add***
 * [issue#1859](https://github.com/pyecharts/pyecharts/issues/1859) Added view control for `option.grid3D.viewControl.alpha` and `beta` in `Grid3DOpts`.
@@ -20,6 +20,7 @@
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/7f5a2eae7cc15b0929a42b0082d7409040e6d382) `Gauge` add `tab_css_opts`, `TabChartGlobalOpts` to configure Tab related CSS styles
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/84483fd6165db0cf607fb95dd4e431d83f2871fe) Added `add_geo_json` API for adding custom `GeoJson` data to `Geo` and `Map`. 
 * [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/74c151a371ffb44336a3aea3d624e27535527711) Added `GraphGL`
+* [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/aaf8076e6d28787dd16d4219f1e473c3c076eb54) Added `GeoRegionsOpts` for `Geo` configure `regions` arguments
 
 ***Fixed***
 * [issue#1794](https://github.com/pyecharts/pyecharts/issues/1794) Fix `Toolbox` exception
@@ -32,7 +33,9 @@
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/2b6fd503349b72b6addad57ff33d253c22743a78) [issue#1871](https://github.com/pyecharts/pyecharts/issues/1871) Fix an issue with using multiple `Radar` graphs in `Timeline`.
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/d25cca137b13fdd852bf91d74de816847877bd05) Fix `add_dataset` exception in certain scenarios
 * [issue#2075](https://github.com/pyecharts/pyecharts/issues/2075) Fix `Grid` not adding multiple `Radar` graphs properly.
-* [issue#2059](https://github.com/pyecharts/pyecharts/issues/2059) Fix `animationOpts` can't use dictionary configuration. 
+* [issue#2059](https://github.com/pyecharts/pyecharts/issues/2059) Fix `animationOpts` can't use dictionary configuration.
+* [issue#2051](https://github.com/pyecharts/pyecharts/issues/2051) Update Map for Hunan Province.
+* [commit/assets](https://github.com/pyecharts/pyecharts-assets/commit/5b95f0b0fbfd641b7cd74e6f597354df1abcbb6c) Update Map for China.
 
 ***Updated***
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/d25cca137b13fdd852bf91d74de816847877bd05) [commit/dev](https://github.com/pyecharts/pyecharts/commit/a85711c3114127d866ffac16d27672802d009e81) Update the parameters of some configuration items

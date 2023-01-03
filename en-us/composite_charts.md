@@ -370,6 +370,15 @@ def add_schema(
 
     # The style of the 'control button'. "The 'control buttons' include: 'play button', 'forward button', 'back button'.
     controlstyle_opts: types.TimeLineControl = None,
+    
+    # Line styles in the progress bar
+    progress_linestyle_opts: types.LineStyle = None,
+    
+    # The style of the inflection point in the progress bar.
+    progress_itemstyle_opts: types.ItemStyle = None,
+    
+    # The style of the label in the progress bar.
+    progress_label_opts: types.Label = None,
 )
 ```
 

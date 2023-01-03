@@ -371,6 +371,15 @@ def add_schema(
 
     # 控制按钮』的样式。『控制按钮』包括：『播放按钮』、『前进按钮』、『后退按钮』。
     controlstyle_opts: types.TimeLineControl = None,
+    
+    # 进度条中的线条样式
+    progress_linestyle_opts: types.LineStyle = None,
+    
+    # 进度条中的拐点样式。
+    progress_itemstyle_opts: types.ItemStyle = None,
+    
+    # 进度条中的标签样式
+    progress_label_opts: types.Label = None,
 )
 ```
 
