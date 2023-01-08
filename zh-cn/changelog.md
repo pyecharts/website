@@ -1,6 +1,10 @@
 # 版本日志
 
-### version 2.0.0 - 2022-12-24 (Current)
+### version 2.0.1 - 2023-01-08 (Current)
+***Fixed***
+* [commit/dev](https://github.com/pyecharts/pyecharts/commit/d7788ba4b56545bbfe92e39516b6842ac39e9837) 修复因为地图底图修改导致 `faker.py` 的地图数据显示异常的问题
+
+### version 2.0.0 - 2023-01-04
 
 ***Add***
 * [issue#1859](https://github.com/pyecharts/pyecharts/issues/1859) 在`Grid3DOpts`中增加对`option.grid3D.viewControl.alpha`和`beta`的视角控制
