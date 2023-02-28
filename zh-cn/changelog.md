@@ -1,6 +1,14 @@
 # 版本日志
 
-### version 2.0.1 - 2023-01-08 (Current)
+### version 2.0.2 - 2023-02-28 (Current)
+***Add***
+* [issue#2118](https://github.com/pyecharts/pyecharts/issues/2118) `Graph` 图增加参数
+* [issue#2125](https://github.com/pyecharts/pyecharts/issues/2125) `Line` 图增加参数
+
+***Fixed***
+* [issue#2116](https://github.com/pyecharts/pyecharts/issues/2116) 修复 `Grid.visualMap` 的异常
+
+### version 2.0.1 - 2023-01-08
 ***Fixed***
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/d7788ba4b56545bbfe92e39516b6842ac39e9837) 修复因为地图底图修改导致 `faker.py` 的地图数据显示异常的问题
 

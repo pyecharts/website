@@ -519,6 +519,13 @@ def add(
 
     # The gravitational factor towards the centre to which the node is subjected. The larger the value the closer the node is to the centre.
     gravity: Numeric = 0.2,
+    
+    # This parameter slows down the movement of the node. The range of values is 0 to 1.
+    friction: Numeric = 0.6,
+    
+    # Because the force-guided layout will stabilise after several iterations, this parameter determines whether to show the iterative animation of the layout
+    # It is not recommended to turn it off when there is a lot of node data on the browser side (>100), the layout process can cause a false browser death.
+    is_layout_animation: bool = True,
 
     # The repulsion factor between nodes.
     # Supports setting to an array to express the range of repulsive forces, where different values of different sizes will map linearly to different repulsive forces. The larger the value the greater the repulsion

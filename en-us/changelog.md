@@ -1,6 +1,15 @@
 # Version log
 
-### version 2.0.1 - 2023-01-08 (Current)
+### version 2.0.2 - 2023-02-28 (Current)
+***Add***
+* [issue#2118](https://github.com/pyecharts/pyecharts/issues/2118) Add `Graph` arguments
+* [issue#2125](https://github.com/pyecharts/pyecharts/issues/2125) Add `Line` arguments
+
+***Fixed***
+* [issue#2116](https://github.com/pyecharts/pyecharts/issues/2116) Fix `Grid.visualMap` error
+
+
+### version 2.0.1 - 2023-01-08
 ***Fixed***
 * [commit/dev](https://github.com/pyecharts/pyecharts/commit/d7788ba4b56545bbfe92e39516b6842ac39e9837) Fix an issue that caused the map data in `faker.py` to be displayed incorrectly due to a change in the map base map.
 

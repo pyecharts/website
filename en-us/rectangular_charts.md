@@ -656,6 +656,15 @@ def add_yaxis(
     # The z value of all the shapes of the Line Chart component. Controls the order of the shapes before and after them. zLesser shapes will be overwritten by larger ones.
     # z has lower priority than zlevel and no new Canvas is created.
     z: types.Numeric = 0,
+    
+    # A downsampling strategy for line charts when the amount of data is much larger than the number of pixel points. Turned on to optimise the efficiency of the chart, off by default, i.e. all plotted without filtering data points.
+    # Optional.
+    # 'lttb' Takes the Largest-Triangle-Three-Bucket algorithm, which maximises the trend, shape and extreme values of the sampled lines.
+    # 'average' takes the average of the filtered points
+    # 'max' takes the maximum value of the filter points
+    # 'min' takes the minimum value of the filter points
+    # 'sum' takes the sum of the filter points
+    sampling: types.Optional[str] = None,
 
     # Markpoint configuration items, see `series_options.MarkPointOpts`
     markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
