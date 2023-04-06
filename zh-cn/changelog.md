@@ -11,6 +11,7 @@
 
 **Updated**
 * 代码覆盖率：99%
+* [commit#6deda6a](https://github.com/pyecharts/pyecharts/pull/2155/commits/6deda6a9abfe597d7af1c5fcb5e32d327ac73e68) 更新 Map 配置
 
 ### version 2.0.2 - 2023-02-28
 ***Add***
