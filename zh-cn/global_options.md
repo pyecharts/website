@@ -217,6 +217,16 @@ class InitOpts(
 )
 ```
 
+## RenderOpts: 渲染配置项
+> *class pyecharts.options.RenderOpts*
+
+```python
+class RenderOpts(
+    # 是否在渲染 HTML 时嵌入 JS 文件
+    is_embed_js: bool = False
+)
+```
+
 ## ToolBoxFeatureSaveAsImagesOpts：工具箱保存图片配置项
 > *class pyecharts.options.ToolBoxFeatureSaveAsImagesOpts*
 
