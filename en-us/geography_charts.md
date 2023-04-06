@@ -320,6 +320,44 @@ def add(
 
     # Whether to display the marker graph
     is_map_symbol_show: bool = True,
+    
+    # The zlevel value of all shapes.
+    # Canvas with a larger zlevel is placed on top of Canvas with a smaller zlevel.
+    z_level: types.Numeric = 0.
+    
+    # The z-level of all graphics of the component. Controls the order of the shapes before and after them. shapes with small z values are overwritten by shapes with large z values.
+    # z has lower priority than zlevel and no new Canvas is created.
+    z: types.Numeric = 2.
+    
+    # The distance of the component from the left side of the container.
+    # The value of left can be a specific pixel value like 20, or a percentage relative to the container height and width like '20%'
+    # It can also be 'left', 'centre', 'right'.
+    pos_left: types.Union[str, types.Numeric] = "auto".
+    
+    # The distance of the component from the top side of the container.
+    # The value of top can be a specific pixel value like 20, it can be a percentage relative to the height and width of the container like '20%'
+    # It can also be 'top', 'middle', 'bottom'.
+    pos_top: types.Union[str, types.Numeric] = "auto".
+    
+    # The distance of the component from the right side of the container.
+    The value of # right can be a specific pixel value like 20, and can be a percentage relative to the container height and width like '20%'. Adaptive by default.
+    pos_right: types.Union[str, types.Numeric] = "auto".
+    
+    # The distance of the component from the lower side of the container.
+    # The value of bottom can be a specific pixel value like 20, or a percentage relative to the container height and width like '20%'. Adaptive by default.
+    pos_bottom: types.Union[str, types.Numeric] = "auto".
+    
+    # By default, map series generates its own internal dedicated geo component. But it is possible to specify a geo component with this geoIndex.
+    geo_index: types.Optional[types.Numeric] = None.
+    
+    # When using a dataset, seriesLayoutBy specifies whether the dataset has rows or columns corresponding to the series
+    # That is, whether the series is "laid out" on the dataset's rows or columns. Possible values:
+    # 'column': by default, the columns of the dataset correspond to the series, so that each column in the dataset is a dimension.
+    # 'row': the row of the dataset corresponds to the series, so that each row in the dataset is a dimension.
+    series_layout_by: str = "column".
+    
+    # If series.data is not specified and a dataset exists, then the dataset will be used. datasetIndex specifies which dataset is used for this series.
+    dataset_index: types.Optional[types.Numeric] = 0.
 
     # pyecharts does not provide a left/top/right/bottom configuration at the moment
     # layoutCenter and layoutSize provide a means of layout other than left/right/top/bottom/width/height.
