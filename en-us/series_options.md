@@ -523,7 +523,7 @@ class MarkAreaItem(
     # This can be the direct name of a dimension, e.g. x, angle, etc. for line graphs, open, close, etc. for candlestick graphs.
     value_dim: Sequence[Optional[str], Optional[str]] = (None, None),
     
-    # The screen x-coordinate relative to the container, in pixels, supports percentage forms, e.g. '20%'.
+    # The screen x-coordinate relative to the container, in pixels, supports percentage forms, e.g. '20%'. Requires an axis type of value.
     x: Sequence[Union[str, Numeric, None], Union[str, Numeric, None]] = (None, None),
     
     # The y-coordinate of the screen relative to the container, in pixels, supporting a percentage form, e.g. '20%'.

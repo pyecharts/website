@@ -524,7 +524,7 @@ class MarkAreaItem(
     # 这可以是维度的直接名称，例如折线图时可以是 x、angle 等、candlestick 图时可以是 open、close 等维度名称。
     value_dim: Sequence[Optional[str], Optional[str]] = (None, None),
     
-    # 相对容器的屏幕 x 坐标，单位像素，支持百分比形式，例如 '20%'。
+    # 相对容器的屏幕 x 坐标，单位像素，支持百分比形式，例如 '20%'。需要轴类型是 value。
     x: Sequence[Union[str, Numeric, None], Union[str, Numeric, None]] = (None, None),
     
     # 相对容器的屏幕 y 坐标，单位像素，支持百分比形式，例如 '20%'。
