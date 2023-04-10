@@ -667,6 +667,17 @@ def add_yaxis(
     # 'min' 取过滤点的最小值
     # 'sum' 取过滤点的和
     sampling: types.Optional[str] = None,
+    
+    # 使用 dimensions 定义 series.data 或者 dataset.source 的每个维度的信息。
+    # 注意：如果使用了 dataset，那么可以在 dataset.source 的第一行/列中给出 dimension 名称。
+    # 于是就不用在这里指定 dimension。
+    # 但是，如果在这里指定了 dimensions，那么 ECharts 不再会自动从 dataset.source 的第一行/列中获取维度信息。
+    dimensions: types.Union[types.Sequence, None] = None,
+
+    # 当使用 dataset 时，seriesLayoutBy 指定了 dataset 中用行还是列对应到系列上，也就是说，系列“排布”到 dataset 的行还是列上。可取值：
+    # 'column'：默认，dataset 的列对应于系列，从而 dataset 中每一列是一个维度（dimension）。
+    # 'row'：dataset 的行对应于系列，从而 dataset 中每一行是一个维度（dimension）。
+    series_layout_by: str = "column",
 
     # 标记点配置项，参考 `series_options.MarkPointOpts`
     markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
@@ -688,6 +699,9 @@ def add_yaxis(
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # 可以定义 data 的哪个维度被编码成什么。
+    encode: types.Union[types.JSFunc, dict, None] = None,
 )
 ```
 

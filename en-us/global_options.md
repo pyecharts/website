@@ -308,6 +308,16 @@ class InitOpts(
 )
 ```
 
+## RenderOpts: Render configuration items
+> *class pyecharts.options.RenderOpts*
+
+```python
+class RenderOpts(
+    # Whether to embed JS files when rendering HTML
+    is_embed_js: bool = False
+)
+```
+
 ## ToolBoxFeatureSaveAsImagesOpts: toolbox save image configuration items
 > *class pyecharts.options.ToolBoxFeatureSaveAsImagesOpts*
 

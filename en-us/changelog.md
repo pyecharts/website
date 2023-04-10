@@ -1,6 +1,20 @@
 # Version log
 
-### version 2.0.2 - 2023-02-28 (Current)
+### version 2.0.3 - 2023-04-06 (Current)
+***Add***
+* [pr#2158](https://github.com/pyecharts/pyecharts/pull/2158) Add a rendering configuration (embedding `js` files into `HTML` files) by @omixwxm
+
+***Fixed***
+* [issue#2144](https://github.com/pyecharts/pyecharts/issues/2144) Fix `legend` selection state exception when using `timeline`
+* [issue#2153](https://github.com/pyecharts/pyecharts/issues/2153) Fix exception for `Grid.visualMap`.
+* [issue#2165](https://github.com/pyecharts/pyecharts/issues/2165) Fix `dataset` exception for `Line` diagrams
+
+**Updated**
+* Code coverage: 99%
+* [commit#6deda6a](https://github.com/pyecharts/pyecharts/pull/2155/commits/6deda6a9abfe597d7af1c5fcb5e32d327ac73e68) Update Map Configuration
+
+
+### version 2.0.2 - 2023-02-28
 ***Add***
 * [issue#2118](https://github.com/pyecharts/pyecharts/issues/2118) Add `Graph` arguments
 * [issue#2125](https://github.com/pyecharts/pyecharts/issues/2125) Add `Line` arguments

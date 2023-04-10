@@ -320,6 +320,44 @@ def add(
 
     # 是否显示标记图形
     is_map_symbol_show: bool = True,
+    
+    # 所有图形的 zlevel 值。
+    # zlevel 大的 Canvas 会放在 zlevel 小的 Canvas 的上面。
+    z_level: types.Numeric = 0,
+    
+    # 组件的所有图形的z值。控制图形的前后顺序。z 值小的图形会被 z 值大的图形覆盖。
+    # z 相比 zlevel 优先级更低，而且不会创建新的 Canvas。
+    z: types.Numeric = 2,
+    
+    # 组件离容器左侧的距离。
+    # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比
+    # 也可以是 'left', 'center', 'right'。
+    pos_left: types.Union[str, types.Numeric] = "auto",
+    
+    # 组件离容器上侧的距离。
+    # top 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比
+    # 也可以是 'top', 'middle', 'bottom'。
+    pos_top: types.Union[str, types.Numeric] = "auto",
+    
+    # 组件离容器右侧的距离。
+    # right 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。默认自适应。
+    pos_right: types.Union[str, types.Numeric] = "auto",
+    
+    # 组件离容器下侧的距离。
+    # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。默认自适应。
+    pos_bottom: types.Union[str, types.Numeric] = "auto",
+    
+    # 默认情况下，map series 会自己生成内部专用的 geo 组件。但是也可以用这个 geoIndex 指定一个 geo 组件。
+    geo_index: types.Optional[types.Numeric] = None,
+    
+    # 当使用 dataset 时，seriesLayoutBy 指定了 dataset 中用行还是列对应到系列上
+    # 也就是说，系列“排布”到 dataset 的行还是列上。可取值：
+    # 'column'：默认，dataset 的列对应于系列，从而 dataset 中每一列是一个维度（dimension）。
+    # 'row'：dataset 的行对应于系列，从而 dataset 中每一行是一个维度（dimension）。
+    series_layout_by: str = "column",
+    
+    # 如果 series.data 没有指定，并且 dataset 存在，那么就会使用 dataset。datasetIndex 指定本系列使用那个 dataset。
+    dataset_index: types.Optional[types.Numeric] = 0,
 
     # pyecharts 暂时没有提供 left/top/right/bottom 的配置
     # layoutCenter 和 layoutSize 提供了除了 left/right/top/bottom/width/height 之外的布局手段。

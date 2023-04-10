@@ -1,6 +1,19 @@
 # 版本日志
 
-### version 2.0.2 - 2023-02-28 (Current)
+### version 2.0.3 - 2023-04-06 (Current)
+***Add***
+* [pr#2158](https://github.com/pyecharts/pyecharts/pull/2158) 增加一个渲染配置方式（将 `js` 文件嵌入 `HTML` 文件）by @omixwxm
+
+***Fixed***
+* [issue#2144](https://github.com/pyecharts/pyecharts/issues/2144) 修复使用 `timeline` 时 `legend` 选择状态异常
+* [issue#2153](https://github.com/pyecharts/pyecharts/issues/2153) 修复 `Grid.visualMap` 的异常
+* [issue#2165](https://github.com/pyecharts/pyecharts/issues/2165) 修复 `Line` 图使用 `dataset` 异常的问题
+
+**Updated**
+* 代码覆盖率：99%
+* [commit#6deda6a](https://github.com/pyecharts/pyecharts/pull/2155/commits/6deda6a9abfe597d7af1c5fcb5e32d327ac73e68) 更新 Map 配置
+
+### version 2.0.2 - 2023-02-28
 ***Add***
 * [issue#2118](https://github.com/pyecharts/pyecharts/issues/2118) `Graph` 图增加参数
 * [issue#2125](https://github.com/pyecharts/pyecharts/issues/2125) `Line` 图增加参数

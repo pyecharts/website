@@ -665,6 +665,17 @@ def add_yaxis(
     # 'min' takes the minimum value of the filter points
     # 'sum' takes the sum of the filter points
     sampling: types.Optional[str] = None,
+    
+    # Use dimensions to define information about each dimension of series.data or dataset.source.
+    # Note: If a dataset is used, then the dimension name can be given in the first row/column of the dataset.source.
+    # So there is no need to specify the dimension here.
+    # However, if dimensions are specified here, then ECharts will no longer automatically get the dimension information from the first row/column of dataset.source.
+    dimensions: types.Union[types.Sequence, None] = None,
+
+    # When using a dataset, seriesLayoutBy specifies whether rows or columns in the dataset correspond to the series, i.e. whether the series is "laid out" on the rows or columns of the dataset. Possible values.
+    # 'column': by default, the columns of the dataset correspond to the series, so that each column in the dataset is a dimension.
+    # 'row': the row of the dataset corresponds to the series, so that each row in the dataset is a dimension.
+    series_layout_by: str = "column",
 
     # Markpoint configuration items, see `series_options.MarkPointOpts`
     markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
@@ -686,6 +697,9 @@ def add_yaxis(
 
     # Item style configuration items, see `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # You can define which dimension of data is encoded as what.
+    encode: types.Union[types.JSFunc, dict, None] = None,
 )
 ```
 

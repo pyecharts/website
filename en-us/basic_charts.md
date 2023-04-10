@@ -1553,9 +1553,6 @@ def add(
     nodes: Sequence,
     links: Sequence,
 
-    # Whether the legend is selected or not
-    is_selected: bool = True,
-    
     # The distance of the Sankey component from the left side of the container.
     pos_left: types.Union[str, types.Numeric] = "5%",
 
@@ -1592,6 +1589,13 @@ def add(
     # Control the interaction of node dragging, turned on by default. When turned on, the user can drag any node in the diagram to any position. If you want to turn off this interaction, just set the value to false.
     is_draggable: bool = True,
     
+    # When highlighting a graph, does the graph of other data fade out to achieve focus. The following configurations are supported:
+    # 'none' No other graphs are faded out, this configuration is used by default.
+    # 'self' Focuses (does not fade out) only the graph of the currently highlighted data.
+    # 'series' Focuses all graphs in the series of the currently highlighted data.
+    # 'adjacency' graph that focuses on the neighbours and edges in the relationship graph
+    focus_node_mode: str = "none".
+
     # mouse hover to node or edge, adjacent nodes and edges highlight interaction, off by default, can be turned on manually.
     # false: When hovering to a node or edge, only the hovered node or edge is highlighted.
     # true: same as 'allEdges'.

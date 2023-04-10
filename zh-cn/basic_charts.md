@@ -1555,9 +1555,6 @@ def add(
     nodes: Sequence,
     links: Sequence,
 
-    # 是否选中图例
-    is_selected: bool = True,
-    
     # Sankey 组件离容器左侧的距离。
     pos_left: types.Union[str, types.Numeric] = "5%",
 
@@ -1593,6 +1590,13 @@ def add(
 
     # 控制节点拖拽的交互，默认开启。开启后，用户可以将图中任意节点拖拽到任意位置。若想关闭此交互，只需将值设为 false 就行了。
     is_draggable: bool = True,
+    
+    # 在高亮图形时，是否淡出其它数据的图形已达到聚焦的效果。支持如下配置：
+    # 'none' 不淡出其它图形，默认使用该配置。
+    # 'self' 只聚焦（不淡出）当前高亮的数据的图形。
+    # 'series' 聚焦当前高亮的数据所在的系列的所有图形。
+    # 'adjacency' 聚焦关系图中的邻接点和边的图形
+    focus_node_mode: str = "none",
     
     # 鼠标 hover 到节点或边上，相邻接的节点和边高亮的交互，默认关闭，可手动开启。
     # false：hover 到节点或边时，只有被 hover 的节点或边高亮。
