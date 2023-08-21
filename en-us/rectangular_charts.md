@@ -534,6 +534,10 @@ def add_yaxis(
     # 'data': assigns the colours in the palette by data item, with each data item using a different colour.
     color_by: types.Optional[str] = "series",
     
+    # Specifies the column width. Either an absolute value (e.g. 10) or a percentage (e.g. '20%' for what percent of the band width) can be used. 
+    # The default is adaptive.
+    bar_width: types.Optional[types.Numeric] = None,
+    
     # Layout style, optional values.
     # 'horizontal': horizontal layout of individual boxes.
     # 'vertical': vertical layout of the boxes.

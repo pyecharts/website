@@ -1499,6 +1499,33 @@ class SingleAxisOpts(
     # 'log': The time axis, for continuous temporal data, has a formatting of time compared to the numeric axis and differs in the scale calculation, e.g. whether to use a month, week, day or hour scale depending on the span.
     # 'log' logarithmic axis. Applies to logarithmic data.
     type_: Optional[str] = None,
+    
+    # Axis line options, see `global_options.AxisLineOpts`.
+    axisline_opts: Union[AxisLineOpts, dict, None] = None,
+    
+    # Axis tick options, refer to `global_options.AxisTickOpts`.
+    axistick_opts: union[AxisTickOpts, dict, None] = None, # Axis tick label configuration item, refer to `global_options.AxisTickOpts`.
+    
+    # Axis label options, refer to `series_options.LabelOpts`.
+    axislabel_opts: Union[LabelOpts, dict, None] = None, # Axis axis label configuration item ref.
+    
+    # Axis pointer options, see `global_options.AxisPointerOpts`.
+    axispointer_opts: Union[AxisPointerOpts, dict, None] = None, # Axis pointer configuration items in the grid area, refer to `global_options.AxisPointerOpts`.
+    
+    # Axis separators in the grid area, not shown by default. References `series_options.SplitAreaOpts`.
+    splitarea_opts: union[SplitAreaOpts, dict, None] = None, # Split area configuration items, cf.
+    
+    # Split line opts, see `series_options.SplitLineOpts`.
+    splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(is_show=True),
+    
+    # Settings related to the minor ticks of the axes, see `series_options.MinorTickOpts`.
+    minor_tick_opts: Union[MinorTickOpts, dict, None] = None, # Axes in grid area.
+    
+    # The minor ticks for the axes in the grid area. Minor split lines align to minor ticks, see `series_options.MinorSplitLineOpts`.
+    minor_split_line_opts: Union[MinorSplitLineOpts, dict, None] = None, `series_options.
+    
+    # Configuration items for the tipbox component, see `series_options.TooltipOpts`.
+    tooltip_opts: Union[TooltipOpts, dict, None] = None, # Tip box component configuration item, see `series_options.TooltipOpts`.
 )
 ```
 

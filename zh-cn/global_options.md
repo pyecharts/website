@@ -1410,6 +1410,33 @@ class SingleAxisOpts(
     # 例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
     # 'log' 对数轴。适用于对数数据。
     type_: Optional[str] = None,
+    
+    # 坐标轴刻度线配置项，参考 `global_options.AxisLineOpts`
+    axisline_opts: Union[AxisLineOpts, dict, None] = None,
+    
+    # 坐标轴刻度配置项，参考 `global_options.AxisTickOpts`
+    axistick_opts: Union[AxisTickOpts, dict, None] = None,
+    
+    # 坐标轴线标签配置项，参考 `series_options.LabelOpts`
+    axislabel_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 坐标轴指示器配置项，参考 `global_options.AxisPointerOpts`
+    axispointer_opts: Union[AxisPointerOpts, dict, None] = None,
+    
+    # 坐标轴在 grid 区域中的分隔区域，默认不显示。参考 `series_options.SplitAreaOpts`
+    splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
+    
+    # 分割线配置项，参考 `series_options.SplitLineOpts`
+    splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(is_show=True),
+    
+    # 坐标轴次刻度线相关设置，参考 `series_options.MinorTickOpts`
+    minor_tick_opts: Union[MinorTickOpts, dict, None] = None,
+    
+    # 坐标轴在 grid 区域中的次分隔线。次分割线会对齐次刻度线 minorTick，参考 `series_options.MinorSplitLineOpts`
+    minor_split_line_opts: Union[MinorSplitLineOpts, dict, None] = None,
+    
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[TooltipOpts, dict, None] = None,
 )
 ```
 

@@ -588,9 +588,45 @@ class GraphNode(
     # The size of the node marker for this category, either as a single number such as 10, or as an array of separate widths and heights.
     # For example, [20, 10] means the marker is 20 wide and 10 high.
     symbol_size: Union[Numeric, Sequence, None] = None,
+    
+    # The rotation angle (not radians) of the node marker. Positive values indicate counterclockwise rotation.
+    # Note that symbolRotate is ignored in markLine when symbol is 'arrow' forcing the angle to be tangent.
+    symbol_rotate: Optional[int] = None, # symbol_rotate: Optional[int] = None, # symbol_rotate.
+    
+    # Item style opts, see `series_options.ItemStyleOpts`.
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None, # Item style configuration item, refer to `series_options.ItemStyleOpts`.
 
     # Label configuration items, refer to `series_options.LabelOpts`
     label_opts: Optional[LabelOpts] = None,
+    
+    # Whether to turn off the highlighting state.
+    # Turn off highlighting to stop it being triggered when the mouse is over the graph, when the tooltip is triggered, or when the legend is linked.
+    # Turn it off when there are a lot of graphics to improve the smoothness of the interaction.
+    is_disabled_emphasis: Optional[bool] = None, # The style of the highlighted element.
+    
+    # Item style options for highlighting, see `series_options.ItemStyleOpts`.
+    emphasis_itemstyle_opts: Union[ItemStyleOpts, dict, None] = None, # Highlighted label configuration items, refer to `series_options.ItemStyleOpts`.
+    
+    # Highlighted label options, see `series_options.LabelOpts`.
+    emphasis_label_opts: Union[LabelOpts, dict, None] = None, # highlighted label configuration items, refer to `series_options.LabelOpts`, refer to `series_options.
+    
+    # Faded item style options, see `series_options.ItemStyleOpts`.
+    blur_itemstyle_opts: Union[ItemStyleOpts, dict, None] = None, # Faded item style configuration items, refer to `series_options.ItemStyleOpts`.
+    
+    # Faded label options, see `series_options.LabelOpts`.
+    blur_label_opts: Union[LabelOpts, dict, None] = None,.
+    
+    # Whether or not it can be selected. Valid when selectedMode is turned on and can be used to turn off some data.
+    is_disabled_select: Optional[bool] = None, # The selected data can be used to turn off some of the data.
+    
+    # The selected item style options, see `series_options.ItemStyleOpts`.
+    select_itemstyle_opts: Union[ItemStyleOpts, dict, None] = None, # Selected item style configuration items, refer to `series_options.ItemStyleOpts`.
+    
+    # Selected label options, see `series_options.LabelOpts`.
+    select_label_opts: Union[LabelOpts, dict, None] = None, # Selected label configuration items, refer to `series_options.LabelOpts`.
+    
+    # Tip box component configuration item, see `series_options.TooltipOpts`.
+    tooltip_opts: Union[TooltipOpts, dict, None] = None, # The configuration item for the tip box component, see `series_options.TooltipOpts`.
 )
 ```
 
@@ -620,6 +656,35 @@ class GraphLink(
 
     # Label styles, refer to `series_options.LabelOpts`
     label_opts: Optional[LabelOpts] = None,
+    
+    # Whether to turn off the highlighting state.
+    # Turn off highlighting to stop it being triggered when the mouse is over the graph, when the tooltip is triggered, or when the legend is linked.
+    # Turn it off when there are a lot of graphics to improve the smoothness of the interaction.
+    is_disabled_emphasis: Optional[bool] = None, # The style of the highlighted element.
+    
+    # Line style options for highlighting, see `series_options.LineStyleOpts`.
+    emphasis_linestyle_opts: Union[LineStyleOpts, dict, None] = None, # Line style configuration items for highlighting, refer to `series_options.LineStyleOpts`.
+    
+    # Highlighted label opts, see `series_options.LabelOpts`.
+    emphasis_label_opts: Union[LabelOpts, dict, None] = None, # The line style configuration item for fading, refer to `series_options.LabelOpts`.
+    
+    # Faded line style options, see `series_options.LineStyleOpts`.
+    blur_linestyle_opts: Union[LineStyleOpts, dict, None] = None, # Fading line style configuration items, refer to `series_options.LineStyleOpts`.
+    
+    # Faded label opts, see `series_options.LabelOpts`.
+    blur_label_opts: Union[LabelOpts, dict, None] = None, # The blur label configuration item.
+    
+    # Whether or not it can be selected. Valid when selectedMode is turned on and can be used to turn off some data.
+    is_disabled_select: Optional[bool] = None,.
+    
+    # Selected line style options, see `series_options.LineStyleOpts`.
+    select_linestyle_opts: union[LineStyleOpts, dict, None] = None, # Selected line configuration items, ref.
+    
+    # Selected label options, see `series_options.LabelOpts`.
+    select_label_opts: Union[LabelOpts, dict, None] = None, # select_label_opts: Union[LabelOpts, dict, None] = None, # select_label_opts.
+    
+    # Make this edge not perform force guide layout calculations.
+    is_ignore_force_layout: bool = False,
 )
 ```
 
@@ -1588,6 +1653,9 @@ def add(
 
     # Control the interaction of node dragging, turned on by default. When turned on, the user can drag any node in the diagram to any position. If you want to turn off this interaction, just set the value to false.
     is_draggable: bool = True,
+    
+    # Configuration of Sankey's Edge Label
+    edge_label_opt: types.Label = None,
     
     # When highlighting a graph, does the graph of other data fade out to achieve focus. The following configurations are supported:
     # 'none' No other graphs are faded out, this configuration is used by default.
