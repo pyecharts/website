@@ -232,6 +232,38 @@ class LabelOpts(
     # }
     formatter: Optional[str] = None,
     
+    # The text block background colour.
+    # Can use colour values, e.g. '#123234', 'red', 'rgba(0,23,11,0.3)'.
+    background_color: Optional[str] = None,.
+    
+    # The text block border colour. If set to 'inherit', it is the colour obtained by visual mapping, e.g. series colour.
+    border_color: Optional[str] = None, # Text block border width.
+    
+    # The border width of the text block.
+    border_width: Optional[Numeric] = None, # The rounded corner of the text block.
+    
+    # The rounded corner of the text block.
+    border_radius: Optional[Numeric] = None, # The inner margin of the text block.
+    
+    # The inner margin of the text block. Example:
+    # padding: [3, 4, 5, 6]: means [top, right, bottom, left] margin.
+    # padding: 4: means padding: [4, 4, 4, 4, 4].
+    # padding: [3, 4]: means padding: [3, 4, 3, 4].
+    # padding: [3, 4]: means padding: [3, 4, 3, 4]. # Note that the width and height of the text block specify the height and width of the content, not the padding.
+    padding: Union[Numeric, Sequence[Numeric], None] = None, # Text display width.
+    
+    # Text display width.
+    text_width: Optional[Numeric] = None, # text_width.
+    
+    # The height of the text.
+    text_height: Optional[Numeric] = None, # Text height.
+    
+    # If or not the text will be truncated or linefeed if it exceeds the width. Valid when width is configured.
+    # 'truncate' truncates and displays ellipsis-configured text at the end, defaults to...
+    # 'break' line feed
+    # 'breakAll' breaks the line, unlike 'break', which in Latin languages such as English also forces a line break within the word.
+    overflow: Optional[str] = None,
+    
     # In rich, you can customize the rich text style. Rich text styles can be used to create very rich effects in tags
     # See https://www.echartsjs.com/tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE for configuration details
     rich: Optional[dict] = None,

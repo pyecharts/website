@@ -536,6 +536,10 @@ def add_yaxis(
     # 'data'：按照数据项分配调色盘中的颜色，每个数据项都使用不同的颜色。
     color_by: types.Optional[str] = "series",
     
+    # 指定柱宽度。可以使用绝对数值（如 10）或百分比（如 '20%'，表示 band width 的百分之多少）。
+    # 默认自适应。
+    bar_width: types.Optional[types.Numeric] = None,
+    
     # 布局方式，可选值：
     # 'horizontal'：水平排布各个 box。
     # 'vertical'：竖直排布各个 box。

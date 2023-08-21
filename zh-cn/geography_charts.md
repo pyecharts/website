@@ -88,9 +88,17 @@ def add(
     # 数据项 (坐标点名称，坐标点值)
     data_pair: Sequence,
 
-    # Geo 图类型，有 scatter, effectScatter, heatmap, lines 4 种，建议使用
+    # Geo 图类型，有 9 种
     # from pyecharts.globals import GeoType
-    # GeoType.GeoType.EFFECT_SCATTER，GeoType.HEATMAP，GeoType.LINES
+    # ChartType.SCATTER
+    # ChartType.SCATTERGL
+    # ChartType.EFFECT_SCATTER
+    # ChartType.FLOWGL
+    # ChartType.HEATMAP
+    # ChartType.LINES
+    # ChartType.LINESGL
+    # ChartType.CUSTOM
+    # ChartType.PIE
     type_: str = "scatter",
 
     # 是否选中图例
@@ -107,6 +115,9 @@ def add(
     
     # 每个点模糊的大小，在地理坐标系(coordinateSystem: 'geo')上有效。
     point_size: types.Numeric = 20,
+    
+    # 饼图的半径, 当 type_ 为 ChartType.PIE 生效
+    radius: types.Optional[types.Sequence] = None,
 
     # 系列 label 颜色
     color: Optional[str] = None,

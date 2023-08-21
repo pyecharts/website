@@ -588,9 +588,45 @@ class GraphNode(
     # 该类目节点标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示宽和高，
     # 例如 [20, 10] 表示标记宽为 20，高为 10。
     symbol_size: Union[Numeric, Sequence, None] = None,
+    
+    # 节点标记的旋转角度（而非弧度）。正值表示逆时针旋转。
+    # 注意在 markLine 中当 symbol 为 'arrow' 时会忽略 symbolRotate 强制设置为切线的角度。
+    symbol_rotate: Optional[int] = None,
+    
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Optional[LabelOpts] = None,
+    
+    # 是否关闭高亮状态。
+    # 关闭高亮状态可以在鼠标移到图形上，tooltip 触发，或者图例联动的时候不再触发高亮效果。
+    # 在图形非常多的时候可以关闭以提升交互流畅性。
+    is_disabled_emphasis: Optional[bool] = None,
+    
+    # 高亮的图元样式配置项，参考 `series_options.ItemStyleOpts`
+    emphasis_itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # 高亮的标签配置项，参考 `series_options.LabelOpts`
+    emphasis_label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 淡出的图元样式配置项，参考 `series_options.ItemStyleOpts`
+    blur_itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # 淡出的标签配置项，参考 `series_options.LabelOpts`
+    blur_label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 是否可以被选中。在开启selectedMode的时候有效，可以用于关闭部分数据。
+    is_disabled_select: Optional[bool] = None,
+    
+    # 选中的图元样式配置项，参考 `series_options.ItemStyleOpts`
+    select_itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # 选中的标签配置项，参考 `series_options.LabelOpts`
+    select_label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[TooltipOpts, dict, None] = None,
 )
 ```
 
@@ -620,6 +656,35 @@ class GraphLink(
 
     # 标签样式，参考 `series_options.LabelOpts`
     label_opts: Optional[LabelOpts] = None,
+    
+    # 是否关闭高亮状态。
+    # 关闭高亮状态可以在鼠标移到图形上，tooltip 触发，或者图例联动的时候不再触发高亮效果。
+    # 在图形非常多的时候可以关闭以提升交互流畅性。
+    is_disabled_emphasis: Optional[bool] = None,
+    
+    # 高亮的线条样式配置项，参考 `series_options.LineStyleOpts`
+    emphasis_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    
+    # 高亮的标签配置项，参考 `series_options.LabelOpts`
+    emphasis_label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 淡出的线条样式配置项，参考 `series_options.LineStyleOpts`
+    blur_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    
+    # 淡出的标签配置项，参考 `series_options.LabelOpts`
+    blur_label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 是否可以被选中。在开启selectedMode的时候有效，可以用于关闭部分数据。
+    is_disabled_select: Optional[bool] = None,
+    
+    # 选中的线条配置项，参考 `series_options.LineStyleOpts`
+    select_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    
+    # 选中的标签配置项，参考 `series_options.LabelOpts`
+    select_label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 使此边不进行力导图布局的计算。
+    is_ignore_force_layout: bool = False
 )
 ```
 
@@ -1590,6 +1655,9 @@ def add(
 
     # 控制节点拖拽的交互，默认开启。开启后，用户可以将图中任意节点拖拽到任意位置。若想关闭此交互，只需将值设为 false 就行了。
     is_draggable: bool = True,
+    
+    # Sankey 的 Edge Label 的配置
+    edge_label_opt: types.Label = None,
     
     # 在高亮图形时，是否淡出其它数据的图形已达到聚焦的效果。支持如下配置：
     # 'none' 不淡出其它图形，默认使用该配置。

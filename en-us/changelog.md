@@ -1,6 +1,17 @@
 # Version log
 
-### version 2.0.3 - 2023-04-06 (Current)
+### version 2.0.4 - 2023-08-21 (Current)
+***Add***
+* [issue#2219](https://github.com/pyecharts/pyecharts/issues/2219) [**EXPERIMENTAL**] Updated `Geo` support for `Pie` diagram configuration.
+* [issue#2096](https://github.com/pyecharts/pyecharts/issues/2096) Add `recipes` file for `conda-forge` [pull-requests#23709](https://github. com/conda-forge/staged-recipes/pull/23709)
+
+**Updated**
+* [issue#2213](https://github.com/pyecharts/pyecharts/issues/2213) Updated `Kline` configuration to add K-line bar width configuration
+* [issue#2211](https://github.com/pyecharts/pyecharts/issues/2211) Updated configuration of `Graph` graph, `GraphNode` and `GraphLink`.
+* [issue#2194](https://github.com/pyecharts/pyecharts/issues/2194) Updated `Sankey` configuration to add `EdgeLabel` configuration to match `LabelOpts`.
+* [issue#2176](https://github.com/pyecharts/pyecharts/issues/2176) Updated `ThemeRiver` configuration.
+
+### version 2.0.3 - 2023-04-06
 ***Add***
 * [pr#2158](https://github.com/pyecharts/pyecharts/pull/2158) Add a rendering configuration (embedding `js` files into `HTML` files) by @omixwxm
 

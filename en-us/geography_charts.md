@@ -88,9 +88,17 @@ def add(
     # Data items (coordinate point names, coordinate point values)
     data_pair: Sequence,
 
-    # Geo plot types, 4 types: scatter, effectScatter, heatmap, lines, recommended
+    # Geo plot types, 9 types
     # from pyecharts.globals import GeoType
-    # GeoType.GeoType.EFFECT_SCATTER, GeoType.HEATMAP, GeoType.LINES
+    # ChartType.SCATTER
+    # ChartType.SCATTERGL
+    # ChartType.EFFECT_SCATTER
+    # ChartType.FLOWGL
+    # ChartType.HEATMAP
+    # ChartType.LINES
+    # ChartType.LINESGL
+    # ChartType.CUSTOM
+    # ChartType.PIE
     type_: str = "scatter",
 
     # Whether the legend is selected or not
@@ -107,6 +115,9 @@ def add(
     
     # The size of each point blur, valid on the geographic coordinate system (coordinateSystem: 'geo').
     point_size: types.Numeric = 20,
+
+    # Radius of the pie chart, valid when type_ is ChartType.
+    radius: types.Optional[types.Sequence] = None,
 
     # series label colour
     color: Optional[str] = None,

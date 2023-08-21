@@ -1,6 +1,17 @@
 # 版本日志
 
-### version 2.0.3 - 2023-04-06 (Current)
+### version 2.0.4 - 2023-08-21 (Current)
+***Add***
+* [issue#2219](https://github.com/pyecharts/pyecharts/issues/2219) 【**试验性**】更新 `Geo` 支持 `Pie` 图的配置
+* [issue#2096](https://github.com/pyecharts/pyecharts/issues/2096) 增加 `conda-forge` 的 `recipes` 文件 [pull-requests#23709](https://github.com/conda-forge/staged-recipes/pull/23709)
+
+**Updated**
+* [issue#2213](https://github.com/pyecharts/pyecharts/issues/2213) 更新 `Kline` 的配置，增加 K 线柱状图宽度的配置
+* [issue#2211](https://github.com/pyecharts/pyecharts/issues/2211) 更新 `Graph` 图下,  `GraphNode` 和 `GraphLink` 的配置
+* [issue#2194](https://github.com/pyecharts/pyecharts/issues/2194) 更新 `Sankey` 的配置，增加 `EdgeLabel` 的配置与 `LabelOpts` 一致。
+* [issue#2176](https://github.com/pyecharts/pyecharts/issues/2176) 更新 `ThemeRiver` 的配置。
+
+### version 2.0.3 - 2023-04-06
 ***Add***
 * [pr#2158](https://github.com/pyecharts/pyecharts/pull/2158) 增加一个渲染配置方式（将 `js` 文件嵌入 `HTML` 文件）by @omixwxm
 

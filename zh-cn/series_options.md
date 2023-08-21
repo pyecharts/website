@@ -233,6 +233,38 @@ class LabelOpts(
     # }
     formatter: Optional[str] = None,
     
+    # 文字块背景色。
+    # 可以使用颜色值，例如：'#123234', 'red', 'rgba(0,23,11,0.3)'。
+    background_color: Optional[str] = None,
+    
+    # 文字块边框颜色。如果设置为 'inherit'，则为视觉映射得到的颜色，如系列色。
+    border_color: Optional[str] = None,
+    
+    # 文字块边框宽度。
+    border_width: Optional[Numeric] = None,
+    
+    # 文字块的圆角。
+    border_radius: Optional[Numeric] = None,
+    
+    # 文字块的内边距。例如：
+    # padding: [3, 4, 5, 6]：表示 [上, 右, 下, 左] 的边距。
+    # padding: 4：表示 padding: [4, 4, 4, 4]。
+    # padding: [3, 4]：表示 padding: [3, 4, 3, 4]。
+    # 注意，文字块的 width 和 height 指定的是内容高宽，不包含 padding。
+    padding: Union[Numeric, Sequence[Numeric], None] = None,
+    
+    # 文本显示宽度。
+    text_width: Optional[Numeric] = None,
+    
+    # 文本显示高度。
+    text_height: Optional[Numeric] = None,
+    
+    # 文字超出宽度是否截断或者换行。配置width时有效
+    # 'truncate' 截断，并在末尾显示ellipsis配置的文本，默认为...
+    # 'break' 换行
+    # 'breakAll' 换行，跟'break'不同的是，在英语等拉丁文中，'breakAll'还会强制单词内换行
+    overflow: Optional[str] = None,
+    
     # 在 rich 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果
     # 具体配置可以参考一下 https://www.echartsjs.com/tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE
     rich: Optional[dict] = None,
