@@ -42,6 +42,9 @@ def add(
     
     # Data mapping configuration items, see `global_options.VisualMapOpts`
     visualmap_opts: types.VisualMap = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -141,6 +144,9 @@ def add(
 
     # Item style configuration items, see `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -227,6 +233,9 @@ def add(
     
     # Item style configuration items, see `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -552,6 +561,9 @@ def add(
 
     # Item style configuration items, see `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -764,6 +776,9 @@ def add(
 
     # Tipbox component configuration items, refer to `series_options.
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -816,6 +831,9 @@ def add(
 
     # Item style configuration items, see `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -1077,6 +1095,9 @@ def add(
     
     # Pie chart guide line configuration, see `chart_options.PieLabelLineOpts`
     label_line_opts: types.PieLabelLine = opts,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -1252,6 +1273,9 @@ def add(
 
     # Tipbox component configuration items, refer to `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -1466,6 +1490,12 @@ def add_schema(
 
     # Axis line configuration items, see `global_options.AxisLineOpts`
     axisline_opt: Union[opts.AxisLineOpts, dict] = opts.AxisLineOpts(),
+    
+    # Axis tick settings, see `global_options.AxisTickOpts`.
+    axisTick_opt: types.AxisTick = None,
+
+    # Axis tick labels, see `global_options.LabelOpts`.
+    axislabel_opt: types.Label = None,
 
     # The radial axis of the polar coordinate system. References `basic_charts.RadiusAxisOpts`
     radiusaxis_opts: types.RadiusAxis = None,
@@ -1510,6 +1540,9 @@ def add(
 
     # Tipbox component configuration items, refer to `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -1645,7 +1678,7 @@ def add(
     # Layout iteration count to continuously optimize the position of nodes in the graph to reduce mutual occlusion between nodes and edges.
     # Default number of layout iterations: 32.
     # Note: The number of layout iterations should not be lower than the default value.
-    layout_iterations: types.Numeric = 32,
+    layout_iterations: types.Optional[types.Numeric] = None,
 
     # The layout orientation of the nodes in the san base map, either horizontally from left to right, or vertically from top to bottom.
     # The corresponding parameter values are horizontal, vertical respectively.
@@ -1683,6 +1716,9 @@ def add(
 
     # Tipbox component configuration items, refer to `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -1748,6 +1784,9 @@ def add(
     
     # Configuration of data items, refer to `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -1824,6 +1863,9 @@ def add(
     
     # Marker point style configuration items, see `series_options.ItemStyleOpts`
     itemstyle_opts: types.ItemStyle = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 ):
 ```
 

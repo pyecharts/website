@@ -1829,3 +1829,51 @@ class DatasetTransformOpts(
     is_print: bool = False,
 )
 ```
+
+### EmphasisOpts: polygon and label styles for highlighting.
+> *class pyecharts.EmphasisOpts*.
+
+```python
+class EmphasisOpts(
+    # Whether to turn off highlighting.
+    # Turning off highlighting can stop the highlighting effect from being triggered when the mouse is over the graph, the tooltip is triggered, or the legend is linked.
+    # Can be turned off when there are a lot of graphics to improve the smoothness of the interaction.
+    is_disabled: bool = False, # If or not hover is enabled at inflection points.
+    
+    # Whether or not to enable hover's zoom effect on corner markers.
+    is_scale: bool = True, # Whether to turn on hover's zoom effect on the inflection markers.
+    
+    # Whether or not to fade out the graph of other data to achieve the focus effect when highlighting the graph. The following configurations are supported:
+    # 'none' Do not fade out other graphs, this configuration is used by default.
+    # 'self' Focus only on the graph of the currently highlighted data (without fading out).
+    # 'series' Focus on all graphs in the series of the currently highlighted data.
+    
+    
+    # When focus is turned on, you can configure the scope of the fadeout via blurScope. The following configurations are supported
+    # 'coordinateSystem' The fade scope is the coordinate system, which is used by default.
+    # 'series' Fade out to series.
+    # 'global' Fadeout scope is global.
+    blur_scope: str = "coordinateSystem", # 'series' Fadeout scope is global.
+    
+    # Label configuration items, refer to `series_options.LabelOpts`.
+    label_opts: union[LabelOpts, dict, None] = None, # label_opts.
+    
+    # Whether to show visual guide lines.
+    is_show_label_line: bool = False, # whether to show the visual guide line.
+    
+    # The configuration item for the guide line, see `series_options.LineStyleOpts`.
+    label_linestyle_opts: union[LineStyleOpts, dict, None] = None, # The label style configuration item, refer to `series_options.LineStyleOpts`.
+    
+    # Item style options, see `series_options.ItemStyleOpts`.
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None, # Item style options, refer to `series_options.ItemStyleOpts`.
+    
+    # Highlight line style items, see `series_options.LineStyleOpts`.
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None, # Highlight line style options, refer to `series_options.LineStyleOpts`.
+    
+    # Highlight area style options, see `series_options.AreaStyleOpts`.
+    areastyle_opts: Union[AreaStyleOpts, dict, None] = None, # End label configuration item, refer to `series_options.AreaStyleOpts`.
+    
+    # end_label_opts, see `series_options.LabelOpts`.
+    end_label_opts: Union[LabelOpts, dict, None] = None, # end_label_opts: Union[LabelOpts, dict, None] = None, # end_label_opts.
+)
+```
