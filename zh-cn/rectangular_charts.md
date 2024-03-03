@@ -194,6 +194,9 @@ def add_yaxis(
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
+    
     # 可以定义 data 的哪个维度被编码成什么。
     encode: types.Union[types.JSFunc, dict, None] = None,
 )
@@ -308,6 +311,9 @@ def add_yaxis(
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -390,6 +396,12 @@ class EffectScatter(
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
+    
+    # 可以定义 data 的哪个维度被编码成什么。
+    encode: types.Union[types.JsCode, dict] = None,
 )
 ```
 
@@ -481,6 +493,9 @@ def add_yaxis(
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -564,6 +579,9 @@ def add_yaxis(
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -706,6 +724,9 @@ def add_yaxis(
     
     # 可以定义 data 的哪个维度被编码成什么。
     encode: types.Union[types.JSFunc, dict, None] = None,
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -872,6 +893,9 @@ def add_yaxis(
 
     # 可以定义 data 的哪个维度被编码成什么。
     encode: types.Union[types.JsCode, dict] = None,
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -946,6 +970,9 @@ def add_yaxis(
 
     # 可以定义 data 的哪个维度被编码成什么。
     encode: types.Union[types.JSFunc, dict, None] = None,
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 

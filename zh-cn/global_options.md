@@ -1040,7 +1040,7 @@ class VisualMapOpts(
     #  colorLightness: 颜色的明暗度，参见 HSL。
     #  colorSaturation: 颜色的饱和度，参见 HSL。
     #  colorHue: 颜色的色调，参见 HSL。
-    out_of_range: Optional[Sequence] = None,
+    out_of_range: Optional[dict] = None,
     
     # 图形的宽度，即长条的宽度。
     item_width: int = 0,
@@ -1738,5 +1738,53 @@ class DatasetTransformOpts(
     
     # debug 模式会通过浏览器 console 打印。
     is_print: bool = False,
+)
+```
+
+### EmphasisOpts: 高亮状态下的多边形和标签样式。
+> *class pyecharts.EmphasisOpts*
+
+```python
+class EmphasisOpts(
+    # 是否关闭高亮状态。
+    # 关闭高亮状态可以在鼠标移到图形上，tooltip 触发，或者图例联动的时候不再触发高亮效果。
+    # 在图形非常多的时候可以关闭以提升交互流畅性。
+    is_disabled: bool = False,
+    
+    # 是否开启 hover 在拐点标志上的放大效果。
+    is_scale: bool = True,
+    
+    # 在高亮图形时，是否淡出其它数据的图形已达到聚焦的效果。支持如下配置：
+    # 'none' 不淡出其它图形，默认使用该配置。
+    # 'self' 只聚焦（不淡出）当前高亮的数据的图形。
+    # 'series' 聚焦当前高亮的数据所在的系列的所有图形。
+    focus: str = "none",
+    
+    # 在开启focus的时候，可以通过blurScope配置淡出的范围。支持如下配置
+    # 'coordinateSystem' 淡出范围为坐标系，默认使用该配置。
+    # 'series' 淡出范围为系列。
+    # 'global' 淡出范围为全局。
+    blur_scope: str = "coordinateSystem",
+    
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 是否显示视觉引导线。
+    is_show_label_line: bool = False,
+    
+    # 引导线配置项，参考 `series_options.LineStyleOpts`
+    label_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # 高亮线条样式配置项，参考 `series_options.LineStyleOpts`
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    
+    # 高亮区域配置项，参考 `series_options.AreaStyleOpts`
+    areastyle_opts: Union[AreaStyleOpts, dict, None] = None,
+    
+    # 末尾标签配置项，参考 `series_options.LabelOpts`
+    end_label_opts: Union[LabelOpts, dict, None] = None,
 )
 ```

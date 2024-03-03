@@ -196,6 +196,9 @@ def add_yaxis(
     
     # You can define which dimension of data is encoded as what.
     encode: types.Union[types.JSFunc, dict, None] = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -308,6 +311,9 @@ def add_yaxis(
 
     # Item style configuration items, see `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -389,6 +395,12 @@ class EffectScatter(
 
     # Item style configuration items, see `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
+    
+    # You can define which dimension of data is encoded as what.
+    encode: types.Union[types.JSFunc, dict, None] = None,
 )
 ```
 
@@ -480,6 +492,9 @@ def add_yaxis(
 
     # Item style configuration items, see `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -562,6 +577,9 @@ def add_yaxis(
 
     # Item style configuration items, see `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -704,6 +722,9 @@ def add_yaxis(
     
     # You can define which dimension of data is encoded as what.
     encode: types.Union[types.JSFunc, dict, None] = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -870,6 +891,9 @@ def add_yaxis(
 
     # You can define which dimension of data is encoded as what.
     encode: types.Union[types.JsCode, dict] = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -945,6 +969,9 @@ def add_yaxis(
 
     # You can define which dimension of data is encoded as what.
     encode: types.Union[types.JSFunc, dict, None] = None,
+    
+    # Emphasis configuration items，see `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 

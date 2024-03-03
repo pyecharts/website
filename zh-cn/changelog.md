@@ -1,6 +1,24 @@
 # 版本日志
 
-### version 2.0.4 - 2023-08-21 (Current)
+### version 2.0.5 - 2023-12-04 (Current)
+***Add***
+* [issue#2259](https://github.com/pyecharts/pyecharts/issues/2259) 增加 `GeoItem` 用来兼容仅传入经纬度数据的模式
+* [issue#2254](https://github.com/pyecharts/pyecharts/issues/2254) 增加对 Numpy 和 Pandas 非原生数据结构作为数据入参的错误提示。
+
+**Updated**
+* [issue#2227](https://github.com/pyecharts/pyecharts/issues/2227) 增加部分 `Sunburst` 的配置
+* [issue#2263](https://github.com/pyecharts/pyecharts/issues/2263) 所有的图表增加 `Emphasis` 的配置
+* [issue#2240](https://github.com/pyecharts/pyecharts/issues/2240) 更新 Radar 图的配置
+* [issue#2286](https://github.com/pyecharts/pyecharts/pull/2286) 更新 VisualMapOpts 的配置
+
+**Fixed**
+* [issue#2236](https://github.com/pyecharts/pyecharts/issues/2236) 修复 `LegendOpts` 的 `border_width` 在特定配置下导致的样式异常问题
+* [issue#2264](https://github.com/pyecharts/pyecharts/issues/2264) 修复 `Grid` 下多个 `DataZoomOpts` 失效的问题
+* [issue#2265](https://github.com/pyecharts/pyecharts/issues/2265) 修复 `Sankey` 的配置错误问题
+
+
+
+### version 2.0.4 - 2023-08-21
 ***Add***
 * [issue#2219](https://github.com/pyecharts/pyecharts/issues/2219) 【**试验性**】更新 `Geo` 支持 `Pie` 图的配置
 * [issue#2096](https://github.com/pyecharts/pyecharts/issues/2096) 增加 `conda-forge` 的 `recipes` 文件 [pull-requests#23709](https://github.com/conda-forge/staged-recipes/pull/23709)

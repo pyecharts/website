@@ -1,6 +1,22 @@
 # Version log
 
-### version 2.0.4 - 2023-08-21 (Current)
+### version 2.0.5 - 2023-12-04 (Current)
+***Add***
+* [issue#2259](https://github.com/pyecharts/pyecharts/issues/2259) Add `GeoItem` for compatibility with incoming latitude/longitude data only.
+* [issue#2254](https://github.com/pyecharts/pyecharts/issues/2254) Add an error alert for Numpy and Pandas non-native data structures as data inputs.
+
+**Updated**
+* [issue#2227](https://github.com/pyecharts/pyecharts/issues/2227) Update the part of `Sunburst` configuration.
+* [issue#2263](https://github.com/pyecharts/pyecharts/issues/2263) Update `Emphasis` configuration to all charts.
+* [issue#2240](https://github.com/pyecharts/pyecharts/issues/2240) Update the part of `Radar` configuration.
+* [issue#2286](https://github.com/pyecharts/pyecharts/pull/2286) Update the part of `VisualMapOpts` configuration.
+
+**Fixed**
+* [issue#2236](https://github.com/pyecharts/pyecharts/issues/2236) Fix style anomalies in `LegendOpts.border_width` caused by certain configurations.
+* [issue#2264](https://github.com/pyecharts/pyecharts/issues/2264) Fix multiple `DataZoomOpts` failures under `Grid.
+* [issue#2265](https://github.com/pyecharts/pyecharts/issues/2265) Fix `Sankey` configuration bug.
+
+### version 2.0.4 - 2023-08-21
 ***Add***
 * [issue#2219](https://github.com/pyecharts/pyecharts/issues/2219) [**EXPERIMENTAL**] Updated `Geo` support for `Pie` diagram configuration.
 * [issue#2096](https://github.com/pyecharts/pyecharts/issues/2096) Add `recipes` file for `conda-forge` [pull-requests#23709](https://github. com/conda-forge/staged-recipes/pull/23709)

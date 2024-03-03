@@ -42,6 +42,9 @@ def add(
     
     # 数据映射配置项，参考 `global_options.VisualMapOpts`
     visualmap_opts: types.VisualMap = None,
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -141,6 +144,9 @@ def add(
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -227,6 +233,9 @@ def add(
     
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -552,6 +561,9 @@ def add(
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -765,6 +777,9 @@ def add(
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -817,6 +832,9 @@ def add(
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -1078,6 +1096,9 @@ def add(
     
     # 饼图引导线配置，参考 `chart_options.PieLabelLineOpts`
     label_line_opts: types.PieLabelLine = opts.PieLabelLineOpts(),
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -1253,6 +1274,9 @@ def add(
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -1468,7 +1492,13 @@ def add_schema(
 
     # 坐标轴轴线配置项，参考 `global_options.AxisLineOpts`
     axisline_opt: Union[opts.AxisLineOpts, dict] = opts.AxisLineOpts(),
-
+    
+    # 坐标轴刻度相关设置，参考 `global_options.AxisTickOpts`
+    axisTick_opt: types.AxisTick = None,
+    
+    # 坐标轴刻度标签的相关设置，参考 `global_options.LabelOpts`
+    axislabel_opt: types.Label = None,
+    
     # 极坐标系的径向轴。参考 `basic_charts.RadiusAxisOpts`
     radiusaxis_opts: types.RadiusAxis = None,
     
@@ -1512,6 +1542,9 @@ def add(
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -1647,7 +1680,7 @@ def add(
     # 布局的迭代次数，用来不断优化图中节点的位置，以减少节点和边之间的相互遮盖。
     # 默认布局迭代次数：32。
     # 注: 布局迭代次数不要低于默认值。
-    layout_iterations: types.Numeric = 32,
+    layout_iterations: types.Optional[types.Numeric] = None,
 
     # 桑基图中节点的布局方向，可以是水平的从左往右，也可以是垂直的从上往下。
     # 对应的参数值分别是 horizontal, vertical。
@@ -1685,6 +1718,9 @@ def add(
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -1750,6 +1786,9 @@ def add(
     
     # 数据项的配置，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 )
 ```
 
@@ -1826,6 +1865,9 @@ def add(
     
     # 标记点样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: types.ItemStyle = None,
+    
+    # 高亮配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: types.Emphasis = None,
 ):
 ```
 
