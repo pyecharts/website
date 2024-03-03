@@ -9,6 +9,7 @@
 * [issue#2227](https://github.com/pyecharts/pyecharts/issues/2227) Update the part of `Sunburst` configuration.
 * [issue#2263](https://github.com/pyecharts/pyecharts/issues/2263) Update `Emphasis` configuration to all charts.
 * [issue#2240](https://github.com/pyecharts/pyecharts/issues/2240) Update the part of `Radar` configuration.
+* [issue#2286](https://github.com/pyecharts/pyecharts/pull/2286) Update the part of `VisualMapOpts` configuration.
 
 **Fixed**
 * [issue#2236](https://github.com/pyecharts/pyecharts/issues/2236) Fix style anomalies in `LegendOpts.border_width` caused by certain configurations.

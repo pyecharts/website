@@ -1040,7 +1040,7 @@ class VisualMapOpts(
     #  colorLightness: 颜色的明暗度，参见 HSL。
     #  colorSaturation: 颜色的饱和度，参见 HSL。
     #  colorHue: 颜色的色调，参见 HSL。
-    out_of_range: Optional[Sequence] = None,
+    out_of_range: Optional[dict] = None,
     
     # 图形的宽度，即长条的宽度。
     item_width: int = 0,

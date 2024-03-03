@@ -1129,7 +1129,7 @@ class VisualMapOpts(
     # colorLightness: The lightness or darkness of the colour, see HSL.
     # colorSaturation: The saturation of the colour, see HSL.
     # colorHue: The hue of the colour, see HSL.
-    out_of_range: Optional[Sequence] = None,
+    out_of_range: Optional[dict] = None,
     
     # The width of the graphic, i.e. the width of the long bar.
     item_width: int = 0,

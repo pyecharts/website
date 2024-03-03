@@ -9,6 +9,7 @@
 * [issue#2227](https://github.com/pyecharts/pyecharts/issues/2227) 增加部分 `Sunburst` 的配置
 * [issue#2263](https://github.com/pyecharts/pyecharts/issues/2263) 所有的图表增加 `Emphasis` 的配置
 * [issue#2240](https://github.com/pyecharts/pyecharts/issues/2240) 更新 Radar 图的配置
+* [issue#2286](https://github.com/pyecharts/pyecharts/pull/2286) 更新 VisualMapOpts 的配置
 
 **Fixed**
 * [issue#2236](https://github.com/pyecharts/pyecharts/issues/2236) 修复 `LegendOpts` 的 `border_width` 在特定配置下导致的样式异常问题
