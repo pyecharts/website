@@ -1793,7 +1793,7 @@ class GraphicRect(
 ```
 
 
-### PolarOpts: polar coordinate system configuration
+## PolarOpts: polar coordinate system configuration
 > *class pyecharts.PolarOpts*
 
 ```python
@@ -1813,7 +1813,7 @@ class PolarOpts(
 )
 ```
 
-### DatasetTransformOpts: dataset transformation configuration items
+## DatasetTransformOpts: dataset transformation configuration items
 > *class pyecharts.options.DatasetTransformOpts*
 
 ```python
@@ -1830,7 +1830,7 @@ class DatasetTransformOpts(
 )
 ```
 
-### EmphasisOpts: polygon and label styles for highlighting.
+## EmphasisOpts: polygon and label styles for highlighting.
 > *class pyecharts.EmphasisOpts*.
 
 ```python
