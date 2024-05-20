@@ -1704,7 +1704,7 @@ class GraphicRect(
 ```
 
 
-### PolarOpts：极坐标系配置
+## PolarOpts：极坐标系配置
 > *class pyecharts.PolarOpts*
 
 ```python
@@ -1724,7 +1724,7 @@ class PolarOpts(
 )
 ```
 
-### DatasetTransformOpts：数据集转换配置项
+## DatasetTransformOpts：数据集转换配置项
 > *class pyecharts.options.DatasetTransformOpts*
 
 ```python
@@ -1741,7 +1741,7 @@ class DatasetTransformOpts(
 )
 ```
 
-### EmphasisOpts: 高亮状态下的多边形和标签样式。
+## EmphasisOpts: 高亮状态下的多边形和标签样式。
 > *class pyecharts.EmphasisOpts*
 
 ```python
