@@ -4,32 +4,32 @@
 
 **配置项**
 
-[全局配置项](zh-cn/global_options) | [系列配置项](zh-cn/series_options)
+[全局配置项](./global_options.md) | [系列配置项](./series_options.md)
 
 **基本使用**
 
-[图表 API](zh-cn/chart_api) | [示例数据](zh-cn/demo_data) | [全局变量](zh-cn/global_vars)
+[图表 API](./chart_api.md) | [示例数据](./demo_data.md) | [全局变量](./global_vars.md)
 
 **图表类型**
 
-[基本图表](zh-cn/basic_charts) | [直角坐标系图表](zh-cn/rectangular_charts) | [地理图表](zh-cn/geography_charts) | [3D 图表](zh-cn/3d_charts) | [组合图表](zh-cn/composite_charts) | [HTML 组件](zh-cn/html_components)
+[基本图表](./basic_charts.md) | [直角坐标系图表](./rectangular_charts.md) | [地理图表](./geography_charts.md) | [3D 图表](./3d_charts.md) | [组合图表](./composite_charts.md) | [HTML 组件](./html_components.md)
 
 **进阶话题**
 
-[参数传递](zh-cn/parameters) | [数据格式](zh-cn/data_format) | [定制主题](zh-cn/themes) | [定制地图](zh-cn/maps) | [渲染图片](zh-cn/render_images) | [Notebook](zh-cn/notebook) | [原生 Javascript](zh-cn/javasrcipt) | [资源引用](zh-cn/assets_host)
+[参数传递](./parameters.md) | [数据格式](./data_format.md) | [定制主题](./themes.md) | [定制地图](./maps.md) | [渲染图片](./render_images.md) | [Notebook](./notebook.md) | [原生 Javascript](./javascript.md) | [资源引用](./assets_host.md)
 
 **Web 框架整合**
 
- [Flask](zh-cn/web_flask) | [Sanic](zh-cn/web_sanic) | [Django](zh-cn/web_django) | [Tornado](zh-cn/web_tornado)
+ [Flask](./web_flask.md) | [Sanic](./web_sanic.md) | [Django](./web_django.md) | [Tornado](./web_tornado.md)
 
 **其他资源**
 
-[示例项目](https://github.com/pyecharts/pyecharts-gallery) | [地理地图数据](zh-cn/datasets)
+[示例项目](https://github.com/pyecharts/pyecharts-gallery) | [地理地图数据](./datasets.md)
 
 **项目发布**
 
-[版本日志](zh-cn/changelog) | [里程碑](zh-cn/release-note/)
+[版本日志](./changelog.md) | [里程碑](./release-note/)
 
 **项目开发**
 
-[参与贡献](zh-cn/contribution) | [技术文档](zh-cn/technical) | [赞助者名单](zh-cn/donors)  | [FAQ](zh-cn/faq)
+[参与贡献](./contribution.md) | [技术文档](./technical.md) | [赞助者名单](./donors.md)  | [FAQ](./faq.md)
