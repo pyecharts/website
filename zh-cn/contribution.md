@@ -10,6 +10,5 @@ pyecharts 目前只有 3 个开发者在参与日常的开发和维护工作，�
 
 * [pyecharts/website](https://github.com/pyecharts/website)
 * [pyecharts/pyecharts-gallery](https://github.com/pyecharts/pyecharts-gallery)
-* [pyecharts/pyecharts-user-case](https://github.com/pyecharts/pyecharts-user-case)
 
 Fork -> Develop -> Test -> PR -> Merged ✨
