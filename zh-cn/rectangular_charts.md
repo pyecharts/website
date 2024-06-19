@@ -91,6 +91,17 @@ def add_yaxis(
 
     # 使用的 y 轴的 index，在单个图表实例中存在多个 y 轴的时候有用。
     yaxis_index: Optional[Numeric] = None,
+    
+    # 使用的极坐标系的 index，在单个图表实例中存在多个极坐标系的时候有用。
+    polar_index: types.Optional[types.Numeric] = None,
+    
+    # 是否在环形柱条两侧使用圆弧效果。仅对极坐标系柱状图有效。
+    is_round_cap: types.Optional[bool] = None,
+    
+    # 从调色盘 option.color 中取色的策略，可取值为：
+    # 'series'：按照系列分配调色盘中的颜色，同一系列中的所有数据都是用相同的颜色；
+    # 'data'：按照数据项分配调色盘中的颜色，每个数据项都使用不同的颜色。
+    color_by: types.Optional[str] = None,
 
     # 是否启用图例 hover 时的联动高亮
     is_legend_hover_link: bool = True,
@@ -152,6 +163,17 @@ def add_yaxis(
     
     # 开启绘制优化的阈值。
     large_threshold: types.Numeric = 400,
+    
+    # 渐进式渲染时每一帧绘制图形数量，设为 0 时不启用渐进式渲染，支持每个系列单独配置。
+    progressive: types.Optional[types.Numeric] = None,
+    
+    # 启用渐进式渲染的图形数量阈值，在单个系列的图形数量超过该阈值时启用渐进式渲染。
+    progressive_threshold: types.Optional[types.Numeric] = None,
+    
+    # 分片的方式。可选值：
+    # 'sequential': 按照数据的顺序分片。缺点是渲染过程不自然。
+    # 'mod': 取模分片，即每个片段中的点会遍布于整个数据，从而能够视觉上均匀得渲染。
+    progressive_chunk_mode: types.Optional[str] = None,
 
     # 使用 dimensions 定义 series.data 或者 dataset.source 的每个维度的信息。
     # 注意：如果使用了 dataset，那么可以在 dataset.source 的第一行/列中给出 dimension 名称。
@@ -187,6 +209,9 @@ def add_yaxis(
 
     # 标记线配置项，参考 `series_options.MarkLineOpts`
     markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
+    
+    # 图表标域，常用于标记图表中某个范围的数据，参考 `series_options.MarkAreaOpts`
+    markarea_opts: types.MarkArea = None,
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
@@ -196,6 +221,12 @@ def add_yaxis(
     
     # 高亮配置项，参考 `global_options.EmphasisOpts`
     emphasis_opts: types.Emphasis = None,
+    
+    # 淡出时的图形样式和标签样式。开启 emphasis.focus 后有效。
+    blur_opts: types.Blur = None,
+    
+    # 数据选中时的图形样式和标签样式。开启 selectedMode 后有效。
+    select_opts: types.Select = None,
     
     # 可以定义 data 的哪个维度被编码成什么。
     encode: types.Union[types.JSFunc, dict, None] = None,
@@ -207,13 +238,22 @@ def add_yaxis(
 ```python
 class BarItem(
     # 数据项名称。
-    name: Optional[str] = None,
+    name: Union[int, str, None] = None,
 
     # 单个数据项的数值。
     value: Optional[Numeric] = None,
+    
+    # 该数据项的组 ID。
+    group_id: Optional[str] = None,
 
     # 单个柱条文本的样式设置，参考 `series_options.LabelOpts`。
     label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 是否显示视觉引导线。
+    is_show_label_line: Optional[bool] = None,
+    
+    # 视觉引导线配置
+    label_line_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
 
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
@@ -238,6 +278,9 @@ class BarBackgroundStyleOpts(
 
     # 柱条的描边类型，默认为实线，支持 'dashed', 'dotted'。
     border_type: str = "solid",
+    
+    # 圆角半径，单位px，支持传入数组分别指定 4 个圆角半径。
+    border_radius: Union[Numeric, Sequence] = 0,
 
     # 圆角半径，单位px，支持传入数组分别指定 4 个圆角半径。 如:
     # barBorderRadius: 5, // 统一设置四个角的圆角大小
@@ -296,6 +339,39 @@ def add_yaxis(
 
     # 使用的 y 轴的 index，在单个图表实例中存在多个 y 轴的时候有用。
     yaxis_index: Optional[Numeric] = None,
+    
+    # 如果 series.data 没有指定，并且 dataset 存在，那么就会使用 dataset。
+    # datasetIndex 指定本系列使用那个 dataset。
+    dataset_index: types.Optional[types.Numeric] = None,
+    
+    # 从调色盘 option.color 中取色的策略，可取值为：
+    # 'series'：按照系列分配调色盘中的颜色，同一系列中的所有数据都是用相同的颜色；
+    # 'data'：按照数据项分配调色盘中的颜色，每个数据项都使用不同的颜色。
+    color_by: types.Optional[str] = None,
+    
+    # 是否启用图例 hover 时的联动高亮。
+    is_legend_hover_link: bool = True,
+    
+    # 是否开启 hover 在 box 上的动画效果。
+    is_hover_animation: bool = True,
+    
+    # 布局方式，可选值：
+    # 'horizontal'：水平排布各个 box。
+    # 'vertical'：竖直排布各个 box。
+    # 默认值根据当前坐标系状况决定：如果 category 轴为横轴，则水平排布；否则竖直排布；如果没有 category 轴则水平排布。
+    layout: types.Optional[str] = None,
+    
+    # box 的宽度的上下限。数组的意思是：[min, max]。
+    # 可以是绝对数值，如 [7, 50]，也可以是百分比，如 ['40%', '90%']。
+    # 百分比的意思是，最大可能宽度（bandWidth）的百分之多少。
+    box_width: types.Optional[types.Sequence] = None,
+    
+    # 选中模式的配置，表示是否支持多个选中，默认关闭，支持布尔值和字符串。
+    # 字符串取值可选'single'，'multiple'，'series' 分别表示单选，多选以及选择整个系列。
+    selected_mode: types.Union[bool, str] = False,
+    
+    # 使用 dimensions 定义 series.data 或者 dataset.source 的每个维度的信息。与 dataset 使用相关
+    dimensions: types.Union[types.Sequence, None] = None,
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
@@ -305,6 +381,20 @@ def add_yaxis(
 
     # 标记线配置项，参考 `series_options.MarkLineOpts`
     markline_opts: Union[opts.MarkLineOpts, dict] = opts.MarkLineOpts(),
+    
+    # 图表标域，常用于标记图表中某个范围的数据，参考 `series_options.MarkAreaOpts`
+    markarea_opts: types.MarkArea = None,
+    
+    # 盒须图所有图形的 zlevel 值。
+    # zlevel 用于 Canvas 分层，不同zlevel值的图形会放置在不同的 Canvas 中，Canvas 分层是一种常见的优化手段。
+    # 我们可以把一些图形变化频繁（例如有动画）的组件设置成一个单独的 zlevel。
+    # 需要注意的是过多的 Canvas 会引起内存开销的增大，在手机端上需要谨慎使用以防崩溃。
+    # zlevel 大的 Canvas 会放在 zlevel 小的 Canvas 的上面。
+    z_level: types.Numeric = 0,
+    
+    # 盒须图组件的所有图形的z值。控制图形的前后顺序。z值小的图形会被z值大的图形覆盖。
+    # z 相比 zlevel 优先级更低，而且不会创建新的 Canvas。
+    z: types.Numeric = 2,
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
@@ -314,6 +404,15 @@ def add_yaxis(
     
     # 高亮配置项，参考 `global_options.EmphasisOpts`
     emphasis_opts: types.Emphasis = None,
+    
+    # 淡出时的图形样式和标签样式。开启 emphasis.focus 后有效
+    blur_opts: types.Blur = None,
+    
+    # 数据选中时的图形样式和标签样式。开启 selectedMode 后有效。
+    select_opts: types.Select = None,
+    
+    # 可以定义 data 的哪个维度被编码成什么。
+    encode: types.Union[types.JSFunc, dict, None] = None,
 )
 ```
 
@@ -364,17 +463,45 @@ class EffectScatter(
     # 系列数据
     y_axis: types.Sequence[types.Union[opts.BoxplotItem, dict]],
 
-    # 是否选中图例
-    is_selected: bool = True,
-
     # 使用的 x 轴的 index，在单个图表实例中存在多个 x 轴的时候有用。
     xaxis_index: Optional[Numeric] = None,
 
     # 使用的 y 轴的 index，在单个图表实例中存在多个 y 轴的时候有用。
     yaxis_index: Optional[Numeric] = None,
+    
+    # 使用的极坐标系的 index，在单个图表实例中存在多个极坐标系的时候有用。
+    polar_index: types.Optional[types.Numeric] = None,
+    
+    # 使用的地理坐标系的 index，在单个图表实例中存在多个地理坐标系的时候有用。
+    geo_index: types.Optional[types.Numeric] = None,
+    
+    # 使用的日历坐标系的 index，在单个图表实例中存在多个日历坐标系的时候有用。
+    calendar_index: types.Optional[types.Numeric] = None,
+    
+    # 如果 series.data 没有指定，并且 dataset 存在，那么就会使用 dataset。datasetIndex 指定本系列使用哪个 dataset。
+    dataset_index: types.Optional[types.Numeric] = None,
 
     # 系列 label 颜色
     color: Optional[str] = None,
+    
+    # 从调色盘 option.color 中取色的策略，可取值为：
+    # 'series'：按照系列分配调色盘中的颜色，同一系列中的所有数据都是用相同的颜色；
+    # 'data'：按照数据项分配调色盘中的颜色，每个数据项都使用不同的颜色。
+    color_by: types.Optional[str] = None,
+    
+    # 是否启用图例 hover 时的联动高亮。
+    is_legend_hover_link: bool = True,
+    
+    # 配置何时显示特效。
+    # 可选：'render' 绘制完成后显示特效。'emphasis' 高亮（hover）的时候显示特效。
+    show_effect_on: str = "render",
+    
+    # 该系列使用的坐标系，可选：
+    # 'cartesian2d': 使用二维的直角坐标系（也称笛卡尔坐标系），通过 xAxisIndex, yAxisIndex指定相应的坐标轴组件。
+    # 'polar': 使用极坐标系，通过 polarIndex 指定相应的极坐标组件
+    # 'geo': 使用地理坐标系，通过 geoIndex 指定相应的地理坐标系组件。
+    # 'calendar': 使用日历坐标系，通过 calendarIndex 指定相应的日历坐标系组件。
+    coordinate_system: str = "cartesian2d",
 
     # 标记图形形状
     symbol: Optional[str] = None,
@@ -384,6 +511,10 @@ class EffectScatter(
 
     # 标记的旋转角度。注意在 markLine 中当 symbol 为 'arrow' 时会忽略 symbolRotate 强制设置为切线的角度。
     symbol_rotate: types.Optional[types.Numeric] = None,
+    
+    # 选中模式的配置，表示是否支持多个选中，默认关闭，支持布尔值和字符串。
+    # 字符串取值可选'single'，'multiple'，'series' 分别表示单选，多选以及选择整个系列。
+    selected_mode: types.Union[bool, str] = False,
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
@@ -399,6 +530,23 @@ class EffectScatter(
     
     # 高亮配置项，参考 `global_options.EmphasisOpts`
     emphasis_opts: types.Emphasis = None,
+    
+    # 标记点配置项，参考 `series_options.MarkPointOpts`
+    markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
+
+    # 标记线配置项，参考 `series_options.MarkLineOpts`
+    markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
+    
+    # 图表标域，常用于标记图表中某个范围的数据，参考 `series_options.MarkAreaOpts`
+    markarea_opts: types.MarkArea = None,
+    
+    # 所有图形的 zlevel 值。
+    z_level: types.Numeric = 0,
+
+    # 组件的所有图形的z值。控制图形的前后顺序。
+    # z值小的图形会被z值大的图形覆盖。
+    # z相比zlevel优先级更低，而且不会创建新的 Canvas。
+    z: types.Numeric = 2,
     
     # 可以定义 data 的哪个维度被编码成什么。
     encode: types.Union[types.JsCode, dict] = None,
@@ -470,14 +618,39 @@ def add_yaxis(
     # 系列数据项
     value: types.Sequence[types.Union[opts.HeatMapItem, dict]],
 
-    # 是否选中图例
-    is_selected: bool = True,
+    # 该系列使用的坐标系，可选：
+    # 'cartesian2d': 使用二维的直角坐标系（也称笛卡尔坐标系），通过 xAxisIndex, yAxisIndex指定相应的坐标轴组件。
+    # 'geo': 使用地理坐标系，通过 geoIndex 指定相应的地理坐标系组件。
+    # 'calendar': 使用日历坐标系，通过 calendarIndex 指定相应的日历坐标系组件。
+    coordinate_system: str = "cartesian2d",
 
     # 使用的 x 轴的 index，在单个图表实例中存在多个 x 轴的时候有用。
     xaxis_index: Optional[Numeric] = None,
 
     # 使用的 y 轴的 index，在单个图表实例中存在多个 y 轴的时候有用。
     yaxis_index: Optional[Numeric] = None,
+    
+    # 使用的地理坐标系的 index，在单个图表实例中存在多个地理坐标系的时候有用。
+    geo_index: types.Optional[types.Numeric] = None,
+    
+    # 使用的日历坐标系的 index，在单个图表实例中存在多个日历坐标系的时候有用。
+    calendar_index: types.Optional[types.Numeric] = None,
+    
+    # 如果 series.data 没有指定，并且 dataset 存在，那么就会使用 dataset。
+    # datasetIndex 指定本系列使用哪个 dataset。
+    dataset_index: types.Optional[types.Numeric] = None,
+    
+    # 每个点的大小，在地理坐标系(coordinateSystem: 'geo')上有效。
+    point_size: types.Optional[types.Numeric] = None,
+    
+    # 每个点模糊的大小，在地理坐标系(coordinateSystem: 'geo')上有效。
+    blur_size: types.Optional[types.Numeric] = None,
+    
+    # 最小的透明度，在地理坐标系(coordinateSystem: 'geo')上有效。
+    min_opacity: types.Optional[types.Numeric] = None,
+    
+    # 最大的透明度，在地理坐标系(coordinateSystem: 'geo')上有效。
+    max_opacity: types.Optional[types.Numeric] = None,
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
@@ -487,6 +660,9 @@ def add_yaxis(
 
     # 标记线配置项，参考 `series_options.MarkLineOpts`
     markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
+    
+    # 图表标域，常用于标记图表中某个范围的数据，参考 `series_options.MarkAreaOpts`
+    markarea_opts: types.MarkArea = None,
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
@@ -496,6 +672,19 @@ def add_yaxis(
     
     # 高亮配置项，参考 `global_options.EmphasisOpts`
     emphasis_opts: types.Emphasis = None,
+    
+    # 选中模式的配置，表示是否支持多个选中，默认关闭，支持布尔值和字符串。
+    # 字符串取值可选'single'，'multiple'，'series' 分别表示单选，多选以及选择整个系列。
+    selected_mode: types.Union[bool, str] = False,
+    
+    # 热力图所有图形的 zlevel 值。
+    z_level: types.Numeric = 0,
+    
+    # 热力图组件的所有图形的z值。控制图形的前后顺序。z值小的图形会被z值大的图形覆盖。
+    z: types.Numeric = 2,
+    
+    # 可以定义 data 的哪个维度被编码成什么。
+    encode: types.Union[types.JSFunc, dict, None] = None,
 )
 ```
 
@@ -542,10 +731,11 @@ def add_yaxis(
 
     # 系列数据
     y_axis: types.Sequence[types.Union[opts.CandleStickItem, dict]],
-
-    # 是否选中图例
-    is_selected: bool = True,
     
+    # 该系列使用的坐标系，可选：
+    # 'cartesian2d': 使用二维的直角坐标系（也称笛卡尔坐标系），通过 xAxisIndex, yAxisIndex指定相应的坐标轴组件。
+    coordinate_system: str = "cartesian2d",
+
     # 从调色盘 option.color 中取色的策略，可取值为：
     # 'series'：按照系列分配调色盘中的颜色，同一系列中的所有数据都是用相同的颜色；
     # 'data'：按照数据项分配调色盘中的颜色，每个数据项都使用不同的颜色。
@@ -554,6 +744,12 @@ def add_yaxis(
     # 指定柱宽度。可以使用绝对数值（如 10）或百分比（如 '20%'，表示 band width 的百分之多少）。
     # 默认自适应。
     bar_width: types.Optional[types.Numeric] = None,
+    
+    # 指定柱最小宽度。可以使用绝对数值（如 10）或百分比（如 '20%'，表示 band width 的百分之多少）。默认自适应。
+    bar_min_width: types.Optional[types.Numeric] = None,
+    
+    # 指定柱最大宽度。可以使用绝对数值（如 10）或百分比（如 '20%'，表示 band width 的百分之多少）。默认自适应。
+    bar_max_width: types.Optional[types.Numeric] = None,
     
     # 布局方式，可选值：
     # 'horizontal'：水平排布各个 box。
@@ -567,12 +763,21 @@ def add_yaxis(
 
     # 使用的 y 轴的 index，在单个图表实例中存在多个 y 轴的时候有用。
     yaxis_index: Optional[Numeric] = None,
+    
+    # 是否启用图例 hover 时的联动高亮。
+    is_legend_hover_link: bool = True,
+    
+    # 是否开启 hover 在 box 上的动画效果。
+    is_hover_animation: bool = True,
 
     # 标记线配置项，参考 `series_options.MarkLineOpts`
-    markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
+    markline_opts: types.MarkLine = None,
 
     # 标记点配置项，参考 `series_options.MarkPointOpts`
-    markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
+    markpoint_opts: types.MarkPoint = None,
+    
+    # 图表标域，常用于标记图表中某个范围的数据，参考 `series_options.MarkAreaOpts`
+    markarea_opts: types.MarkArea = None,
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
@@ -582,6 +787,26 @@ def add_yaxis(
     
     # 高亮配置项，参考 `global_options.EmphasisOpts`
     emphasis_opts: types.Emphasis = None,
+    
+    # 选中模式的配置，表示是否支持多个选中，默认关闭，支持布尔值和字符串。
+    # 字符串取值可选'single'，'multiple'，'series' 分别表示单选，多选以及选择整个系列。
+    selected_mode: types.Union[bool, str] = False,
+    
+    # 是否开启大数据量优化，在数据图形特别多而出现卡顿时候可以开启。
+    is_large: bool = False,
+    
+    # 可以定义 data 的哪个维度被编码成什么。
+    encode: types.Union[types.JSFunc, dict, None] = None,
+    
+    # 是否裁剪超出坐标系部分的图形，具体裁剪效果根据系列决定：
+    # K 线图：忽略整体都超出坐标系的图形，但是不裁剪单个图形
+    is_clip: bool = True,
+    
+    # K线图所有图形的 zlevel 值。
+    z_level: types.Numeric = 0,
+    
+    # K线图组件的所有图形的z值。控制图形的前后顺序。z值小的图形会被z值大的图形覆盖。
+    z: types.Numeric = 2,
 )
 ```
 
@@ -629,9 +854,6 @@ def add_yaxis(
     # 系列数据
     y_axis: types.Sequence[types.Union[opts.LineItem, dict]],
 
-    # 是否选中图例
-    is_selected: bool = True,
-
     # 是否连接空数据，空数据使用 `None` 填充
     is_connect_nones: bool = False,
 
@@ -640,6 +862,19 @@ def add_yaxis(
 
     # 使用的 y 轴的 index，在单个图表实例中存在多个 y 轴的时候有用。
     yaxis_index: Optional[Numeric] = None,
+    
+    # 使用的极坐标系的 index，在单个图表实例中存在多个极坐标系的时候有用。
+    polar_index: types.Optional[types.Numeric] = None,
+    
+    # 该系列使用的坐标系，可选：
+    # 'cartesian2d': 使用二维的直角坐标系（也称笛卡尔坐标系），通过 xAxisIndex, yAxisIndex指定相应的坐标轴组件。
+    # 'polar': 使用极坐标系，通过 polarIndex 指定相应的极坐标组件
+    coordinate_system: types.Optional[str] = None,
+    
+    # 从调色盘 option.color 中取色的策略，可取值为：
+    # 'series'：按照系列分配调色盘中的颜色，同一系列中的所有数据都是用相同的颜色；
+    # 'data'：按照数据项分配调色盘中的颜色，每个数据项都使用不同的颜色。
+    color_by: types.Optional[str] = None,
 
     # 系列 label 颜色
     color: Optional[str] = None,
@@ -659,6 +894,13 @@ def add_yaxis(
 
     # 数据堆叠，同个类目轴上系列配置相同的　stack　值可以堆叠放置。
     stack: Optional[str] = None,
+    
+    # 堆积数值的策略，前提是stack属性已被设置。其值可以是：
+    # 'samesign' 只在要堆叠的值与当前累积的堆叠值具有相同的正负符号时才堆叠。
+    # 'all' 堆叠所有的值，不管当前或累积的堆叠值的正负符号是什么。
+    # 'positive' 只堆积正值。
+    # 'negative' 只堆叠负值。
+    stack_strategy: types.Optional[str] = "samesign",
 
     # 是否平滑曲线
     is_smooth: bool = False,
@@ -706,6 +948,9 @@ def add_yaxis(
 
     # 标记线配置项，参考 `series_options.MarkLineOpts`
     markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
+    
+    # 图表标域，常用于标记图表中某个范围的数据，参考 `series_options.MarkAreaOpts`
+    markarea_opts: types.MarkArea = None,
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,

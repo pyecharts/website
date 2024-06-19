@@ -177,6 +177,12 @@ def add(
 
     # Series data
     data: Sequence,
+    
+    # The coordinate system used by the series, optional:
+    # 'cartesian3D': use 3D Cartesian coordinate system, specify the corresponding 3D Cartesian coordinate system component via grid3DIndex.
+    # 'geo3D': Use 3D geographic coordinate system, specify the corresponding 3D geographic coordinate system component via geo3DIndex.
+    # 'globe': use geographic coordinate system, specify the corresponding geographic coordinate system component via globeIndex.
+    coordinate_system: Optional[str] = None,
 
     # The colouring effect of the 3D graphics in the 3D bar chart.
     # colour: only colour is displayed, independent of other factors such as lighting.
@@ -202,6 +208,9 @@ def add(
 
     # 3D Cartesian coordinate system configuration items, see `Grid3DOpts`
     grid3d_opts: Union[opts.Grid3DOpts, dict] = opts.Grid3DOpts(),
+    
+    # Label and style configuration for the highlight state, see `Emphasis3D`
+    emphasis_opts: types.Optional[types.Emphasis3D] = None,
     
     # Whether to be a parametric surface (only available for Surface3D)
     is_parametric: types.Optional[bool] = None,

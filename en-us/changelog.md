@@ -1,6 +1,27 @@
 # Version log
 
-### version 2.0.5 - 2023-12-04 (Current)
+### version 2.0.6 - 2024-06-20 (Current)
+***Add***
+* [issue#2325](https://github.com/pyecharts/pyecharts/issues/2325) add RenderSepType for performing rendering of line breaks
+* [pr#2338](https://github.com/pyecharts/pyecharts/pull/2338) Migrated test code from `nose` to `nose2/unittest`.
+* [pr#2347](https://github.com/pyecharts/pyecharts/pull/2347) Adding `add_js_events` experimental API to add JS manipulation functions
+* [pr#2348](https://github.com/pyecharts/pyecharts/pull/2348) added `Emphasis3DOpts`, `BlurOpts`, `SelectOpts`, `TreeLeavesOpts` configuration items.
+
+**Updated**
+* [pr#2256](https://github.com/pyecharts/pyecharts/pull/2256) Dashboard Pointer Configuration Item `GaugePointerOpts` support for setting styles `itemstyle_opts`
+* [pr#2338](https://github.com/pyecharts/pyecharts/pull/2338) Updates to `DataZoomOpts` configuration
+* [pr#2338](https://github.com/pyecharts/pyecharts/pull/2338) Updated `ThreeAxisChart` configuration.
+* [pr#2347](https://github.com/pyecharts/pyecharts/pull/2347) Updates `boxplot, custom, effectscatter, funnel, kline, pie, radar` chart configuration.
+* [pr#2348](https://github.com/pyecharts/pyecharts/pull/2348) Updates `bar, box, funnel, heatmap, parallel, pie, tree` chart configurations
+* [pr#2345](https://github.com/pyecharts/pyecharts/pull/2345) Update series_options.py `(chart-labels-text border)`.
+* [pr#2350](https://github.com/pyecharts/pyecharts/pull/2350) update timeline + 3D charts (some scenarios may be incompatible)
+
+**Fixed**
+* [pr#2286](https://github.com/pyecharts/pyecharts/pull/2286) Fixed VisualMapOpts::out_of_range
+* [pr#2338](https://github.com/pyecharts/pyecharts/pull/2338) fix BarBackgroundStyleOpts
+* [pr#2338](https://github.com/pyecharts/pyecharts/pull/2338) fix Timeline + Geo
+
+### version 2.0.5 - 2023-12-04
 ***Add***
 * [issue#2259](https://github.com/pyecharts/pyecharts/issues/2259) Add `GeoItem` for compatibility with incoming latitude/longitude data only.
 * [issue#2254](https://github.com/pyecharts/pyecharts/issues/2254) Add an error alert for Numpy and Pandas non-native data structures as data inputs.
