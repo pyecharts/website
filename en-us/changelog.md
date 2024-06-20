@@ -15,6 +15,8 @@
 * [pr#2348](https://github.com/pyecharts/pyecharts/pull/2348) Updates `bar, box, funnel, heatmap, parallel, pie, tree` chart configurations
 * [pr#2345](https://github.com/pyecharts/pyecharts/pull/2345) Update series_options.py `(chart-labels-text border)`.
 * [pr#2350](https://github.com/pyecharts/pyecharts/pull/2350) update timeline + 3D charts (some scenarios may be incompatible)
+* [pr#22](https://github.com/pyecharts/pyecharts-assets/pull/22) Update world.js
+* [pr#23](https://github.com/pyecharts/pyecharts-assets/pull/23) Update v5 assets to Echarts 5.5.0
 
 **Fixed**
 * [pr#2286](https://github.com/pyecharts/pyecharts/pull/2286) Fixed VisualMapOpts::out_of_range

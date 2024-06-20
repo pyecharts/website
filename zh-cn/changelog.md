@@ -15,6 +15,8 @@
 * [pr#2348](https://github.com/pyecharts/pyecharts/pull/2348) 更新 `bar, boxplot, funnel, heatmap, parallel, pie, tree` charts configuration
 * [pr#2345](https://github.com/pyecharts/pyecharts/pull/2345) 更新 series_options.py `(Graph-Label-textBorder)`
 * [pr#2350](https://github.com/pyecharts/pyecharts/pull/2350) 更新 Timeline + 3D charts(可能存在部分场景不兼容)
+* [pr#22](https://github.com/pyecharts/pyecharts-assets/pull/22) 更新 world.js
+* [pr#23](https://github.com/pyecharts/pyecharts-assets/pull/23) 更新 v5 静态资源版本到 Echarts 5.5.0
 
 **Fixed**
 * [pr#2286](https://github.com/pyecharts/pyecharts/pull/2286) 修复 VisualMapOpts::out_of_range
