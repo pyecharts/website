@@ -1,6 +1,29 @@
 # 版本日志
 
-### version 2.0.5 - 2023-12-04 (Current)
+### version 2.0.6 - 2024-06-20 (Current)
+***Add***
+* [issue#2325](https://github.com/pyecharts/pyecharts/issues/2325) 增加 RenderSepType 用于执行渲染换行符
+* [pr#2338](https://github.com/pyecharts/pyecharts/pull/2338) Migrate the test code from `nose` to `nose2/unittest`
+* [pr#2347](https://github.com/pyecharts/pyecharts/pull/2347) 增加 `add_js_events` 实验性 API 添加 JS 操作函数
+* [pr#2348](https://github.com/pyecharts/pyecharts/pull/2348) 增加 `Emphasis3DOpts`, `BlurOpts`, `SelectOpts`, `TreeLeavesOpts` 配置项
+
+**Updated**
+* [pr#2256](https://github.com/pyecharts/pyecharts/pull/2256) 仪表盘指针配置项 `GaugePointerOpts` 支持设置样式 `itemstyle_opts`
+* [pr#2338](https://github.com/pyecharts/pyecharts/pull/2338) 更新 `DataZoomOpts` 配置
+* [pr#2338](https://github.com/pyecharts/pyecharts/pull/2338) 更新 `ThreeAxisChart` 配置
+* [pr#2347](https://github.com/pyecharts/pyecharts/pull/2347) 更新 `boxplot, custom, effectscatter, funnel, kline, pie, radar` charts configuration.
+* [pr#2348](https://github.com/pyecharts/pyecharts/pull/2348) 更新 `bar, boxplot, funnel, heatmap, parallel, pie, tree` charts configuration
+* [pr#2345](https://github.com/pyecharts/pyecharts/pull/2345) 更新 series_options.py `(Graph-Label-textBorder)`
+* [pr#2350](https://github.com/pyecharts/pyecharts/pull/2350) 更新 Timeline + 3D charts(可能存在部分场景不兼容)
+* [pr#22](https://github.com/pyecharts/pyecharts-assets/pull/22) 更新 world.js
+* [pr#23](https://github.com/pyecharts/pyecharts-assets/pull/23) 更新 v5 静态资源版本到 Echarts 5.5.0
+
+**Fixed**
+* [pr#2286](https://github.com/pyecharts/pyecharts/pull/2286) 修复 VisualMapOpts::out_of_range
+* [pr#2338](https://github.com/pyecharts/pyecharts/pull/2338) 修复 BarBackgroundStyleOpts
+* [pr#2338](https://github.com/pyecharts/pyecharts/pull/2338) 修复 Timeline + Geo
+
+### version 2.0.5 - 2023-12-04
 ***Add***
 * [issue#2259](https://github.com/pyecharts/pyecharts/issues/2259) 增加 `GeoItem` 用来兼容仅传入经纬度数据的模式
 * [issue#2254](https://github.com/pyecharts/pyecharts/issues/2254) 增加对 Numpy 和 Pandas 非原生数据结构作为数据入参的错误提示。
@@ -15,8 +38,6 @@
 * [issue#2236](https://github.com/pyecharts/pyecharts/issues/2236) 修复 `LegendOpts` 的 `border_width` 在特定配置下导致的样式异常问题
 * [issue#2264](https://github.com/pyecharts/pyecharts/issues/2264) 修复 `Grid` 下多个 `DataZoomOpts` 失效的问题
 * [issue#2265](https://github.com/pyecharts/pyecharts/issues/2265) 修复 `Sankey` 的配置错误问题
-
-
 
 ### version 2.0.4 - 2023-08-21
 ***Add***

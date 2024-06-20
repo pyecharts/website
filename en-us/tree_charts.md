@@ -18,6 +18,9 @@ def add(
 
     # Series data items
     data: Sequence[Union[opts.TreeItem, dict]],
+    
+    # The zoom ratio for the current viewpoint.
+    zoom: types.Optional[types.Numeric] = 1,
 
     # The layout of a tree graph, both orthogonal and radial. The orthogonal layout is what we usually call the horizontal and vertical directions.
     # The corresponding parameter takes the value 'orthogonal'. The radial layout is a ring of nodes at each level, with the root node as the centre of the circle.
@@ -42,21 +45,30 @@ def add(
     # The value of top can be a specific pixel value like 20, a percentage relative to the height and width of the container like '20%'
     # It can also be 'top', 'middle', 'bottom'.
     # If the value of top is 'top', 'middle', 'bottom', the component will be automatically aligned according to the corresponding position.
-    pos_top: Optional[str] = None,
+    pos_top: types.Union[str, types.Numeric, None] = None,
 
     # The distance of the tree component from the left side of the container.
     # The value of left can be a specific pixel value like 20, a percentage relative to the height and width of the container like '20%'
     # It can also be 'left', 'centre', 'right'.
     # If the value of left is 'left', 'centre', 'right', the component will be automatically aligned according to the corresponding position.
-    pos_left: Optional[str] = None,
+    pos_left: types.Union[str, types.Numeric, None] = None,
 
     # The distance of the tree component from the lower side of the container.
     The value of # bottom can be a specific pixel value like 20, or a percentage relative to the height and width of the container like '20%'.
-    pos_bottom: Optional[str] = None,
+    pos_bottom: types.Union[str, types.Numeric, None] = None,
 
     # The distance of the tree component from the right side of the container.
     The value of # right can be a specific pixel value like 20, or a percentage of the container's height and width like '20%'.
-    pos_right: Optional[str] = None,
+    pos_right: types.Union[str, types.Numeric, None] = None,
+    
+    # The width of the tree component.
+    width: types.Union[str, types.Numeric, None] = None,
+    
+    # The height of the tree component.
+    height: types.Union[str, types.Numeric, None] = None, # The height of the tree component. height: types.Union[str, types.
+    
+    # The centre of the current viewpoint. Can be an array of two number types (for pixel values) or string types (for percentages relative to the container). 
+    centre: types.Optional[types.Sequence[types.Union[str, types.Numeric]]] = None, # The centre of the current view.
 
     # Collapse node interval, to resolve node display overspacing when there are too many nodes.
     collapse_interval: Numeric = 0,
@@ -89,13 +101,23 @@ def add(
     initial_tree_depth: Optional[Numeric] = None,
 
     # Label configuration items, see `series_options.LabelOpts`
-    label_opts: Union[opts.LabelOpts, dict] = opts,
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
 
-    # Leaf node label configuration items, see `series_options.LabelOpts`
-    leaves_label_opts: Union[opts.LabelOpts, dict] = opts,
+    # Leaf node label configuration items, see `global_options.TreeLeavesOpts`
+    leaves_opts: Union[opts.TreeLeavesOpts, dict] = opts.TreeLeavesOpts(),
 
     # Tipbox component configuration items, refer to `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+    
+    # The configuration of the check mode, it means whether to support multiple check, default is off, support boolean value and string.
+    # String value can be 'single', 'multiple', 'series' for single selection, multiple selection and whole series selection respectively.
+    selected_mode: types.Union[bool, str] = False,
+    
+    # Configuration for the fade state. Valid when emphasis.focus is enabled.
+    blur_opts: types.Blur = None,
+    
+    # Configuration for the selected state. Valid when selectedMode is enabled.
+    select_opts: types.Select = None,
 )
 ```
 

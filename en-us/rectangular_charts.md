@@ -91,6 +91,17 @@ def add_yaxis(
 
     # The index of the y-axis to use, useful if there are multiple y-axes in a single instance of the chart.
     yaxis_index: Optional[Numeric] = None,
+    
+    # The index of the polar coordinate system to use, useful when there are multiple polar coordinate systems in a single chart instance.
+    polar_index: types.Optional[types.Numeric] = None,.
+    
+    # Whether or not to use the arc effect on both sides of the circular bar. Only valid for polar coordinate system bar charts.
+    is_round_cap: types.Optional[bool] = None,.
+    
+    # The strategy to take the colour from the palette option.color, can take values:
+    # 'series': assign colours in the palette by series, all data in the same series is in the same colour;
+    # 'data': assign colours in the palette by data item, with each data item using a different colour.
+    colour_by: types.Optional[str] = None,
 
     # Whether to enable linkage highlighting for legend hovers
     is_legend_hover_link: bool = True,
@@ -152,6 +163,17 @@ def add_yaxis(
     
     # Threshold to turn on plotting optimization.
     large_threshold: types.Numeric = 400,
+    
+    # The number of graphics to draw per frame for progressive rendering, set to 0 to disable progressive rendering, supports separate configuration for each series.
+    progressive: types.Optional[types.Numeric] = None,
+    
+    # Threshold for the number of graphics to enable progressive rendering, enable progressive rendering when the number of graphics in a single series exceeds this threshold.
+    progressive_threshold: types.Optional[types.Numeric] = None, # Enable progressive rendering when the number of graphics in a single series exceeds this threshold.
+    
+    # The way the slices will be rendered. Optional values:
+    # 'sequential': slices the data in order. The disadvantage is that the rendering process is not natural.
+    # 'mod': Takes a modal chunking, i.e. the points in each fragment are spread over the entire data, allowing for visually even rendering.
+    progressive_chunk_mode: types.Optional[str] = None,
 
     # Use dimensions to define information about each dimension of series.data or dataset.source.
     # Note: If a dataset is used, then the dimension name can be given in the first row/column of the dataset.source.
@@ -187,6 +209,9 @@ def add_yaxis(
 
     # Marking line configuration items, see `series_options.MarkLineOpts`
     markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
+    
+    # Chart marker fields, often used to mark a range of data in a chart, see `series_options.MarkAreaOpts`
+    markarea_opts: types.MarkArea = None,
 
     # Tipbox component configuration items, refer to `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None, # tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
@@ -194,11 +219,17 @@ def add_yaxis(
     # Item style configuration items, see `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     
-    # You can define which dimension of data is encoded as what.
-    encode: types.Union[types.JSFunc, dict, None] = None,
-    
     # Emphasis configuration items，see `global_options.EmphasisOpts`
     emphasis_opts: types.Emphasis = None,
+    
+    # The graphic style and label style when fading out. Effective when emphasis.focus is turned on.
+    blur_opts: types.
+    
+    Blur_opts: types.Blur = None, # Graphics and label styles when data is selected. Valid when selectedMode is enabled.
+    select_opts: types.
+    
+    # You can define which dimension of data is encoded as what.
+    encode: types.Union[types.JSFunc, dict, None] = None,
 )
 ```
 
@@ -207,13 +238,22 @@ def add_yaxis(
 ``` python
 class BarItem(
     ### The name of the data item.
-    name: Optional[str] = None,
+    name: Union[int, str, None] = None,
 
     ### The value of a single data item.
     value: Optional[Numeric] = None,
+    
+    # The group ID of this data item.
+    group_id: Optional[str] = None,
 
     # The style of the individual bar text, see `series_options.LabelOpts`.
     label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # Whether to show the visual guide line.
+    is_show_label_line: Optional[bool] = None,.
+    
+    # The visual guide line configuration
+    label_line_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
 
     # Item style configuration items, see `series_options.ItemStyleOpts`
     itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
@@ -238,6 +278,9 @@ class BarBackgroundStyleOpts(
 
     # The stroke type of the bar, defaults to solid, supports 'dashed', 'dotted'.
     border_type: str = "solid",
+    
+    # Radius of the rounded corners, in px, supports passing in an array of 4 radiuses.
+    border_radius: Union[Numeric, Sequence] = 0,
 
     # The radius of the rounded corners, in px, supports passing in an array to specify each of the 4 radii. For example:
     # barBorderRadius: 5, // Set the size of the rounded corners uniformly for each of the four corners
@@ -296,6 +339,39 @@ def add_yaxis(
 
     # The index of the y-axis to use, useful if there are multiple y-axes in a single instance of the chart.
     yaxis_index: Optional[Numeric] = None,
+    
+    # dataset If series.data is not specified and dataset exists, then dataset is used.
+    # datasetIndex Specifies which dataset to use for this series.
+    dataset_index: types.Optional[types.Numeric] = None, # dataset_index: types.Optional[types.Numeric] = None, # dataset_index.
+    
+    # strategy for taking colours from palette option.color, can take values:
+    # 'series': assign colours in the palette by series, all data in the same series is in the same colour;
+    # 'data': assign colours in the palette by data item, with each data item using a different colour.
+    colour_by: types.Optional[str] = None,.
+    
+    # Whether to enable linkage highlighting for legend hover.
+    is_legend_hover_link: bool = True, # Whether to enable hover on box.
+    
+    # Whether to enable hover animation on the box.
+    is_hover_animation: bool = True, # Whether to enable hover animation on box.
+    
+    # Layout style, optional:
+    # 'horizontal': arrange the boxes horizontally.
+    # 'vertical': arrange the boxes vertically.
+    # Default value depends on current coordinate system: horizontal if category axis is horizontal, otherwise vertical, if no category axis, then horizontal.
+    layout: types.Optional[str] = None, # The upper and lower bounds of the width of the box.
+    
+    The upper and lower bounds of the width of the # box. Array means: [min, max].
+    # Can be an absolute value, like [7, 50], or a percentage, like ['40%', '90%'].
+    # Percentage means what percent of the maximum possible width (bandWidth).
+    box_width: types.Optional[types.Sequence] = None,
+    
+    # Configuration for the check mode, indicates if multiple checks are supported, default is off, booleans and strings are supported.
+    # String values can be 'single', 'multiple', and 'series' for single, multiple, and whole series respectively.
+    selected_mode: types.
+    
+    # Use dimensions to define information about each dimension of series.data or dataset.source. Related to dataset usage
+    dimensions: types.Union[types.Sequence, None] = None, # Use dimensions to define information about each dimension of series.data or dataset.source.
 
     # Label configuration items, see `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts,
@@ -306,6 +382,20 @@ def add_yaxis(
     # Mark line configuration items, see `series_options.MarkLineOpts`
     markline_opts: Union[opts.MarkLineOpts, dict] = opts.MarkLineOpts(), # markline_opts: Union[opts.MarkLineOpts, dict] = opts,
 
+    # Chart markarea, often used to mark a range of data in a chart, see `series_options.MarkAreaOpts`.
+    markarea_opts: types.MarkArea = None, # zlevel values for all graphs in the box-and-whisker plot.
+    
+    # zlevel values for all shapes in the box-and-whisker plot.
+    # The zlevel is used for Canvas layering, where shapes with different zlevel values are placed in different Canvas, and Canvas layering is a common optimisation.
+    # We can set components with frequently changing graphics (e.g. animated) to a separate zlevel.
+    # Note that too many Canvas can cause memory overheads and should be used with caution on mobile to prevent crashes.
+    # Canvas with a large zlevel will be placed on top of Canvas with a small zlevel.
+    z_level: types.
+    
+    z_level: types.Numeric = 0, # z_value of all shapes in the box-and-whisker component. Controls the order of the shapes; shapes with small z-levels will be overridden by shapes with large z-levels.
+    # z has a lower priority than zlevel, and no new Canvas is created.
+    z: types.
+
     # Tipbox component configuration items, see `series_options.
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
 
@@ -314,6 +404,15 @@ def add_yaxis(
     
     # Emphasis configuration items，see `global_options.EmphasisOpts`
     emphasis_opts: types.Emphasis = None,
+    
+    # The graphic style and label style when fading out. Valid when emphasis.focus is enabled
+    blur_opts: types.
+    
+    # The graphical style and label style when the data is selected. Valid when selectedMode is enabled.
+    select_opts: types.
+    
+    # Allows you to define what dimensions of the data are encoded into what.
+    encode: types.Union[types.JSFunc, dict, None] = None, # You can define which dimension the data is encoded into. encode: types.
 )
 ```
 
@@ -363,17 +462,45 @@ class EffectScatter(
     # series data
     y_axis: types.Sequence[types.Union[opts.BoxplotItem, dict]],
 
-    # Whether the legend is selected or not
-    is_selected: bool = True,
-
     # The index of the x-axis to use, useful if there are multiple x-axes in a single chart instance.
     xaxis_index: Optional[Numeric] = None,
 
     # The index of the y-axis to use, useful if there are multiple y-axes in a single instance of the chart.
     yaxis_index: Optional[Numeric] = None,
+    
+    # The index of the polar coordinate system to use, useful when there are multiple polar coordinate systems in a single chart instance.
+    polar_index: types.Optional[types.Numeric] = None,
+    
+    # The index of the geographic coordinate system to use, useful if there are multiple geographic coordinate systems in a single chart instance.
+    geo_index: types.Optional[types.Numeric] = None, # The index of the calendar coordinate system used, useful when there are multiple geographic coordinate systems in a single chart instance.
+    
+    # The index of the calendar coordinate system used, useful when there are multiple calendar coordinate systems in a single chart instance.
+    calendar_index: types.Optional[types.Numeric] = None, # The index of the calendar coordinate system used.
+    
+    # If series.data is not specified and dataset exists, then dataset is used. datasetIndex specifies which dataset is used for this series.
+    dataset_index: types.Optional[types.Numeric] = None,
 
     # The series label colour
     color: Optional[str] = None,
+    
+    # The strategy for taking colours from the palette option.color, can take values:
+    # 'series': assign colours in the palette by series, all data in the same series is in the same colour;
+    # 'data': assign colours in the palette by data item, with each data item using a different colour.
+    colour_by: types.Optional[str] = None,.
+    
+    # Whether to enable linkage highlighting for legend hover.
+    is_legend_hover_link: bool = True, # Configure when the effect is displayed.
+    
+    # Configure when to show the effect.
+    # Optional: 'render' Show effect after drawing is complete.' emphasis' Show effect on highlight.
+    show_effect_on: str = "render", # The coordinate system used by the series.
+    
+    # The coordinate system used by the series, optional:
+    # 'cartesian2d': use a 2D Cartesian coordinate system (also known as Cartesian coordinate system), specify the corresponding axis components via xAxisIndex, yAxisIndex.
+    # 'polar': use the polar coordinate system, specify the corresponding polar component by polarIndex
+    # 'geo': use a geographic coordinate system, specify the corresponding geographic component via geoIndex.
+    # 'calendar': use the calendar coordinate system, specify the corresponding calendar component via calendarIndex.
+    coordinate_system: str = "cartesian2d",
 
     # The shape of the labeled graph
     symbol: Optional[str] = None,
@@ -383,6 +510,10 @@ class EffectScatter(
 
     # The angle of rotation of the marker. Note that symbolRotate is ignored in markLine when symbol is 'arrow' and is forced to be set to the angle of the tangent.
     symbol_rotate: types.Optional[types.Numeric] = None,
+    
+    # The configuration of the check mode, it indicates whether to support multiple selections or not, default is off, support boolean value and string.
+    # String value can be 'single', 'multiple', 'series' for single selection, multiple selection and whole series selection respectively.
+    selected_mode: types.Union[bool, str] = False,
 
     # Label configuration items, see `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts,
@@ -398,6 +529,23 @@ class EffectScatter(
     
     # Emphasis configuration items，see `global_options.EmphasisOpts`
     emphasis_opts: types.Emphasis = None,
+    
+    # Markpoint configuration items, refer to `series_options.MarkPointOpts`.
+    markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None, `series_options.MarkLineOpts`, refer to `series_options.
+
+    # Marker line configuration items, refer to `series_options.MarkLineOpts`.
+    markline_opts: Union[opts.MarkLineOpts, dict, None] = None, # Chart marking fields, refer to `series_options.MarkLineOpts`.
+    
+    # Chart marking area, often used to mark a range of data in a chart, see `series_options.MarkAreaOpts`.
+    markarea_opts: types.MarkArea = None, # The zlevel value of all graphs.
+    
+    # zlevel values for all graphs.
+    z_level: types.Numeric = 0, # zlevel value for all graphs of the component.
+
+    # The z-value of all graphics of the component. Controls the order of graphics before and after.
+    # Graphics with small z-values are overwritten by graphics with large z-values.
+    # z has a lower priority than zlevel and no new Canvas is created.
+    z: types.Numeric = 2,
     
     # You can define which dimension of data is encoded as what.
     encode: types.Union[types.JSFunc, dict, None] = None,
@@ -468,15 +616,40 @@ def add_yaxis(
 
     # Series data items
     value: types.Sequence[types.Union[opts.HeatMapItem, dict]],
-
-    # Whether the legend is selected or not
-    is_selected: bool = True,
+    
+    # The coordinate system used by the series, optional:
+    # 'cartesian2d': use a 2D Cartesian coordinate system (also known as Cartesian coordinate system), specify the corresponding axis components via xAxisIndex, yAxisIndex.
+    # 'geo': Use a geographic coordinate system, specify the geographic component by geoIndex.
+    # 'calendar': use the calendar coordinate system, specify the corresponding calendar component by calendarIndex.
+    coordinate_system: str = "cartesian2d",
 
     # The index of the x-axis to use, useful if there are multiple x-axes in a single chart instance.
     xaxis_index: Optional[Numeric] = None,
 
     # The index of the y-axis to use, useful if there are multiple y-axes in a single instance of the chart.
     yaxis_index: Optional[Numeric] = None,
+    
+    # The index of the geographic coordinate system to use, useful when there are multiple geographic coordinate systems in a single chart instance.
+    geo_index: types.Optional[types.Numeric] = None,
+    
+    # The index of the calendar coordinate system used, useful when there are multiple calendar coordinate systems in a single chart instance.
+    calendar_index: types.Optional[types.Numeric] = None, # The index of the calendar coordinate system used.
+    
+    # If series.data is not specified and dataset exists, then dataset is used.
+    # datasetIndex Specifies which dataset to use for this series.
+    dataset_index: types.Optional[types.Numeric] = None, # dataset_index: types.
+    
+    # point_size The size of each point, valid on the geographic coordinate system (coordinateSystem: 'geo').
+    point_size: types.Optional[types.Numeric] = None, # The size of each point blur, valid on the geographic coordinate system (coordinateSystem: 'geo').
+    
+    # The size of each point blur, valid on the geographic coordinate system (coordinateSystem: 'geo').
+    blur_size: types.Optional[types.Numeric] = None,.
+    
+    # Minimum transparency, valid on geographic coordinate system (coordinateSystem: 'geo').
+    min_opacity: types.Optional[types.Numeric] = None, # The minimum transparency, valid on the geographic coordinate system (coordinateSystem: 'geo').
+    
+    # Maximum transparency, valid on the geographic coordinate system (coordinateSystem: 'geo').
+    max_opacity: types.Optional[types.Numeric] = None, # Maximum transparency, valid on geographic coordinate system (coordinateSystem: 'geo').
 
     # Label configuration items, see `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts,
@@ -486,6 +659,9 @@ def add_yaxis(
 
     # Marking line configuration items, see `series_options.MarkLineOpts`
     markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
+    
+    # Chart markarea, often used to mark a range of data in a chart, see `series_options.MarkAreaOpts`.
+    markarea_opts: types.MarkArea = None,
 
     # Tipbox component configuration items, refer to `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
@@ -495,6 +671,19 @@ def add_yaxis(
     
     # Emphasis configuration items，see `global_options.EmphasisOpts`
     emphasis_opts: types.Emphasis = None,
+    
+    # The configuration of the check mode, it indicates whether to support multiple selections or not, default is off, support boolean value and string.
+    # String value can be 'single', 'multiple', 'series' for single selection, multiple selection and whole series selection respectively.
+    selected_mode: types.
+    
+    # The zlevel value of all graphs in the heatmap.
+    z_level: types.Numeric = 0, # The zlevel value for all graphs of the heatmap component. z_level: types.
+    
+    # zlevel value for all graphs of the heat map component. Controls the order of the graphs before and after. graphs with a small z-value are overwritten by graphs with a large z-value.
+    z: types.Numeric = 2, # The z value of the heatmap component.
+    
+    # Allows you to define which dimension of data is encoded as what.
+    encode: types.Union[types.JSFunc, dict, None] = None, # You can define which dimension the data is encoded into.
 )
 ```
 
@@ -540,10 +729,11 @@ def add_yaxis(
 
     # series data
     y_axis: types.Sequence[types.Union[opts.CandleStickItem, dict]],
-
-    # Whether the legend is selected or not
-    is_selected: bool = True,
     
+    # The coordinate system used by the series, optional:
+    # 'cartesian2d': use a 2D Cartesian coordinate system (also known as Cartesian coordinate system), specify the corresponding axis components via xAxisIndex, yAxisIndex.
+    coordinate_system: str = "cartesian2d",
+
     # The strategy for taking colours from the palette option.colour, which can take the values.
     # 'series': assign the colours in the palette according to series, all data in the same series are in the same colour.
     # 'data': assigns the colours in the palette by data item, with each data item using a different colour.
@@ -552,6 +742,12 @@ def add_yaxis(
     # Specifies the column width. Either an absolute value (e.g. 10) or a percentage (e.g. '20%' for what percent of the band width) can be used. 
     # The default is adaptive.
     bar_width: types.Optional[types.Numeric] = None,
+    
+    # Specifies the minimum width of the column. Either an absolute value (e.g. 10) or a percentage (e.g. '20%' for what percent of the band width) can be used. Default is adaptive.
+    bar_min_width: types.Optional[types.Numeric] = None,
+    
+    # Specifies the maximum width of the bar. Can be used as an absolute value (e.g. 10) or as a percentage (e.g. '20%' for what percent of the band width). Default is adaptive.
+    bar_max_width: types.Optional[types.Numeric] = None, # Specify the bar maximum width.
     
     # Layout style, optional values.
     # 'horizontal': horizontal layout of individual boxes.
@@ -565,13 +761,22 @@ def add_yaxis(
 
     # The index of the y-axis to use, useful if there are multiple y-axes in a single instance of the chart.
     yaxis_index: Optional[Numeric] = None,
+    
+    # Whether or not to enable linkage highlighting for legend hover.
+    is_legend_hover_link: bool = True,
+    
+    # Whether to enable hover animation on the box.
+    is_hover_animation: bool = True, # Whether to enable hover animation on box.
 
     # Mark line configuration items, see `series_options.MarkLineOpts`
-    markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
+    markline_opts: types.MarkLine = None,
 
     # Markpoint configuration items, see `series_options.MarkPointOpts`
-    markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None, # markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
-
+    markpoint_opts: types.MarkPoint = None, 
+    
+    # Chart markarea, often used to mark a range of data in a chart, see `series_options.MarkAreaOpts`.
+    markarea_opts: types.MarkArea = None,
+    
     # Tipbox component configuration items, refer to `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
 
@@ -580,6 +785,26 @@ def add_yaxis(
     
     # Emphasis configuration items，see `global_options.EmphasisOpts`
     emphasis_opts: types.Emphasis = None,
+    
+    # The configuration of the check mode, it indicates whether to support multiple selections or not, default is off, support boolean value and string.
+    # String value can be 'single', 'multiple', 'series' for single selection, multiple selection and whole series selection respectively.
+    selected_mode: types.Union[bool, str] = False,
+    
+    # Whether or not to enable large data volume optimisation, can be enabled when the data graph is particularly large and lags.
+    is_large: bool = False, # Whether to enable large data volume optimisation.
+    
+    # Define what dimension of the data is encoded into what.
+    encode: types.Union[types.JSFunc, dict, None] = None, # Whether to crop beyond the coordinate system.
+    
+    # Whether or not to crop the graph beyond the coordinate system, depending on the series:
+    # K-Line: ignore graphs that are out of the coordinate system as a whole, but do not clip individual graphs.
+    is_clip: bool = True, # If or not all graphs in the K-chart are out of the coordinate system, but not individual graphs.
+    
+    # The zlevel value of all shapes in the K-line chart.
+    z_level: types.Numeric = 0, # The zlevel of all graphs of the K-line chart component.
+    
+    # The zlevel value for all graphs of the K-Line Chart component. Controls the order of the graphs before and after each other. graphs with small z-values will be overwritten by graphs with large z-values.
+    z: types.Numeric = 2, # The z value of all graphs in the K-Line Chart component.
 )
 ```
 
@@ -627,9 +852,6 @@ def add_yaxis(
     # series data
     y_axis: types.Sequence[types.Union[opts.LineItem, dict]],
 
-    # Whether the legend is selected or not
-    is_selected: bool = True,
-
     # Whether to connect to empty data, use `None` to fill in the empty data
     is_connect_nones: bool = False,
 
@@ -638,6 +860,19 @@ def add_yaxis(
 
     # The index of the y-axis to use, useful if there are multiple y-axes in a single instance of the chart.
     yaxis_index: Optional[Numeric] = None,
+    
+    # The index of the polar coordinate system to use, useful when there are multiple polar coordinate systems in a single chart instance.
+    polar_index: types.Optional[types.Numeric] = None,.
+    
+    # The coordinate system to use for the series, optional:
+    # 'cartesian2d': use a 2D Cartesian coordinate system (also known as Cartesian coordinate system), specify the corresponding axis components via xAxisIndex, yAxisIndex.
+    # 'polar': use the polar coordinate system, specify the corresponding polar component by polarIndex
+    coordinate_system: types.Optional[str] = None,
+    
+    # The strategy for taking colours from the palette option.color, can take values:
+    # 'series': assign colours in the palette by series, all data in the same series is in the same colour;
+    # 'data': assign colours in the palette by data item, with each data item using a different colour.
+    color_by: types.Optional[str] = None,
 
     # The series label colour
     color: Optional[str] = None,
@@ -657,6 +892,13 @@ def add_yaxis(
 
     # Data stacking, where stack values with the same series configuration on the same class axis can be stacked.
     stack: Optional[str] = None,
+    
+    # The strategy for stacking values, provided the stack attribute has been set. Its value can be:
+    # 'samesign' Stack only if the value to be stacked has the same positive or negative sign as the current accumulated stacked value.
+    # 'all' Stack all values, regardless of the positive or negative sign of the current or accumulated stacked values.
+    # 'positive' Stack only positive values.
+    # 'negative' Stack only negative values.
+    stack_strategy: types.Optional[str] = "samesign",
 
     # Whether to smooth the curve
     is_smooth: bool = False,
@@ -704,6 +946,9 @@ def add_yaxis(
 
     # Marking line configuration items, see `series_options.MarkLineOpts`
     markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
+    
+    # Chart markarea, often used to mark a range of data in a chart, see `series_options.MarkAreaOpts`.
+    markarea_opts: types.MarkArea = None,
 
     # Tipbox component configuration items, refer to `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,

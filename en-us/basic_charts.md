@@ -124,17 +124,42 @@ def add(
     # Series data items in the format [(key1, value1), (key2, value2)]
     data_pair: Sequence,
 
-    # Whether the legend is selected or not
-    is_selected: bool = True,
-
     # series label colour
     color: Optional[str] = None,
+    
+    # The strategy for taking colours from the palette option.color, can take values:
+    # 'series': assign colours in the palette by series, all data in the same series is in the same colour;
+    # 'data': assign colours in the palette by data item, with each data item using a different colour.
+    colour_by: types.Optional[str] = None,.
+    
+    # The minimum value of the specified data.
+    min_: types.Numeric = 0, # The specified data maximum.
+    
+    Numeric = 0, # The maximum value of the specified data.
+    max_: types.Numeric = 100, # The specified data minimum. max_: types.
+    
+    # The width of the data minimum min mapping.
+    # Can be an absolute pixel size or a percentage of the relative layout width, which can be achieved by setting this property if the graphic for which a minimum value is required is not a tip-triangle.
+    min_size: types.Union[str, types.Numeric] = "0%",
+    
+    # The width of the data max max mapping.
+    # Can be an absolute pixel size or a percentage of the relative layout width.
+    max_size: types.Union[str, types.Numeric] = "100%", # The width of the data mapping.
+    
+    # The funnel map orientation, supports configuring it as 'vertical' or 'horizontal'.
+    orient: str = "vertical",
 
     # data sorting, can take 'ascending', 'descending', 'none' (means in order of data)
     sort_: str = "descending",
 
     # Data graph spacing
     gap: Numeric = 0,
+    
+    # Whether or not to enable linkage highlighting for legend hover.
+    is_legend_hover_link: bool = True,
+    
+    # Horizontal alignment layout type, default is centre, available options: 'left' | 'right' | 'center'.
+    funnel_align: str = "centre", # The layout type of the horizontal alignment, available options are: 'left' | 'right' | 'center'.
 
     # Label configuration items, see `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts,
@@ -147,6 +172,50 @@ def add(
     
     # Emphasis configuration items，see `global_options.EmphasisOpts`
     emphasis_opts: types.Emphasis = None,
+    
+    # The configuration of the check mode, it means whether to support multiple check, default is off, support boolean value and string.
+    # String value can be 'single', 'multiple', 'series' for single selection, multiple selection and whole series selection respectively.
+    selected_mode: types.
+    
+    # The zlevel value for all graphics.
+    z_level: types.Numeric = 0, # zlevel value for all graphics of the component.
+    
+    # The z-value of all graphics for the component. Controls the order of shapes before or after each other; shapes with smaller z values are overwritten by shapes with larger z values.
+    A small z value will be overwritten by a large z value. # z has a lower priority than zlevel, and no new Canvas will be created.
+    z: types.Numeric = 2, # The funnelgraph component is located farther away from the container than the zlevel component. z: types.
+    
+    # The distance of the funnel graph component from the top side of the container.
+    pos_top: types.Union[str, types.Numeric, None] = None, # The distance of the funnel plot component from the left side of the container.
+    
+    # The distance of the funnel plot component from the left side of the container.
+    pos_left: types.Union[str, types.Numeric, None] = None, # The distance of the funnel chart component from the container's left side.
+    
+    # The distance of the funnel plot component from the bottom side of the container.
+    pos_bottom: types.Union[str, types.Numeric, None] = None, # The distance of the funnel plot component from the right side of the container.
+    
+    # The distance of the funnel plot component from the right side of the container.
+    pos_right: types.Union[str, types.Numeric, None] = None, # The width of the funnel plot component.
+    
+    # The width of the funnel chart component. Adaptive by default.
+    width: types.Union[str, types.Numeric, None] = None, # The width of the funnel chart component.
+    
+    # The height of the funnel chart component. Default is adaptive.
+    height: types.Union[str, types.Numeric, None] = None, # The height of the funnel chart component.
+    
+    # If series.data is not specified and dataset exists, then dataset is used.
+    # datasetIndex Specify which dataset to use for this series.
+    dataset_index: types.Optional[types.Numeric] = None, # dataset_index: types.Optional[types.
+    
+    # dataset_index Allows you to define which dimension of data is encoded as what.
+    encode: types.Union[types.JSFunc, dict, None] = None, # The dataset is encoded into the dataset.
+    # Markpoint opts, see `series_options.MarkPointOpts`.
+    markpoint_opts: union[opts.MarkPointOpts, dict, None] = None, # Markpoint configuration item, refer to `series_options.MarkPointOpts`.
+
+    # Marker line configuration items, refer to `series_options.MarkLineOpts`.
+    markline_opts: Union[opts.MarkLineOpts, dict, None] = None, # Chart marking fields, refer to `series_options.MarkLineOpts`.
+    
+    # Chart marking area, often used to mark a range of data in a chart, see `series_options.MarkAreaOpts`.
+    markarea_opts: types.MarkArea = None, # Chart markarea.
 )
 ```
 
@@ -425,6 +494,9 @@ class GaugePointerOpts(
 
     # The width of the pointer.
     width: Numeric = 8,
+    
+    # The style of the pointer.
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
 )
 ```
 
@@ -816,12 +888,33 @@ def add(
 
     # series data
     data: types.Sequence[types.Union[opts.ParallelItem, dict]],
-
-    # Whether or not the legend is selected.
-    is_selected: bool = True,
+    
+    # The index of the parallel coordinate system to use, useful when there are multiple parallel coordinate systems in a single chart instance.
+    parallel_index: types.Optional[types.Numeric] = None,
+    
+    # The strategy for taking colours from the palette option.color, can take values:
+    # 'series': assign colours in the palette by series, all data in the same series is in the same colour;
+    # 'data': assign colours in the palette by data item, with each data item using a different colour.
+    colour_by: types.Optional[str] = None,.
+    
+    # When boxed, unchecked bars will be set to this 'transparency' (thus allowing for a darkening effect).
+    inactive_opacity: types.Optional[types.Numeric] = 0.05, # When box-selected, the selected bar will be set to this 'transparency' (so that it can be darkened).
+    
+    # When box is selected, the selected line will be set to this opacity (so that it can be highlighted).
+    active_opacity: types.Optional[types.Numeric] = 1, # Whether to refresh in real time.
+    
+    # Whether or not to refresh in real time.
+    is_realtime: bool = True, # whether to refresh in real time.
 
     # Whether to smooth the curve
     is_smooth: bool = False,
+    
+    # The zlevel value of all shapes in parallel coordinates.
+    z_level: types.
+    
+    z_level: types.Numeric = 0, # z_value of all shapes of the parallel coordinates component. Controls the order of shapes; shapes with small z values are overwritten by shapes with large z values.
+    A small z value will be overwritten by a large z value. z: types.Numeric = 0, # The z value of all shapes in the Parallel Coordinates component controls the order of shapes.
+    z: types.
 
     # Line styles, refer to `series_options.LineStyleOpts`
     linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
@@ -990,6 +1083,28 @@ class ParallelItem(
 
     # The type of the line. Options are 'solid', 'dashed', 'dotted'
     type_: str = "solid",
+    
+    # Used to set the offset of the dashed line, can be used with type to specify dash array to achieve flexible dashed line effect.
+    dash_offset: Numeric = 0,
+    
+    # Used to specify how the end of the line segment is drawn, could be:
+    # 'butt': line ends in a square.
+    # 'round': line ends in a circle.
+    # 'square': the line ends in a square, but adds a rectangular area that is the same width as the line and half the height of the line.
+    # The default value is 'butt'. 
+    cap: str = "butt", # used to set 2 rectangles whose lengths are not the same as the line's thickness.
+    
+    # Attribute used to set how 2 connected sections (line segments, arcs, curves) with lengths other than 0 are joined together (deformed sections with length 0, whose specified end is at the same location as the control point, are ignored).
+    # can be:
+    # 'bevel': fills the ends of connected sections with an additional triangle-base area, each with its own separate rectangular corner.
+    # 'round': draws the shape of the corners by filling an extra sector with the centre of the circle at the end of the connected sections. The radius of the round corner is the width of the segment.
+    # 'miter': Creates an additional diamond-shaped area by extending the outer edges of the connected segments so that they intersect at a point. The effect of this setting can be seen with the miterLimit property.
+    # The default value is 'bevel'. 
+    join: str = "bevel",
+    
+    # Used to set the miter limit ratio. miterLimit is only valid if join is miter.
+    # Defaults to 10. Negative numbers, 0, Infinity and NaN are ignored.
+    miter_limit: Optional[Numeric] = None, # Default value is 10. miter_limit: Optional[Numeric] = None, # Default value is 0.
 
     # The transparency of the graph. Supports numbers from 0 to 1, and does not draw the graph when it is 0.
     opacity: Numeric = 0.45,
@@ -1090,14 +1205,23 @@ def add(
     # Item style configuration items, see `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 
-    # You can define which dimension of data is encoded as what.
-    encode: types.Union[types.JSFunc, dict, None] = None,
-    
     # Pie chart guide line configuration, see `chart_options.PieLabelLineOpts`
     label_line_opts: types.PieLabelLine = opts,
     
     # Emphasis configuration items，see `global_options.EmphasisOpts`
     emphasis_opts: types.Emphasis = None,
+    
+    # You can define which dimension of data is encoded into what.
+    encode: types.Union[types.JSFunc, dict, None] = None,
+    
+    # Markpoint opts, see `series_options.MarkPointOpts`.
+    markpoint_opts: Union[opts.MarkPointOpts, dict] = opts.MarkPointOpts(), # Markpoint configuration items, refer to `series_options.MarkPointOpts`.
+
+    # Marker line opts, refer to `series_options.MarkLineOpts`.
+    markline_opts: union[opts.MarkLineOpts, dict] = opts.MarkLineOpts(), # chart marking fields, refer to `series_options.MarkLineOpts`, refer to `series_options.
+    
+    # chart_area_opts: Union[opts.MarkLineOpts, dict] = opts.MarkLineOpts(,), # chart_area_opts: Union[opts.MarkLineOpts, dict] = opts.
+    markarea_opts: types.MarkArea = None, # chart markarea = None, `series_options.
 )
 ```
 
@@ -1110,9 +1234,9 @@ class PieItem(
 
     ### Data value.
     value: Optional[Numeric] = None,
-
-    # Whether the data item is selected or not.
-    is_selected: bool = False,
+    
+    # The group ID of this data item.
+    group_id: Optional[str] = None,
 
     # Label configuration items, refer to `series_options.LabelOpts`
     label_opts: Union[LabelOpts, dict, None] = None,
@@ -1517,9 +1641,11 @@ def add(
 
     # series data items
     data: types.Sequence[types.Union[opts.RadarItem, dict]],
-
-    # Whether the legend is selected or not
-    is_selected: bool = True,
+    
+    # The strategy for taking colours from the palette option.color, can take values:
+    # 'series': assign colours in the palette by series, all data in the same series is in the same colour;
+    # 'data': assign colours in the palette by data item, with each data item using a different colour.
+    colour_by: types.Optional[str] = None,
 
     # ECharts provides markers of types 'circle', 'rect', 'roundRect', 'triangle', 
     # 'diamond', 'pin', 'arrow', 'none'
@@ -1531,6 +1657,20 @@ def add(
 
     # Label configuration items, refer to `series_options.LabelOpts`
     label_opts: opts.LabelOpts = opts,
+    
+    # The index of the radar component used by the radar map.
+    radar_index: types.
+    
+    # Configuration of the check mode, indicates if multiple checks are supported, default is off, boolean and string values are supported.
+    # String values can be 'single', 'multiple', 'series' for single selection, multiple selection, and whole series selection respectively.
+    selected_mode: types.
+    
+    # The zlevel value of all graphs in the radar graph.
+    z_level: types.Numeric = 0, # The zlevel value for all graphs of the Radar Chart component.
+    
+    # The z-level value for all graphs of the Radar Chart component. Controls the order of the graphs before and after each other. graphs with a small z-value will be overwritten by graphs with a large z-value.
+    A small z value will be overwritten by a large z value. # z has a lower priority than zlevel, and no new Canvas will be created.
+    z: types.
 
     # Line style configuration items, see `series_options.LineStyleOpts`
     linestyle_opts: opts.LineStyleOpts = opts,
