@@ -412,6 +412,9 @@ class MapItem(
 
     # The value of the data for the region.
     value: Optional[Numeric] = None,
+    
+    # The group ID of this data item.
+    group_id: Optional[str] = None,
 
     # Whether the field is selected or not.
     is_selected: bool = False,

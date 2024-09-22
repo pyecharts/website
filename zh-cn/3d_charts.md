@@ -177,6 +177,12 @@ def add(
 
     # 系列数据
     data: Sequence,
+    
+    # 该系列使用的坐标系，可选：
+    # 'cartesian3D': 使用三维笛卡尔坐标系，通过 grid3DIndex 指定相应的三维笛卡尔坐标系组件。
+    # 'geo3D': 使用三维地理坐标系，通过 geo3DIndex 指定相应的三维地理坐标系组件
+    # 'globe': 使用地球坐标系，通过 globeIndex 指定相应的地球坐标系组件
+    coordinate_system: Optional[str] = None,
 
     # 三维柱状图中三维图形的着色效果。
     # color：只显示颜色，不受光照等其它因素的影响。
@@ -202,6 +208,9 @@ def add(
 
     # 三维笛卡尔坐标系配置项，参考 `Grid3DOpts`
     grid3d_opts: Union[opts.Grid3DOpts, dict] = opts.Grid3DOpts(),
+    
+    # 高亮状态的标签和样式配置。参考 `Emphasis3D`
+    emphasis_opts: types.Optional[types.Emphasis3D] = None,
     
     # 是否为参数曲面(仅 Surface3D 可用)
     is_parametric: types.Optional[bool] = None,

@@ -7,6 +7,13 @@
 def add_js_funcs(*fns):
 ```
 
+> *func pyecharts.Base.add_js_events*
+
+```python
+# 新增 js 事件函数，js 代码会被渲染在 setOption 后执行
+def add_js_events(*fns):
+```
+
 > *func pyecharts.Base.set_colors*
 
 ```python

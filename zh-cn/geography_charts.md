@@ -412,6 +412,9 @@ class MapItem(
 
     # 该区域的数据值。
     value: Optional[Numeric] = None,
+    
+    # 该数据项的组 ID。
+    group_id: Optional[str] = None,
 
     # 该区域是否选中。
     is_selected: bool = False,

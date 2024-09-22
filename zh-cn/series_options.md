@@ -259,6 +259,25 @@ class LabelOpts(
     # 文本显示高度。
     text_height: Optional[Numeric] = None,
     
+    # 文字本身的描边颜色。
+    # 如果设置为 'inherit'，则为视觉映射得到的颜色，如系列色。
+    text_border_color: Optional[str] = None,
+    
+    # 文字本身的描边宽度。
+    text_border_width: Optional[Numeric] = None,
+    
+    # 文字本身的阴影颜色。
+    text_shadow_color: Optional[str] = None,
+    
+    # 文字本身的阴影长度。
+    text_shadow_blur: Optional[Numeric] = None,
+    
+    # 文字本身的阴影 X 偏移。
+    text_shadow_offset_x: Optional[Numeric] = None,
+    
+    # 文字本身的阴影 Y 偏移。
+    text_shadow_offset_y: Optional[Numeric] = None,
+    
     # 文字超出宽度是否截断或者换行。配置width时有效
     # 'truncate' 截断，并在末尾显示ellipsis配置的文本，默认为...
     # 'break' 换行

@@ -828,6 +828,9 @@ class DataZoomOpts(
     # component type, optionally "slider", "inside"
     type_: str = "slider",
     
+    # Whether to disable the component's functionality.
+    is_disabled: bool = False,
+    
     # Whether to update the view of the series in real time when dragging. If set to false, updates only at the end of the drag.
     is_realtime: bool = True,
 
@@ -842,6 +845,22 @@ class DataZoomOpts(
     
     # The end value of the data window range. If end is set then endValue is invalid.
     end_value: Union[int, str, None] = None,
+    
+    # The minimum value (in percentage) to limit the window size, ranging from 0 to 100.
+    # If dataZoom-inside.minValueSpan is set then minSpan is invalid.
+    min_span: Union[int, None] = None, # The maximum value to be used to limit the size of the window.
+    
+    # The maximum value (as a percentage) to limit the window size, in the range 0 ~ 100.
+    # If dataZoom-inside.maxValueSpan is set then maxSpan is invalid.
+    max_span: Union[int, None] = None, # The minimum value used to limit the size of the window.
+    
+    # Minimum value (actual value) used to limit the window size.
+    # For example, on the timeline it can be set to: 3600 * 24 * 1000 * 5 for 5 days. On the category axis it can be set to 5 for 5 categories.
+    min_value_span: Union[int, str, None] = None, # Used to limit the maximum value of the window size.
+    
+    # The maximum value (actual value) to limit the window size.
+    # For example, on the time axis it can be set to 3600 * 24 * 1000 * 5 for 5 days. On the category axis it can be set to 5 for 5 categories.
+    max_value_span: Union[int, str, None] = None, # for the maximum value of the window.
 
     # Whether the layout is horizontal or vertical. Not only the layout method, but also for the Cartesian coordinate system, determines, by default, whether the horizontal or vertical number axis is controlled
     # The optional values are: 'horizontal', 'vertical'
@@ -857,9 +876,27 @@ class DataZoomOpts(
     # If number means control one axis, if Array means control multiple axes.
     yaxis_index: Union[int, Sequence[int], None] = None,
     
+    # Set the radius axis that the dataZoom-inside component controls (i.e. radiusAxis, a concept in the Cartesian coordinate system, see polar).
+    # If it is a number, it controls one axis, if it is an array, it controls multiple axes.
+    radius_axis_index: Union[int, Sequence[int], None] = None,.
+    
+    # Set the angle axis (i.e. angleAxis, a concept in the Cartesian coordinate system, see polar) controlled by the dataZoom-inside component.
+    # If it's a number it controls one axis, if it's an array it controls multiple axes.
+    angle_axis_index: Union[int, Sequence[int], None] = None,
+    
     # Whether to lock the size of the selection area (or data window as it is called).
     # If set to true then the selection area is locked in size, i.e. it can only be panned, not zoomed.
     is_zoom_lock: bool = False,
+    
+    # Set the frequency that triggers a view refresh. The unit is milliseconds (ms).
+    # If animation is set to true and animationDurationUpdate is greater than 0, you can keep throttle to the default value of 100 (or set it to a value greater than 0), otherwise the screen may feel laggy when dragging.
+    # If animation is set to false or animationDurationUpdate is set to 0, and the screen feels laggy when dragging when the amount of data is not large, you can try to set throttle to 0 to improve the situation.
+    throttle: Optional[int] = None, # Formatted as: [[int] = 0
+    
+    # In the form of [rangeModeForStart, rangeModeForEnd].
+    # For example, rangeMode: ['value', 'percent'], which means start takes an absolute value and end takes a percentage.
+    # Optional values for each: 'value', 'percent'
+    range_mode: Optional[Sequence] = None,
 
     # The distance of the dataZoom-slider component from the left side of the container.
     # The value of left can be a specific pixel value like 20, a percentage relative to the height and width of the container like '20%'
@@ -890,7 +927,34 @@ class DataZoomOpts(
     # Each data item, the whole data item is filtered out only if all dimensions are outside the same side of the data window.
     # 'empty': data outside the current data window, is set to empty. I.e. it does not affect the data range of the other axes.
     # 'none': No data is filtered, only the range of the number axis is changed.
-    filter_mode: str = "filter"
+    filter_mode: str = "filter",
+    
+    # How to trigger scaling. Optional values are:
+    # true: means the mouse wheel can trigger zoom without pressing any function key.
+    # false: the mouse wheel cannot trigger zoom.
+    # 'shift': hold down shift and mouse wheel to trigger zoom.
+    # 'ctrl': hold ctrl and mouse wheel to zoom.
+    # 'alt': hold down alt and mouse wheel to trigger zoom.
+    is_zoom_on_mouse_wheel: bool = True, # How to trigger data window panning.
+    
+    # How to trigger data window panning. Optional values are:
+    # true: indicates that mouse wheel movement can trigger data window panning without pressing any function key.
+    # false: indicates that mouse movement cannot trigger panning.
+    # 'shift': indicates that holding down shift and moving the mouse will trigger the data window to pan.
+    # 'ctrl': hold down ctrl and mouseover to trigger panning.
+    # 'alt': hold down alt and move the mouse to trigger panning.
+    is_move_on_mouse_move: bool = True, # How to trigger data window panning.
+    
+    # How to trigger data window panning. Optional values are:
+    # true: means the mouse wheel can trigger the data window to move without pressing any function key.
+    # false: indicates that the mouse wheel cannot trigger the panning.
+    # 'shift': indicates that holding down shift and the mouse wheel will trigger the data window panning.
+    # 'ctrl': indicates that holding down ctrl and the mouse wheel can trigger the data window panning.
+    # 'alt': hold down alt and mouse wheel to trigger panning.
+    is_move_on_mouse_wheel: bool = True, # If or not the mousemove event is blocked.
+    
+    # Whether to prevent the default behaviour of the mousemove event.
+    is_prevent_default_mouse_move: bool = True, # Whether to prevent the default behaviour of the mousemove event.
 )
 ```
 
@@ -1048,6 +1112,10 @@ class VisualMapOpts(
 
     # Specifies the maximum value of the visualMapPiecewise component.
     max_: Union[int, float] = 100,
+    
+    # Specify the position of the corresponding numeric value of the handle. 
+    # Range should be in the min max range.
+    range_: Sequence[Numeric] = None,
 
     # The text at each end, e.g. ['High', 'Low'].
     range_text: Union[list, tuple] = None,
@@ -1764,6 +1832,9 @@ class GraphicTextStyleOpts(
     # font: 'bolder 2em "Microsoft YaHei", sans-serif'
     font: Optional[str] = None,
     
+    # Font size
+    font_size: Optional[Numeric] = 0,
+    
     # Horizontal alignment, take values: 'left', 'center', 'right'. Default value is: 'left'
     # If 'left', the leftmost end of the text is at the x value. If 'right', it means that the rightmost end of the text is on the x value.
     text_align: str = "left",
@@ -1793,7 +1864,7 @@ class GraphicRect(
 ```
 
 
-### PolarOpts: polar coordinate system configuration
+## PolarOpts: polar coordinate system configuration
 > *class pyecharts.PolarOpts*
 
 ```python
@@ -1813,7 +1884,7 @@ class PolarOpts(
 )
 ```
 
-### DatasetTransformOpts: dataset transformation configuration items
+## DatasetTransformOpts: dataset transformation configuration items
 > *class pyecharts.options.DatasetTransformOpts*
 
 ```python
@@ -1830,7 +1901,7 @@ class DatasetTransformOpts(
 )
 ```
 
-### EmphasisOpts: polygon and label styles for highlighting.
+## EmphasisOpts: polygon and label styles for highlighting.
 > *class pyecharts.EmphasisOpts*.
 
 ```python
@@ -1875,5 +1946,81 @@ class EmphasisOpts(
     
     # end_label_opts, see `series_options.LabelOpts`.
     end_label_opts: Union[LabelOpts, dict, None] = None, # end_label_opts: Union[LabelOpts, dict, None] = None, # end_label_opts.
+)
+```
+
+## Emphasis3DOpts: polygon and label styles for 3D chart highlighting state
+> *class pyecharts.Emphasis3DOpts*
+
+```python
+class Emphasis3DOpts(
+    # Item style configuration item, refer to `series_options.ItemStyleOpts`.
+    itemstyle_opts: union[ItemStyleOpts, dict, None] = None,
+    
+    # Label options, see `series_options.LabelOpts`.
+    label_opts: Union[LabelOpts, dict, None] = None, # label configuration items, refer to `series_options.LabelOpts`.
+)
+```
+
+## BlurOpts: polygons and label styles in fade state
+> *class pyecharts.BlurOpts*.
+
+```python
+class BlurOpts(
+    # Label configuration items, see `series_options.LabelOpts`.
+    label_opts: union[LabelOpts, dict, None] = None,.
+    
+    # Line style options, see `series_options.LineStyleOpts`.
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None, # Line style configuration item, refer to `series_options.LineStyleOpts`.
+    
+    # Whether to show visual guide lines.
+    is_show_label_line: bool = False, # The visual guide line configuration for labels.
+    
+    # Configuration of visual guide lines for labels, refer to `series_options.LineStyleOpts`.
+    label_linestyle_opts: union[LineStyleOpts, dict, None] = None, # Visual guide line configuration for labels, refer to `series_options.LineStyleOpts`.
+    
+    # Item style options, see `series_options.ItemStyleOpts`.
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None, # Item style configuration items, refer to `series_options.ItemStyleOpts`.
+)
+```
+
+## SelectOpts: polygon and label styles in selected state
+> *class pyecharts.SelectOpts*
+
+```python
+class SelectOpts(
+    # Whether the polygons can be selected. Valid when selectedMode is turned on, and can be used to turn off some data.
+    is_disabled: Optional[bool] = None,.
+    
+    # Item style opts, refer to `series_options.ItemStyleOpts`.
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None, # Line style configuration item, refer to `series_options.ItemStyleOpts`.
+    
+    # Line style options, see `series_options.LineStyleOpts`.
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None, # Line style options, refer to `series_options.LineStyleOpts`.
+    
+    # Label opts, see `series_options.LabelOpts`.
+    label_opts: Union[LabelOpts, dict, None] = None, # Label configuration items, refer to `series_options.LabelOpts`.
+)
+```
+
+## TreeLeavesOpts： Tree Leaves Component Configuration
+> *class pyecharts.TreeLeavesOpts*
+
+```python
+class TreeLeavesOpts(
+    # Label configuration items, refer to `series_options.LabelOpts`.
+    label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # Item style options, see `series_options.ItemStyleOpts`.
+    Itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # Highlight style options, see `global_options.EmphasisOpts`.
+    emphasis_opts: Union[EmphasisOpts, dict, None] = None,
+    
+    # Emphasis opts, see `global_options.BlurOpts`.
+    blur_opts: Union[BlurOpts, dict, None] = None,
+    
+    # Selected state configuration item, see `global_options.SelectOpts`.
+    select_opts: Union[SelectOpts, dict, None] = None,
 )
 ```

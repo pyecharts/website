@@ -7,6 +7,13 @@ The `Base` class is the base class for all charts, including combined charts, an
 def add_js_funcs(*fns):
 ```
 
+> *func pyecharts.Base.add_js_events*
+
+```python
+# add js event function, js code will be rendered after setOption.
+def add_js_events(*fns):
+```
+
 > *func pyecharts.Base.set_colors*
 
 ``` python

@@ -124,17 +124,42 @@ def add(
     # 系列数据项，格式为 [(key1, value1), (key2, value2)]
     data_pair: Sequence,
 
-    # 是否选中图例
-    is_selected: bool = True,
-
     # 系列 label 颜色
     color: Optional[str] = None,
+    
+    # 从调色盘 option.color 中取色的策略，可取值为：
+    # 'series'：按照系列分配调色盘中的颜色，同一系列中的所有数据都是用相同的颜色；
+    # 'data'：按照数据项分配调色盘中的颜色，每个数据项都使用不同的颜色。
+    color_by: types.Optional[str] = None,
+    
+    # 指定的数据最小值。
+    min_: types.Numeric = 0,
+    
+    # 指定的数据最大值。
+    max_: types.Numeric = 100,
+    
+    # 数据最小值 min 映射的宽度。
+    # 可以是绝对的像素大小，也可以是相对布局宽度的百分比，如果需要最小值的图形并不是尖端三角，可通过设置该属性实现。
+    min_size: types.Union[str, types.Numeric] = "0%",
+    
+    # 数据最大值 max 映射的宽度。
+    # 可以是绝对的像素大小，也可以是相对布局宽度的百分比。
+    max_size: types.Union[str, types.Numeric] = "100%",
+    
+    # 漏斗图朝向，支持配置为'vertical'或者'horizontal'。
+    orient: str = "vertical",
 
     # 数据排序， 可以取 'ascending'，'descending'，'none'（表示按 data 顺序）
     sort_: str = "descending",
 
     # 数据图形间距
     gap: Numeric = 0,
+    
+    # 是否启用图例 hover 时的联动高亮。
+    is_legend_hover_link: bool = True,
+    
+    # 水平方向对齐布局类型，默认居中对齐，可用选项还有：'left' | 'right' | 'center'
+    funnel_align: str = "center",
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
@@ -147,6 +172,50 @@ def add(
     
     # 高亮配置项，参考 `global_options.EmphasisOpts`
     emphasis_opts: types.Emphasis = None,
+    
+    # 选中模式的配置，表示是否支持多个选中，默认关闭，支持布尔值和字符串
+    # 字符串取值可选'single'，'multiple'，'series' 分别表示单选，多选以及选择整个系列。
+    selected_mode: types.Union[bool, str] = False,
+    
+    # 所有图形的 zlevel 值。
+    z_level: types.Numeric = 0,
+    
+    # 组件的所有图形的 z 值。控制图形的前后顺序。z 值小的图形会被 z 值大的图形覆盖。
+    # z 相比 zlevel 优先级更低，而且不会创建新的 Canvas。
+    z: types.Numeric = 2,
+    
+    # 漏斗图组件离容器上侧的距离。
+    pos_top: types.Union[str, types.Numeric, None] = None,
+    
+    # 漏斗图组件离容器左侧的距离。
+    pos_left: types.Union[str, types.Numeric, None] = None,
+    
+    # 漏斗图组件离容器下侧的距离。
+    pos_bottom: types.Union[str, types.Numeric, None] = None,
+    
+    # 漏斗图组件离容器右侧的距离。
+    pos_right: types.Union[str, types.Numeric, None] = None,
+    
+    # 漏斗图组件的宽度。默认自适应。
+    width: types.Union[str, types.Numeric, None] = None,
+    
+    # 漏斗图组件的高度。默认自适应。
+    height: types.Union[str, types.Numeric, None] = None,
+    
+    # 如果 series.data 没有指定，并且 dataset 存在，那么就会使用 dataset。
+    # datasetIndex 指定本系列使用哪个 dataset。
+    dataset_index: types.Optional[types.Numeric] = None,
+    
+    # 可以定义 data 的哪个维度被编码成什么。
+    encode: types.Union[types.JSFunc, dict, None] = None,
+    # 标记点配置项，参考 `series_options.MarkPointOpts`
+    markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
+
+    # 标记线配置项，参考 `series_options.MarkLineOpts`
+    markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
+    
+    # 图表标域，常用于标记图表中某个范围的数据，参考 `series_options.MarkAreaOpts`
+    markarea_opts: types.MarkArea = None,
 )
 ```
 
@@ -425,6 +494,9 @@ class GaugePointerOpts(
 
     # 指针宽度。
     width: Numeric = 8,
+    
+    # 指针样式
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
 )
 ```
 
@@ -817,12 +889,33 @@ def add(
 
     # 系列数据
     data: types.Sequence[types.Union[opts.ParallelItem, dict]],
-
-    # 是否选中图例。
-    is_selected: bool = True,
+    
+    # 使用的平行坐标系的 index，在单个图表实例中存在多个平行坐标系的时候有用。
+    parallel_index: types.Optional[types.Numeric] = None,
+    
+    # 从调色盘 option.color 中取色的策略，可取值为：
+    # 'series'：按照系列分配调色盘中的颜色，同一系列中的所有数据都是用相同的颜色；
+    # 'data'：按照数据项分配调色盘中的颜色，每个数据项都使用不同的颜色。
+    color_by: types.Optional[str] = None,
+    
+    # 框选时，未被选中的条线会设置成这个『透明度』（从而可以达到变暗的效果）。
+    inactive_opacity: types.Optional[types.Numeric] = 0.05,
+    
+    # 框选时，选中的条线会设置成这个『透明度』（从而可以达到高亮的效果）。
+    active_opacity: types.Optional[types.Numeric] = 1,
+    
+    # 是否实时刷新。
+    is_realtime: bool = True,
 
     # 是否平滑曲线
     is_smooth: bool = False,
+    
+    # 平行坐标所有图形的 zlevel 值。
+    z_level: types.Numeric = 0,
+    
+    # 平行坐标组件的所有图形的 z 值。控制图形的前后顺序。z 值小的图形会被 z 值大的图形覆盖。
+    # z 相比 zlevel 优先级更低，而且不会创建新的 Canvas。
+    z: types.Numeric = 2,
 
     # 线条样式，参考 `series_options.LineStyleOpts`
     linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
@@ -991,6 +1084,28 @@ class ParallelItem(
 
     # 线的类型。可选'solid'，'dashed'，'dotted'
     type_: str = "solid",
+    
+    # 用于设置虚线的偏移量，可搭配 type 指定 dash array 实现灵活的虚线效果。
+    dash_offset: Numeric = 0,
+    
+    # 用于指定线段末端的绘制方式，可以是：
+    # 'butt': 线段末端以方形结束。
+    # 'round': 线段末端以圆形结束。
+    # 'square': 线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+    # 默认值为 'butt'。 
+    cap: str = "butt",
+    
+    # 用于设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性（长度为0的变形部分，其指定的末端和控制点在同一位置，会被忽略）。
+    # 可以是：
+    # 'bevel': 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+    # 'round': 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+    # 'miter': 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 miterLimit 属性看到效果。
+    # 默认值为 'bevel'。 
+    join: str = "bevel",
+    
+    # 用于设置斜接面限制比例。只有当 join 为 miter 时， miterLimit 才有效。
+    # 默认值为 10。负数、0、Infinity 和 NaN 均会被忽略。
+    miter_limit: Optional[Numeric] = None,
 
     # 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
     opacity: Numeric = 0.45,
@@ -1052,7 +1167,7 @@ def add(
     # 是否展示成南丁格尔图，通过半径区分数据大小，有'radius'和'area'两种模式。
     # radius：扇区圆心角展现数据的百分比，半径展现数据的大小
     # area：所有扇区圆心角相同，仅通过半径展现数据大小
-    rosetype: Optional[str] = None,
+    rosetype: types.Union[str, bool] = None,
     
     # 饼图的扇区是否是顺时针排布。
     is_clockwise: bool = True,
@@ -1091,14 +1206,23 @@ def add(
     # 图元样式配置项，参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
 
-    # 可以定义 data 的哪个维度被编码成什么。
-    encode: types.Union[types.JSFunc, dict, None] = None,
-    
     # 饼图引导线配置，参考 `chart_options.PieLabelLineOpts`
     label_line_opts: types.PieLabelLine = opts.PieLabelLineOpts(),
     
     # 高亮配置项，参考 `global_options.EmphasisOpts`
     emphasis_opts: types.Emphasis = None,
+    
+    # 可以定义 data 的哪个维度被编码成什么。
+    encode: types.Union[types.JSFunc, dict, None] = None,
+    
+    # 标记点配置项，参考 `series_options.MarkPointOpts`
+    markpoint_opts: Union[opts.MarkPointOpts, dict] = opts.MarkPointOpts(),
+
+    # 标记线配置项，参考 `series_options.MarkLineOpts`
+    markline_opts: Union[opts.MarkLineOpts, dict] = opts.MarkLineOpts(),
+    
+    # 图表标域，常用于标记图表中某个范围的数据，参考 `series_options.MarkAreaOpts`
+    markarea_opts: types.MarkArea = None,
 )
 ```
 
@@ -1111,9 +1235,9 @@ class PieItem(
 
     # 数据值。
     value: Optional[Numeric] = None,
-
-    # 该数据项是否被选中。
-    is_selected: bool = False,
+    
+    # 该数据项的组 ID。
+    group_id: Optional[str] = None,
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[LabelOpts, dict, None] = None,
@@ -1519,9 +1643,11 @@ def add(
 
     # 系列数据项
     data: types.Sequence[types.Union[opts.RadarItem, dict]],
-
-    # 是否选中图例
-    is_selected: bool = True,
+    
+    # 从调色盘 option.color 中取色的策略，可取值为：
+    # 'series'：按照系列分配调色盘中的颜色，同一系列中的所有数据都是用相同的颜色；
+    # 'data'：按照数据项分配调色盘中的颜色，每个数据项都使用不同的颜色。
+    color_by: types.Optional[str] = None,
 
     # ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 
     # 'diamond', 'pin', 'arrow', 'none'
@@ -1533,6 +1659,20 @@ def add(
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: opts.LabelOpts = opts.LabelOpts(),
+    
+    # 雷达图所使用的 radar 组件的 index。
+    radar_index: types.Numeric = None,
+    
+    # 选中模式的配置，表示是否支持多个选中，默认关闭，支持布尔值和字符串
+    # 字符串取值可选'single'，'multiple'，'series' 分别表示单选，多选以及选择整个系列。
+    selected_mode: types.Union[bool, str] = False,
+    
+    # 雷达图所有图形的 zlevel 值。
+    z_level: types.Numeric = 0,
+    
+    # 雷达图组件的所有图形的 z 值。控制图形的前后顺序。z 值小的图形会被 z 值大的图形覆盖。
+    # z 相比 zlevel 优先级更低，而且不会创建新的 Canvas。
+    z: types.Numeric = 2,
 
     # 线样式配置项，参考 `series_options.LineStyleOpts`
     linestyle_opts: opts.LineStyleOpts = opts.LineStyleOpts(),

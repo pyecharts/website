@@ -18,6 +18,9 @@ def add(
 
     # 系列数据项
     data: Sequence[Union[opts.TreeItem, dict]],
+    
+    # 当前视角的缩放比例。
+    zoom: types.Optional[types.Numeric] = 1,
 
     # 树图的布局，有 正交 和 径向 两种。这里的 正交布局 就是我们通常所说的水平 和 垂直 方向，
     # 对应的参数取值为 'orthogonal' 。而 径向布局 是指以根节点为圆心，每一层节点为环，
@@ -42,21 +45,30 @@ def add(
     # top 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
     # 也可以是 'top', 'middle', 'bottom'。
     # 如果 top 的值为'top', 'middle', 'bottom'，组件会根据相应的位置自动对齐。
-    pos_top: Optional[str] = None,
+    pos_top: types.Union[str, types.Numeric, None] = None,
 
     # tree 组件离容器左侧的距离。
     # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
     # 也可以是 'left', 'center', 'right'。
     # 如果 left 的值为'left', 'center', 'right'，组件会根据相应的位置自动对齐。
-    pos_left: Optional[str] = None,
+    pos_left: types.Union[str, types.Numeric, None] = None,
 
     # tree 组件离容器下侧的距离。
     # bottom 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
-    pos_bottom: Optional[str] = None,
+    pos_bottom: types.Union[str, types.Numeric, None] = None,
 
     # tree 组件离容器右侧的距离。
     # right 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。
-    pos_right: Optional[str] = None,
+    pos_right: types.Union[str, types.Numeric, None] = None,
+    
+    # tree 组件的宽度。
+    width: types.Union[str, types.Numeric, None] = None,
+    
+    # tree 组件的高度。
+    height: types.Union[str, types.Numeric, None] = None,
+    
+    # 当前视角的中心点。可以是包含两个 number 类型（表示像素值）或 string 类型（表示相对容器的百分比）的数组。 
+    center: types.Optional[types.Sequence[types.Union[str, types.Numeric]]] = None,
 
     # 折叠节点间隔，当节点过多时可以解决节点显示过杂间隔。
     collapse_interval: Numeric = 0,
@@ -91,11 +103,21 @@ def add(
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
 
-    # 叶子节点标签配置项，参考 `series_options.LabelOpts`
-    leaves_label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+    # 叶子节点标签配置项，参考 `global_options.TreeLeavesOpts`
+    leaves_opts: Union[opts.TreeLeavesOpts, dict] = opts.TreeLeavesOpts(),
 
     # 提示框组件配置项，参考 `series_options.TooltipOpts`
     tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+    
+    # 选中模式的配置，表示是否支持多个选中，默认关闭，支持布尔值和字符串
+    # 字符串取值可选'single'，'multiple'，'series' 分别表示单选，多选以及选择整个系列。
+    selected_mode: types.Union[bool, str] = False,
+    
+    # 淡出状态的相关配置。开启 emphasis.focus 后有效。
+    blur_opts: types.Blur = None,
+    
+    # 选中状态的相关配置。开启 selectedMode 后有效。
+    select_opts: types.Select = None,
 )
 ```
 

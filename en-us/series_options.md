@@ -258,6 +258,25 @@ class LabelOpts(
     # The height of the text.
     text_height: Optional[Numeric] = None, # Text height.
     
+    # The stroke colour of the text itself.
+    # If set to 'inherit', the colour obtained by visual mapping, e.g. series colour.
+    text_border_colour: Optional[str] = None, # the width of the stroke of the text itself.
+    
+    # The width of the stroke of the text itself.
+    text_border_width: Optional[Numeric] = None, # The stroke width of the text itself.
+    
+    # The shadow colour of the text itself.
+    text_shadow_color: Optional[str] = None, # The shadow colour of the text itself.
+    
+    # The shadow length of the text itself.
+    text_shadow_blur: Optional[Numeric] = None, # The shadow x-offset of the text itself.
+    
+    # The x-offset of the shadow of the text itself.
+    text_shadow_offset_x: Optional[Numeric] = None, # The Y offset of the shadow of the text itself.
+    
+    # The Y offset of the shadow of the text itself.
+    text_shadow_offset_y: Optional[Numeric] = None, # The text's shadow Y offset.
+    
     # If or not the text will be truncated or linefeed if it exceeds the width. Valid when width is configured.
     # 'truncate' truncates and displays ellipsis-configured text at the end, defaults to...
     # 'break' line feed

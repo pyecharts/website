@@ -739,6 +739,9 @@ class DataZoomOpts(
     # 组件类型，可选 "slider", "inside"
     type_: str = "slider",
     
+    # 是否停止组件的功能。
+    is_disabled: bool = False,
+    
     # 拖动时，是否实时更新系列的视图。如果设置为 false，则只在拖拽结束的时候更新。
     is_realtime: bool = True,
 
@@ -753,6 +756,22 @@ class DataZoomOpts(
     
     # 数据窗口范围的结束数值。如果设置了 end 则 endValue 失效。
     end_value: Union[int, str, None] = None,
+    
+    # 用于限制窗口大小的最小值（百分比值），取值范围是 0 ~ 100。
+    # 如果设置了 dataZoom-inside.minValueSpan 则 minSpan 失效。
+    min_span: Union[int, None] = None,
+    
+    # 用于限制窗口大小的最大值（百分比值），取值范围是 0 ~ 100。
+    # 如果设置了 dataZoom-inside.maxValueSpan 则 maxSpan 失效。
+    max_span: Union[int, None] = None,
+    
+    # 用于限制窗口大小的最小值（实际数值）。
+    # 如在时间轴上可以设置为：3600 * 24 * 1000 * 5 表示 5 天。 在类目轴上可以设置为 5 表示 5 个类目。
+    min_value_span: Union[int, str, None] = None,
+    
+    # 用于限制窗口大小的最大值（实际数值）。
+    # 如在时间轴上可以设置为：3600 * 24 * 1000 * 5 表示 5 天。 在类目轴上可以设置为 5 表示 5 个类目。
+    max_value_span: Union[int, str, None] = None,
 
     # 布局方式是横还是竖。不仅是布局方式，对于直角坐标系而言，也决定了，缺省情况控制横向数轴还是纵向数轴
     # 可选值为：'horizontal', 'vertical'
@@ -768,9 +787,27 @@ class DataZoomOpts(
     # 如果是 number 表示控制一个轴，如果是 Array 表示控制多个轴。
     yaxis_index: Union[int, Sequence[int], None] = None,
     
+    # 设置 dataZoom-inside 组件控制的 radius 轴（即radiusAxis，是直角坐标系中的概念，参见 polar）。
+    # 如果是 number 表示控制一个轴，如果是 Array 表示控制多个轴。
+    radius_axis_index: Union[int, Sequence[int], None] = None,
+    
+    # 设置 dataZoom-inside 组件控制的 angle 轴（即angleAxis，是直角坐标系中的概念，参见 polar）。
+    # 如果是 number 表示控制一个轴，如果是 Array 表示控制多个轴。
+    angle_axis_index: Union[int, Sequence[int], None] = None,
+    
     # 是否锁定选择区域（或叫做数据窗口）的大小。
     # 如果设置为 true 则锁定选择区域的大小，也就是说，只能平移，不能缩放。
     is_zoom_lock: bool = False,
+    
+    # 设置触发视图刷新的频率。单位为毫秒（ms）。
+    # 如果 animation 设为 true 且 animationDurationUpdate 大于 0，可以保持 throttle 为默认值 100（或者设置为大于 0 的值），否则拖拽时有可能画面感觉卡顿。
+    # 如果 animation 设为 false 或者 animationDurationUpdate 设为 0，且在数据量不大时，拖拽时画面感觉卡顿，可以把尝试把 throttle 设为 0 来改善。
+    throttle: Optional[int] = None,
+    
+    # 形式为：[rangeModeForStart, rangeModeForEnd]。
+    # 例如 rangeMode: ['value', 'percent']，表示 start 值取绝对数值，end 取百分比。
+    # 每项可选值为：'value', 'percent'
+    range_mode: Optional[Sequence] = None,
 
     # dataZoom-slider 组件离容器左侧的距离。
     # left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
@@ -801,7 +838,34 @@ class DataZoomOpts(
     #  每个数据项，只有当全部维度都在数据窗口同侧外部，整个数据项才会被过滤掉。
     # 'empty'：当前数据窗口外的数据，被设置为空。即不会影响其他轴的数据范围。
     # 'none': 不过滤数据，只改变数轴范围。
-    filter_mode: str = "filter"
+    filter_mode: str = "filter",
+    
+    # 如何触发缩放。可选值为：
+    # true：表示不按任何功能键，鼠标滚轮能触发缩放。
+    # false：表示鼠标滚轮不能触发缩放。
+    # 'shift'：表示按住 shift 和鼠标滚轮能触发缩放。
+    # 'ctrl'：表示按住 ctrl 和鼠标滚轮能触发缩放。
+    # 'alt'：表示按住 alt 和鼠标滚轮能触发缩放。
+    is_zoom_on_mouse_wheel: bool = True,
+    
+    # 如何触发数据窗口平移。可选值为：
+    # true：表示不按任何功能键，鼠标移动能触发数据窗口平移。
+    # false：表示鼠标移动不能触发平移。
+    # 'shift'：表示按住 shift 和鼠标移动能触发数据窗口平移。
+    # 'ctrl'：表示按住 ctrl 和鼠标移动能触发数据窗口平移。
+    # 'alt'：表示按住 alt 和鼠标移动能触发数据窗口平移。
+    is_move_on_mouse_move: bool = True,
+    
+    # 如何触发数据窗口平移。可选值为：
+    # true：表示不按任何功能键，鼠标滚轮能触发数据窗口平移。
+    # false：表示鼠标滚轮不能触发平移。
+    # 'shift'：表示按住 shift 和鼠标滚轮能触发数据窗口平移。
+    # 'ctrl'：表示按住 ctrl 和鼠标滚轮能触发数据窗口平移。
+    # 'alt'：表示按住 alt 和鼠标滚轮能触发数据窗口平移。
+    is_move_on_mouse_wheel: bool = True,
+    
+    # 是否阻止 mousemove 事件的默认行为。
+    is_prevent_default_mouse_move: bool = True,
 )
 ```
 
@@ -959,6 +1023,9 @@ class VisualMapOpts(
 
     # 指定 visualMapPiecewise 组件的最大值。
     max_: Union[int, float] = 100,
+    
+    # 指定手柄对应数值的位置。range 应在 min max 范围内。
+    range_: Sequence[Numeric] = None,
 
     # 两端的文本，如['High', 'Low']。
     range_text: Union[list, tuple] = None,
@@ -1675,6 +1742,9 @@ class GraphicTextStyleOpts(
     # font: 'bolder 2em "Microsoft YaHei", sans-serif'
     font: Optional[str] = None,
     
+    # 字体大小
+    font_size: Optional[Numeric] = 0,
+    
     # 水平对齐方式，取值：'left', 'center', 'right'。默认值为：'left'
     # 如果为 'left'，表示文本最左端在 x 值上。如果为 'right'，表示文本最右端在 x 值上。
     text_align: str = "left",
@@ -1704,7 +1774,7 @@ class GraphicRect(
 ```
 
 
-### PolarOpts：极坐标系配置
+## PolarOpts：极坐标系配置
 > *class pyecharts.PolarOpts*
 
 ```python
@@ -1724,7 +1794,7 @@ class PolarOpts(
 )
 ```
 
-### DatasetTransformOpts：数据集转换配置项
+## DatasetTransformOpts：数据集转换配置项
 > *class pyecharts.options.DatasetTransformOpts*
 
 ```python
@@ -1741,7 +1811,7 @@ class DatasetTransformOpts(
 )
 ```
 
-### EmphasisOpts: 高亮状态下的多边形和标签样式。
+## EmphasisOpts: 高亮状态下的多边形和标签样式。
 > *class pyecharts.EmphasisOpts*
 
 ```python
@@ -1786,5 +1856,81 @@ class EmphasisOpts(
     
     # 末尾标签配置项，参考 `series_options.LabelOpts`
     end_label_opts: Union[LabelOpts, dict, None] = None,
+)
+```
+
+## Emphasis3DOpts: 3D 图高亮状态下的多边形和标签样式
+> *class pyecharts.Emphasis3DOpts*
+
+```python
+class Emphasis3DOpts(
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+)
+```
+
+## BlurOpts: 淡出状态下的多边形和标签样式
+> *class pyecharts.BlurOpts*
+
+```python
+class BlurOpts(
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 线条样式配置项，参考 `series_options.LineStyleOpts`
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    
+    # 是否显示视觉引导线。
+    is_show_label_line: bool = False,
+    
+    # 标签的视觉引导线配置，参考 `series_options.LineStyleOpts`
+    label_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+)
+```
+
+## SelectOpts: 选中状态下的多边形和标签样式
+> *class pyecharts.SelectOpts*
+
+```python
+class SelectOpts(
+    # 是否可以被选中。在开启selectedMode的时候有效，可以用于关闭部分数据。
+    is_disabled: Optional[bool] = None,
+    
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # 线条样式配置项，参考 `series_options.LineStyleOpts`
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+)
+```
+
+## TreeLeavesOpts: Tree Leaves 组件配置
+> *class pyecharts.TreeLeavesOpts*
+
+```python
+class TreeLeavesOpts(
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+    
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # 高亮样式配置项，参考 `global_options.EmphasisOpts`
+    emphasis_opts: Union[EmphasisOpts, dict, None] = None,
+    
+    # 淡出状态配置项，参考 `global_options.BlurOpts`
+    blur_opts: Union[BlurOpts, dict, None] = None,
+    
+    # 选中状态配置项，参考 `global_options.SelectOpts`
+    select_opts: Union[SelectOpts, dict, None] = None,
 )
 ```
