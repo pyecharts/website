@@ -455,8 +455,8 @@ class EffectScatter(
 > *func pyecharts.charts.EffectScatter.add_yaxis*
 
 ``` python
- def add_yaxis(
-     # Series name for display of tooltip, legend filtering for legend.
+def add_yaxis(
+    # Series name for display of tooltip, legend filtering for legend.
     series_name: str,
 
     # series data

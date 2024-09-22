@@ -456,8 +456,8 @@ class EffectScatter(
 > *func pyecharts.charts.EffectScatter.add_yaxis*
 
 ```python
- def add_yaxis(
-     # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
+def add_yaxis(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
     series_name: str,
 
     # 系列数据
