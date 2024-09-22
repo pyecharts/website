@@ -626,6 +626,8 @@ def add_schema(
 )
 ```
 
+### Map3DLabelOpts：Map3D 地图标签配置项
+
 > *class pyecharts.options.charts_options.Map3DLabelOpts*
 
 ```python
@@ -647,6 +649,8 @@ class Map3DLabelOpts(
     text_style: Union[TextStyleOpts, dict, None] = None,
 )
 ```
+
+### Map3DRealisticMaterialOpts：Map3D 真实感材质配置项
 
 > *class pyecharts.options.charts_options.Map3DRealisticMaterialOpts*
 
@@ -683,6 +687,8 @@ class Map3DRealisticMaterialOpts(
 )
 ```
 
+### Map3DLambertMaterialOpts：Map3D Lambert 材质配置项
+
 > *class pyecharts.options.charts_options.Map3DLambertMaterialOpts*
 
 ```python
@@ -699,6 +705,8 @@ class Map3DLambertMaterialOpts(
 )
 ```
 
+### Map3DColorMaterialOpts：Map3D 颜色配置项
+
 > *class pyecharts.options.charts_options.Map3DColorMaterialOpts*
 
 ```python
@@ -714,6 +722,8 @@ class Map3DColorMaterialOpts(
     texture_offset: Numeric = 0,
 )
 ```
+
+### Map3DLightOpts：Map3D 光源配置项
 
 > *class pyecharts.options.charts_options.Map3DLightOpts*
 
@@ -756,6 +766,8 @@ class Map3DLightOpts(
     ambient_cubemap_specular_intensity: Numeric = 0.5,
 )
 ```
+
+### Map3DPostEffectOpts：Map3D 后处理特效配置项
 
 > *class pyecharts.options.charts_options.Map3DPostEffectOpts*
 
@@ -820,6 +832,8 @@ class Map3DPostEffectOpts(
     is_fxaa_enable: bool = False,
 )
 ```
+
+### Map3DViewControlOpts：Map3D 投影配置项
 
 > *class pyecharts.options.charts_options.Map3DViewControlOpts*
 

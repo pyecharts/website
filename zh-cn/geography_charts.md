@@ -181,7 +181,7 @@ def add_coordinate(
 
 > *func pyecharts.charts.Geo.add_coordinate_json*
 
-以 JOSN 文件格式新增多个坐标点
+以 JSON 文件格式新增多个坐标点
 ```python
 def add_coordinate_json(
     # json 文件格式的坐标数据
@@ -211,6 +211,8 @@ from pyecharts.datasets import COORDINATES
 # cutoff 为匹配阈值，阈值越高相似性越高，1 为完全相同。默认为 0.6
 COORDINATES.cutoff = 0.75
 ```
+
+### GeoRegionsOpts：Geo 区域样式配置
 
 > *func pyecharts.options.GeoRegionsOpts*
 

@@ -135,6 +135,8 @@ class TreeMap(
 )
 ```
 
+### TreeMapBreadcrumbOpts：矩形树图面包屑配置
+
 > *class pyecharts.options.TreeMapBreadcrumbOpts*
 
 ```python
@@ -173,6 +175,8 @@ class TreeMapBreadcrumbOpts(
 )
 ```
 
+### TreeMapItemStyleOpts：矩形树图元素样式配置项
+
 > *class pyecharts.options.TreeMapItemStyleOpts*
 
 ```python
@@ -205,6 +209,8 @@ class TreeMapItemStyleOpts(
     stroke_width: Optional[Numeric] = None,
 )
 ```
+
+### TreeMapLevelsOpts：矩形树图层级样式配置项
 
 > *class pyecharts.options.TreeMapLevelsOpts*
 

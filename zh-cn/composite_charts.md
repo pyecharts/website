@@ -127,6 +127,8 @@ class Page(
 def add(*charts)    # charts: 任意图表实例
 ```
 
+### PageLayoutOpts：Page 布局配置项
+
 > *class pyecharts.options.PageLayoutOpts*
 
 ```python

@@ -135,6 +135,8 @@ class TreeMap(
 )
 ```
 
+### TreeMapBreadcrumbOpts：TreeMap breadcrumb options
+
 > *class pyecharts.options.TreeMapBreadcrumbOpts*
 
 ``` python
@@ -173,6 +175,8 @@ class TreeMapBreadcrumbOpts(
 )
 ```
 
+### TreeMapItemStyleOpts：TreeMap item style options
+
 > *class pyecharts.options.TreeMapItemStyleOpts*
 
 ```python
@@ -205,6 +209,8 @@ class TreeMapItemStyleOpts(
     stroke_width: Optional[Numeric] = None,
 )
 ```
+
+### TreeMapLevelsOpts：TreeMap level options
 
 > *class pyecharts.options.TreeMapLevelsOpts*
 

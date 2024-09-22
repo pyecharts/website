@@ -181,7 +181,7 @@ def add_coordinate(
 
 > *func pyecharts.charts.Geo.add_coordinate_json*
 
-Add multiple coordinate points in JOSN file format
+Add multiple coordinate points in JSON file format
 ``` python
 def add_coordinate_json(
     # Coordinate data in json file format
@@ -211,6 +211,8 @@ from pyecharts.datasets import COORDINATES
 # cutoff is the matching threshold, the higher the threshold the higher the similarity, 1 is identical. The default is 0.6
 COORDINATES.cutoff = 0.75
 ```
+
+### GeoRegionsOpts：Geo region options
 
 > *func pyecharts.options.GeoRegionsOpts*
 
