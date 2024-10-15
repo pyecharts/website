@@ -101,4 +101,4 @@ bar = (
 bar
 ```
 
-![](TODO)
+![marimo](https://github.com/user-attachments/assets/5270706e-3543-44bb-8478-3058a8a0e54f)
