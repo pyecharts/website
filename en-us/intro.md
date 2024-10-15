@@ -6,7 +6,7 @@
 
 * Simple API design, silky smooth usage and support for chained calls
 * 30+ common charts in one place
-* Supports major Notebook environments, Jupyter Notebook and JupyterLab
+* Supports major Notebook environments, Jupyter Notebook, JupyterLab, and [marimo](https://github.com/marimo-team/marimo)
 * Easy integration with major web frameworks such as Flask, Django, etc.
 * Highly flexible configuration options for easy matching of beautiful charts
 * Detailed documentation and examples to help developers get up and running faster
