@@ -81,3 +81,24 @@ bar.render_notebook()
 ```
 
 ![](https://user-images.githubusercontent.com/17564655/60228824-8abb7b80-98c6-11e9-9435-0fc8777624d0.png)
+
+## marimo
+
+[marimo](https://github.com/marimo-team/marimo) automatically renders pyecharts charts in the marimo notebook environment, without any configuration required.
+
+```python
+import pyecharts.options as opts
+from pyecharts.charts import Bar
+
+bar = (
+    Bar()
+    .add_xaxis(["shirt", "cardigan", "chiffon", "pants", "heels", "socks"])
+    .add_yaxis("Merchant A", [5, 20, 36, 10, 75, 90])
+    .add_yaxis("Merchant B", [15, 6, 45, 20, 35, 66])
+    .set_global_opts(title_opts=opts.TitleOpts(title="Main Title", subtitle="Subtitle"))
+)
+
+bar
+```
+
+![marimo](https://github.com/user-attachments/assets/5270706e-3543-44bb-8478-3058a8a0e54f)
