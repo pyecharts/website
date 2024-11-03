@@ -1,6 +1,24 @@
 # 版本日志
 
-### version 2.0.6 - 2024-06-20 (Current)
+### version 2.0.7 - 2024-11-03 (Current)
+
+**Added**
+* 增加对于高德地图 `AMap` 的兼容，使用方式参考 `BMap`
+
+**Updated**
+* [issue#2362](https://github.com/pyecharts/pyecharts/issues/2362) 更新一些配置的引用位置和方式 `markline`, `markarea` 增加动画配置项
+* [issue#2350](https://github.com/pyecharts/pyecharts/issues/2350) 更新 `timeline` 支持 `3D` 图。
+* [issue#2385](https://github.com/pyecharts/pyecharts/issues/2385) 支持 `marimo` 渲染 `pyecharts` 图表。
+* [issue#2373](https://github.com/pyecharts/pyecharts/issues/2373) 支持 `Page` 使用 `is_embed_js` 参数用于离线可视化
+* CI 增加 Python 3.13 的测试，版本兼容 Python 3.13
+* `AxisOpts` 增加 `animation_opts` 配置
+* `LabelOpts` 增加 `is_value_animation(valueAnimation)` 配置
+
+**Fixed**
+* [issue#2361](https://github.com/pyecharts/pyecharts/issues/2361) 修复 `timeline` 的 bug，关联
+* 修复 `AnimationOpts` 错误的类型提示
+
+### version 2.0.6 - 2024-06-20
 ***Add***
 * [issue#2325](https://github.com/pyecharts/pyecharts/issues/2325) 增加 RenderSepType 用于执行渲染换行符
 * [pr#2338](https://github.com/pyecharts/pyecharts/pull/2338) Migrate the test code from `nose` to `nose2/unittest`

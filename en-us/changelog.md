@@ -1,6 +1,24 @@
 # Version log
 
-### version 2.0.6 - 2024-06-20 (Current)
+### version 2.0.7 - 2024-11-03 (Current)
+
+**Added**
+* Added compatibility with `AMap` for `BMap`.
+
+**Updated**
+* [issue#2362](https://github.com/pyecharts/pyecharts/issues/2362) update some configurations `markline`, `markarea` add animation configurations.
+* [issue#2350](https://github.com/pyecharts/pyecharts/issues/2350) Update `timeline` to support `3D` charts.
+* [issue#2385](https://github.com/pyecharts/pyecharts/issues/2385) Support `marimo` rendering of `pyecharts` charts.
+* [issue#2373](https://github.com/pyecharts/pyecharts/issues/2373) Support for `Page` using `is_embed_js` parameter for offline visualisation.
+* CI adds tests for Python 3.13, version compatible with Python 3.13
+* `AxisOpts` add `animation_opts` config.
+* `LabelOpts` add `is_value_animation(valueAnimation)` config.
+
+**Fixed**
+* [issue#2361](https://github.com/pyecharts/pyecharts/issues/2361) Fix bug in `timeline`, related to
+* Fix type hints for `AnimationOpts` bugs
+
+### version 2.0.6 - 2024-06-20
 ***Add***
 * [issue#2325](https://github.com/pyecharts/pyecharts/issues/2325) add RenderSepType for performing rendering of line breaks
 * [pr#2338](https://github.com/pyecharts/pyecharts/pull/2338) Migrated test code from `nose` to `nose2/unittest`.

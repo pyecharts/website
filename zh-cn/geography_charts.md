@@ -705,3 +705,122 @@ class BMapGeoLocationControlOpts(
 ### Demo
 
 [gallery 示例](http://gallery.pyecharts.org/#/BMap/README)
+
+
+## AMap：高德地图
+
+高德地图需要申请开发者 AK，[官网申请](https://lbs.amap.com/)。
+
+> *class pyecharts.charts.AMap*
+
+```python
+class AMap(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: opts.InitOpts = opts.InitOpts()
+
+    # 是否忽略不存在的坐标，默认值为 False，即不忽略
+    is_ignore_nonexistent_coord: bool = False
+)
+```
+
+> *func pyecharts.charts.AMap.add_schema*
+
+```python
+def add_schema(
+    # 高德地图开发应用 appkey，请使用到高德地图的开发者自行到高德地图开放平台
+    # 注册高德 ak。
+    amap_ak: str,
+    
+    # 当前视角的中心点，用经纬度表示
+    center: Optional[Sequence] = None,
+    
+    # 当前视角的缩放比例。
+    zoom: Optional[Numeric] = None,
+    
+    # 是否开启尺寸重绘模式
+    is_enable_resize: bool = True,
+    
+    # 地图样式配置项
+    map_style: Optional[dict] = None,
+    
+    # 地图移动时是否渲染 echarts 图层。默认为 “true”。
+    # 如果为 “false”，则只有在地图 “moveend ”后才会重新渲染。
+    # 如果数据量较大，最好将此选项设置为 false。
+    is_render_on_map: bool = True,
+    
+    # echarts 图层是否是交互式的。
+    is_layer_interactive: bool = True,
+    
+    # 大数据量优化
+    is_large: bool = False,
+)
+```
+
+> *func pyecharts.charts.AMap.add*
+
+```python
+def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
+    series_name: str,
+
+    # 数据项 (坐标点名称，坐标点值)
+    data_pair: Sequence,
+
+    # Geo 图类型，有 scatter, effectScatter, heatmap, lines 4 种，建议使用
+    # from pyecharts.globals import GeoType
+    # GeoType.GeoType.EFFECT_SCATTER，GeoType.HEATMAP，GeoType.LINES
+    type_: str = "scatter",
+
+    # 是否选中图例
+    is_selected: bool = True,
+
+    # 标记图形形状
+    symbol: Optional[str] = None,
+
+    # 标记的大小
+    symbol_size: Numeric = 12,
+
+    # 系列 label 颜色
+    color: Optional[str] = None,
+    
+    # 是否是多段线，在画 lines 图情况下
+    is_polyline: bool = False,
+    
+    # 是否启用大规模线图的优化，在数据图形特别多的时候（>=5k）可以开启
+    is_large: bool = False,
+    
+    # 开启绘制优化的阈值。
+    large_threshold: Numeric = 2000,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+
+    # 涟漪特效配置项，参考 `series_options.EffectOpts`
+    effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
+
+    # 线样式配置项，参考 `series_options.LineStyleOpts`
+    linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+)
+```
+
+> *func pyecharts.charts.AMap.add_control_panel*
+
+```python
+def add_control_panel(
+    # 是否开启卫星图层
+    is_add_satellite_layer: bool = False,
+    
+    # 是否开启路网图层
+    is_add_road_net_layer: bool = False,
+)
+```
+
+### Demo
+
+[gallery 示例](http://gallery.pyecharts.org/#/AMap/README)

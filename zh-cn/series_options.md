@@ -287,6 +287,9 @@ class LabelOpts(
     # 在 rich 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果
     # 具体配置可以参考一下 https://www.echartsjs.com/tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE
     rich: Optional[dict] = None,
+    
+    # 是否开启数值动画，默认关闭
+    is_value_animation: bool = False,
 )
 ```
 
@@ -471,6 +474,9 @@ class MarkPointOpts(
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: LabelOpts = LabelOpts(position="inside", color="#fff"),
+    
+    # 动画配置项，参考 `global_options.AnimationOpts`
+    animation_opts: Union[AnimationOpts, dict, None] = None,
 )
 ```
 
@@ -522,6 +528,9 @@ class MarkLineItem(
     # 标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示宽和高，
     # 例如 [20, 10] 表示标记宽为 20，高为 10。
     symbol_size: Optional[Numeric] = None,
+    
+    # 动画配置项，参考 `global_options.AnimationOpts`
+    animation_opts: Union[AnimationOpts, dict, None] = None,
 )
 ```
 
@@ -586,6 +595,9 @@ class MarkAreaItem(
     
     # 该数据项区域的样式，起点和终点项的 itemStyle 会合并到一起。参考 `series_options.ItemStyleOpts`
     itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # 动画配置项，参考 `global_options.AnimationOpts`
+    animation_opts: Union[AnimationOpts, dict, None] = None,
 )
 ```
 

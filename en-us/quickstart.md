@@ -122,4 +122,4 @@ bar = (
 
 ### Using Notebook
 
-Of course you can also take a cooler approach and use Notebook to display diagrams. matplotlib has it, so will pyecharts. pyecharts supports Jupyter Notebook / Jupyter Lab / Nteract / Zeppelin for rendering in all four environments. See [Advanced Topics/Notebook](zh-cn/notebook) for details
+Of course you can also take a cooler approach and use Notebook to display diagrams. matplotlib has it, so will pyecharts. pyecharts supports Jupyter Notebook / Jupyter Lab / Nteract / Zeppelin / marimo for rendering in all four environments. See [Advanced Topics/Notebook](zh-cn/notebook) for details
