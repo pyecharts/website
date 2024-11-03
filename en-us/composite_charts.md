@@ -115,6 +115,15 @@ class Page(
 
     # The interval between each legend
     interval: int = 1,
+    
+    # Whether to remove line breaks between legends
+    is_remove_br: bool = False,
+    
+    # Whether to embed the js file (will cause the html to grow in size, use with caution)
+    is_embed_js: bool = False, # Whether to embed js files (will cause html volume to grow).
+    
+    # Border colour
+    page_border_colour: str = ‘’, # the colour of the border.
 
     # Layout configuration items, see `PageLayoutOpts`
     layout: Union[PageLayoutOpts, dict] = PageLayoutOpts()

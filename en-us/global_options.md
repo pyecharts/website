@@ -1506,6 +1506,9 @@ class AxisOpts(
 
     # The subdivisions of the coordinate axes in the grid area. The minor split line aligns to the minorTick line, see `series_options.MinorSplitLineOpts`
     minor_split_line_opts: Union[MinorSplitLineOpts, dict, None] = None,
+    
+    # The animation options，see `global_options.AnimationOpts`
+    animation_opts: Union[AnimationOpts, dict] = AnimationOpts(),
 )
 ```
 

@@ -286,6 +286,9 @@ class LabelOpts(
     # In rich, you can customize the rich text style. Rich text styles can be used to create very rich effects in tags
     # See https://www.echartsjs.com/tutorial.html#%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE for configuration details
     rich: Optional[dict] = None,
+    
+    # Whether to enable value animation, default is False
+    is_value_animation: bool = False,
 )
 ```
 
@@ -470,6 +473,9 @@ class MarkPointOpts(
 
     # Label configuration items, see `series_options.LabelOpts`
     label_opts: LabelOpts = LabelOpts(position="inside", color="#fff"),
+    
+    # The animation options，see `global_options.AnimationOpts`
+    animation_opts: Union[AnimationOpts, dict, None] = None,
 )
 ```
 
@@ -521,6 +527,9 @@ class MarkLineItem(
     # The size of the marker, either as a single number such as 10, or as an array of separate widths and heights.
     # For example [20, 10] means that the symbol is 20 wide and 10 high.
     symbol_size: Optional[Numeric] = None,
+    
+    # The animation options，see `global_options.AnimationOpts`
+    animation_opts: Union[AnimationOpts, dict, None] = None,
 )
 ```
 
@@ -585,6 +594,9 @@ class MarkAreaItem(
     
     # The style of this data item area, the itemStyle of the start and end items will be merged together. See `series_options.ItemStyleOpts` for reference
     itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    
+    # The animation options，see `global_options.AnimationOpts`
+    animation_opts: Union[AnimationOpts, dict, None] = None,
 )
 ```
 

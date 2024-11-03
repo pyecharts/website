@@ -115,6 +115,15 @@ class Page(
 
     # 每个图例之间的间隔
     interval: int = 1,
+    
+    # 是否移除图例之间的换行符
+    is_remove_br: bool = False,
+    
+    # 是否嵌入 js 文件（会导致 html 体积变大，谨慎使用）
+    is_embed_js: bool = False,
+    
+    # 边框颜色
+    page_border_color: str = "",
 
     # 布局配置项，参考 `PageLayoutOpts`
     layout: Union[PageLayoutOpts, dict] = PageLayoutOpts()

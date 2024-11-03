@@ -1416,6 +1416,9 @@ class AxisOpts(
 
     # 坐标轴在 grid 区域中的次分隔线。次分割线会对齐次刻度线 minorTick，参考 `series_options.MinorSplitLineOpts`
     minor_split_line_opts: Union[MinorSplitLineOpts, dict, None] = None,
+    
+    # 动画配置项，参考 `global_options.AnimationOpts`
+    animation_opts: Union[AnimationOpts, dict] = AnimationOpts(),
 )
 ```
 

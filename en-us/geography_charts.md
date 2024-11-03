@@ -704,3 +704,121 @@ class BMapGeoLocationControlOpts(
 ### Demo
 
 [gallery example](http://gallery.pyecharts.org/#/BMap/README)
+
+## AMap：GaoDe Maps(AMap)
+
+AMap needs to apply for Developer AK, [official website application](https://lbs.amap.com/).
+
+> *class pyecharts.charts.AMap*
+
+```python
+class AMap(
+    # Initialise configuration items, refer to `global_options.InitOpts`.
+    init_opts: opts.InitOpts = opts.InitOpts()
+
+    # Whether to ignore non-existing coordinates, defaults to False, i.e. not ignored
+    is_ignore_nonexistent_coord: bool = False
+)
+```
+
+> *func pyecharts.charts.AMap.add_schema*
+
+```python
+def add_schema(
+    # GaoDe Maps development application appkey, please use the Gaode Maps developers to Gaode Maps open platform by themselves.
+    # Register GaoDe ak.
+    amap_ak: str,.
+    
+    # The centre point of the current view, expressed in latitude and longitude
+    centre: Optional[Sequence] = None, # The centre of the current view, in latitude and longitude.
+    
+    # The zoom ratio of the current viewpoint.
+    zoom: Optional[Numeric] = None, # The zoom of the current viewpoint.
+    
+    # Whether to enable resize mode
+    is_enable_resize: bool = True, # The map style configuration item.
+    
+    # Map style configuration item
+    map_style: Optional[dict] = None, # If the map is rendered when moving.
+    
+    # Whether to render echarts layers when the map is moved. Defaults to true.
+    # If ‘false’, the map will only be re-rendered after it ‘movesend’.
+    # It is best to set this option to false if there is a large amount of data.
+    is_render_on_map: bool = True,
+    
+    # Whether echarts layers are interactive.
+    is_layer_interactive: bool = True, # If the echarts layer is interactive.
+    
+    # Optimisation for large data volumes
+    is_large: bool = False, # echarts layers are optimised for large data volumes.
+)
+```
+
+> *func pyecharts.charts.AMap.add*
+
+```python
+def add(
+    # Series name for tooltip display and legend filter for legend.
+    series_name: str, # data_items (point_name, point_value)
+
+    # Data item (point name, point value).
+    data_pair: Sequence, # Geo plot type.
+
+    # Geo plot type, there are 4 types: scatter, effectScatter, heatmap, lines.
+    # from pyecharts.globals import GeoType
+    # GeoType.GeoType.EFFECT_SCATTER, GeoType.HEATMAP, GeoType.LINES
+    type_: str = ‘scatter’,
+
+    # Whether the legend is selected
+    is_selected: bool = True, # Whether the legend is selected.
+
+    # Mark the shape of the graphic
+    symbol: Optional[str] = None,
+
+    # Size of the symbol
+    symbol_size: Numeric = 12, # series label colours, # symbol_size: Numeric = 12, # symbol_size.
+
+    # Series label colour
+    colour: Optional[str] = None, # label colour
+    
+    # Whether or not the line is polyline, in case of drawing lines.
+    is_polyline: bool = False, # Whether to enable optimisation for massive line charts.
+    
+    # Whether to enable optimisation for large-scale line charts, in case of very large data graphs (>=5k)
+    is_large: bool = False, # Enable plotting optimisation.
+    
+    # Threshold for enabling plotting optimisation.
+    large_threshold: numeric = 2000, # Enable plotting optimisation threshold.
+
+    # Label options, see `series_options.LabelOpts`.
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(), # label_opts.
+
+    # Ripple effect configuration item, refer to `series_options.EffectOpts`.
+    effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(), # line style configuration item, refer to `series_options.EffectOpts`, dict] = opts.
+
+    # Line style options, refer to `series_options.LineStyleOpts`.
+    linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(), # line style configuration item, refer to `series_options.LineStyleOpts`, refer to `series_options.
+
+    # Tipbox component configuration item, see `series_options.TooltipOpts`.
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None, # Tip box component configuration item, refer to `series_options.TooltipOpts`.
+
+    # Item style options, refer to `series_options.ItemStyleOpts`.
+    itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None, # Item style configuration items, refer to `series_options.ItemStyleOpts`.
+)
+```
+
+> *func pyecharts.charts.AMap.add_control_panel*
+
+```python
+def add_control_panel(
+    # Whether to enable satellite layers
+    is_add_satellite_layer: bool = False,
+    
+    # Whether to enable the road network layer
+    is_add_road_net_layer: bool = False, # Whether to turn on the road network layer.
+)
+```
+
+### Demo
+
+[gallery example](http://gallery.pyecharts.org/#/AMap/README)
