@@ -1,6 +1,18 @@
 # 版本日志
 
-### version 2.0.7 - 2024-11-03 (Current)
+### version 2.0.8 - 2025-01-24 (Current)
+
+**Added**
+* 增加对于谷歌地图 `GMap` 的兼容，使用方式参考 `AMap`
+* 增加对于 Leaflet 地图 `LMap` 的兼容，使用方式参考 `AMap`
+* 增加对于 Echarts Stat 统计插件的兼容
+
+**Updated**
+* 更新 `Base` 类，增加 `use_echarts_stat` api 用于嵌入 Echarts 统计插件
+* `Line` 图支持 `dataset_index` 的配置
+* `Calendar` 日历图支持多个图例配置
+
+### version 2.0.7 - 2024-11-03
 
 **Added**
 * 增加对于高德地图 `AMap` 的兼容，使用方式参考 `BMap`

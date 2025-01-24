@@ -1,6 +1,18 @@
 # Version log
 
-### version 2.0.7 - 2024-11-03 (Current)
+### version 2.0.8 - 2025-01-24 (Current)
+
+**Added**
+* Added compatibility for Google Maps `GMap`. Refer to `AMap` for usage.
+* Added compatibility for Leaflet maps `LMap`. Refer to `AMap` for usage.
+* Added compatibility for the Echarts Stat statistical plugin.
+
+**Updated**
+* Updated the `Base` class and added the `use_echarts_stat` API for embedding the Echarts statistical plugin.
+* The `Line` chart supports the configuration of `dataset_index`.
+* The `Calendar` chart supports multiple calendar options configurations.
+
+### version 2.0.7 - 2024-11-03
 
 **Added**
 * Added compatibility with `AMap` for `BMap`.
