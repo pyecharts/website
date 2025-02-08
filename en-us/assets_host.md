@@ -23,6 +23,7 @@ pyecharts provides a shortcut to change the global HOST. The following is an exa
 
     ```python
     # Just declare CurrentConfig.ONLINE_HOST at the top
+    # Note: If using pyecharts 2.x version, use http://127.0.0.1:8000/assets/v5 for loading.
     from pyecharts.globals import CurrentConfig
     CurrentConfig.ONLINE_HOST = "http://127.0.0.1:8000/assets/"
 
