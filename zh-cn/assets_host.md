@@ -23,6 +23,7 @@ pyecharts 提供了更改全局 HOST 的快捷方式，下面以开发者启动�
 
     ```python
     # 只需要在顶部声明 CurrentConfig.ONLINE_HOST 即可
+    # 注意：如果使用 pyecharts 2.x 版本，则使用 http://127.0.0.1:8000/assets/v5 进行加载
     from pyecharts.globals import CurrentConfig
     CurrentConfig.ONLINE_HOST = "http://127.0.0.1:8000/assets/"
 
