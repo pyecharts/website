@@ -957,6 +957,9 @@ def add_yaxis(
 
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+    
+    # 端点配置项，参考 `series_options.LabelOpts`
+    end_label_opts: types.Label = None,
 
     # 线样式配置项，参考 `series_options.LineStyleOpts`
     linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),

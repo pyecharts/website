@@ -955,6 +955,9 @@ def add_yaxis(
 
     # Label configuration items, see `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts,
+    
+    # End Label configuration items, see `series_options.LabelOpts`
+    end_label_opts: types.Label = None,
 
     # Line style configuration items, see `series_options.LineStyleOpts`
     linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),

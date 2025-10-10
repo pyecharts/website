@@ -1,6 +1,19 @@
 # Version log
 
-### version 2.0.8 - 2025-01-24 (Current)
+### version 2.0.9 - 2025-10-10 (Current)
+
+**Updated**
+* Update the way parameters are added to the `Table` class by adding the parameter `**kwargs` to expand other parameters for `Table` to interface with `prettytable`.
+* Update `MarkPointOpts`，`MarkPointItemOpts` and `LabelOpts`.
+* Update `Line` parameter `end_label_opts`
+
+**Fixed**
+* Fix the problem that `chart_id` is not effective in the `Grid` chart scenario.
+* Fix the duplicate configuration problem of `datazoom` and `visualmap` in the generated `HTML` file in the `Grid` chart scenario.
+* Fix several index issues in the `Grid` chart scenario.
+* Fix the abnormal override of css_libs in `Page` chart.
+
+### version 2.0.8 - 2025-01-24
 
 **Added**
 * Added compatibility for Google Maps `GMap`. Refer to `AMap` for usage.

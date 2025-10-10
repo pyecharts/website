@@ -1,6 +1,19 @@
 # 版本日志
 
-### version 2.0.8 - 2025-01-24 (Current)
+### version 2.0.9 - 2025-10-10 (Current)
+
+**Updated**
+* 更新 `Table` 类参数添加方式，加入参数 `**kwargs`，扩展 `Table` 对接 `prettytable` 的其他参数。
+* 更新 `MarkPointOpts`、`MarkPointItemOpts` 以及 `LabelOpts`。
+* 更新 `Line`，加入参数 `end_label_opts` 适配。
+
+**Fixed**
+* 修复 `Grid` 图场景下，`chart_id` 不生效的问题。
+* 修复 `Grid` 图场景下，`datazoom` 和 `visualmap` 在生成的 `HTML` 文件中的配置重复问题。
+* 修复 `Grid` 图场景下若干索引问题。
+* 修复 `Page` 的 `css_libs` 被异常覆盖。
+
+### version 2.0.8 - 2025-01-24 
 
 **Added**
 * 增加对于谷歌地图 `GMap` 的兼容，使用方式参考 `AMap`
