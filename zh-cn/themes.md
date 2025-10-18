@@ -26,7 +26,7 @@ def theme_default() -> Bar:
 
 ### LIGHT
 
-```pyhon
+```python
 c = Bar(init_opts=opts.InitOpts(theme=ThemeType.LIGHT))
 ```
 ![](https://user-images.githubusercontent.com/19553554/55897092-6cf94700-5bf2-11e9-8fa9-e7d880481a90.png)
