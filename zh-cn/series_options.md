@@ -290,6 +290,15 @@ class LabelOpts(
     
     # 是否开启数值动画，默认关闭
     is_value_animation: bool = False,
+    
+    # 标签的透明度
+    opacity: Optional[Numeric] = None,
+    
+    # 文本边距
+    text_margin: Union[Numeric, Sequence, None] = None,
+    
+    # 最小边距
+    min_margin: Optional[Numeric] = None,
 )
 ```
 
@@ -808,5 +817,99 @@ class GraphGLForceAtlas2Opts(
     
     # 是否开启防止节点重叠。
     is_prevent_overlap: bool = False,
+)
+```
+
+
+## CustomBarRangeItemPayloadOpts：自定义柱状图范围项载荷配置项
+> *class pyecharts.options.CustomBarRangeItemPayloadOpts*
+
+```python
+class CustomBarRangeItemPayloadOpts(
+    # 柱状图宽度
+    bar_width: Union[Numeric, str, None] = None,
+
+    # 边框圆角
+    border_radius: Optional[Numeric] = None,
+
+    # 边距
+    margin: Optional[Numeric] = None,
+)
+```
+
+## CustomContourItemPayloadOpts：自定义轮廓项载荷配置项
+> *class pyecharts.options.CustomContourItemPayloadOpts*
+
+```python
+class CustomContourItemPayloadOpts(
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # 线条样式配置项，参考 `series_options.LineStyleOpts`
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+
+    # 带宽
+    bandwidth: Optional[Numeric] = None,
+)
+```
+
+## CustomLineRangeItemPayloadOpts：自定义折线图范围项载荷配置项
+> *class pyecharts.options.CustomLineRangeItemPayloadOpts*
+
+```python
+class CustomLineRangeItemPayloadOpts(
+    # 区域填充样式配置项，参考 `series_options.AreaStyleOpts`
+    areastyle_opts: Union[AreaStyleOpts, dict, None] = None,
+
+    # 线条样式配置项，参考 `series_options.LineStyleOpts`
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+)
+```
+
+## CustomSegmentedDoughnutItemPayloadOpts：自定义分段圆环图项载荷配置项
+> *class pyecharts.options.CustomSegmentedDoughnutItemPayloadOpts*
+
+```python
+class CustomSegmentedDoughnutItemPayloadOpts(
+    # 中心坐标
+    center: Optional[Sequence] = None,
+
+    # 半径
+    radius: Optional[Sequence] = None,
+
+    # 分段数
+    segment_count: Optional[Numeric] = None,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+)
+```
+
+## CustomStageItemPayloadOpts：自定义阶段项载荷配置项
+> *class pyecharts.options.CustomStageItemPayloadOpts*
+
+```python
+class CustomStageItemPayloadOpts(
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+)
+```
+
+## CustomViolinItemPayloadOpts：自定义小提琴图项载荷配置项
+> *class pyecharts.options.CustomViolinItemPayloadOpts*
+
+```python
+class CustomViolinItemPayloadOpts(
+    # 标记大小
+    symbol_size: Optional[Numeric] = None,
+
+    # 区域透明度
+    area_opacity: Optional[Numeric] = None,
+
+    # 带宽缩放
+    bandwidth_scale: Optional[Numeric] = None,
+
+    # 箱数
+    bin_count: Optional[Numeric] = None,
 )
 ```

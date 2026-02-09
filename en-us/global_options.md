@@ -1084,6 +1084,9 @@ class LegendOpts(
     # Not shown by default, user can turn it on manually or configure the title of each button manually.
     selector: Union[bool, Sequence] = False,
     
+    # Selector label configuration items, see `series_options.LabelOpts`
+    selector_label: Union[LabelOpts, dict, None] = None,
+    
     # The position of the selector, it can be placed at the end or the head of the legend, the corresponding values are 'end' and 'start' respectively.
     # By default, when the legend is laid out horizontally, the selector is placed at the end of the legend; when the legend is laid out vertically, the selector is placed at the head of the legend.
     selector_position: str = "auto",
@@ -1509,6 +1512,15 @@ class AxisOpts(
     
     # The animation options，see `global_options.AnimationOpts`
     animation_opts: Union[AnimationOpts, dict] = AnimationOpts(),
+    
+    # Jitter overlap
+    is_jitter_overlap: Optional[bool] = None,
+    
+    # Jitter margin
+    jitter_margin: Optional[Numeric] = None,
+    
+    # Jitter value
+    jitter: Optional[Numeric] = None,
 )
 ```
 
@@ -2007,23 +2019,497 @@ class SelectOpts(
 ```
 
 ## TreeLeavesOpts： Tree Leaves Component Configuration
-> *class pyecharts.TreeLeavesOpts*
+> *class pyecharts.options.TreeLeavesOpts*
 
 ```python
 class TreeLeavesOpts(
-    # Label configuration items, refer to `series_options.LabelOpts`.
+    # The colour of the graph.
+    # The colour can be represented using RGB, e.g. 'rgb(128, 128, 128)', and if you want to add an alpha channel for opacity
+    # You can use RGBA, e.g. 'rgba(128, 128, 128, 0.5)', or you can use hexadecimal format, e.g. '#ccc'.
+    # Gradient colours and texture fills are also supported in addition to solid colours
+    # 
+    # Linear gradients, with the first four parameters x0, y0, x2, y2, ranging from 0 - 1, are equivalent to percentages in a graphical wraparound box.
+    # If globalCoord is `true`, then the four values are absolute pixel positions
+    # color: {
+    # type: `linear',
+    # x: 0,
+    # y: 0,
+    # x2: 0,
+    # y2: 1,
+    # colorStops: [{
+    # offset: 0, color: 'red' # colour at 0%
+    # }, {
+    # offset: 1, color: 'blue' # colour at 100%
+    # }],
+    # globalCoord: false # default is false
+    # }
+    color: Optional[str] = None,
+
+    # The style of the text font.
+    # Optional: 'normal', 'italic', 'oblique'
+    font_style: str = "normal",
+
+    # The thickness of the text font.
+    # Optional: 'normal', 'bold', 'bolder', 'lighter', 100 | 200 | 300 | 400...
+    font_weight: str = "normal",
+    
+    # The font family of the text.
+    # Can be 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+    font_family: str = "sans-serif",
+    
+    # The font size of the text.
+    font_size: Numeric = 12,
+    
+    # Line height of the text fragment
+    line_height: Optional[Numeric] = None,
+    
+    # The background colour of the text block.
+    # Colour values can be used, e.g. '#123234', 'red', 'rgba(0,23,11,0.3)'.
+    background_color: Optional[str] = None,
+    
+    # Text block border colour.
+    border_color: Optional[str] = None,
+    
+    # The width of the text block border.
+    border_width: Optional[Numeric] = None,
+    
+    # The rounded corners of the text block.
+    border_radius: Union[Numeric, Sequence] = 0,
+    
+    # The inner margin of the text block. Example.
+    # padding: [3, 4, 5, 6]: indicates [top, right, bottom, left] margins.
+    # padding: 4: means padding: [4, 4, 4, 4].
+    # padding: [3, 4]: means padding: [3, 4, 3, 4].
+    # Note that the width and height of the text block specify the content height and width, not the padding.
+    padding: Union[Numeric, Sequence] = 0,
+    
+    # The background shadow colour of the text block.
+    shadow_color: Optional[str] = None,
+    
+    # The length of the text block's background shadow.
+    shadow_blur: Optional[Numeric] = None,
+    
+    # The background shading x offset of the text block.
+    shadow_offset_x: Optional[Numeric] = None,
+    
+    # The background shadow y offset of the text block.
+    shadow_offset_y: Optional[Numeric] = None,
+    
+    # The width of the text block.
+    width: Optional[str] = None,
+    
+    # The height of the text block.
+    height: Optional[str] = None,
+    
+    # Text block can be placed anywhere in the parent container, 'left' can be.
+    # A specific pixel value like 20, a percentage relative to the container height and width like '20%'
+    # Or 'left', 'centre', 'right'.
+    # If the value of left is 'left', 'centre', 'right', the component will be automatically aligned according to the corresponding position.
+    # If the value of left is a number or a percentage, the element is placed at the pixel value or percentage from the left side of the parent container.
+    # If left is not set, it is calculated automatically based on right.
+    # If left and right are set at the same time (excluding the case where one side is auto), the width of the graphic element is stretched.
+    pos_left: Optional[str] = None,
+    
+    # Text block can be placed anywhere in the parent container, 'top' can be.
+    # A specific pixel value like 20, a percentage relative to the container height and width like '20%'
+    # Or 'top', 'middle', 'bottom'.
+    # If the value of top is 'top', 'middle', 'bottom', the component will be automatically aligned according to the corresponding position.
+    # If the value of top is a number or a percentage, the element is placed at the pixel value or percentage from the top of the parent container.
+    # If top is not set, it is calculated automatically based on bottom.
+    # If top and bottom are set at the same time (excluding the case where one side is auto), the height of the graphic element is stretched.
+    pos_top: Optional[str] = None,
+    
+    # Text block can be placed anywhere in the parent container, 'right' can be.
+    # A specific pixel value like 20, a percentage relative to the container height and width like '20%'.
+    # If the value of right is a number or a percentage, the element is placed at the pixel value or percentage from the right side of the parent container.
+    # If right is not set, it is calculated automatically based on left.
+    # If left and right are set at the same time (excluding the case where one side is auto), the width of the graphic element is stretched.
+    pos_right: Optional[str] = None,
+    
+    # Text block can be placed anywhere in the parent container, 'bottom' can be.
+    # A specific pixel value like 20, a percentage relative to the container height and width like '20%'.
+    # If the value of bottom is a number or a percentage, the element is placed at the pixel value or percentage from the bottom of the parent container.
+    # If bottom is not set, it is calculated automatically based on top.
+    # If top and bottom are set at the same time (excluding the case where one side is auto), the height of the graphic element is stretched.
+    pos_bottom: Optional[str] = None,
+    
+    # Opacity of the text block, defaults to 1 and does not draw the graphic element when 0.
+    opacity: Optional[Numeric] = None,
+)
+```
+
+
+## AxisBreakOpts: Axis break configuration items
+> *class pyecharts.options.AxisBreakOpts*
+
+```python
+class AxisBreakOpts(
+    # Start position of the break
+    start: Union[Numeric, str] = None,
+
+    # End position of the break
+    end: Union[Numeric, str] = None,
+
+    # Gap between breaks
+    gap: Union[Numeric, str] = None,
+
+    # Whether the break is expanded
+    is_expanded: bool = False,
+)
+```
+
+## AxisBreakAreaOpts: Axis break area configuration items
+> *class pyecharts.options.AxisBreakAreaOpts*
+
+```python
+class AxisBreakAreaOpts(
+    # Whether to show the break area
+    is_show: Optional[bool] = None,
+
+    # Item style configuration items, see `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # Amplitude of the zigzag pattern
+    zigzag_amplitude: Optional[Numeric] = None,
+
+    # Z-index of the zigzag pattern
+    zigzag_z: Optional[Numeric] = None,
+
+    # Whether to expand on click
+    is_expand_onclick: bool = True,
+)
+```
+
+## AxisBreakLabelLayoutOpts: Axis break label layout configuration items
+> *class pyecharts.options.AxisBreakLabelLayoutOpts*
+
+```python
+class AxisBreakLabelLayoutOpts(
+    # Whether to move overlapping labels
+    is_move_overlap: Optional[bool] = None,
+)
+```
+
+
+## MatrixOpts: Matrix configuration items
+> *class pyecharts.options.MatrixOpts*
+
+```python
+class MatrixOpts(
+    # zlevel value for all graphics of the component.
+    z_level: Numeric = 0,
+
+    # The z-value of all graphics for the component. Controls the order of shapes before or after each other; shapes with smaller z values are overwritten by shapes with larger z values.
+    z: Numeric = 2,
+
+    # The distance of the matrix component from the left side of the container.
+    pos_left: Union[Numeric, str, None] = None,
+
+    # The distance of the matrix component from the top side of the container.
+    pos_top: Union[Numeric, str, None] = None,
+
+    # The distance of the matrix component from the right side of the container.
+    pos_right: Union[Numeric, str, None] = None,
+
+    # The distance of the matrix component from the bottom side of the container.
+    pos_bottom: Union[Numeric, str, None] = None,
+
+    # The width of the matrix component.
+    width: Union[Numeric, str, None] = None,
+
+    # The height of the matrix component.
+    height: Union[Numeric, str, None] = None,
+
+    # Matrix x-axis configuration
+    x_data: Union[MatrixAxisOpts, dict, None] = None,
+
+    # Matrix y-axis configuration
+    y_data: Union[MatrixAxisOpts, dict, None] = None,
+
+    # Matrix body configuration
+    body_opts: Union[MatrixBodyOrCornerOpts, dict, None] = None,
+
+    # Matrix corner configuration
+    corner_opts: Union[MatrixBodyOrCornerOpts, dict, None] = None,
+
+    # Matrix background style
+    background_style: Union[MatrixBackgroundStyleOpts, dict, None] = None,
+
+    # Z-index of the border
+    border_z2: Optional[Numeric] = None,
+
+    # Tooltip configuration items, see `global_options.TooltipOpts`
+    tooltip_opts: TooltipOpts = None,
+)
+```
+
+## MatrixAxisOpts: Matrix axis configuration items
+> *class pyecharts.options.MatrixAxisOpts*
+
+```python
+class MatrixAxisOpts(
+    # Whether to show the axis
+    is_show: bool = True,
+
+    # Axis data
+    data: Union[Sequence, dict, JSFunc, None] = None,
+
+    # Label configuration items, see `series_options.LabelOpts`
     label_opts: Union[LabelOpts, dict, None] = None,
-    
-    # Item style options, see `series_options.ItemStyleOpts`.
-    Itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
-    
-    # Highlight style options, see `global_options.EmphasisOpts`.
-    emphasis_opts: Union[EmphasisOpts, dict, None] = None,
-    
-    # Emphasis opts, see `global_options.BlurOpts`.
-    blur_opts: Union[BlurOpts, dict, None] = None,
-    
-    # Selected state configuration item, see `global_options.SelectOpts`.
-    select_opts: Union[SelectOpts, dict, None] = None,
+
+    # Item style configuration items, see `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # Whether the axis is static or not cannot be interacted with.
+    is_silent: bool = False,
+
+    # Mouse cursor when hovering
+    cursor: Optional[str] = None,
+
+    # z-index of the axis
+    z2: Optional[Numeric] = None,
+
+    # Size of the level
+    level_size: Union[Numeric, str, None] = None,
+
+    # Axis levels
+    levels: Optional[Sequence] = None,
+)
+```
+
+## MatrixBodyDataOpts: Matrix body data configuration items
+> *class pyecharts.options.MatrixBodyDataOpts*
+
+```python
+class MatrixBodyDataOpts(
+    # Coordinates of the data
+    coord: Optional[Sequence] = None,
+
+    # Whether to clamp the coordinates
+    is_coord_clamp: Optional[bool] = None,
+
+    # Whether to merge cells
+    is_merge_cells: Optional[bool] = None,
+
+    # Value of the data
+    value: Union[Numeric, str, None] = None,
+
+    # Label configuration items, see `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+)
+```
+
+## MatrixBodyOrCornerOpts: Matrix body or corner configuration items
+> *class pyecharts.options.MatrixBodyOrCornerOpts*
+
+```python
+class MatrixBodyOrCornerOpts(
+    # Data configuration
+    data: Union[Sequence[MatrixBodyDataOpts], dict, None] = None,
+
+    # Label configuration items, see `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+
+    # Item style configuration items, see `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # Whether the element is static or not cannot be interacted with.
+    is_silent: bool = False,
+
+    # Mouse cursor when hovering
+    cursor: Optional[str] = None,
+
+    # z-index of the element
+    z2: Optional[Numeric] = None,
+)
+```
+
+## MatrixBackgroundStyleOpts: Matrix background style configuration items
+> *class pyecharts.options.MatrixBackgroundStyleOpts*
+
+```python
+class MatrixBackgroundStyleOpts(
+    # Background color
+    color: Optional[str] = None,
+
+    # Border color
+    border_color: str = "#ccc",
+
+    # Border width
+    border_width: Numeric = 1,
+
+    # Border type
+    border_type: str = "solid",
+
+    # Border radius
+    border_radius: Union[Numeric, Sequence] = 0,
+
+    # Border cap
+    border_cap: str = "butt",
+
+    # Border join
+    border_join: str = "bevel",
+
+    # Border miter limit
+    border_miter_limit: Optional[Numeric] = 10,
+
+    # Shadow blur
+    shadow_blur: Optional[Numeric] = None,
+
+    # Shadow color
+    shadow_color: Optional[str] = None,
+
+    # Shadow x offset
+    shadow_offset_x: Numeric = 0,
+
+    # Shadow y offset
+    shadow_offset_y: Numeric = 0,
+
+    # Opacity
+    opacity: Optional[Numeric] = 1,
+)
+```
+
+## MatrixDividerLineStyleOpts: Matrix divider line style configuration items
+> *class pyecharts.options.MatrixDividerLineStyleOpts*
+
+```python
+class MatrixDividerLineStyleOpts(
+    # Line color
+    color: Optional[str] = "#aaa",
+
+    # Line width
+    width: Optional[Numeric] = 1,
+
+    # Line type
+    type_: Optional[str] = "solid",
+
+    # Dash offset
+    dash_offset: Optional[Numeric] = 0,
+
+    # Line cap
+    cap: Optional[str] = "butt",
+
+    # Line join
+    join: Optional[str] = "bevel",
+
+    # Miter limit
+    miter_limit: Optional[Numeric] = 10,
+
+    # Shadow blur
+    shadow_blur: Optional[Numeric] = None,
+
+    # Shadow color
+    shadow_color: Optional[str] = None,
+
+    # Shadow x offset
+    shadow_offset_x: Optional[Numeric] = None,
+
+    # Shadow y offset
+    shadow_offset_y: Optional[Numeric] = None,
+
+    # Opacity
+    opacity: Optional[Numeric] = 1,
+)
+```
+
+## ThumbnailOpts: Thumbnail configuration items
+> *class pyecharts.options.ThumbnailOpts*
+
+```python
+class ThumbnailOpts(
+    # Whether to show the thumbnail
+    is_show: bool = True,
+
+    # zlevel value for all graphics of the component.
+    z_level: Numeric = 0,
+
+    # The z-value of all graphics for the component. Controls the order of shapes before or after each other; shapes with smaller z values are overwritten by shapes with larger z values.
+    z: Numeric = 2,
+
+    # The distance of the thumbnail from the left side of the container.
+    pos_left: Union[Numeric, str, None] = None,
+
+    # The distance of the thumbnail from the top side of the container.
+    pos_top: Union[Numeric, str, None] = None,
+
+    # The distance of the thumbnail from the right side of the container.
+    pos_right: Union[Numeric, str, None] = None,
+
+    # The distance of the thumbnail from the bottom side of the container.
+    pos_bottom: Union[Numeric, str, None] = None,
+
+    # The width of the thumbnail.
+    width: Union[Numeric, str, None] = None,
+
+    # The height of the thumbnail.
+    height: Union[Numeric, str, None] = None,
+
+    # The coordinate system used for the thumbnail. By default, no coordinate system is used.
+    coordinate_system: Optional[str] = None,
+
+    # Specify how to use the coordinate system, could be 'auto', 'replace' or 'overlay'.
+    coordinate_system_usage: Optional[str] = None,
+
+    # The coordinates for the thumbnail.
+    coord: Optional[Union[Sequence, Numeric, str]] = None,
+
+    # Item style configuration items, see `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # Window style configuration items
+    window_style_opts: Union[ThumbnailWindowStyleOpts, dict, None] = None,
+
+    # The index of the series to use
+    series_index: Optional[Numeric] = None,
+
+    # The ID of the series to use
+    series_id: Union[Numeric, str, None] = None,
+)
+```
+
+## ThumbnailWindowStyleOpts: Thumbnail window style configuration items
+> *class pyecharts.options.ThumbnailWindowStyleOpts*
+
+```python
+class ThumbnailWindowStyleOpts(
+    # Window color
+    color: Optional[str] = "#9ea0a5",
+
+    # Window border color
+    border_color: str = "#b7b9be",
+
+    # Window border width
+    border_width: Numeric = 1,
+
+    # Window border type
+    border_type: str = "solid",
+
+    # Window border radius
+    border_radius: Union[Numeric, Sequence] = 0,
+
+    # Window border cap
+    border_cap: str = "butt",
+
+    # Window border join
+    border_join: str = "bevel",
+
+    # Window border miter limit
+    border_miter_limit: Optional[Numeric] = 10,
+
+    # Window shadow blur
+    shadow_blur: Optional[Numeric] = None,
+
+    # Window shadow color
+    shadow_color: Optional[str] = None,
+
+    # Window shadow x offset
+    shadow_offset_x: Numeric = 0,
+
+    # Window shadow y offset
+    shadow_offset_y: Numeric = 0,
+
+    # Window opacity
+    opacity: Optional[Numeric] = 0.3,
 )
 ```

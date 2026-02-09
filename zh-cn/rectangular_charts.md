@@ -125,6 +125,9 @@ def add_yaxis(
     # 注：目前 stack 只支持堆叠于 'value' 和 'log' 类型的类目轴上，不支持 'time' 和 'category' 类型的类目轴。
     stack_strategy: types.Optional[str] = "samesign",
     
+    # 堆叠顺序策略，可选 'samesign', 'positive', 'negative', 'all'
+    stack_order: types.Optional[str] = None,
+    
     # 堆积数值的策略，前提是stack属性已被设置。其值可以是：
     # 'samesign' 只在要堆叠的值与当前累积的堆叠值具有相同的正负符号时才堆叠。
     # 'all' 堆叠所有的值，不管当前或累积的堆叠值的正负符号是什么。
@@ -901,6 +904,9 @@ def add_yaxis(
     # 'positive' 只堆积正值。
     # 'negative' 只堆叠负值。
     stack_strategy: types.Optional[str] = "samesign",
+    
+    # 堆叠顺序策略，可选 'samesign', 'positive', 'negative', 'all'
+    stack_order: types.Optional[str] = None,
 
     # 是否平滑曲线
     is_smooth: bool = False,

@@ -70,6 +70,27 @@ def add(
     # The centre of the current viewpoint. Can be an array of two number types (for pixel values) or string types (for percentages relative to the container). 
     centre: types.Optional[types.Sequence[types.Union[str, types.Numeric]]] = None, # The centre of the current view.
 
+    # The coordinate system used for the chart. By default, no coordinate system is used.
+    coordinate_system: types.Optional[str] = None,
+
+    # Specify how to use the coordinate system, could be 'auto', 'replace' or 'overlay'.
+    coordinate_system_usage: types.Optional[str] = None,
+
+    # The coordinates for the chart.
+    coord: types.Union[types.Sequence, types.Numeric, str] = None,
+
+    # The index of the calendar axis to use
+    calendar_index: types.Optional[types.Numeric] = None,
+
+    # The index of the calendar axis to use
+    calendar_id: types.Optional[types.Numeric] = None,
+
+    # The index of the matrix axis to use
+    matrix_index: types.Optional[types.Numeric] = None,
+
+    # The index of the matrix axis to use
+    matrix_id: types.Optional[types.Numeric] = None,
+
     # Collapse node interval, to resolve node display overspacing when there are too many nodes.
     collapse_interval: Numeric = 0,
 
@@ -86,6 +107,9 @@ def add(
     # Whether to turn on mouse zoom and pan roaming. Not enabled by default. If you only want to turn on scaling or panning.
     # Can be set to 'scale' or 'move'. Set to true to enable both
     is_roam: bool = False,
+
+    # The trigger for roam interaction, can be 'pan' or 'scroll'
+    roam_trigger: types.Optional[str] = None,
 
     # Interaction for subtree collapse and expansion, turned on by default. Since the drawing area is finite, and a tree diagram may normally have a large number of nodes.
     # This can lead to the problem of nodes covering each other. To avoid this problem, temporarily unrelated subtrees can be collapsed and put away
@@ -118,6 +142,12 @@ def add(
     
     # Configuration for the selected state. Valid when selectedMode is enabled.
     select_opts: types.Select = None,
+
+    # Whether the element is static or not cannot be interacted with.
+    is_silent: bool = False,
+
+    # The ID of the series to use
+    series_id: Union[Numeric, str, None] = None,
 )
 ```
 

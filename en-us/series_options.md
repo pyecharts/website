@@ -289,6 +289,15 @@ class LabelOpts(
     
     # Whether to enable value animation, default is False
     is_value_animation: bool = False,
+    
+    # The transparency of the label
+    opacity: Optional[Numeric] = None,
+    
+    # Text margin
+    text_margin: Union[Numeric, Sequence, None] = None,
+    
+    # Minimum margin
+    min_margin: Optional[Numeric] = None,
 )
 ```
 
@@ -808,5 +817,99 @@ class GraphGLForceAtlas2Opts(
     
     # Whether to turn on preventing nodes from overlapping.
     is_prevent_overlap: bool = False,
+)
+```
+
+
+## CustomBarRangeItemPayloadOpts: Custom bar range item payload configuration items
+> *class pyecharts.options.CustomBarRangeItemPayloadOpts*
+
+```python
+class CustomBarRangeItemPayloadOpts(
+    # Bar width
+    bar_width: Union[Numeric, str, None] = None,
+
+    # Border radius
+    border_radius: Optional[Numeric] = None,
+
+    # Margin
+    margin: Optional[Numeric] = None,
+)
+```
+
+## CustomContourItemPayloadOpts: Custom contour item payload configuration items
+> *class pyecharts.options.CustomContourItemPayloadOpts*
+
+```python
+class CustomContourItemPayloadOpts(
+    # Item style configuration items, see `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # Line style configuration items, see `series_options.LineStyleOpts`
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+
+    # Bandwidth
+    bandwidth: Optional[Numeric] = None,
+)
+```
+
+## CustomLineRangeItemPayloadOpts: Custom line range item payload configuration items
+> *class pyecharts.options.CustomLineRangeItemPayloadOpts*
+
+```python
+class CustomLineRangeItemPayloadOpts(
+    # Area style configuration items, see `series_options.AreaStyleOpts`
+    areastyle_opts: Union[AreaStyleOpts, dict, None] = None,
+
+    # Line style configuration items, see `series_options.LineStyleOpts`
+    linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+)
+```
+
+## CustomSegmentedDoughnutItemPayloadOpts: Custom segmented doughnut item payload configuration items
+> *class pyecharts.options.CustomSegmentedDoughnutItemPayloadOpts*
+
+```python
+class CustomSegmentedDoughnutItemPayloadOpts(
+    # Center coordinates
+    center: Optional[Sequence] = None,
+
+    # Radius
+    radius: Optional[Sequence] = None,
+
+    # Segment count
+    segment_count: Optional[Numeric] = None,
+
+    # Label configuration items, see `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+)
+```
+
+## CustomStageItemPayloadOpts: Custom stage item payload configuration items
+> *class pyecharts.options.CustomStageItemPayloadOpts*
+
+```python
+class CustomStageItemPayloadOpts(
+    # Item style configuration items, see `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+)
+```
+
+## CustomViolinItemPayloadOpts: Custom violin item payload configuration items
+> *class pyecharts.options.CustomViolinItemPayloadOpts*
+
+```python
+class CustomViolinItemPayloadOpts(
+    # Symbol size
+    symbol_size: Optional[Numeric] = None,
+
+    # Area opacity
+    area_opacity: Optional[Numeric] = None,
+
+    # Bandwidth scale
+    bandwidth_scale: Optional[Numeric] = None,
+
+    # Bin count
+    bin_count: Optional[Numeric] = None,
 )
 ```
