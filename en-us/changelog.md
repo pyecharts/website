@@ -1,6 +1,6 @@
 # Version log
 
-### version 2.1.0 - 2026-02-09 (Current)
+### version 2.1.0 - 2026-02-10 (Current)
 
 **The first version of pyecharts to support ECharts 6.X**
 

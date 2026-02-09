@@ -1,6 +1,6 @@
 # 版本日志
 
-### version 2.1.0 - 2026-02-09 (Current)
+### version 2.1.0 - 2026-02-10 (Current)
 
 **适配 Echarts 6.X 的第一个版本**
 
