@@ -193,7 +193,7 @@
 * [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/29a6c4249bce6dea209e81f58065f9e8486a9beb) Make CI Support Python 3.11
 * [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/4d0edd9f8c1fd667c03b3fd575ffa759a89f311e) `Geo / BMap` 图支持 `scatterGL`, `flowGL`, `linesGL`
 
-### version 1.9.0 - 2020-10-29 (Current)
+### version 1.9.0 - 2020-10-29
 
 ***Add***
 * [pr#1737](https://github.com/pyecharts/pyecharts/pull/1737) 新增部分图的 `ChartItem` 配置（已移除 `warning` 提示）
