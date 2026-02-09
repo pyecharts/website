@@ -125,6 +125,9 @@ def add_yaxis(
     # Note: Currently stack is only supported on the 'value' and 'log' type category axes, not the 'time' and 'category' type category axes.
     stack_strategy: types.Optional[str] = "samesign",
     
+    # Stack order strategy, can be 'samesign', 'positive', 'negative', 'all'
+    stack_order: types.Optional[str] = None,
+    
     # Strategy for stacking values, provided the stack attribute has been set. Its value can be.
     # 'samesign' Stack only if the value to be stacked has the same positive and negative sign as the currently accumulated stacked values.
     # 'all' stacks all values, regardless of the positive and negative sign of the current or accumulated stacked values.
@@ -899,6 +902,9 @@ def add_yaxis(
     # 'positive' Stack only positive values.
     # 'negative' Stack only negative values.
     stack_strategy: types.Optional[str] = "samesign",
+    
+    # Stack order strategy, can be 'samesign', 'positive', 'negative', 'all'
+    stack_order: types.Optional[str] = None,
 
     # Whether to smooth the curve
     is_smooth: bool = False,

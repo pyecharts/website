@@ -995,6 +995,9 @@ class LegendOpts(
     # 默认不显示，用户可手动开启，也可以手动配置每个按钮的标题。
     selector: Union[bool, Sequence] = False,
     
+    # 选择器标签配置项，参考 `series_options.LabelOpts`
+    selector_label: Union[LabelOpts, dict, None] = None,
+    
     # 选择器的位置，可以放在图例的尾部或者头部，对应的值分别为 'end' 和 'start'。
     # 默认情况下，图例横向布局的时候，选择器放在图例的尾部；图例纵向布局的时候，选择器放在图例的头部。
     selector_position: str = "auto",
@@ -1419,6 +1422,15 @@ class AxisOpts(
     
     # 动画配置项，参考 `global_options.AnimationOpts`
     animation_opts: Union[AnimationOpts, dict] = AnimationOpts(),
+    
+    # 抖动重叠
+    is_jitter_overlap: Optional[bool] = None,
+    
+    # 抖动边距
+    jitter_margin: Optional[Numeric] = None,
+    
+    # 抖动值
+    jitter: Optional[Numeric] = None,
 )
 ```
 
@@ -1935,5 +1947,381 @@ class TreeLeavesOpts(
     
     # 选中状态配置项，参考 `global_options.SelectOpts`
     select_opts: Union[SelectOpts, dict, None] = None,
+)
+```
+
+
+## AxisBreakOpts：坐标轴断裂配置项
+> *class pyecharts.options.AxisBreakOpts*
+
+```python
+class AxisBreakOpts(
+    # 断裂的起始位置
+    start: Union[Numeric, str] = None,
+
+    # 断裂的结束位置
+    end: Union[Numeric, str] = None,
+
+    # 断裂之间的间隔
+    gap: Union[Numeric, str] = None,
+
+    # 断裂是否展开
+    is_expanded: bool = False,
+)
+```
+
+## AxisBreakAreaOpts：坐标轴断裂区域配置项
+> *class pyecharts.options.AxisBreakAreaOpts*
+
+```python
+class AxisBreakAreaOpts(
+    # 是否显示断裂区域
+    is_show: Optional[bool] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # 锯齿图案的振幅
+    zigzag_amplitude: Optional[Numeric] = None,
+
+    # 锯齿图案的 z-index
+    zigzag_z: Optional[Numeric] = None,
+
+    # 是否在点击时展开
+    is_expand_onclick: bool = True,
+)
+```
+
+## AxisBreakLabelLayoutOpts：坐标轴断裂标签布局配置项
+> *class pyecharts.options.AxisBreakLabelLayoutOpts*
+
+```python
+class AxisBreakLabelLayoutOpts(
+    # 是否移动重叠的标签
+    is_move_overlap: Optional[bool] = None,
+)
+```
+
+
+## MatrixOpts：矩阵配置项
+> *class pyecharts.options.MatrixOpts*
+
+```python
+class MatrixOpts(
+    # 组件的所有图形的 zlevel 值。
+    z_level: Numeric = 0,
+
+    # 组件的所有图形的 z 值。控制图形的前后顺序。z 值小的图形会被 z 值大的图形覆盖。
+    z: Numeric = 2,
+
+    # 矩阵组件离容器左侧的距离。
+    pos_left: Union[Numeric, str, None] = None,
+
+    # 矩阵组件离容器上侧的距离。
+    pos_top: Union[Numeric, str, None] = None,
+
+    # 矩阵组件离容器右侧的距离。
+    pos_right: Union[Numeric, str, None] = None,
+
+    # 矩阵组件离容器下侧的距离。
+    pos_bottom: Union[Numeric, str, None] = None,
+
+    # 矩阵组件的宽度。
+    width: Union[Numeric, str, None] = None,
+
+    # 矩阵组件的高度。
+    height: Union[Numeric, str, None] = None,
+
+    # 矩阵 x 轴配置
+    x_data: Union[MatrixAxisOpts, dict, None] = None,
+
+    # 矩阵 y 轴配置
+    y_data: Union[MatrixAxisOpts, dict, None] = None,
+
+    # 矩阵主体配置
+    body_opts: Union[MatrixBodyOrCornerOpts, dict, None] = None,
+
+    # 矩阵角落配置
+    corner_opts: Union[MatrixBodyOrCornerOpts, dict, None] = None,
+
+    # 矩阵背景样式
+    background_style: Union[MatrixBackgroundStyleOpts, dict, None] = None,
+
+    # 边框的 z-index
+    border_z2: Optional[Numeric] = None,
+
+    # 提示框组件配置项，参考 `global_options.TooltipOpts`
+    tooltip_opts: TooltipOpts = None,
+)
+```
+
+## MatrixAxisOpts：矩阵轴配置项
+> *class pyecharts.options.MatrixAxisOpts*
+
+```python
+class MatrixAxisOpts(
+    # 是否显示坐标轴
+    is_show: bool = True,
+
+    # 坐标轴数据
+    data: Union[Sequence, dict, JSFunc, None] = None,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # 坐标轴是否是静态无法交互。
+    is_silent: bool = False,
+
+    # 鼠标悬停时的光标
+    cursor: Optional[str] = None,
+
+    # 坐标轴的 z-index
+    z2: Optional[Numeric] = None,
+
+    # 等级的大小
+    level_size: Union[Numeric, str, None] = None,
+
+    # 坐标轴等级
+    levels: Optional[Sequence] = None,
+)
+```
+
+## MatrixBodyDataOpts：矩阵主体数据配置项
+> *class pyecharts.options.MatrixBodyDataOpts*
+
+```python
+class MatrixBodyDataOpts(
+    # 数据的坐标
+    coord: Optional[Sequence] = None,
+
+    # 是否限制坐标
+    is_coord_clamp: Optional[bool] = None,
+
+    # 是否合并单元格
+    is_merge_cells: Optional[bool] = None,
+
+    # 数据的值
+    value: Union[Numeric, str, None] = None,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+)
+```
+
+## MatrixBodyOrCornerOpts：矩阵主体或角落配置项
+> *class pyecharts.options.MatrixBodyOrCornerOpts*
+
+```python
+class MatrixBodyOrCornerOpts(
+    # 数据配置
+    data: Union[Sequence[MatrixBodyDataOpts], dict, None] = None,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[LabelOpts, dict, None] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # 元素是否是静态无法交互。
+    is_silent: bool = False,
+
+    # 鼠标悬停时的光标
+    cursor: Optional[str] = None,
+
+    # 元素的 z-index
+    z2: Optional[Numeric] = None,
+)
+```
+
+## MatrixBackgroundStyleOpts：矩阵背景样式配置项
+> *class pyecharts.options.MatrixBackgroundStyleOpts*
+
+```python
+class MatrixBackgroundStyleOpts(
+    # 背景颜色
+    color: Optional[str] = None,
+
+    # 边框颜色
+    border_color: str = "#ccc",
+
+    # 边框宽度
+    border_width: Numeric = 1,
+
+    # 边框类型
+    border_type: str = "solid",
+
+    # 边框圆角
+    border_radius: Union[Numeric, Sequence] = 0,
+
+    # 边框端点样式
+    border_cap: str = "butt",
+
+    # 边框连接样式
+    border_join: str = "bevel",
+
+    # 边框斜接面限制比例
+    border_miter_limit: Optional[Numeric] = 10,
+
+    # 阴影模糊
+    shadow_blur: Optional[Numeric] = None,
+
+    # 阴影颜色
+    shadow_color: Optional[str] = None,
+
+    # 阴影 x 偏移
+    shadow_offset_x: Numeric = 0,
+
+    # 阴影 y 偏移
+    shadow_offset_y: Numeric = 0,
+
+    # 透明度
+    opacity: Optional[Numeric] = 1,
+)
+```
+
+## MatrixDividerLineStyleOpts：矩阵分隔线样式配置项
+> *class pyecharts.options.MatrixDividerLineStyleOpts*
+
+```python
+class MatrixDividerLineStyleOpts(
+    # 线条颜色
+    color: Optional[str] = "#aaa",
+
+    # 线条宽度
+    width: Optional[Numeric] = 1,
+
+    # 线条类型
+    type_: Optional[str] = "solid",
+
+    # 虚线偏移量
+    dash_offset: Optional[Numeric] = 0,
+
+    # 线条端点样式
+    cap: Optional[str] = "butt",
+
+    # 线条连接样式
+    join: Optional[str] = "bevel",
+
+    # 斜接面限制比例
+    miter_limit: Optional[Numeric] = 10,
+
+    # 阴影模糊
+    shadow_blur: Optional[Numeric] = None,
+
+    # 阴影颜色
+    shadow_color: Optional[str] = None,
+
+    # 阴影 x 偏移
+    shadow_offset_x: Optional[Numeric] = None,
+
+    # 阴影 y 偏移
+    shadow_offset_y: Optional[Numeric] = None,
+
+    # 透明度
+    opacity: Optional[Numeric] = 1,
+)
+```
+
+## ThumbnailOpts：缩略图配置项
+> *class pyecharts.options.ThumbnailOpts*
+
+```python
+class ThumbnailOpts(
+    # 是否显示缩略图
+    is_show: bool = True,
+
+    # 组件的所有图形的 zlevel 值。
+    z_level: Numeric = 0,
+
+    # 组件的所有图形的 z 值。控制图形的前后顺序。z 值小的图形会被 z 值大的图形覆盖。
+    z: Numeric = 2,
+
+    # 缩略图离容器左侧的距离。
+    pos_left: Union[Numeric, str, None] = None,
+
+    # 缩略图离容器上侧的距离。
+    pos_top: Union[Numeric, str, None] = None,
+
+    # 缩略图离容器右侧的距离。
+    pos_right: Union[Numeric, str, None] = None,
+
+    # 缩略图离容器下侧的距离。
+    pos_bottom: Union[Numeric, str, None] = None,
+
+    # 缩略图的宽度。
+    width: Union[Numeric, str, None] = None,
+
+    # 缩略图的高度。
+    height: Union[Numeric, str, None] = None,
+
+    # 缩略图使用的坐标系。默认不使用坐标系。
+    coordinate_system: Optional[str] = None,
+
+    # 指定如何使用坐标系，可选 'auto', 'replace' 或 'overlay'。
+    coordinate_system_usage: Optional[str] = None,
+
+    # 缩略图的坐标。
+    coord: Optional[Union[Sequence, Numeric, str]] = None,
+
+    # 图元样式配置项，参考 `series_options.ItemStyleOpts`
+    itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+
+    # 窗口样式配置项
+    window_style_opts: Union[ThumbnailWindowStyleOpts, dict, None] = None,
+
+    # 要使用的系列索引
+    series_index: Optional[Numeric] = None,
+
+    # 要使用的系列 ID
+    series_id: Union[Numeric, str, None] = None,
+)
+```
+
+## ThumbnailWindowStyleOpts：缩略图窗口样式配置项
+> *class pyecharts.options.ThumbnailWindowStyleOpts*
+
+```python
+class ThumbnailWindowStyleOpts(
+    # 窗口颜色
+    color: Optional[str] = "#9ea0a5",
+
+    # 窗口边框颜色
+    border_color: str = "#b7b9be",
+
+    # 窗口边框宽度
+    border_width: Numeric = 1,
+
+    # 窗口边框类型
+    border_type: str = "solid",
+
+    # 窗口边框圆角
+    border_radius: Union[Numeric, Sequence] = 0,
+
+    # 窗口边框端点样式
+    border_cap: str = "butt",
+
+    # 窗口边框连接样式
+    border_join: str = "bevel",
+
+    # 窗口边框斜接面限制比例
+    border_miter_limit: Optional[Numeric] = 10,
+
+    # 窗口阴影模糊
+    shadow_blur: Optional[Numeric] = None,
+
+    # 窗口阴影颜色
+    shadow_color: Optional[str] = None,
+
+    # 窗口阴影 x 偏移
+    shadow_offset_x: Numeric = 0,
+
+    # 窗口阴影 y 偏移
+    shadow_offset_y: Numeric = 0,
+
+    # 窗口透明度
+    opacity: Optional[Numeric] = 0.3,
 )
 ```
