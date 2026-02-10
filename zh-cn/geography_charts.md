@@ -61,6 +61,39 @@ def add_schema(
     # 地图的大小，见 layoutCenter。支持相对于屏幕宽高的百分比或者绝对的像素大小。
     layout_size: types.Union[str, types.Numeric] = None,
 
+    # 是否保持纵横比
+    is_preserve_aspect: bool = False,
+
+    # 保持纵横比时的对齐方式
+    preserve_aspect_align: types.Optional[str] = None,
+
+    # 保持纵横比时的垂直对齐方式
+    preserve_aspect_vertical_align: types.Optional[str] = None,
+
+    # 是否裁剪元素
+    is_clip: bool = False,
+
+    # 图表使用的坐标系。默认不使用坐标系。
+    coordinate_system: types.Optional[str] = None,
+
+    # 指定如何使用坐标系，可选 'auto', 'replace' 或 'overlay'。
+    coordinate_system_usage: types.Optional[str] = None,
+
+    # 图表的坐标。
+    coord: types.Optional[types.Union[types.Sequence, types.Numeric, str]] = None,
+
+    # 要使用的日历坐标轴索引
+    calendar_index: types.Optional[types.Numeric] = None,
+
+    # 要使用的日历坐标轴 ID
+    calendar_id: types.Optional[types.Numeric] = None,
+
+    # 要使用的矩阵坐标轴索引
+    matrix_index: types.Optional[types.Numeric] = None,
+
+    # 要使用的矩阵坐标轴 ID
+    matrix_id: types.Optional[types.Numeric] = None,
+
     # # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict, None] = None,
 
@@ -75,6 +108,12 @@ def add_schema(
     
     # 在地图中对特定的区域配置样式。具体配置参考 `charts_options.GeoRegionsOpts`
     regions_opts: types.Union[types.Sequence[types.GeoRegions], types.Sequence[dict]] = None,
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # 选择配置项，参考 `global_options.SelectOpts`
+    select_opts: types.Select = None,
 ):
 ```
 
@@ -140,6 +179,33 @@ def add(
     # 启用渐进式渲染的图形数量阈值，在单个系列的图形数量超过该阈值时启用渐进式渲染。
     progressive_threshold: types.Numeric = 3000,
 
+    # 图表使用的坐标系。默认不使用坐标系。
+    coordinate_system: types.Optional[str] = None,
+
+    # 指定如何使用坐标系，可选 'auto', 'replace' 或 'overlay'。
+    coordinate_system_usage: types.Optional[str] = None,
+
+    # 图表的坐标。
+    coord: types.Union[types.Sequence, types.Numeric, str] = None,
+
+    # 要使用的地理坐标轴索引
+    geo_index: types.Optional[types.Numeric] = None,
+
+    # 要使用的地理坐标轴 ID
+    geo_id: types.Optional[types.Numeric] = None,
+
+    # 要使用的日历坐标轴索引
+    calendar_index: types.Optional[types.Numeric] = None,
+
+    # 要使用的日历坐标轴 ID
+    calendar_id: types.Optional[types.Numeric] = None,
+
+    # 要使用的矩阵坐标轴索引
+    matrix_index: types.Optional[types.Numeric] = None,
+
+    # 要使用的矩阵坐标轴 ID
+    matrix_id: types.Optional[types.Numeric] = None,
+
     # 标签配置项，参考 `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
 
@@ -160,6 +226,15 @@ def add(
     
     # 这个配置相对非常复杂（参照地址: https://www.echartsjs.com/zh/option.html#series-custom.encode）
     encode: types.Union[types.JsCode, dict] = None,
+
+    # 元素是否是静态无法交互。
+    is_silent: bool = False,
+
+    # 选择配置项，参考 `global_options.SelectOpts`
+    select_opts: types.Select = None,
+
+    # 要使用的系列 ID
+    series_id: Union[Numeric, str, None] = None,
 )
 ```
 

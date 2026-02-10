@@ -1,3 +1,103 @@
+## Chord：弦图
+
+> *class pyecharts.charts.Chord*
+
+```python
+class Chord(
+    # 初始化配置项，参考 `global_options.InitOpts`
+    init_opts: opts.InitOpts = opts.InitOpts()
+)
+```
+
+> *func pyecharts.charts.Chord.add*
+
+```python
+def add(
+    # 系列名称，用于 tooltip 的显示，legend 的图例筛选。
+    series_name: str,
+
+    # 弦图节点数据项列表，参考 `opts.ChordData`
+    data: Sequence[Union[opts.ChordData, dict]],
+
+    # 弦图节点间关系数据项列表，参考 `opts.ChordLink`
+    links: Sequence[Union[opts.ChordLink, dict]],
+
+    # 是否选中图例
+    is_selected: bool = True,
+
+    # 弦图是否顺时针排列。
+    is_clockwise: bool = False,
+
+    # 弦图使用的坐标系。默认不使用坐标系。
+    coordinate_system: types.Optional[str] = None,
+
+    # 指定如何使用坐标系，可选 'auto', 'replace' 或 'overlay'。
+    coordinate_system_usage: types.Optional[str] = None,
+
+    # 弦图的中心（圆心）坐标，数组的第一项是横坐标，第二项是纵坐标
+    # 默认设置成百分比，当设置成百分比时第一项是相对于容器宽度，第二项是相对于容器高度
+    center: types.Optional[types.Sequence] = None,
+
+    # 弦图的半径，数组的第一项是内半径，第二项是外半径
+    # 默认设置成百分比，相对于容器高宽中较小的一项的一半
+    radius: types.Optional[types.Union[types.Sequence, str]] = None,
+
+    # 起始角度，支持范围 [0, 360]
+    start_angle: types.Numeric = 90,
+
+    # 结束角度，支持范围 [0, 360]
+    end_angle: types.Optional[types.Numeric] = None,
+
+    # 最小的扇区角度（0 ~ 360），用于防止某个值过小导致扇区太小影响交互。
+    min_angle: types.Optional[types.Numeric] = None,
+
+    # 扇区间的角度，单位为度。
+    pad_angle: types.Optional[types.Numeric] = None,
+
+    # 提示框组件配置项，参考 `series_options.TooltipOpts`
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # 标签配置项，参考 `series_options.LabelOpts`
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+
+    # 线条样式配置项，参考 `series_options.LineStyleOpts`
+    linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
+)
+```
+
+### ChordData：弦图的节点数据项
+
+> *class pyecharts.options.ChordData*
+
+```python
+class ChordData(
+    # 数据项名称。
+    name: Optional[str] = None,
+)
+```
+
+### ChordLink：弦图节点间的关系数据
+
+> *class pyecharts.options.ChordLink*
+
+```python
+class ChordLink(
+    # 边的源节点名称的字符串，也支持使用数字表示源节点的索引。
+    source: Union[str, int, None] = None,
+
+    # 边的目标节点名称的字符串，也支持使用数字表示源节点的索引。
+    target: Union[str, int, None] = None,
+
+    # 边的数值。
+    value: Optional[Numeric] = None,
+)
+```
+
+### Demo
+
+[gallery 示例](http://gallery.pyecharts.org/#/Chord/README)
+
+
 ## Calendar：日历图
 
 > *class pyecharts.charts.Calendar*
@@ -571,6 +671,9 @@ def add(
     # 是否开启鼠标缩放和平移漫游。
     is_roam: bool = True,
     
+    # 漫游交互的触发方式，可选 'pan' 或 'scroll'
+    roam_trigger: types.Optional[str] = None,
+    
     # 节点是否可拖拽，只在使用力引导布局的时候有用。
     is_draggable: bool = False,
 
@@ -611,6 +714,9 @@ def add(
     # 节点之间的斥力因子。
     # 支持设置成数组表达斥力的范围，此时不同大小的值会线性映射到不同的斥力。值越大则斥力越大
     repulsion: Numeric = 50,
+    
+    # 节点缩放比例
+    node_scale_ratio: types.Numeric = 0.6,
 
      # Graph 图节点边的 Label 配置（即在边上显示数据或标注的配置）
     edge_label: types.Label = None,

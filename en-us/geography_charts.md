@@ -61,6 +61,39 @@ def add_schema(
     # The size of the map, see layoutCenter. supports a percentage or absolute pixel size relative to the screen width and height.
     layout_size: types.Union[str, types.Numeric] = None,
 
+    # Whether to preserve the aspect ratio
+    is_preserve_aspect: bool = False,
+
+    # Alignment when preserving aspect ratio
+    preserve_aspect_align: types.Optional[str] = None,
+
+    # Vertical alignment when preserving aspect ratio
+    preserve_aspect_vertical_align: types.Optional[str] = None,
+
+    # Whether to clip the element
+    is_clip: bool = False,
+
+    # The coordinate system used for the chart. By default, no coordinate system is used.
+    coordinate_system: types.Optional[str] = None,
+
+    # Specify how to use the coordinate system, could be 'auto', 'replace' or 'overlay'.
+    coordinate_system_usage: types.Optional[str] = None,
+
+    # The coordinates for the chart.
+    coord: types.Optional[types.Union[types.Sequence, types.Numeric, str]] = None,
+
+    # The index of the calendar axis to use
+    calendar_index: types.Optional[types.Numeric] = None,
+
+    # The index of the calendar axis to use
+    calendar_id: types.Optional[types.Numeric] = None,
+
+    # The index of the matrix axis to use
+    matrix_index: types.Optional[types.Numeric] = None,
+
+    # The index of the matrix axis to use
+    matrix_id: types.Optional[types.Numeric] = None,
+
     # # Label configuration items, see `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict, None] = None,
 
@@ -75,6 +108,12 @@ def add_schema(
     
     # Configure styles for specific regions in the map. Refer to `charts_options.GeoRegionsOpts` for specific configurations
     regions_opts: types.Union[types.Sequence[types.GeoRegions], types.Sequence[dict]] = None,
+
+    # Tipbox component configuration items, see `series_options.TooltipOpts`
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # Select configuration items, see `global_options.SelectOpts`
+    select_opts: types.Select = None,
 ):
 ```
 
@@ -140,6 +179,33 @@ def add(
     # Threshold for the number of graphics to enable progressive rendering, which is enabled when the number of graphics in a single series exceeds this threshold.
     progressive_threshold: types.Numeric = 3000,
 
+    # The coordinate system used for the chart. By default, no coordinate system is used.
+    coordinate_system: types.Optional[str] = None,
+
+    # Specify how to use the coordinate system, could be 'auto', 'replace' or 'overlay'.
+    coordinate_system_usage: types.Optional[str] = None,
+
+    # The coordinates for the chart.
+    coord: types.Union[types.Sequence, types.Numeric, str] = None,
+
+    # The index of the geo axis to use
+    geo_index: types.Optional[types.Numeric] = None,
+
+    # The index of the geo axis to use
+    geo_id: types.Optional[types.Numeric] = None,
+
+    # The index of the calendar axis to use
+    calendar_index: types.Optional[types.Numeric] = None,
+
+    # The index of the calendar axis to use
+    calendar_id: types.Optional[types.Numeric] = None,
+
+    # The index of the matrix axis to use
+    matrix_index: types.Optional[types.Numeric] = None,
+
+    # The index of the matrix axis to use
+    matrix_id: types.Optional[types.Numeric] = None,
+
     # Label configuration items, see `series_options.LabelOpts`
     label_opts: Union[opts.LabelOpts, dict] = opts,
 
@@ -160,6 +226,15 @@ def add(
     
     # This is a relatively complex configuration (see https://www.echartsjs.com/zh/option.html#series-custom.encode)
     encode: types.Union[types.JsCode, dict] = None,
+
+    # Whether the element is static or not cannot be interacted with.
+    is_silent: bool = False,
+
+    # Select configuration items, see `global_options.SelectOpts`
+    select_opts: types.Select = None,
+
+    # The ID of the series to use
+    series_id: Union[Numeric, str, None] = None,
 )
 ```
 

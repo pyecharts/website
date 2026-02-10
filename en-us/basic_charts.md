@@ -1,3 +1,103 @@
+## Chord: Chord diagram
+
+> *class pyecharts.charts.Chord*
+
+```python
+class Chord(
+    ## Initialize configuration items, see ``global_options.InitOpts``
+    init_opts: opts.InitOpts = opts.InitOpts()
+)
+```
+
+> *func pyecharts.charts.Chord.add*
+
+```python
+def add(
+    # Series name for display of tooltip, legend filter for legend.
+    series_name: str,
+
+    # List of data items for chord diagram nodes, referencing ``opts.ChordData``
+    data: Sequence[Union[opts.ChordData, dict]],
+
+    # List of relational data items between chord diagram nodes, see `opts.ChordLink`
+    links: Sequence[Union[opts.ChordLink, dict]],
+
+    # Whether the legend is selected or not
+    is_selected: bool = True,
+
+    # Whether the chord diagram is arranged clockwise.
+    is_clockwise: bool = False,
+
+    # The coordinate system used for the Chord diagram. By default, no coordinate system is used.
+    coordinate_system: types.Optional[str] = None,
+
+    # Specify how to use the coordinate system, could be 'auto', 'replace' or 'overlay'.
+    coordinate_system_usage: types.Optional[str] = None,
+
+    # The coordinates of the center (center of the circle) of the chord diagram, the first item of the array is the horizontal coordinate, the second item is the vertical coordinate
+    # default is set to percentage, when set to percentage the first item is relative to the container width, the second item is relative to the container height
+    center: types.Optional[types.Sequence] = None,
+
+    # The radius of the chord diagram, the first item of the array is the inner radius, the second is the outer radius
+    # default set to a percentage, half of the smaller one relative to the container height and width
+    radius: types.Optional[types.Union[types.Sequence, str]] = None,
+
+    # Start angle, supports range [0, 360]
+    start_angle: types.Numeric = 90,
+
+    # End angle, supports range [0, 360]
+    end_angle: types.Optional[types.Numeric] = None,
+
+    # The minimum sector angle (0 ~ 360), used to prevent a value too small to make the sector too small for interaction.
+    min_angle: types.Optional[types.Numeric] = None,
+
+    # The angle between sectors in degrees.
+    pad_angle: types.Optional[types.Numeric] = None,
+
+    # Tipbox component configuration items, see `series_options.TooltipOpts`
+    tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+
+    # Label configuration items, see `series_options.LabelOpts`
+    label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+
+    # Line style configuration items, see `series_options.LineStyleOpts`
+    linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
+)
+```
+
+### ChordData: node data items for chord diagrams
+
+> *class pyecharts.options.ChordData*
+
+```python
+class ChordData(
+    ### The name of the data item.
+    name: Optional[str] = None,
+)
+```
+
+### ChordLink: relational data between nodes in chord diagrams
+
+> *class pyecharts.options.ChordLink*
+
+```python
+class ChordLink(
+    ### String for the name of the source node of the edge, also supports using numbers for the index of the source node.
+    source: Union[str, int, None] = None,
+
+    # String of the name of the target node of the edge, also supports using numbers for the index of the source node.
+    target: Union[str, int, None] = None,
+
+    # The value of the edge.
+    value: Optional[Numeric] = None,
+)
+```
+
+### Demo
+
+[gallery example](http://gallery.pyecharts.org/#/Chord/README)
+
+
 ## Calendar: calendar chart
 
 > *class pyecharts.charts.Calendar*
@@ -571,6 +671,9 @@ def add(
     # Whether to enable mouse zoom and pan roaming.
     is_roam: bool = True,
     
+    # The trigger for roam interaction, can be 'pan' or 'scroll'
+    roam_trigger: types.Optional[str] = None,
+    
     # Whether the node is draggable, only useful when using force-guided layout.
     is_draggable: bool = False,
 
@@ -611,6 +714,9 @@ def add(
     # The repulsion factor between nodes.
     # Supports setting to an array to express the range of repulsive forces, where different values of different sizes will map linearly to different repulsive forces. The larger the value the greater the repulsion
     repulsion: Numeric = 50,
+    
+    # Node scale ratio
+    node_scale_ratio: types.Numeric = 0.6,
 
      # Label configuration for Graph graph node edges (i.e. configuration to display data or labels on edges)
     edge_label: types.Label = None,

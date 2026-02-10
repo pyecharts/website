@@ -1,6 +1,37 @@
 # 版本日志
 
-### version 2.0.9 - 2025-10-10 (Current)
+### version 2.1.0 - 2026-02-10 (Current)
+
+**适配 Echarts 6.X 的第一个版本**
+
+**Added**
+* 新增 `Chord` 图表类型，包含 `ChordData` 和 `ChordLink` 配置项
+* 新增完整的 Matrix 配置项系列 (`MatrixOpts`、`MatrixAxisOpts`、`MatrixBodyDataOpts`、`MatrixBodyOrCornerOpts`、`MatrixBackgroundStyleOpts`、`MatrixDividerLineStyleOpts`)
+* 新增完整的 Thumbnail 配置项系列 (`ThumbnailOpts`、`ThumbnailWindowStyleOpts`)
+* 新增 AxisBreak 配置项 (`AxisBreakOpts`、`AxisBreakAreaOpts`、`AxisBreakLabelLayoutOpts`)
+* 新增 CustomItemPayload 配置项系列 (`CustomBarRangeItemPayloadOpts`、`CustomContourItemPayloadOpts`、`CustomLineRangeItemPayloadOpts`、`CustomSegmentedDoughnutItemPayloadOpts`、`CustomStageItemPayloadOpts`、`CustomViolinItemPayloadOpts`)
+* 为 `Bar` 和 `Line` 图表新增 `stack_order` 参数
+* 为 `Geo`、`Graph`、`Tree` 等图表新增完整的坐标系支持
+* 为 `LabelOpts` 新增 `opacity`、`text_margin`、`min_margin` 参数
+* 为 `LegendOpts` 新增 `selector_label` 和 `page_animation_duration_update` 参数
+* 为 `AxisOpts` 新增 `jitter` 相关参数
+* 为 `Graph` 图表新增 `node_scale_ratio` 和 `roam_trigger` 参数
+* 为多个图表新增 `is_silent` 和 `series_id` 参数
+* 为 `Geo` 图表新增 `preserve_aspect` 相关参数
+* 为多个图表新增各种 *_id 参数支持
+
+**Updated**
+* 更新所有新增功能和配置项的文档
+* 更新 `MarkPointOpts`、`MarkPointItemOpts` 以及 `LabelOpts`。
+* 更新 `Line`，加入参数 `end_label_opts` 适配。
+
+**Fixed**
+* 修复 `Grid` 图场景下，`chart_id` 不生效的问题。
+* 修复 `Grid` 图场景下，`datazoom` 和 `visualmap` 在生成的 `HTML` 文件中的配置重复问题。
+* 修复 `Grid` 图场景下若干索引问题。
+* 修复 `Page` 的 `css_libs` 被异常覆盖。
+
+### version 2.0.9 - 2025-10-10
 
 **Updated**
 * 更新 `Table` 类参数添加方式，加入参数 `**kwargs`，扩展 `Table` 对接 `prettytable` 的其他参数。
@@ -162,7 +193,7 @@
 * [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/29a6c4249bce6dea209e81f58065f9e8486a9beb) Make CI Support Python 3.11
 * [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/4d0edd9f8c1fd667c03b3fd575ffa759a89f311e) `Geo / BMap` 图支持 `scatterGL`, `flowGL`, `linesGL`
 
-### version 1.9.0 - 2020-10-29 (Current)
+### version 1.9.0 - 2020-10-29
 
 ***Add***
 * [pr#1737](https://github.com/pyecharts/pyecharts/pull/1737) 新增部分图的 `ChartItem` 配置（已移除 `warning` 提示）

@@ -70,6 +70,27 @@ def add(
     # 当前视角的中心点。可以是包含两个 number 类型（表示像素值）或 string 类型（表示相对容器的百分比）的数组。 
     center: types.Optional[types.Sequence[types.Union[str, types.Numeric]]] = None,
 
+    # 图表使用的坐标系。默认不使用坐标系。
+    coordinate_system: types.Optional[str] = None,
+
+    # 指定如何使用坐标系，可选 'auto', 'replace' 或 'overlay'。
+    coordinate_system_usage: types.Optional[str] = None,
+
+    # 图表的坐标。
+    coord: types.Union[types.Sequence, types.Numeric, str] = None,
+
+    # 要使用的日历坐标轴索引
+    calendar_index: types.Optional[types.Numeric] = None,
+
+    # 要使用的日历坐标轴 ID
+    calendar_id: types.Optional[types.Numeric] = None,
+
+    # 要使用的矩阵坐标轴索引
+    matrix_index: types.Optional[types.Numeric] = None,
+
+    # 要使用的矩阵坐标轴 ID
+    matrix_id: types.Optional[types.Numeric] = None,
+
     # 折叠节点间隔，当节点过多时可以解决节点显示过杂间隔。
     collapse_interval: Numeric = 0,
 
@@ -86,6 +107,9 @@ def add(
     # 是否开启鼠标缩放和平移漫游。默认不开启。如果只想要开启缩放或者平移。
     # 可以设置成 'scale' 或者 'move'。设置成 true 为都开启
     is_roam: bool = False,
+
+    # 漫游交互的触发方式，可选 'pan' 或 'scroll'
+    roam_trigger: types.Optional[str] = None,
 
     # 子树折叠和展开的交互，默认打开 。由于绘图区域是有限的，而通常一个树图的节点可能会比较多，
     # 这样就会出现节点之间相互遮盖的问题。为了避免这一问题，可以将暂时无关的子树折叠收起，
@@ -118,6 +142,12 @@ def add(
     
     # 选中状态的相关配置。开启 selectedMode 后有效。
     select_opts: types.Select = None,
+
+    # 元素是否是静态无法交互。
+    is_silent: bool = False,
+
+    # 要使用的系列 ID
+    series_id: Union[Numeric, str, None] = None,
 )
 ```
 

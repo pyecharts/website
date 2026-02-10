@@ -1,6 +1,37 @@
 # Version log
 
-### version 2.0.9 - 2025-10-10 (Current)
+### version 2.1.0 - 2026-02-10 (Current)
+
+**The first version of pyecharts to support ECharts 6.X**
+
+**Added**
+* Added `Chord` chart type with `ChordData` and `ChordLink` configuration items
+* Added complete Matrix configuration item series (`MatrixOpts`, `MatrixAxisOpts`, `MatrixBodyDataOpts`, `MatrixBodyOrCornerOpts`, `MatrixBackgroundStyleOpts`, `MatrixDividerLineStyleOpts`)
+* Added complete Thumbnail configuration item series (`ThumbnailOpts`, `ThumbnailWindowStyleOpts`)
+* Added AxisBreak configuration items (`AxisBreakOpts`, `AxisBreakAreaOpts`, `AxisBreakLabelLayoutOpts`)
+* Added CustomItemPayload configuration item series (`CustomBarRangeItemPayloadOpts`, `CustomContourItemPayloadOpts`, `CustomLineRangeItemPayloadOpts`, `CustomSegmentedDoughnutItemPayloadOpts`, `CustomStageItemPayloadOpts`, `CustomViolinItemPayloadOpts`)
+* Added `stack_order` parameter for `Bar` and `Line` charts
+* Added complete coordinate system support for `Geo`, `Graph`, `Tree` and other charts
+* Added `opacity`, `text_margin`, `min_margin` parameters for `LabelOpts`
+* Added `selector_label` and `page_animation_duration_update` parameters for `LegendOpts`
+* Added `jitter` related parameters for `AxisOpts`
+* Added `node_scale_ratio` and `roam_trigger` parameters for `Graph` chart
+* Added `is_silent` and `series_id` parameters for multiple charts
+* Added `preserve_aspect` related parameters for `Geo` chart
+* Added various *_id parameters support for multiple charts
+
+**Updated**
+* Updated documentation for all newly added features and configuration items
+* Updated `MarkPointOpts`，`MarkPointItemOpts` and `LabelOpts`.
+* Updated `Line` parameter `end_label_opts`
+
+**Fixed**
+* Fix the problem that `chart_id` is not effective in the `Grid` chart scenario.
+* Fix the duplicate configuration problem of `datazoom` and `visualmap` in the generated `HTML` file in the `Grid` chart scenario.
+* Fix several index issues in the `Grid` chart scenario.
+* Fix the abnormal override of css_libs in `Page` chart.
+
+### version 2.0.9 - 2025-10-10
 
 **Updated**
 * Update the way parameters are added to the `Table` class by adding the parameter `**kwargs` to expand other parameters for `Table` to interface with `prettytable`.
@@ -164,7 +195,7 @@
 * [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/29a6c4249bce6dea209e81f58065f9e8486a9beb) Make CI Support Python 3.11
 * [commit/dev](https://github.com/pyecharts/pyecharts/pull/2104/commits/4d0edd9f8c1fd667c03b3fd575ffa759a89f311e) `Geo / BMap` diagram support `scatterGL`, `flowGL`, `linesGL`
 
-### version 1.9.0 - 2020-10-29 (Current)
+### version 1.9.0 - 2020-10-29
 
 ***Add***
 * [pr#1737](https://github.com/pyecharts/pyecharts/pull/1737) Added `ChartItem` configuration for some charts (removed `warning` prompt)
